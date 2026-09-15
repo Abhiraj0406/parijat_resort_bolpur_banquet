@@ -1,0 +1,101 @@
+/* Glassmorphism Utilities */
+
+@mixin glass-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+    @include glass-container;
+}
+
+.glass-navbar {
+    background: rgba(17, 17, 17, 0.8) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    
+    &:focus {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-color: $yellow !important;
+        box-shadow: none !important;
+    }
+    
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+}
+
+/* Global Glass Overrides to Fix Light Themes */
+body, section, .about_area, .hotel_booking_area, .facilities_area, .testimonial_area, .restaurant_area {
+    background: transparent !important;
+}
+
+h1, h2, h3, h4, h5, h6, .sec_title h2, .about_content h2 {
+    color: #ffffff !important;
+}
+
+p, .sec_title p, .about_content p {
+    color: #d0d0d0 !important;
+}
+
+/* Fix specific cards and tables */
+.hotel_booking_table, .boking_table, .book_tabel_item {
+    background: transparent !important;
+}
+
+.hotel_booking_area {
+    @include glass-container;
+    margin-top: -80px;
+    position: relative;
+    z-index: 5;
+}
+
+.facilities_item {
+    @include glass-container;
+    padding: 30px;
+    h4 { color: #fff !important; }
+    p { color: #d0d0d0 !important; }
+}
+
+.single-restaurant-item {
+    @include glass-container;
+    padding: 20px;
+    h4, h5 { color: #fff !important; }
+    p { color: #d0d0d0 !important; }
+}
+
+.restaurant-item {
+    @include glass-container;
+    padding: 20px;
+    background: rgba(255,255,255,0.05) !important;
+}
+
+.card {
+    @include glass-container;
+    background: rgba(255,255,255,0.05) !important;
+}
+
+/* Bootstrap Utility Overrides for Dark Glass Theme */
+.text-dark { color: #ffffff !important; }
+.text-muted { color: #cccccc !important; }
+.text-secondary { color: #cccccc !important; }
+.bg-light { background: rgba(255, 255, 255, 0.05) !important; color: #fff !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+.bg-white { background: transparent !important; }
+.badge-light { background: rgba(255, 255, 255, 0.1) !important; color: #fff !important; border: none !important; }
+.card-title { color: #fff !important; }
+.card-text { color: #cccccc !important; }
+.shadow-sm { box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important; }
+
+

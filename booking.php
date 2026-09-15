@@ -1,0 +1,224 @@
+<?php
+$page_title = "Room Booking Enquiry - Parijat Resort Bolpur";
+$meta_description = "Submit your room reservation enquiry for Parijat Resort Bolpur. All 19 rooms across 4 categories feature private balconies with AC / Non-AC options.";
+$og_image = "image/booking_og.jpg";
+$current_page = "booking";
+include_once 'includes/header.php';
+
+// Fetch Active Categories
+$catStmt = $pdo->query("SELECT * FROM room_categories WHERE status='active' ORDER BY id ASC");
+$categories = $catStmt->fetchAll();
+
+$preselectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+$preselectedAc = isset($_GET['ac']) ? $_GET['ac'] : 'AC';
+$primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
+?>
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Room Booking Enquiry</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="accomodation.php">Rooms</a></li>
+                <li class="active">Booking Enquiry</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+                <div class="card-header bg-dark text-white p-4 text-center">
+                    <span class="badge badge-warning text-dark px-3 py-1 font-weight-bold text-uppercase mb-2" style="letter-spacing:1px;">Official Reservation Desk</span>
+                    <h3 class="text-white font-weight-bold mb-1">Room Booking &amp; WhatsApp Enquiry</h3>
+                    <p class="mb-0 text-white-50 small">
+                        Please fill out the details below. Your enquiry will be securely recorded and sent to our reservations team on WhatsApp (<strong class="text-warning"><?php echo htmlspecialchars($primaryWhatsApp); ?></strong>).
+                    </p>
+                </div>
+                
+                <div class="card-body p-4 p-md-5">
+                    <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fa fa-exclamation-circle mr-2"></i> <?php echo htmlspecialchars($_GET['error']); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="book_process.php" method="POST" class="needs-validation" novalidate id="bookingForm">
+                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+                        
+                        <h5 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+                            <i class="fa fa-user-circle-o text-warning mr-2"></i> 1. Guest Information
+                        </h5>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="name" class="font-weight-bold">Customer Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter guest's full name" required maxlength="100">
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="phone" class="font-weight-bold">Mobile Number <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-right: none; padding: 10px 15px;"><i class="fa fa-phone text-secondary"></i></span>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="10-digit mobile number" required maxlength="20">
+                                </div>
+                                <div class="invalid-feedback">Please enter a valid calling phone number.</div>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="whatsapp_number" class="font-weight-bold">WhatsApp Number <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-right: none; padding: 10px 15px;"><i class="fa fa-whatsapp text-success"></i></span>
+                                    <input type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number" placeholder="WhatsApp number for booking updates" required maxlength="20">
+                                </div>
+                                <div class="invalid-feedback">Please enter your WhatsApp number.</div>
+                                <small class="form-text text-muted">
+                                    <a href="javascript:void(0);" id="sameAsMobile" class="text-primary font-weight-bold">Same as Mobile Number</a>
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="font-weight-bold">Email Address <span class="text-muted small">(Optional - for email receipt)</span></label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" maxlength="150">
+                        </div>
+
+                        <h5 class="font-weight-bold text-dark border-bottom pb-2 mb-3 mt-4">
+                            <i class="fa fa-calendar-check-o text-warning mr-2"></i> 2. Stay &amp; Room Details
+                        </h5>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="check_in" class="font-weight-bold">Check‑In Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="check_in" name="check_in" min="<?php echo date('Y-m-d'); ?>" required>
+                                <div class="invalid-feedback">Please select check-in date.</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="check_out" class="font-weight-bold">Check‑Out Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="check_out" name="check_out" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
+                                <div class="invalid-feedback">Please select check-out date.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="category_id" class="font-weight-bold">Room Category <span class="text-danger">*</span></label>
+                                <select class="form-control w-100" style="width: 100% !important; display: block; height: auto; padding: 8px 15px;" id="category_id" name="category_id" required>
+                                    <option value="" disabled <?php echo !$preselectedCategory ? 'selected' : ''; ?>>-- Select Room Category --</option>
+                                    <?php foreach ($categories as $cat): ?>
+                                        <option value="<?php echo $cat['id']; ?>" <?php echo $preselectedCategory == $cat['id'] ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($cat['name']); ?> (<?php echo $cat['total_rooms']; ?> Rooms)
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="invalid-feedback">Please choose a room category.</div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="ac_preference" class="font-weight-bold">AC / Non-AC <span class="text-danger">*</span></label>
+                                <select class="form-control w-100" style="width: 100% !important; display: block; height: auto; padding: 8px 15px;" id="ac_preference" name="ac_preference" required>
+                                    <option value="AC" <?php echo $preselectedAc === 'AC' ? 'selected' : ''; ?>>AC</option>
+                                    <option value="Non-AC" <?php echo $preselectedAc === 'Non-AC' ? 'selected' : ''; ?>>Non-AC</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="number_of_rooms" class="font-weight-bold">No. of Rooms <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="number_of_rooms" name="number_of_rooms" min="1" max="19" value="1" required>
+                                <div class="invalid-feedback">Min 1 room required.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="adults" class="font-weight-bold">Adults (Age 10+) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="adults" name="adults" min="1" max="30" value="2" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="kids" class="font-weight-bold">Kids (Under 10 Years)</label>
+                                <input type="number" class="form-control" id="kids" name="kids" min="0" max="15" value="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="font-weight-bold">Message / Special Requests</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Mention any extra bed request, food preferences, early check-in, or occasion..."></textarea>
+                        </div>
+
+                        <div class="card bg-light border p-3 mb-4 rounded">
+                            <div class="d-flex align-items-start">
+                                <i class="fa fa-whatsapp text-success fa-2x mr-3 mt-1"></i>
+                                <div>
+                                    <strong class="text-dark d-block">Instant WhatsApp Booking Desk</strong>
+                                    <p class="small text-muted mb-0">
+                                        On clicking submit, your enquiry will be saved into our reservation system, and WhatsApp will open with your pre-formatted enquiry message to send directly to Parijat Resort's reservation executive.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-block py-3 font-weight-bold text-uppercase shadow" style="font-size: 1.1rem; letter-spacing: 0.5px;">
+                            <i class="fa fa-whatsapp mr-2 fa-lg"></i> Send Enquiry via WhatsApp &amp; Book
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Same as mobile helper
+    var sameBtn = document.getElementById('sameAsMobile');
+    if (sameBtn) {
+        sameBtn.addEventListener('click', function() {
+            var phone = document.getElementById('phone').value;
+            if (phone) {
+                document.getElementById('whatsapp_number').value = phone;
+            } else {
+                document.getElementById('phone').focus();
+            }
+        });
+    }
+
+    // Dynamic date validation: check_out must be after check_in
+    var checkInInput = document.getElementById('check_in');
+    var checkOutInput = document.getElementById('check_out');
+
+    checkInInput.addEventListener('change', function() {
+        if (this.value) {
+            var inDate = new Date(this.value);
+            inDate.setDate(inDate.getDate() + 1);
+            var minOut = inDate.toISOString().split('T')[0];
+            checkOutInput.min = minOut;
+            if (checkOutInput.value && checkOutInput.value <= this.value) {
+                checkOutInput.value = minOut;
+            }
+        }
+    });
+
+    // Form Bootstrap validation
+    var form = document.getElementById('bookingForm');
+    form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    }, false);
+});
+</script>
+
+<?php include_once 'includes/footer.php'; ?>
