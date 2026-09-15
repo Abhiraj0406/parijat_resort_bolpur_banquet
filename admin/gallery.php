@@ -104,29 +104,38 @@ $csrfToken = generate_csrf_token();
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Photo Gallery</h2>
+    <div>
+        <h2 class="mb-1">Photo Gallery</h2>
+        <p class="text-muted mb-0">Manage resort images displayed on the frontend gallery section</p>
+    </div>
 </div>
 
 <?php if ($errorMsg): ?>
-    <div class="alert alert-danger"><?php echo htmlspecialchars($errorMsg); ?></div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i> <?php echo htmlspecialchars($errorMsg); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <?php endif; ?>
 <?php if ($successMsg): ?>
-    <div class="alert alert-success"><?php echo htmlspecialchars($successMsg); ?></div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i> <?php echo htmlspecialchars($successMsg); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <?php endif; ?>
 
 <div class="row">
     <!-- Form Col -->
     <div class="col-md-4 mb-4">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Upload New Photo</h5>
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 fw-bold"><i class="bi bi-cloud-arrow-up me-2 text-primary"></i>Upload New Photo</h5>
             </div>
             <div class="card-body">
                 <form method="POST" action="gallery.php" enctype="multipart/form-data">
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                     
-                    <div class="form-group">
-                        <label>Category (Optional)</label>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Category (Optional)</label>
                         <input type="text" class="form-control" name="category" placeholder="e.g. Exterior, Dining, Pool" list="categoryList">
                         <datalist id="categoryList">
                             <option value="Exterior">
@@ -136,22 +145,23 @@ $csrfToken = generate_csrf_token();
                         </datalist>
                     </div>
                     
-                    <div class="form-group">
-                        <label>Image File (JPG, PNG, WebP) - Max 5MB</label>
-                        <input type="file" class="form-control-file" name="gallery_image" accept=".jpg,.jpeg,.png,.webp" required>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Image File (JPG, PNG, WebP) - Max 5MB <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="gallery_image" accept=".jpg,.jpeg,.png,.webp" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label>Caption</label>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Caption</label>
                         <input type="text" class="form-control" name="caption" placeholder="Short description for the image">
                     </div>
                     
-                    <div class="form-group">
-                        <label>Sort Order</label>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Sort Order</label>
                         <input type="number" class="form-control" name="sort_order" value="0">
+                        <small class="text-muted">Lower numbers appear first.</small>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-block">Upload Image</button>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold"><i class="bi bi-upload me-2"></i> Upload Image</button>
                 </form>
             </div>
         </div>
@@ -159,26 +169,34 @@ $csrfToken = generate_csrf_token();
     
     <!-- Table/Grid Col -->
     <div class="col-md-8">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="row">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 fw-bold"><i class="bi bi-images me-2 text-primary"></i>Uploaded Images</h5>
+            </div>
+            <div class="card-body bg-light">
+                <div class="row g-3">
                     <?php if (count($images) > 0): ?>
                         <?php foreach ($images as $img): ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100">
-                                <img src="../<?php echo htmlspecialchars($img['image_path']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($img['caption']); ?>" style="height: 150px; object-fit: cover;">
-                                <div class="card-body p-2">
-                                    <?php if ($img['category']): ?>
-                                        <span class="badge badge-info mb-1"><?php echo htmlspecialchars($img['category']); ?></span>
-                                    <?php endif; ?>
-                                    <p class="card-text small mb-2"><?php echo htmlspecialchars($img['caption']); ?></p>
-                                    <a href="gallery.php?action=delete&id=<?php echo $img['id']; ?>" class="btn btn-sm btn-danger btn-block" onclick="return confirm('Delete this image permanently?');"><i class="fas fa-trash"></i> Delete</a>
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+                                <img src="../<?php echo htmlspecialchars($img['image_path']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($img['caption']); ?>" style="height: 180px; object-fit: cover;">
+                                <div class="card-body p-3 d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <?php if ($img['category']): ?>
+                                            <span class="badge bg-primary bg-opacity-10 text-primary border border-primary-subtle px-2 py-1"><?php echo htmlspecialchars($img['category']); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <p class="card-text small text-muted mb-3 flex-grow-1"><?php echo htmlspecialchars($img['caption'] ?: 'No caption'); ?></p>
+                                    <a href="gallery.php?action=delete&id=<?php echo $img['id']; ?>" class="btn btn-sm btn-outline-danger w-100 mt-auto" onclick="return confirm('Delete this image permanently?');"><i class="bi bi-trash3 me-1"></i> Delete</a>
                                 </div>
                             </div>
                         </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <div class="col-12 text-center py-4">No images found in the gallery.</div>
+                        <div class="col-12 text-center py-5 text-muted">
+                            <i class="bi bi-images fs-1 d-block mb-3"></i>
+                            No images found in the gallery.
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

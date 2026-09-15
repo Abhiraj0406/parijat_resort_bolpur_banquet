@@ -49,14 +49,46 @@ $og_image = $seo['og_image'] ?? 'image/Logo.png';
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
         
-        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="vendors/linericon/style.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
         <link rel="stylesheet" href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
         
+        <!-- Dark Mode CSS Logic -->
+        <style>
+        html[data-theme="dark"] {
+            filter: invert(1) hue-rotate(180deg);
+            background-color: #111; /* Ensures smooth background color flip */
+        }
+        
+        /* Re-invert images, videos, backgrounds, and icons so they look normal in dark mode */
+        html[data-theme="dark"] img,
+        html[data-theme="dark"] video,
+        html[data-theme="dark"] .bg-parallax,
+        html[data-theme="dark"] .gallery_img,
+        html[data-theme="dark"] .card-img-top,
+        html[data-theme="dark"] i.fa,
+        html[data-theme="dark"] i.bi,
+        html[data-theme="dark"] .logo_h {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        /* Adjust some theme colors that get washed out */
+        html[data-theme="dark"] .btn-warning,
+        html[data-theme="dark"] .badge-warning,
+        html[data-theme="dark"] .text-warning {
+            filter: invert(1) hue-rotate(180deg) brightness(1.2);
+        }
+        
+        /* Ensure navbar doesn't glitch */
+        html[data-theme="dark"] .header_area {
+            background: #fff; /* will be inverted to dark */
+        }
+        </style>
+
         <!-- JSON-LD Structured Data for LocalBusiness / Hotel (Accurate data without invented ratings) -->
         <script type="application/ld+json">
         {
@@ -112,11 +144,6 @@ $og_image = $seo['og_image'] ?? 'image/Logo.png';
                         <?php echo htmlspecialchars($resort_name); ?>
                     </a>
                     
-                    <!-- Dark Mode Toggle -->
-                    <button id="theme-toggle" class="btn btn-outline-secondary ml-2" aria-label="Toggle dark mode">
-                        <span id="theme-icon" class="fa fa-moon-o"></span>
-                    </button>
-                    
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -128,11 +155,11 @@ $og_image = $seo['og_image'] ?? 'image/Logo.png';
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item <?php echo ($current_page == 'index') ? 'active' : ''; ?>"><a class="nav-link" href="index.php">Home</a></li> 
                             <li class="nav-item <?php echo ($current_page == 'accomodation') ? 'active' : ''; ?>"><a class="nav-link" href="accomodation.php">Rooms</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'restaurant') ? 'active' : ''; ?>"><a class="nav-link" href="index.php#restaurant">Dining</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="index.php#banquet">Banquet</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'restaurant') ? 'active' : ''; ?>"><a class="nav-link" href="dining.php">Dining</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="banquet.php">Banquet</a></li>
                             <li class="nav-item <?php echo ($current_page == 'rules') ? 'active' : ''; ?>"><a class="nav-link" href="rules.php">Rules & Policies</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'gallery') ? 'active' : ''; ?>"><a class="nav-link" href="index.php#gallery">Gallery</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'contact') ? 'active' : ''; ?>"><a class="nav-link" href="index.php#contact">Contact</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'gallery') ? 'active' : ''; ?>"><a class="nav-link" href="gallery.php">Gallery</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'contact') ? 'active' : ''; ?>"><a class="nav-link" href="contact.php">Contact</a></li>
                         </ul>
                     </div> 
                 </nav>

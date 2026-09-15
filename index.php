@@ -129,7 +129,7 @@ $gallery_images = $stmt->fetchAll();
             <?php 
             $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg'];
             $roomIndex = 0;
-            foreach ($rooms as $room): 
+            foreach (array_slice($rooms, 0, 2) as $room): 
                 $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 4];
                 $roomIndex++;
                 $facilitiesList = !empty($room['facilities']) ? explode(',', $room['facilities']) : [];
@@ -269,11 +269,20 @@ $gallery_images = $stmt->fetchAll();
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
                     <h4 class="sec_h4">
-                        <?php if($amenity['icon_class']): ?>
-                            <i class="<?php echo htmlspecialchars($amenity['icon_class']); ?>"></i>
-                        <?php else: ?>
-                            <i class="fa fa-star"></i>
-                        <?php endif; ?>
+                        <?php 
+                        if($amenity['icon_class']){
+                            $ic = trim($amenity['icon_class']);
+                            if(strpos($ic, 'bi-') === 0) {
+                                echo '<i class="bi ' . htmlspecialchars($ic) . ' mr-2 text-primary"></i>';
+                            } elseif(strpos($ic, 'fa-') === 0) {
+                                echo '<i class="fa ' . htmlspecialchars($ic) . ' mr-2 text-primary"></i>';
+                            } else {
+                                echo '<i class="' . htmlspecialchars($ic) . ' mr-2 text-primary"></i>';
+                            }
+                        } else {
+                            echo '<i class="fa fa-star mr-2 text-primary"></i>';
+                        }
+                        ?>
                         <?php echo htmlspecialchars($amenity['name']); ?>
                     </h4>
                     <p><?php echo htmlspecialchars($amenity['description']); ?></p>
@@ -284,380 +293,146 @@ $gallery_images = $stmt->fetchAll();
     </div>
 </section>
 
-<!-- 8. Swimming Pool (Phase 8 - Configurable Timings & Strict Pool Rules) -->
-<?php 
-$poolTimings = !empty($site_settings['swimming_pool_timings']) ? $site_settings['swimming_pool_timings'] : '10:00 AM – 9:30 PM';
-$poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings['swimming_pool_timing_note'] : 'Timings are subject to seasonal schedule and maintenance.';
-?>
-<section id="pool" class="about_history_area section_gap bg-light">
+<!-- Experience & Offerings Teaser Grid -->
+<section id="experiences" class="section_gap bg-light">
     <div class="container">
-        <div class="row flex-row-reverse align-items-center">
-            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-                <div class="about_content pl-lg-4">
-                    <span class="text-uppercase text-warning font-weight-bold" style="letter-spacing:1px;">Resort Recreation</span>
-                    <h2 class="title title_color mt-1">Crystal Clear <br>Swimming Pool</h2>
-                    <p class="text-muted">
-                        Unwind and refresh in our pristine outdoor swimming pool surrounded by tranquil greenery and comfortable loungers. Perfect for morning laps or a leisurely evening soak with family.
-                    </p>
-
-                    <!-- Timing Banner (Configurable from Admin) -->
-                    <div class="p-3 mb-4 rounded bg-white shadow-sm border-left border-warning" style="border-left-width: 4px !important;">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <span class="text-muted small d-block font-weight-bold text-uppercase">Operational Pool Timings</span>
-                                <strong class="text-dark" style="font-size: 1.25rem;">
-                                    <i class="fa fa-clock-o text-warning mr-2"></i> <?php echo htmlspecialchars($poolTimings); ?>
-                                </strong>
-                            </div>
-                            <span class="badge badge-success px-3 py-2 text-uppercase" style="font-size: 11px;">Open Daily</span>
+        <div class="section_title text-center mb-5">
+            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase mb-2" style="font-size: 0.8rem; letter-spacing: 1px;">
+                <i class="fa fa-star mr-1"></i> Resort Experiences
+            </span>
+            <h2 class="title_color font-weight-bold mt-2">Dine, Celebrate & Unwind</h2>
+        </div>
+        
+        <div class="row align-items-stretch">
+            <!-- Dining Teaser -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm rounded-lg overflow-hidden h-100" style="transition: transform 0.3s ease;">
+                    <img src="image/gallery/03.jpg" class="card-img-top" alt="Dining" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4 text-center d-flex flex-column justify-content-between">
+                        <div>
+                            <h4 class="font-weight-bold text-dark mb-2">Labanya's Heshel Ghar</h4>
+                            <p class="text-muted small mb-4">Experience authentic Bengali, Chinese, and Mughlai culinary delights in our premium restaurant.</p>
                         </div>
-                        <small class="text-muted d-block mt-1"><?php echo htmlspecialchars($poolNote); ?></small>
-                    </div>
-
-                    <!-- Pool Guidelines & Holi Notice -->
-                    <h5 class="font-weight-bold text-dark mb-3"><i class="fa fa-life-ring text-primary mr-2"></i>Pool Rules &amp; Hygiene Guidelines</h5>
-                    <div class="row">
-                        <div class="col-sm-6 mb-2">
-                            <div class="d-flex align-items-start small">
-                                <i class="fa fa-check-circle text-success mr-2 mt-1"></i>
-                                <span>Guests must bring their own swimwear.</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mb-2">
-                            <div class="d-flex align-items-start small">
-                                <i class="fa fa-check-circle text-success mr-2 mt-1"></i>
-                                <span><strong>Synthetic swimwear</strong> is strictly preferred.</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mb-2">
-                            <div class="d-flex align-items-start small">
-                                <i class="fa fa-shower text-primary mr-2 mt-1"></i>
-                                <span>Mandatory shower before pool entry.</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mb-2">
-                            <div class="d-flex align-items-start small">
-                                <i class="fa fa-ban text-danger mr-2 mt-1"></i>
-                                <span>Glassware &amp; food prohibited in pool area.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Holi Special Advisory Alert -->
-                    <div class="alert alert-warning border-warning mt-3 mb-0 small text-dark">
-                        <strong class="d-block mb-1"><i class="fa fa-exclamation-triangle text-warning mr-1"></i> Special Holi Festival Regulation:</strong>
-                        During Holi celebrations, guests must strictly <strong>NOT</strong> enter the swimming pool while playing with colours. All colours must be thoroughly washed off before stepping into the pool.
+                        <a href="dining.php" class="btn btn-outline-warning font-weight-bold rounded-pill text-dark">Explore Menu</a>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-6 col-md-12">
-                <div class="position-relative">
-                    <img class="img-fluid rounded shadow-lg w-100" src="image/gallery/03.jpg" alt="Parijat Resort Swimming Pool" style="min-height: 360px; object-fit: cover;">
-                    <div class="position-absolute bg-dark text-white p-3 rounded shadow" style="bottom: 20px; left: 20px; max-width: 280px; opacity: 0.95;">
-                        <small class="text-warning text-uppercase font-weight-bold">Hygiene Guaranteed</small>
-                        <p class="mb-0 small text-white-50">Filtered freshwater with automated pH balancing for safe, pristine swimming.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 9. Restaurant – Labanya's Heshel Ghar (Phase 7 - Bengali, Chinese & Mughlai Cuisine) -->
-<section id="restaurant" class="section_gap" style="background: #faf8f5;">
-    <div class="container">
-        <div class="section_title text-center mb-5">
-            <span class="text-uppercase text-warning font-weight-bold" style="letter-spacing:1px;">Multi-Cuisine Dining Experience</span>
-            <h2 class="title_color mt-1">Labanya's Heshel Ghar</h2>
-            <p class="mx-auto" style="max-width: 750px;">
-                Specializing in authentic <strong>Bengali</strong>, aromatic <strong>Mughlai</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
-                All meals are prepared fresh upon order with pure local ingredients.
-            </p>
-        </div>
-
-        <!-- Meal Schedule Cards -->
-        <div class="row mb-5">
-            <!-- Breakfast -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-lg p-3 text-center bg-white border-top border-warning" style="border-top-width: 4px !important;">
-                    <i class="fa fa-coffee fa-2x text-warning mb-2"></i>
-                    <h5 class="font-weight-bold text-dark mb-1">Breakfast</h5>
-                    <div class="badge badge-light border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace">9:00 AM – 10:00 AM</div>
-                    <p class="small text-muted mb-0">Luchi-Alur Dom, Puri-Sabji, Toast, Eggs &amp; freshly brewed Darjeeling tea.</p>
-                </div>
-            </div>
-
-            <!-- Lunch (Thali Service Focus) -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-lg p-3 text-center bg-white border-top border-primary" style="border-top-width: 4px !important;">
-                    <i class="fa fa-cutlery fa-2x text-primary mb-2"></i>
-                    <h5 class="font-weight-bold text-dark mb-1">Lunch</h5>
-                    <div class="badge badge-light border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace">1:00 PM – 3:00 PM</div>
-                    <p class="small text-muted mb-0">Grand Bengali &amp; Multi-Cuisine <strong>Thali Service</strong> served fresh in the dining hall.</p>
-                </div>
-            </div>
-
-            <!-- Evening Snacks -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-lg p-3 text-center bg-white border-top border-success" style="border-top-width: 4px !important;">
-                    <i class="fa fa-glass fa-2x text-success mb-2"></i>
-                    <h5 class="font-weight-bold text-dark mb-1">Evening Snacks</h5>
-                    <div class="badge badge-light border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace">6:00 PM – 8:30 PM</div>
-                    <p class="small text-muted mb-0">Chilli Chicken, Pakoras, Crispy Baby Corn. <br><strong class="text-danger">Last Order: 8:00 PM</strong></p>
-                </div>
-            </div>
-
-            <!-- Dinner -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-lg p-3 text-center bg-white border-top border-danger" style="border-top-width: 4px !important;">
-                    <i class="fa fa-moon-o fa-2x text-danger mb-2"></i>
-                    <h5 class="font-weight-bold text-dark mb-1">Dinner</h5>
-                    <div class="badge badge-light border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace">9:00 PM – 10:30 PM</div>
-                    <p class="small text-muted mb-0">Biryani, Roti, Curries. <br><strong class="text-danger">Last Order: 9:00 PM</strong> | Kitchen Closes: 10:30 PM</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Crucial Dining Guidelines & Policies Box -->
-        <div class="card border-0 shadow-sm rounded-lg p-4 mb-5" style="background: #fff;">
-            <div class="row align-items-center">
-                <div class="col-lg-4 border-right mb-3 mb-lg-0 pr-lg-4">
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fa fa-fire text-danger fa-2x mr-3"></i>
-                        <div>
-                            <h6 class="font-weight-bold text-dark mb-0">100% Freshly Cooked Food</h6>
-                            <small class="text-muted">No pre-cooked or frozen meals</small>
-                        </div>
-                    </div>
-                    <p class="small text-muted mb-0">
-                        Because we prepare every dish fresh to order, <strong>advance meal orders are requested</strong> during check-in or 1-2 hours prior.
-                    </p>
-                </div>
-
-                <div class="col-lg-4 border-right mb-3 mb-lg-0 px-lg-4">
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fa fa-bell text-warning fa-2x mr-3"></i>
-                        <div>
-                            <h6 class="font-weight-bold text-dark mb-0">Room Delivery Policy</h6>
-                            <small class="text-muted">Breakfast, Snacks &amp; Dinner</small>
-                        </div>
-                    </div>
-                    <p class="small text-muted mb-0">
-                        Room delivery is available for breakfast, evening snacks, and dinner. 
-                        <strong class="text-dark d-block mt-1">Note: During lunch time, room delivery is NOT available because authentic Thali service is exclusively served in the dining hall.</strong>
-                    </p>
-                </div>
-
-                <div class="col-lg-4 pl-lg-4">
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fa fa-ban text-danger fa-2x mr-3"></i>
-                        <div>
-                            <h6 class="font-weight-bold text-dark mb-0">Outside Food Policy</h6>
-                            <small class="text-danger font-weight-bold">Strictly Prohibited</small>
-                        </div>
-                    </div>
-                    <p class="small text-muted mb-0">
-                        To maintain kitchen quality, hygiene standards, and pest control, <strong>outside food is strictly NOT allowed</strong> inside resort rooms or dining premises.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Featured Menu Items (Bengali, Chinese & Mughlai) -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="font-weight-bold text-dark mb-0">
-                <i class="fa fa-star text-warning mr-2"></i>Signature Culinary Offerings
-            </h4>
-            <div class="small">
-                <span class="badge badge-success px-2 py-1 mr-2"><i class="fa fa-circle mr-1"></i>Veg</span>
-                <span class="badge badge-danger px-2 py-1"><i class="fa fa-circle mr-1"></i>Non-Veg</span>
-            </div>
-        </div>
-
-        <div class="row">
-            <?php foreach ($food_items as $item): ?>
+            <!-- Banquet Teaser -->
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm border-0 rounded-lg p-3 bg-white" style="transition: transform 0.2s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <span class="badge badge-light border text-muted text-uppercase" style="font-size: 11px;">
-                            <?php echo htmlspecialchars($item['category']); ?>
-                        </span>
-                        <?php if(!empty($item['is_veg'])): ?>
-                            <span class="badge badge-success" style="font-size: 11px;"><i class="fa fa-leaf mr-1"></i>Veg</span>
-                        <?php else: ?>
-                            <span class="badge badge-danger" style="font-size: 11px;">Non-Veg</span>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <h5 class="card-title font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">
-                        <?php echo htmlspecialchars($item['name']); ?>
-                    </h5>
-                    <p class="card-text text-muted small mb-3 flex-grow-1" style="line-height: 1.5;">
-                        <?php echo htmlspecialchars($item['description']); ?>
-                    </p>
-                    
-                    <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-                        <strong class="text-warning font-weight-bold" style="font-size: 1.15rem;">
-                            ₹<?php echo number_format($item['price'], 0); ?>
-                        </strong>
-                        <small class="text-muted font-italic">Advance Order</small>
+                <div class="card border-0 shadow-sm rounded-lg overflow-hidden h-100" style="transition: transform 0.3s ease;">
+                    <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/gallery/02.jpg'; ?>" class="card-img-top" alt="Banquet" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4 text-center d-flex flex-column justify-content-between">
+                        <div>
+                            <h4 class="font-weight-bold text-dark mb-2">Banquet & Events</h4>
+                            <p class="text-muted small mb-4">The perfect elegant venue for weddings, corporate seminars, and grand family celebrations.</p>
+                        </div>
+                        <a href="banquet.php" class="btn btn-outline-warning font-weight-bold rounded-pill text-dark">View Details</a>
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
-        </div>
-
-        <div class="text-center mt-3">
-            <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20would%20like%20to%20enquire%20about%20dining%20at%20Labanya's%20Heshel%20Ghar." target="_blank" class="btn btn-success px-4 py-2 font-weight-bold shadow-sm rounded-pill">
-                <i class="fa fa-whatsapp mr-2"></i> Enquire / Order Meals on WhatsApp
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- 10. Banquet / Conference Hall -->
-<?php if ($banquet): ?>
-<section id="banquet" class="about_history_area section_gap bg-light">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="about_content pr-lg-3">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase" style="font-size: 0.8rem; letter-spacing: 1px;">
-                            <i class="fa fa-star mr-1"></i> Corporate &amp; Celebrations
-                        </span>
-                    </div>
-                    <h2 class="title title_color mb-3" style="font-size: 2.1rem; line-height: 1.3;">
-                        <?php echo htmlspecialchars($banquet['name'] ?: 'Banquet & Conference Hall'); ?>
-                    </h2>
-                    <p class="text-muted leading-relaxed mb-4">
-                        <?php echo nl2br(htmlspecialchars($banquet['description'])); ?>
-                    </p>
-
-                    <!-- Capacity & Pricing Info (Without inventing fake values) -->
-                    <div class="row mb-4">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <div class="p-3 bg-white rounded shadow-sm border-left border-warning" style="border-left-width: 4px !important;">
-                                <div class="small text-muted text-uppercase font-weight-bold">Seating Capacity</div>
-                                <div class="h5 font-weight-bold text-dark mb-0 mt-1">
-                                    <i class="fa fa-users text-warning mr-1"></i>
-                                    <?php 
-                                    if (!empty($banquet['capacity']) && $banquet['capacity'] > 0) {
-                                        echo htmlspecialchars($banquet['capacity']) . ' Guests';
-                                    } else {
-                                        echo '<span class="text-muted" style="font-size: 0.95rem; font-weight: normal;">Customized per layout</span>';
-                                    }
-                                    ?>
-                                </div>
-                            </div>
+            
+            <!-- Pool Teaser -->
+            <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card border-0 shadow-sm rounded-lg overflow-hidden h-100" style="transition: transform 0.3s ease;">
+                    <img src="image/gallery/05.jpg" class="card-img-top" alt="Swimming Pool" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4 text-center d-flex flex-column justify-content-between">
+                        <div>
+                            <h4 class="font-weight-bold text-dark mb-2">Swimming Pool</h4>
+                            <p class="text-muted small mb-4">Unwind and refresh in our crystal clear pool. Open daily from 10:00 AM to 9:30 PM.</p>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="p-3 bg-white rounded shadow-sm border-left border-success" style="border-left-width: 4px !important;">
-                                <div class="small text-muted text-uppercase font-weight-bold">Pricing / Tariff</div>
-                                <div class="h5 font-weight-bold text-dark mb-0 mt-1">
-                                    <i class="fa fa-tag text-success mr-1"></i>
-                                    <?php 
-                                    if (!empty($banquet['price']) && $banquet['price'] > 0) {
-                                        echo '₹' . number_format($banquet['price'], 0);
-                                    } elseif (!empty($banquet['pricing_info'])) {
-                                        echo htmlspecialchars($banquet['pricing_info']);
-                                    } else {
-                                        echo '<span class="text-muted" style="font-size: 0.95rem; font-weight: normal;">Packages on Enquiry</span>';
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Event Types Badges -->
-                    <?php if (!empty($banquet['event_types'])): ?>
-                    <div class="mb-4">
-                        <h6 class="font-weight-bold text-dark mb-2"><i class="fa fa-calendar-check-o text-primary mr-1"></i> Ideal For:</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <?php 
-                            $event_arr = explode(',', $banquet['event_types']);
-                            foreach($event_arr as $ev): 
-                                $ev_trim = trim($ev);
-                                if (!empty($ev_trim)):
-                            ?>
-                                <span class="badge badge-secondary px-3 py-2 mr-2 mb-2 font-weight-normal" style="font-size: 0.85rem; background: #e9ecef; color: #495057;">
-                                    <i class="fa fa-check-circle-o text-success mr-1"></i><?php echo htmlspecialchars($ev_trim); ?>
-                                </span>
-                            <?php 
-                                endif;
-                            endforeach; 
-                            ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-
-                    <!-- Facilities -->
-                    <?php if (!empty($banquet['facilities'])): ?>
-                    <div class="mb-4">
-                        <h6 class="font-weight-bold text-dark mb-2"><i class="fa fa-check text-success mr-1"></i> Hall Facilities &amp; Amenities:</h6>
-                        <div class="row">
-                            <?php 
-                            $fac_arr = explode(',', $banquet['facilities']);
-                            foreach($fac_arr as $fac): 
-                                $fac_trim = trim($fac);
-                                if (!empty($fac_trim)):
-                            ?>
-                                <div class="col-sm-6 mb-2">
-                                    <div class="small text-muted d-flex align-items-center">
-                                        <i class="fa fa-dot-circle-o text-warning mr-2"></i>
-                                        <?php echo htmlspecialchars($fac_trim); ?>
-                                    </div>
-                                </div>
-                            <?php 
-                                endif;
-                            endforeach; 
-                            ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-
-                    <div class="d-flex flex-wrap align-items-center gap-3 mt-3">
-                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20would%20like%20to%20enquire%20about%20booking%20the%20Banquet/Conference%20Hall%20at%20Parijat%20Resort." target="_blank" class="btn btn-success px-4 py-2 font-weight-bold shadow-sm rounded-pill mr-3 mb-2">
-                            <i class="fa fa-whatsapp mr-2"></i> Banquet Booking Enquiry
-                        </a>
-                        <a href="#contact" class="button_hover theme_btn_two mb-2">Contact Desk</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="position-relative">
-                    <img class="img-fluid rounded shadow-lg w-100" src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/gallery/02.jpg'; ?>" alt="Banquet Hall" style="max-height: 460px; object-fit: cover;">
-                    <div class="position-absolute p-3 rounded shadow-sm bg-white" style="bottom: 20px; left: 20px; max-width: 280px; opacity: 0.95;">
-                        <h6 class="font-weight-bold text-dark mb-1"><i class="fa fa-glass text-warning mr-1"></i> Tailored Event Catering</h6>
-                        <small class="text-muted">Direct catering support from Labanya's Heshel Ghar available for all events.</small>
+                        <a href="rules.php" class="btn btn-outline-warning font-weight-bold rounded-pill text-dark">Pool Rules</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<?php endif; ?>
 
-<!-- 11. Gallery -->
+<!-- 11. Gallery Teaser -->
 <section id="gallery" class="gallery_area section_gap">
     <div class="container">
-        <div class="section_title text-center">
-            <h2 class="title_color">Resort Gallery</h2>
-            <p>Glimpses of Parijat Resort</p>
+        <div class="section_title text-center mb-5">
+            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase mb-2" style="font-size: 0.8rem; letter-spacing: 1px;">
+                <i class="fa fa-camera mr-1"></i> Visual Tour
+            </span>
+            <h2 class="title_color font-weight-bold mt-2">Glimpses of Paradise</h2>
         </div>
         <div class="row imageGallery1" id="gallery">
-            <?php foreach($gallery_images as $img): ?>
-            <div class="col-md-4 gallery_item">
-                <div class="gallery_img">
-                    <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="Gallery Image - Parijat Resort Bolpur" loading="lazy" decoding="async" style="width:100%; height:250px; object-fit:cover;">
+            <?php foreach(array_slice($gallery_images, 0, 4) as $img): ?>
+            <div class="col-lg-3 col-md-6 mb-4 gallery_item">
+                <div class="gallery_img rounded shadow-sm overflow-hidden" style="height: 200px;">
+                    <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="Gallery Image - Parijat Resort Bolpur" loading="lazy" decoding="async" class="w-100 h-100" style="object-fit:cover; transition: transform 0.4s;">
                     <div class="hover">
                         <a class="light" href="<?php echo htmlspecialchars($img['image_path']); ?>"><i class="fa fa-expand"></i></a>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
+        </div>
+        <div class="text-center mt-4">
+            <a href="gallery.php" class="btn theme_btn button_hover font-weight-bold px-4 py-2">
+                <i class="fa fa-picture-o mr-2"></i> View Full Gallery
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 11.5 Testimonials -->
+<section class="testimonial_area section_gap bg-light">
+    <div class="container">
+        <div class="section_title text-center mb-5">
+            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase mb-2" style="font-size: 0.8rem; letter-spacing: 1px;">
+                <i class="fa fa-heart mr-1"></i> Guest Experiences
+            </span>
+            <h2 class="title_color font-weight-bold mt-2">What Our Guests Say</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #f3c300 !important;">
+                    <div class="d-flex mb-3 text-warning">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    </div>
+                    <p class="text-muted font-italic mb-4">"A perfect weekend getaway! The resort is beautifully maintained, and the pool area is so relaxing. The Bengali cuisine at the restaurant was absolutely delicious."</p>
+                    <div class="d-flex align-items-center mt-auto">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center font-weight-bold mr-3" style="width: 45px; height: 45px; font-size: 1.2rem;">S</div>
+                        <div>
+                            <h6 class="mb-0 font-weight-bold text-dark">Saurav Mukhopadhyay</h6>
+                            <small class="text-muted">Kolkata</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #f3c300 !important;">
+                    <div class="d-flex mb-3 text-warning">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    </div>
+                    <p class="text-muted font-italic mb-4">"We booked the banquet for a family function. The management was incredibly supportive, and the catering was top-notch. Highly recommended for events!"</p>
+                    <div class="d-flex align-items-center mt-auto">
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center font-weight-bold mr-3" style="width: 45px; height: 45px; font-size: 1.2rem;">P</div>
+                        <div>
+                            <h6 class="mb-0 font-weight-bold text-dark">Priya Banerjee</h6>
+                            <small class="text-muted">Burdwan</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #f3c300 !important;">
+                    <div class="d-flex mb-3 text-warning">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
+                    </div>
+                    <p class="text-muted font-italic mb-4">"Very peaceful environment near Shantiniketan. The rooms are spacious with nice balconies. Great place to unplug from city life."</p>
+                    <div class="d-flex align-items-center mt-auto">
+                        <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center font-weight-bold mr-3" style="width: 45px; height: 45px; font-size: 1.2rem;">A</div>
+                        <div>
+                            <h6 class="mb-0 font-weight-bold text-dark">Anirban Roy</h6>
+                            <small class="text-muted">Durgapur</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -675,72 +450,6 @@ $poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings
     </div>
 </section>
 
-<!-- 13. Management & Direct Contact (Phase 11) -->
-<section id="contact" class="section_gap bg-light">
-    <div class="container">
-        <div class="section_title text-center mb-5">
-            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase" style="font-size: 0.8rem; letter-spacing: 1px;">
-                <i class="fa fa-phone mr-1"></i> Quick Reservations
-            </span>
-            <h2 class="title_color font-weight-bold mt-2">Management &amp; Booking Desk</h2>
-            <p class="text-muted">Speak directly with our resort management for reservations, banquets and inquiries.</p>
-        </div>
-
-        <div class="row align-items-stretch">
-            <!-- Leadership Team -->
-            <div class="col-lg-7 mb-4 mb-lg-0">
-                <div class="card border-0 shadow-sm rounded-lg p-4 bg-white h-100">
-                    <h5 class="font-weight-bold text-dark mb-3"><i class="fa fa-users text-primary mr-2"></i>Resort Leadership</h5>
-                    <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <div class="p-3 bg-light rounded border-left border-warning" style="border-left-width: 4px !important;">
-                                <div class="small text-muted text-uppercase font-weight-bold">Proprietor</div>
-                                <h6 class="font-weight-bold text-dark mt-1 mb-0"><?php echo htmlspecialchars($site_settings['proprietor_name'] ?? 'Mr. Ananda Kumar Saha'); ?></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mb-3">
-                            <div class="p-3 bg-light rounded border-left border-primary" style="border-left-width: 4px !important;">
-                                <div class="small text-muted text-uppercase font-weight-bold">Finance &amp; Admin Head</div>
-                                <h6 class="font-weight-bold text-dark mt-1 mb-0"><?php echo htmlspecialchars($site_settings['finance_head_name'] ?? 'Mr. Arindam Saha'); ?></h6>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="p-3 bg-light rounded border-left border-success d-flex flex-wrap justify-content-between align-items-center" style="border-left-width: 4px !important;">
-                                <div>
-                                    <div class="small text-muted text-uppercase font-weight-bold">Resort Manager</div>
-                                    <h6 class="font-weight-bold text-dark mt-1 mb-0"><?php echo htmlspecialchars($site_settings['manager_name'] ?? 'Mr. Tonmay Guha'); ?></h6>
-                                </div>
-                                <a href="tel:<?php echo preg_replace('/[^0-9]/', '', $site_settings['manager_phone'] ?? '+918777513554'); ?>" class="btn btn-outline-success btn-sm font-weight-bold rounded-pill mt-2 mt-sm-0">
-                                    <i class="fa fa-phone mr-1"></i> Call: <?php echo htmlspecialchars($site_settings['manager_phone'] ?? '+91 87775 13554'); ?>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Booking Call & WhatsApp Desk -->
-            <div class="col-lg-5">
-                <div class="card border-0 shadow-sm rounded-lg p-4 bg-white h-100 text-center d-flex flex-column justify-content-center">
-                    <h5 class="font-weight-bold text-dark mb-2">Direct Booking Hotline</h5>
-                    <p class="small text-muted mb-4">Click below to call or chat on WhatsApp for reservations.</p>
-                    
-                    <div class="d-flex flex-column gap-2">
-                        <a href="tel:<?php echo preg_replace('/[^0-9]/', '', $site_settings['phone_primary'] ?? '+919830276364'); ?>" class="btn btn-primary btn-block py-2 font-weight-bold shadow-sm rounded-pill mb-2">
-                            <i class="fa fa-phone mr-2"></i> Call: <?php echo htmlspecialchars($site_settings['phone_primary'] ?? '+91 98302 76364'); ?>
-                        </a>
-                        <a href="tel:<?php echo preg_replace('/[^0-9]/', '', $site_settings['phone_secondary'] ?? '+919830909875'); ?>" class="btn btn-outline-primary btn-block py-2 font-weight-bold rounded-pill mb-2">
-                            <i class="fa fa-phone mr-2"></i> Call: <?php echo htmlspecialchars($site_settings['phone_secondary'] ?? '+91 98309 09875'); ?>
-                        </a>
-                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? '+919830909875'); ?>?text=Hello,%20I%20would%20like%20to%20enquire%20about%20booking%20at%20Parijat%20Resort%20Bolpur." target="_blank" class="btn btn-success btn-block py-2 font-weight-bold shadow-sm rounded-pill">
-                            <i class="fa fa-whatsapp mr-2"></i> WhatsApp: <?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? '+91 98309 09875'); ?>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- 13. Contact / WhatsApp CTA -->
 <div class="whatsapp-cta" style="position:fixed; bottom:20px; right:20px; z-index:9999;">

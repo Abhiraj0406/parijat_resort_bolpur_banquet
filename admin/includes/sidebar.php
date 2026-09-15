@@ -98,6 +98,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </li>
 
             <li class="pr-menu-item">
+                <a href="gallery.php" class="pr-menu-link <?php echo $currentPage == 'gallery.php' ? 'active' : ''; ?>">
+                    <i class="bi bi-image"></i>
+                    <span>Resort Gallery</span>
+                </a>
+            </li>
+
+            <li class="pr-menu-item">
                 <a href="banquet.php" class="pr-menu-link <?php echo $currentPage == 'banquet.php' ? 'active' : ''; ?>">
                     <i class="bi bi-buildings"></i>
                     <span>Banquet & Hall</span>
