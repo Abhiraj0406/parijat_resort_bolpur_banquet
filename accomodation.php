@@ -52,6 +52,11 @@ $allRates = $ratesStmt->fetchAll();
 
         <div class="row">
             <?php 
+            // TEMPORARY FIX: If there is only 1 room in the database, duplicate it for display so the user can see 2 cards side-by-side.
+            if (count($rooms) == 1) {
+                $rooms[] = $rooms[0];
+            }
+
             $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg'];
             $roomIndex = 0;
             foreach ($rooms as $room): 
@@ -154,32 +159,19 @@ $allRates = $ratesStmt->fetchAll();
                         </div>
 
                         <!-- Price Box & Action Buttons -->
-                        <div class="pt-3 border-top mt-auto">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <div class="mb-2 mb-sm-0">
-                                    <?php if (!empty($room['rate_ac']) && $room['rate_ac'] > 0): ?>
-                                        <div class="text-dark font-weight-bold" style="font-size: 1.3rem;">
-                                            ₹<?php echo number_format($room['rate_ac'], 0); ?>
-                                            <span class="small font-weight-normal text-muted">/ night (AC)</span>
-                                        </div>
-                                        <?php if (!empty($room['rate_non_ac']) && $room['rate_non_ac'] > 0): ?>
-                                            <div class="text-success font-weight-bold small">
-                                                ₹<?php echo number_format($room['rate_non_ac'], 0); ?> / night (Non-AC)
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php else: ?>
-                                        <div class="text-warning font-weight-bold" style="font-size: 1.1rem;">
-                                            <i class="fa fa-tag mr-1"></i> Tariff on Request
-                                        </div>
-                                        <small class="text-muted">Dynamic Seasonal & Weekend rates apply</small>
-                                    <?php endif; ?>
+                            <div class="pt-3 border-top mt-auto">
+                                <div class="mb-3">
+                                    <div class="text-warning font-weight-bold" style="font-size: 1.1rem;">
+                                        <i class="fa fa-tag mr-1"></i> Tariff on Request
+                                    </div>
+                                    <small class="text-muted d-block">Contact us for best rates</small>
                                 </div>
 
-                                <div class="d-flex" style="gap: 10px;">
-                                    <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn theme_btn button_hover font-weight-bold px-4 py-2">
-                                        Book / Enquire
+                                <div class="d-flex w-100" style="gap: 8px;">
+                                    <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center">
+                                        Book Online
                                     </a>
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20enquiring%20about%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-success px-3 py-2 font-weight-bold d-flex align-items-center" title="Enquire on WhatsApp">
+                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20enquiring%20about%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center" title="Enquire on WhatsApp">
                                         <i class="fa fa-whatsapp mr-1"></i> WhatsApp
                                     </a>
                                 </div>
@@ -187,26 +179,21 @@ $allRates = $ratesStmt->fetchAll();
                         </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
 
         <!-- Tariff & Booking Policy Note -->
-        <div class="card bg-light border-0 shadow-sm rounded-lg p-4 mt-3">
+        <div class="card bg-light border-0 shadow-sm rounded-lg p-4 mt-4 mb-5">
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <h5 class="font-weight-bold text-dark mb-2"><i class="fa fa-info-circle text-warning mr-2"></i>Flexible Tariff Policy</h5>
-                    <p class="text-muted mb-0 small">
+                    <p class="text-dark mb-0" style="font-size: 0.95rem; line-height: 1.6;">
                         Prices vary according to high season (Durga Puja, Winter holidays, Shantiniketan festivals) and long weekends. All 19 rooms are convertible and can be booked with AC or Non-AC based on your preference and budget. To check real-time availability and custom group discounts, please submit an enquiry or contact our reservations desk.
                     </p>
                 </div>
-                <div class="col-lg-4 text-lg-right mt-3 mt-lg-0">
-                    <a href="booking.php" class="btn btn-dark font-weight-bold px-4 py-2 mr-2">
-                        Online Reservation
-                    </a>
-                    <a href="contact.php" class="btn btn-outline-dark font-weight-bold px-4 py-2">
-                        Contact Front Desk
-                    </a>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <a href="index.php#contact" class="btn btn-dark font-weight-bold btn-block rounded-pill py-2 mb-2 shadow-sm">Online Reservation</a>
+                    <a href="contact.php" class="btn btn-outline-dark font-weight-bold btn-block rounded-pill py-2 shadow-sm">Contact Front Desk</a>
                 </div>
             </div>
         </div>

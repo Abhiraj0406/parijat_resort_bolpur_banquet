@@ -77,5 +77,18 @@ $ig_link = $site_settings['instagram_link'] ?? '#';
         <script src="vendors/lightbox/simpleLightbox.min.js"></script>
         <script src="js/custom.js"></script>
         <script src="assets/js/theme.js"></script>
+        
+        <!-- AOS Animation JS -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                AOS.init({
+                    duration: 800, // values from 0 to 3000, with step 50ms
+                    easing: 'ease-in-out', // default easing for AOS animations
+                    once: true, // whether animation should happen only once - while scrolling down
+                    offset: 100 // offset (in px) from the original trigger point
+                });
+            });
+        </script>
     </body>
 </html>

@@ -75,12 +75,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
 
-            <li class="pr-menu-item">
-                <a href="payments.php" class="pr-menu-link <?php echo $currentPage == 'payments.php' ? 'active' : ''; ?>">
-                    <i class="bi bi-credit-card"></i>
-                    <span>Payments</span>
-                </a>
-            </li>
 
             <li class="pr-menu-item">
                 <a href="reports.php" class="pr-menu-link <?php echo $currentPage == 'reports.php' ? 'active' : ''; ?>">

@@ -36,11 +36,11 @@ $gallery_images = $stmt->fetchAll();
     <div class="booking_table d_flex align-items-center">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
-            <div class="banner_content text-center">
-                <h6>Experience Luxury & Nature</h6>
-                <h2>Welcome to <?php echo htmlspecialchars($resort_name); ?></h2>
-                <p>A serene getaway in the heart of Bolpur. <br> Perfectly blending modern luxury with natural tranquility.</p>
-                <a href="#rooms" class="btn theme_btn button_hover">Explore Rooms</a>
+            <div class="banner_content text-center" data-aos="zoom-in" data-aos-duration="1000">
+                <h6 data-aos="fade-down" data-aos-delay="300">Experience Luxury & Nature</h6>
+                <h2 data-aos="fade-up" data-aos-delay="500">Welcome to <?php echo htmlspecialchars($resort_name); ?></h2>
+                <p data-aos="fade-up" data-aos-delay="700">A serene getaway in the heart of Bolpur. <br> Perfectly blending modern luxury with natural tranquility.</p>
+                <a href="#rooms" class="btn theme_btn button_hover" data-aos="fade-up" data-aos-delay="900">Explore Rooms</a>
             </div>
         </div>
     </div>
@@ -98,19 +98,151 @@ $gallery_images = $stmt->fetchAll();
     </div>
 </section>
 
+<!-- Global Glassmorphism Theme CSS -->
+<style>
+/* Global Glass Theme for Homepage Content */
+body {
+    background: url('image/gallery/01.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
+}
+/* Add a dark overlay over the background image but behind the content */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
+/* Make all section backgrounds transparent so the body background shows through */
+.section_gap, .bg-light, .bg-white, .bg-dark, .accomodation_area, .about_history_area, .facilities_area, .gallery_area, .testimonial_area, .glass_section {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Remove the old parallax overlay from the facilities section so it doesn't double up */
+.facilities_area .overlay.bg-parallax, .glass_section > div:first-child {
+    display: none !important;
+}
+
+/* Convert all white cards and containers to glass cards */
+.card, .facilities_item, .about_content, .gallery_item .gallery_img {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2) !important;
+    border-radius: 16px !important;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card:hover, .facilities_item:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Convert text colors to white for readability on dark background */
+h1, h2, h3, h4, h5, h6, p, span, div, 
+.text-dark, .text-muted, .title_color, .sec_h4 {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Preserve specific colors and keep buttons looking normal */
+.btn, .btn span, .btn i,
+.badge, .badge span, .badge i,
+i.fa, i.bi {
+    text-shadow: none !important;
+}
+
+.btn.btn-dark {
+    background-color: rgba(0,0,0,0.7) !important;
+    border-color: rgba(255,255,255,0.3) !important;
+    color: #fff !important;
+}
+.btn.btn-dark:hover {
+    background-color: #000 !important;
+}
+.btn.btn-success {
+    background-color: #25D366 !important;
+    border-color: #25D366 !important;
+    color: #fff !important;
+}
+.btn.theme_btn {
+    background: #f3c300 !important;
+    color: #000 !important;
+    border: none !important;
+}
+.text-warning, .fa-star, .fa-tag {
+    color: #f3c300 !important;
+}
+.text-success, .fa-leaf, .fa-whatsapp, .fa-check {
+    color: #25D366 !important;
+}
+.badge-warning {
+    background-color: rgba(243, 195, 0, 0.9) !important;
+    color: #000 !important;
+    border: none !important;
+}
+.badge-light {
+    background-color: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+.badge-dark {
+    background-color: rgba(0,0,0,0.6) !important;
+    color: #fff !important;
+}
+.badge-success {
+    background-color: rgba(37, 211, 102, 0.8) !important;
+    color: #fff !important;
+}
+
+/* Fix specific backgrounds inside cards */
+.bg-light {
+    background-color: rgba(255,255,255,0.05) !important;
+}
+
+/* Ensure Footer remains solid and not transparent */
+footer.footer-area, .footer-area.section_gap {
+    background-color: #04091e !important;
+    background: #04091e !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* Ensure Header remains completely solid and readable */
+.header_area {
+    background: #ffffff !important;
+}
+.header_area h1, .header_area h2, .header_area h3, .header_area h4, .header_area h5, .header_area h6, 
+.header_area p, .header_area span, .header_area div, .header_area a {
+    text-shadow: none !important;
+}
+.header_area .nav-link {
+    color: #222222 !important;
+}
+.header_area .nav-item.active .nav-link, .header_area .nav-link:hover {
+    color: #f3c300 !important;
+}
+</style>
+
 <!-- 3. Resort Introduction -->
 <section class="about_history_area section_gap">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 d_flex align-items-center">
-                <div class="about_content">
-                    <h2 class="title title_color">About Us <br>A Haven of Peace</h2>
-                    <p>Escape the hustle and bustle of city life. Parijat Resort offers an eco-friendly environment filled with lush greenery, providing you the ultimate comfort and relaxation. Whether it's a family vacation or a corporate retreat, we have everything you need.</p>
-                    <a href="#contact" class="button_hover theme_btn_two">Contact Us</a>
+        <div class="row align-items-stretch">
+            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 d-flex" data-aos="fade-right">
+                <div class="about_content p-5 glass-card d-flex flex-column justify-content-center h-100 w-100">
+                    <h2 class="title text-white font-weight-bold mb-4" style="line-height: 1.3;">About Us <br>A Haven of Peace</h2>
+                    <p class="text-white mb-4" style="font-size: 1.05rem; line-height: 1.7;">Escape the hustle and bustle of city life. Parijat Resort offers an eco-friendly environment filled with lush greenery, providing you the ultimate comfort and relaxation. Whether it's a family vacation or a corporate retreat, we have everything you need.</p>
+                    <div>
+                        <a href="#contact" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow">Contact Us</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <img class="img-fluid rounded shadow" src="image/about_bg.jpg" alt="About Resort">
+            <div class="col-lg-6 col-md-12 d-flex" data-aos="fade-left" data-aos-delay="200">
+                <div class="glass-card p-3 w-100 h-100 d-flex align-items-center justify-content-center">
+                    <img class="img-fluid rounded-lg shadow w-100 h-100" src="image/about_bg.jpg" alt="About Resort" style="object-fit: cover;">
+                </div>
             </div>
         </div>
     </div>
@@ -119,7 +251,7 @@ $gallery_images = $stmt->fetchAll();
 <!-- 4 & 5. Room Categories & Rates (Phase 5 - 19 Total Rooms across 4 Categories) -->
 <section id="rooms" class="accomodation_area section_gap bg-light">
     <div class="container">
-        <div class="section_title text-center mb-5">
+        <div class="section_title text-center mb-5" data-aos="fade-up">
             <span class="text-uppercase text-warning font-weight-bold letter-spacing-1">Stay with Luxury & Serenity</span>
             <h2 class="title_color mt-2">Resort Rooms & Cottages</h2>
             <p>19 thoughtfully crafted units across 4 distinct categories. All rooms feature private balconies and convertible AC / Non-AC comfort.</p>
@@ -129,12 +261,13 @@ $gallery_images = $stmt->fetchAll();
             <?php 
             $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg'];
             $roomIndex = 0;
+            $delay = 100;
             foreach (array_slice($rooms, 0, 2) as $room): 
                 $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 4];
                 $roomIndex++;
                 $facilitiesList = !empty($room['facilities']) ? explode(',', $room['facilities']) : [];
             ?>
-            <div class="col-lg-6 col-md-12 mb-4">
+            <div class="col-lg-6 col-md-12 mb-4" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden room-premium-card" style="transition: transform 0.3s ease, box-shadow 0.3s ease; background: #fff;">
                     <div class="row no-gutters h-100">
                         <!-- Room Image Column -->
@@ -213,31 +346,20 @@ $gallery_images = $stmt->fetchAll();
                             </div>
 
                             <!-- Pricing & Action -->
-                            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
-                                <div>
-                                    <?php if (!empty($room['rate_ac']) && $room['rate_ac'] > 0): ?>
-                                        <div class="font-weight-bold text-dark" style="font-size: 1.1rem;">
-                                            ₹<?php echo number_format($room['rate_ac'], 0); ?> <small class="text-muted font-weight-normal">/ night (AC)</small>
-                                        </div>
-                                        <?php if (!empty($room['rate_non_ac']) && $room['rate_non_ac'] > 0): ?>
-                                            <div class="small text-success font-weight-bold">
-                                                ₹<?php echo number_format($room['rate_non_ac'], 0); ?> <small class="text-muted">/ night (Non-AC)</small>
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php else: ?>
-                                        <div class="text-warning font-weight-bold" style="font-size: 0.95rem;">
-                                            <i class="fa fa-tag mr-1"></i> Tariff on Request
-                                        </div>
-                                        <small class="text-muted d-block" style="font-size: 11px;">Seasonal & Weekend rates apply</small>
-                                    <?php endif; ?>
+                            <div class="pt-3 border-top">
+                                <div class="mb-3">
+                                    <div class="text-warning font-weight-bold" style="font-size: 0.95rem;">
+                                        <i class="fa fa-tag mr-1"></i> Tariff on Request
+                                    </div>
+                                    <small class="text-muted d-block" style="font-size: 11px;">Contact us for best rates</small>
                                 </div>
 
-                                <div class="d-flex" style="gap: 8px;">
-                                    <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark text-white px-3 py-2 rounded-pill font-weight-bold shadow-sm">
-                                        Enquire Room
+                                <div class="d-flex w-100" style="gap: 8px;">
+                                    <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center">
+                                        Book Online
                                     </a>
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20interested%20in%20booking%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success text-white px-2 py-2 rounded-pill shadow-sm" title="Chat on WhatsApp">
-                                        <i class="fa fa-whatsapp"></i>
+                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20interested%20in%20booking%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center" title="Chat on WhatsApp">
+                                        <i class="fa fa-whatsapp mr-1"></i> WhatsApp
                                     </a>
                                 </div>
                             </div>
@@ -245,12 +367,15 @@ $gallery_images = $stmt->fetchAll();
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <?php 
+                $delay += 200;
+            endforeach; 
+            ?>
         </div>
 
-        <div class="text-center mt-4">
-            <a href="accomodation.php" class="btn theme_btn button_hover font-weight-bold text-uppercase px-4 py-2">
-                View All Room Details & Tariffs &rarr;
+        <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+            <a href="accomodation.php" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow">
+                View All Categories
             </a>
         </div>
     </div>
@@ -260,35 +385,44 @@ $gallery_images = $stmt->fetchAll();
 <section class="facilities_area section_gap">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
-        <div class="section_title text-center">
+        <div class="section_title text-center" data-aos="fade-up">
             <h2 class="title_w">Resort Facilities</h2>
             <p>Everything you need for a perfect stay</p>
         </div>
         <div class="row mb_30">
-            <?php foreach ($amenities as $amenity): ?>
-            <div class="col-lg-4 col-md-6">
-                <div class="facilities_item">
-                    <h4 class="sec_h4">
-                        <?php 
-                        if($amenity['icon_class']){
-                            $ic = trim($amenity['icon_class']);
-                            if(strpos($ic, 'bi-') === 0) {
-                                echo '<i class="bi ' . htmlspecialchars($ic) . ' mr-2 text-primary"></i>';
-                            } elseif(strpos($ic, 'fa-') === 0) {
-                                echo '<i class="fa ' . htmlspecialchars($ic) . ' mr-2 text-primary"></i>';
-                            } else {
-                                echo '<i class="' . htmlspecialchars($ic) . ' mr-2 text-primary"></i>';
-                            }
+            <?php 
+            $f_delay = 100;
+            foreach ($amenities as $amenity): 
+            ?>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="<?php echo $f_delay; ?>">
+                <div class="facilities_item glass-card text-center p-4 h-100">
+                    <?php 
+                    if($amenity['icon_class']){
+                        $ic = trim($amenity['icon_class']);
+                        // Remove potential duplicates
+                        $ic = str_replace(['bi ', 'fa '], '', $ic);
+                        
+                        if(strpos($ic, 'bi-') === 0) {
+                            echo '<i class="bi ' . htmlspecialchars($ic) . ' fa-3x text-info mb-3"></i>';
+                        } elseif(strpos($ic, 'fa-') === 0) {
+                            echo '<i class="fa ' . htmlspecialchars($ic) . ' fa-3x text-info mb-3"></i>';
                         } else {
-                            echo '<i class="fa fa-star mr-2 text-primary"></i>';
+                            echo '<i class="' . htmlspecialchars($ic) . ' fa-3x text-info mb-3"></i>';
                         }
-                        ?>
+                    } else {
+                        echo '<i class="fa fa-star fa-3x text-info mb-3"></i>';
+                    }
+                    ?>
+                    <h5 class="text-white font-weight-bold mb-2">
                         <?php echo htmlspecialchars($amenity['name']); ?>
-                    </h4>
-                    <p><?php echo htmlspecialchars($amenity['description']); ?></p>
+                    </h5>
+                    <p class="text-white small mb-0"><?php echo htmlspecialchars($amenity['description']); ?></p>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <?php 
+                $f_delay += 100;
+            endforeach; 
+            ?>
         </div>
     </div>
 </section>
@@ -296,52 +430,52 @@ $gallery_images = $stmt->fetchAll();
 <!-- Experience & Offerings Teaser Grid -->
 <section id="experiences" class="section_gap bg-light">
     <div class="container">
-        <div class="section_title text-center mb-5">
+        <div class="section_title text-center mb-5" data-aos="fade-up">
             <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase mb-2" style="font-size: 0.8rem; letter-spacing: 1px;">
-                <i class="fa fa-star mr-1"></i> Resort Experiences
+                <i class="fa fa-star mr-1"></i> Signature Experiences
             </span>
             <h2 class="title_color font-weight-bold mt-2">Dine, Celebrate & Unwind</h2>
         </div>
         
         <div class="row align-items-stretch">
-            <!-- Dining Teaser -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm rounded-lg overflow-hidden h-100" style="transition: transform 0.3s ease;">
-                    <img src="image/gallery/03.jpg" class="card-img-top" alt="Dining" style="height: 200px; object-fit: cover;">
-                    <div class="card-body p-4 text-center d-flex flex-column justify-content-between">
+            <!-- Dining -->
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
+                    <img src="image/gallery/03.jpg" class="card-img-top" alt="Labanya's Heshel Ghar" style="height: 220px; object-fit: cover;">
+                    <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
-                            <h4 class="font-weight-bold text-dark mb-2">Labanya's Heshel Ghar</h4>
-                            <p class="text-muted small mb-4">Experience authentic Bengali, Chinese, and Mughlai culinary delights in our premium restaurant.</p>
+                            <h4 class="font-weight-bold mb-3">Labanya's Heshel Ghar</h4>
+                            <p class="text-muted small">Experience authentic Bengali thalis, sizzling Chinese woks, and rich Mughlai dishes crafted by expert chefs.</p>
                         </div>
-                        <a href="dining.php" class="btn btn-outline-warning font-weight-bold rounded-pill text-dark">Explore Menu</a>
+                        <a href="dining.php" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Explore Menu</a>
                     </div>
                 </div>
             </div>
-            
-            <!-- Banquet Teaser -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm rounded-lg overflow-hidden h-100" style="transition: transform 0.3s ease;">
-                    <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/gallery/02.jpg'; ?>" class="card-img-top" alt="Banquet" style="height: 200px; object-fit: cover;">
-                    <div class="card-body p-4 text-center d-flex flex-column justify-content-between">
+
+            <!-- Banquet -->
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="250">
+                <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
+                    <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/gallery/02.jpg'; ?>" class="card-img-top" alt="Banquet Hall" style="height: 220px; object-fit: cover;">
+                    <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
-                            <h4 class="font-weight-bold text-dark mb-2">Banquet & Events</h4>
-                            <p class="text-muted small mb-4">The perfect elegant venue for weddings, corporate seminars, and grand family celebrations.</p>
+                            <h4 class="font-weight-bold mb-3">Grand Banquet & Lawns</h4>
+                            <p class="text-muted small">Host your dream wedding, corporate event, or family gathering in our spacious fully AC banquet hall and open lawns.</p>
                         </div>
-                        <a href="banquet.php" class="btn btn-outline-warning font-weight-bold rounded-pill text-dark">View Details</a>
+                        <a href="banquet.php" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Plan Event</a>
                     </div>
                 </div>
             </div>
-            
-            <!-- Pool Teaser -->
-            <div class="col-lg-4 col-md-12 mb-4">
-                <div class="card border-0 shadow-sm rounded-lg overflow-hidden h-100" style="transition: transform 0.3s ease;">
-                    <img src="image/gallery/05.jpg" class="card-img-top" alt="Swimming Pool" style="height: 200px; object-fit: cover;">
-                    <div class="card-body p-4 text-center d-flex flex-column justify-content-between">
+
+            <!-- Pool & Nature -->
+            <div class="col-lg-4 col-md-6 mb-4 mx-auto" data-aos="fade-up" data-aos-delay="400">
+                <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
+                    <img src="image/gallery/05.jpg" class="card-img-top" alt="Swimming Pool" style="height: 220px; object-fit: cover;">
+                    <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
-                            <h4 class="font-weight-bold text-dark mb-2">Swimming Pool</h4>
-                            <p class="text-muted small mb-4">Unwind and refresh in our crystal clear pool. Open daily from 10:00 AM to 9:30 PM.</p>
+                            <h4 class="font-weight-bold mb-3">Swimming Pool & Gardens</h4>
+                            <p class="text-muted small">Take a refreshing dip in our crystal clear pool or stroll through our manicured gardens to reconnect with nature.</p>
                         </div>
-                        <a href="rules.php" class="btn btn-outline-warning font-weight-bold rounded-pill text-dark">Pool Rules</a>
+                        <a href="gallery.php" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">View Gallery</a>
                     </div>
                 </div>
             </div>
@@ -373,6 +507,79 @@ $gallery_images = $stmt->fetchAll();
         <div class="text-center mt-4">
             <a href="gallery.php" class="btn theme_btn button_hover font-weight-bold px-4 py-2">
                 <i class="fa fa-picture-o mr-2"></i> View Full Gallery
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 11.2 Why Choose Us (Glassmorphism) -->
+<style>
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+.glass-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+</style>
+<section class="glass_section section_gap" style="position: relative;">
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('image/gallery/01.jpg') no-repeat center center/cover; z-index: 1;"></div>
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 2;"></div>
+    
+    <div class="container" style="position: relative; z-index: 3;">
+        <div class="text-center mb-5" data-aos="zoom-in">
+            <h2 class="text-white font-weight-bold mb-3" style="font-size: 2.5rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">Why Choose Parijat Resort?</h2>
+            <p class="text-white" style="font-size: 1.1rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Discover the perfect blend of modern luxury and serene nature.</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <!-- Feature 1 -->
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="flip-left" data-aos-delay="100">
+                <div class="glass-card text-center p-4 h-100">
+                    <i class="fa fa-leaf fa-3x text-success mb-3"></i>
+                    <h5 class="text-white font-weight-bold mb-2">Nature's Lap</h5>
+                    <p class="text-white small mb-0">Surrounded by lush green gardens and a peaceful environment.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="flip-left" data-aos-delay="300">
+                <div class="glass-card text-center p-4 h-100">
+                    <i class="fa fa-bed fa-3x text-info mb-3"></i>
+                    <h4 class="text-white font-weight-bold mb-3">Luxury Rooms</h4>
+                    <p class="text-white small mb-0">19 Premium AC & Non-AC convertible spacious rooms.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="flip-left" data-aos-delay="500">
+                <div class="glass-card text-center p-4 h-100">
+                    <i class="fa fa-glass fa-3x text-warning mb-3"></i>
+                    <h5 class="text-white font-weight-bold mb-2">Event Spaces</h5>
+                    <p class="text-white small mb-0">Grand Banquet Hall & open lawns for your celebrations.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="col-lg-4 col-md-6 mb-4 mx-auto" data-aos="flip-left" data-aos-delay="700">
+                <div class="glass-card text-center p-4 h-100">
+                    <i class="fa fa-cutlery fa-3x text-danger mb-3"></i>
+                    <h4 class="text-white font-weight-bold mb-3">Fine Dining</h4>
+                    <p class="text-white small mb-0">Authentic Bengali, Chinese & Mughlai Cuisine.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4" data-aos="zoom-in" data-aos-delay="900">
+            <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>" target="_blank" class="btn btn-success font-weight-bold px-4 py-2 rounded-pill shadow-lg">
+                <i class="fa fa-whatsapp mr-2"></i> Chat with Us
             </a>
         </div>
     </div>

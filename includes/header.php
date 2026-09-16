@@ -26,7 +26,7 @@ $meta_keywords = $seo['meta_keywords'] ?? '';
 $canonical_url = $seo['canonical_url'] ?? 'https://parijatresortbolpur.com/';
 $og_title = $seo['og_title'] ?? $page_title;
 $og_description = $seo['og_description'] ?? $meta_description;
-$og_image = $seo['og_image'] ?? 'image/Logo.png';
+$og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
 ?>
 <!doctype html>
 <html lang="en" data-theme="light">
@@ -96,7 +96,7 @@ $og_image = $seo['og_image'] ?? 'image/Logo.png';
           "@type": ["Hotel", "Resort"],
           "name": "<?php echo addslashes($resort_name); ?>",
           "url": "https://parijatresortbolpur.com/",
-          "logo": "https://parijatresortbolpur.com/image/Logo.png",
+          "logo": "https://parijatresortbolpur.com/image/logo-parijat.png",
           "image": [
             "https://parijatresortbolpur.com/image/room1.jpg",
             "https://parijatresortbolpur.com/image/room2.jpg"
@@ -129,6 +129,9 @@ $og_image = $seo['og_image'] ?? 'image/Logo.png';
         }
         </script>
 
+        <!-- AOS Animation CSS -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        
         <!-- Main CSS -->
         <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
         <link rel="stylesheet" href="css/responsive.css?v=<?php echo time(); ?>">
@@ -139,9 +142,8 @@ $og_image = $seo['og_image'] ?? 'image/Logo.png';
             <div class="container-fluid" style="padding: 0;">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand -->
-                    <a class="navbar-brand logo_h" href="index.php" style="font-weight: 700; color: #222; font-size: 24px;">
-                        <!-- You can replace this text with an actual Logo image if preferred -->
-                        <?php echo htmlspecialchars($resort_name); ?>
+                    <a class="navbar-brand logo_h" href="index.php">
+                        <img src="image/logo-parijat.png?v=3" alt="<?php echo htmlspecialchars($resort_name); ?>" style="max-height: 80px; width: auto; max-width: 100%; transform: scale(1.25); transform-origin: left center; margin-left: 10px;">
                     </a>
                     
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
