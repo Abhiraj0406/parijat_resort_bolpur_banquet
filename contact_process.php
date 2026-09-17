@@ -89,27 +89,47 @@ if ($type === 'quick_booking') {
     }
     
 } else {
-    // Process General Contact Form (if any)
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
+    // Process General Contact Form
+    $name    = trim($_POST['name'] ?? '');
+    $phone   = trim($_POST['phone'] ?? '');
+    $email   = trim($_POST['email'] ?? '');
     $subject = trim($_POST['subject'] ?? 'Website Contact Form');
     $message = trim($_POST['message'] ?? '');
     
-    if (empty($name) || empty($email) || empty($message)) {
-        die('Name, email, and message are required.');
+    if (empty($name) || (empty($email) && empty($phone)) || empty($message)) {
+        die('Name, contact number/email, and message are required.');
+    }
+
+    // 1. Record inquiry into contact_inquiries table for Admin Panel
+    try {
+        $stmtInq = $pdo->prepare("INSERT INTO contact_inquiries (name, email, phone, subject, message, status) VALUES (:name, :email, :phone, :subject, :message, 'new')");
+        $stmtInq->execute([
+            ':name'    => $name,
+            ':email'   => $email ?: 'no-email@parijatresortbolpur.com',
+            ':phone'   => $phone,
+            ':subject' => $subject,
+            ':message' => $message
+        ]);
+    } catch (PDOException $e) {
+        error_log('Failed to record contact inquiry: ' . $e->getMessage());
     }
     
-    $body = "<h3>New Contact Message</h3>
-             <p><strong>Name:</strong> $name</p>
-             <p><strong>Email:</strong> $email</p>
-             <p><strong>Message:</strong><br/>$message</p>";
+    // 2. Send SMTP Notification Email to Reservations Desk
+    $adminNotifyEmail = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'reservations@parijatresortbolpur.com';
+    $body = "<h3>New Contact Enquiry Received</h3>
+             <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
+             <p><strong>Phone:</strong> " . htmlspecialchars($phone) . "</p>
+             <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
+             <p><strong>Subject:</strong> " . htmlspecialchars($subject) . "</p>
+             <p><strong>Message:</strong><br/>" . nl2br(htmlspecialchars($message)) . "</p>";
              
-    $success = send_smtp_email('reservations@parijatresortbolpur.com', $subject, $body);
+    $success = send_smtp_email($adminNotifyEmail, "New Contact Enquiry: " . $subject, $body);
     
-    if ($success) {
-        echo "Thank you for contacting us. We will get back to you shortly.";
-    } else {
-        echo "Failed to send message. Please try again later.";
-    }
+    // 3. User feedback
+    echo "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 25px; border-radius: 8px; background: #e8f5e9; border: 1px solid #c8e6c9; color: #2e7d32;'>";
+    echo "<h3 style='margin-top:0;'>Thank You for Contacting Us!</h3>";
+    echo "<p>Your message has been received by our reservations desk. We will get back to you shortly.</p>";
+    echo "<p><a href='index.php' style='color: #1b5e20; font-weight: bold;'>&larr; Return to Homepage</a></p>";
+    echo "</div>";
 }
 ?>

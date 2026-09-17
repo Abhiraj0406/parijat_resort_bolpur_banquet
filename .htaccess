@@ -1,36 +1,55 @@
-# Prevent directory listing
+# ==============================================================================
+# PARIJAT RESORT BOLPUR & BANQUET - APACHE CONFIGURATION (.htaccess)
+# ==============================================================================
+
+# 1. Prevent Directory Indexing / Listing
 Options -Indexes
 
-# Security Headers
+# 2. Security Headers (Harden HTTP responses)
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 </IfModule>
 
-# Deny direct access to config, sql, md, log, and sensitive include files
-<FilesMatch "^(config\.php|header\.php|footer\.php|schema\.sql|\.env|\.git.*|.*\.log|.*\.md)$">
-    Order Allow,Deny
-    Deny from all
+# 3. Block Sensitive Files and Environment Configurations (.env, .git, SQL, logs)
+<FilesMatch "^\.env|^\.git|\.(sql|log|ini|bak|sh|inc|swp|dist|md|json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
-# Prevent sensitive files exposure
-<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist)$">
-    Order Allow,Deny
-    Deny from all
-</FilesMatch>
+# 4. Front Controller & Clean URL Rewriting Engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
 
-# Clean URLs (remove .php extension)
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
+    # Block direct HTTP access to includes folder
+    RewriteRule ^includes/ - [F,L]
 
-# Custom Error Document
+    # Allow direct access to physical files and directories (CSS, JS, images, uploads, admin)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Clean URL support: if .php file exists (e.g. /about -> about.php)
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
+
+    # Front Controller: Route all other requests to index.php
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+# 5. Custom Error Document
 ErrorDocument 404 /404.php
 
-# Browser Caching headers & Performance
+# 6. Browser Caching & Performance
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType image/jpeg "access plus 30 days"
@@ -38,11 +57,12 @@ ErrorDocument 404 /404.php
     ExpiresByType image/webp "access plus 30 days"
     ExpiresByType image/svg+xml "access plus 30 days"
     ExpiresByType image/x-icon "access plus 1 year"
-    ExpiresByType text/css "access plus 1 week"
-    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
-# GZIP Compression
+# 7. GZIP / Deflate Compression
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript font/woff2
 </IfModule>
