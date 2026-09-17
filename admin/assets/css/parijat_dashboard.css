@@ -1,0 +1,839 @@
+/* =========================================================================
+   PARIJAT RESORT - LUXURY ADMIN DASHBOARD STYLESHEET
+   Matching exact reference design
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+    --pr-sidebar-bg: #062619;
+    --pr-sidebar-hover: rgba(255, 255, 255, 0.07);
+    --pr-sidebar-active: #153c2a;
+    --pr-sidebar-text: #96af9f;
+    --pr-sidebar-text-active: #ffffff;
+    --pr-accent-green: #258358;
+    --pr-light-green: #d1fae5;
+    --pr-bg-body: #f4f7f5;
+    --pr-card-bg: #ffffff;
+    --pr-border: #e6ede8;
+    --pr-text-dark: #111d17;
+    --pr-text-muted: #65756d;
+    --pr-sidebar-width: 250px;
+}
+
+body {
+    background-color: var(--pr-bg-body) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    color: var(--pr-text-dark);
+}
+
+/* =======================================================
+   SIDEBAR COMPONENT
+   ======================================================= */
+.sidebar-wrapper {
+    width: var(--pr-sidebar-width) !important;
+    background: linear-gradient(180deg, #052115 0%, #082d1e 60%, #041a10 100%) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    z-index: 1040 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 1.5rem 1.1rem 1rem 1.1rem !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Logo & Tagline */
+.pr-sidebar-header {
+    margin-bottom: 1.5rem;
+    padding-left: 0.4rem;
+}
+
+.pr-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+}
+
+.pr-logo-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4ade80;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+
+.pr-brand-text {
+    line-height: 1.15;
+}
+
+.pr-brand-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.pr-brand-tagline {
+    font-size: 0.68rem;
+    color: #8faea0;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-top: 2px;
+}
+
+/* Sidebar Menu Nav */
+.pr-sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+}
+
+.pr-menu-item {
+    margin: 0;
+}
+
+.pr-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--pr-sidebar-text);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.pr-menu-link i {
+    font-size: 1.1rem;
+    color: #799b8b;
+    transition: color 0.2s ease;
+}
+
+.pr-menu-link:hover {
+    color: #ffffff;
+    background-color: var(--pr-sidebar-hover);
+}
+
+.pr-menu-link:hover i {
+    color: #ffffff;
+}
+
+/* Active Menu Item (Soft Pill Capsule like reference image) */
+.pr-menu-link.active {
+    background: #184631 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pr-menu-link.active i {
+    color: #4ade80 !important;
+}
+
+.pr-badge-count {
+    margin-left: auto;
+    background: #84cc16;
+    color: #052115;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+}
+
+/* Sidebar Footer Art (Nature's Luxury) */
+.pr-sidebar-footer {
+    margin-top: auto;
+    text-align: center;
+    padding-top: 1rem;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pr-footer-tagline-wrap {
+    position: relative;
+    z-index: 2;
+}
+
+.pr-luxury-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: #d1b46a;
+    letter-spacing: 0.02em;
+}
+
+.pr-luxury-subtitle {
+    font-size: 0.7rem;
+    color: #7e9c8c;
+    letter-spacing: 0.05em;
+    margin-top: -2px;
+}
+
+/* =======================================================
+   MAIN WRAPPER & TOP NAVBAR
+   ======================================================= */
+.main-wrapper {
+    margin-left: var(--pr-sidebar-width) !important;
+    min-height: 100vh;
+    padding: 1.25rem 2rem 2.5rem 2rem !important;
+    background-color: var(--pr-bg-body);
+}
+
+.pr-top-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.5rem 0 1.5rem 0;
+}
+
+/* Search Bar Pill */
+.pr-search-container {
+    flex: 1;
+    max-width: 480px;
+    position: relative;
+}
+
+.pr-search-input {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e1e8e3;
+    border-radius: 50px;
+    padding: 0.65rem 1.25rem 0.65rem 2.75rem;
+    font-size: 0.88rem;
+    color: var(--pr-text-dark);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.pr-search-input:focus {
+    border-color: #258358;
+    box-shadow: 0 0 0 3px rgba(37, 131, 88, 0.12);
+}
+
+.pr-search-icon {
+    position: absolute;
+    left: 1.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a39b;
+    font-size: 1rem;
+}
+
+/* Navbar Right: Notifications & Profile */
+.pr-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.pr-notify-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    font-size: 1.35rem;
+    color: #4b5563;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    transition: color 0.2s;
+}
+
+.pr-notify-btn:hover {
+    color: #111d17;
+}
+
+.pr-notify-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--pr-bg-body);
+}
+
+/* User Profile Badge */
+.pr-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.pr-user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.pr-user-info {
+    text-align: left;
+    line-height: 1.2;
+}
+
+.pr-user-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--pr-text-dark);
+}
+
+.pr-user-role {
+    font-size: 0.75rem;
+    color: var(--pr-text-muted);
+}
+
+/* =======================================================
+   DASHBOARD HERO & GREETING
+   ======================================================= */
+.pr-hero-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    gap: 1.5rem;
+}
+
+.pr-greeting-col {
+    flex: 1;
+}
+
+.pr-welcome-subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #10774a;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.pr-welcome-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0d1b14;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.35rem;
+}
+
+.pr-welcome-desc {
+    font-size: 0.95rem;
+    color: var(--pr-text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.pr-date-weather {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #526359;
+    font-weight: 500;
+}
+
+.pr-date-chip, .pr-weather-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pr-divider-dot {
+    color: #cbd5e1;
+}
+
+/* Resort Banner Card */
+.pr-banner-card {
+    width: 490px;
+    height: 130px;
+    border-radius: 16px;
+    background: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat, linear-gradient(135deg, #134e34, #06281c);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.pr-banner-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0%, rgba(6, 40, 28, 0.85) 100%);
+}
+
+.pr-banner-content {
+    position: relative;
+    z-index: 2;
+    text-align: right;
+    color: #ffffff;
+}
+
+.pr-banner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.pr-banner-logo i {
+    color: #4ade80;
+}
+
+.pr-banner-tagline {
+    font-size: 0.8rem;
+    color: #a7f3d0;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* =======================================================
+   STAT CARDS (6-CARD GRID)
+   ======================================================= */
+.pr-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.pr-stat-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.15rem 1.15rem 1rem 1.15rem;
+    border: 1px solid #e6ede8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pr-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pr-stat-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+}
+
+.icon-bg-teal { background: #e6f7f2; color: #0d9488; }
+.icon-bg-green { background: #ecfdf5; color: #10b981; }
+.icon-bg-blue { background: #eff6ff; color: #3b82f6; }
+.icon-bg-amber { background: #fffbeb; color: #f59e0b; }
+.icon-bg-purple { background: #faf5ff; color: #8b5cf6; }
+.icon-bg-emerald { background: #ecfdf5; color: #059669; }
+
+.pr-stat-label {
+    font-size: 0.8rem;
+    color: #65756d;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.pr-stat-value {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #111d17;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.pr-stat-desc {
+    font-size: 0.72rem;
+    color: #8c9b93;
+    margin-bottom: 0.65rem;
+}
+
+.pr-stat-trend {
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: auto;
+}
+
+.pr-stat-trend.up { color: #16a34a; }
+.pr-stat-trend.neutral { color: #64748b; }
+
+/* =======================================================
+   MIDDLE ROW: CHARTS & ACTIVITIES
+   ======================================================= */
+.pr-middle-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr 1.3fr;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+}
+
+.pr-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e6ede8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    padding: 1.25rem;
+}
+
+.pr-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.pr-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111d17;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pr-card-title i {
+    color: #16a34a;
+    font-size: 1.1rem;
+}
+
+.pr-pill-toggle {
+    display: flex;
+    background: #f1f5f3;
+    border-radius: 20px;
+    padding: 2px;
+}
+
+.pr-pill-btn {
+    border: none;
+    background: transparent;
+    padding: 0.25rem 0.75rem;
+    border-radius: 18px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #65756d;
+    cursor: pointer;
+}
+
+.pr-pill-btn.active {
+    background: #0d3826;
+    color: #ffffff;
+}
+
+.pr-view-all {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #10774a;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.pr-view-all:hover {
+    color: #064027;
+}
+
+/* Activity Lists (Arrivals & Departures) */
+.pr-activity-section {
+    margin-bottom: 1rem;
+}
+
+.pr-activity-section:last-child {
+    margin-bottom: 0;
+}
+
+.pr-activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.65rem;
+}
+
+.pr-activity-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tag-arrival { color: #16a34a; }
+.tag-departure { color: #d97706; }
+
+.pr-activity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.45rem 0;
+    font-size: 0.8rem;
+    border-bottom: 1px dashed #f0f4f1;
+}
+
+.pr-activity-item:last-child {
+    border-bottom: none;
+}
+
+.pr-activity-time {
+    font-weight: 600;
+    color: #111d17;
+    width: 65px;
+}
+
+.pr-activity-guest {
+    color: #64748b;
+    flex: 1;
+}
+
+.pr-activity-room {
+    font-weight: 500;
+    color: #334155;
+    text-align: right;
+}
+
+/* =======================================================
+   BOTTOM ROW: RECENT BOOKINGS & ROOM STATUS & CALENDAR
+   ======================================================= */
+.pr-bottom-grid {
+    display: grid;
+    grid-template-columns: 2.1fr 1.1fr 1.1fr;
+    gap: 1.25rem;
+}
+
+/* Table Styling */
+.pr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.pr-table th {
+    text-align: left;
+    padding: 0.65rem 0.75rem;
+    font-weight: 600;
+    color: #8c9b93;
+    font-size: 0.75rem;
+    border-bottom: 1px solid #edf2ef;
+}
+
+.pr-table td {
+    padding: 0.75rem 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f3;
+    color: #1e293b;
+}
+
+.pr-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Status Badges */
+.pr-status-badge {
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-checked-in { background: #dcfce7; color: #15803d; }
+.status-arriving { background: #e0f2fe; color: #0369a1; }
+.status-booked { background: #f3e8ff; color: #7e22ce; }
+
+/* Mini Status 4-Card Grid */
+.pr-room-status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.pr-mini-status-card {
+    border-radius: 12px;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.status-card-avail { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.status-card-occ { background: #fef2f2; border: 1px solid #fecaca; }
+.status-card-clean { background: #eff6ff; border: 1px solid #bfdbfe; }
+.status-card-maint { background: #fffbeb; border: 1px solid #fef3c7; }
+
+.pr-mini-status-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.35rem;
+}
+
+.status-card-avail .pr-mini-status-title { color: #16a34a; }
+.status-card-occ .pr-mini-status-title { color: #dc2626; }
+.status-card-clean .pr-mini-status-title { color: #2563eb; }
+.status-card-maint .pr-mini-status-title { color: #d97706; }
+
+.pr-mini-status-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #111d17;
+}
+
+.pr-mini-status-sub {
+    font-size: 0.68rem;
+    color: #64748b;
+}
+
+/* Calendar Widget */
+.pr-calendar-widget {
+    font-size: 0.78rem;
+}
+
+.pr-calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.pr-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: 4px;
+}
+
+.pr-cal-day-name {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    font-weight: 600;
+    padding-bottom: 4px;
+}
+
+.pr-cal-day {
+    padding: 5px 0;
+    border-radius: 50%;
+    font-weight: 500;
+    color: #475569;
+    width: 28px;
+    height: 28px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pr-cal-day.active {
+    background: #0d3826;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.pr-cal-day.muted {
+    color: #cbd5e1;
+}
+
+/* Pagination in Recent Bookings */
+.pr-pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pr-page-item {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    text-decoration: none;
+    background: #f1f5f3;
+}
+
+.pr-page-item.active {
+    background: #0d3826;
+    color: #ffffff;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1399.98px) {
+    .pr-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .pr-middle-grid {
+        grid-template-columns: 1fr;
+    }
+    .pr-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+    .pr-banner-card {
+        width: 360px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .sidebar-wrapper {
+        transform: translateX(-100%);
+    }
+    .main-wrapper {
+        margin-left: 0 !important;
+        padding: 1rem !important;
+    }
+    .pr-hero-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .pr-banner-card {
+        width: 100%;
+    }
+    .pr-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

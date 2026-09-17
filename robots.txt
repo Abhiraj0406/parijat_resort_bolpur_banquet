@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /scripts/
+Disallow: /tests/
+
+Sitemap: https://parijatresortbolpur.com/sitemap.xml
