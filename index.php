@@ -31,7 +31,6 @@ $stmt = $pdo->query("SELECT * FROM gallery ORDER BY id DESC LIMIT 6");
 $gallery_images = $stmt->fetchAll();
 ?>
 
-<!-- 2. Hero Section -->
 <section class="banner_area">
     <div class="booking_table d_flex align-items-center">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
@@ -45,60 +44,60 @@ $gallery_images = $stmt->fetchAll();
         </div>
     </div>
 
-    <!-- 6. Check Availability / Booking Enquiry (Floating over hero) -->
     <div class="hotel_booking_area position">
         <div class="container">
             <div class="hotel_booking_table">
-            <div class="col-md-3">
-                <h2>Quick<br> Booking</h2>
-            </div>
-            <div class="col-md-9">
-                <div class="boking_table">
-                    <form action="contact_process.php" method="POST">
-                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
-                        <input type="hidden" name="type" value="quick_booking">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="book_tabel_item">
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker11'>
-                                            <input type='text' name="check_in" class="form-control" placeholder="Arrival Date" required/>
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <h2>Quick<br> Booking</h2>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="boking_table">
+                            <form action="contact_process.php" method="POST">
+                                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+                                <input type="hidden" name="type" value="quick_booking">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker11'>
+                                                    <input type='text' name="check_in" class="form-control" placeholder="Arrival Date" required/>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input type='text' name="check_out" class="form-control" placeholder="Departure Date" required/>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker1'>
-                                            <input type='text' name="check_out" class="form-control" placeholder="Departure Date" required/>
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group" style="margin-bottom: 20px;">
+                                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <button type="submit" class="book_now_btn button_hover w-100" style="border:none; border-radius: 5px; margin-top: 10px; padding: 10px 20px;">Request Call</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="book_tabel_item">
-                                    <div class="form-group" style="margin-bottom: 20px;">
-                                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="book_tabel_item">
-                                    <button type="submit" class="book_now_btn button_hover w-100" style="border:none;">Request Call</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </section>
 
-<!-- Global Glassmorphism Theme CSS -->
 <style>
 /* Global Glass Theme for Homepage Content */
 body {
@@ -226,7 +225,6 @@ footer.footer-area, .footer-area.section_gap {
 }
 </style>
 
-<!-- 3. Resort Introduction -->
 <section class="about_history_area section_gap">
     <div class="container">
         <div class="row align-items-stretch">
@@ -248,7 +246,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- 4 & 5. Room Categories & Rates (Phase 5 - 19 Total Rooms across 4 Categories) -->
 <section id="rooms" class="accomodation_area section_gap bg-light">
     <div class="container">
         <div class="section_title text-center mb-5" data-aos="fade-up">
@@ -275,19 +272,21 @@ footer.footer-area, .footer-area.section_gap {
                             <img src="<?php echo $imgSrc; ?>" alt="<?php echo htmlspecialchars($room['name']); ?>" loading="lazy" decoding="async" class="w-100 h-100" style="object-fit: cover; position: absolute; left: 0; top: 0;">
                             
                             <!-- Badges over image -->
-                            <div class="position-absolute" style="top: 12px; left: 12px; z-index: 2;">
-                                <span class="badge badge-dark px-2 py-1 shadow-sm" style="font-size: 11px; letter-spacing: 0.5px;">
-                                    <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms
-                                </span>
-                            </div>
+                            <div class="position-absolute" style="top: 12px; left: 12px; z-index: 2; display: flex; flex-direction: column;">
+                                <div class="mb-2">
+                                    <span class="badge badge-dark px-2 py-1 shadow-sm" style="font-size: 11px; letter-spacing: 0.5px;">
+                                        <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms
+                                    </span>
+                                </div>
 
-                            <?php if (!empty($room['has_balcony'])): ?>
-                            <div class="position-absolute" style="top: 12px; right: 12px; z-index: 2;">
-                                <span class="badge badge-success px-2 py-1 shadow-sm" style="font-size: 11px;">
-                                    <i class="fa fa-sun-o mr-1"></i> Balcony
-                                </span>
+                                <?php if (!empty($room['has_balcony'])): ?>
+                                <div>
+                                    <span class="badge badge-success px-2 py-1 shadow-sm" style="font-size: 11px;">
+                                        <i class="fa fa-sun-o mr-1"></i> Balcony
+                                    </span>
+                                </div>
+                                <?php endif; ?>
                             </div>
-                            <?php endif; ?>
 
                             <div class="position-absolute w-100 text-center" style="bottom: 10px; left: 0; z-index: 2;">
                                 <span class="badge badge-warning text-dark px-2 py-1 shadow-sm font-weight-bold" style="font-size: 11px;">
@@ -381,7 +380,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- 7. Resort Facilities -->
 <section class="facilities_area section_gap">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
@@ -427,7 +425,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- Experience & Offerings Teaser Grid -->
 <section id="experiences" class="section_gap bg-light">
     <div class="container">
         <div class="section_title text-center mb-5" data-aos="fade-up">
@@ -483,7 +480,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- 11. Gallery Teaser -->
 <section id="gallery" class="gallery_area section_gap">
     <div class="container">
         <div class="section_title text-center mb-5">
@@ -512,7 +508,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- 11.2 Why Choose Us (Glassmorphism) -->
 <style>
 .glass-card {
     background: rgba(255, 255, 255, 0.1);
@@ -585,7 +580,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- 11.5 Testimonials -->
 <section class="testimonial_area section_gap bg-light">
     <div class="container">
         <div class="section_title text-center mb-5">
@@ -644,7 +638,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-<!-- 12. Rules & Policies Snippet -->
 <section class="section_gap bg-dark text-white text-center py-5">
     <div class="container">
         <h3 class="mb-2 text-white font-weight-bold">Resort Rules &amp; Regulations</h3>
@@ -657,8 +650,6 @@ footer.footer-area, .footer-area.section_gap {
     </div>
 </section>
 
-
-<!-- 13. Contact / WhatsApp CTA -->
 <div class="whatsapp-cta" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
     <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>" target="_blank" class="d-flex align-items-center bg-success text-white px-3 py-2 rounded-pill shadow text-decoration-none">
         <i class="fa fa-whatsapp fa-2x mr-2"></i>
