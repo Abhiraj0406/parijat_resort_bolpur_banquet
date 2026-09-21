@@ -8,6 +8,19 @@ require_once 'includes/header.php';
 // Fetch Banquet Details
 $banquetStmt = $pdo->query("SELECT * FROM banquet_details LIMIT 1");
 $banquet = $banquetStmt->fetch();
+
+$banquet_images = [];
+if ($banquet && isset($banquet['banquet_id'])) {
+    try {
+        $imgStmt = $pdo->prepare("SELECT * FROM banquet_images WHERE banquet_id = ? ORDER BY is_featured DESC");
+        $imgStmt->execute([$banquet['banquet_id']]);
+        $banquet_images = $imgStmt->fetchAll();
+    } catch (PDOException $e) {}
+}
+// Add the main image if images list is empty but main image path exists
+if (empty($banquet_images) && !empty($banquet['image_path'])) {
+    $banquet_images[] = ['image_path' => $banquet['image_path'], 'alt_text' => 'Banquet Hall'];
+}
 ?>
 
 <!--================Breadcrumb Area =================-->
@@ -129,18 +142,108 @@ $banquet = $banquetStmt->fetch();
 
                     <div class="d-flex flex-wrap align-items-center gap-3 mt-3">
                         <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20would%20like%20to%20enquire%20about%20booking%20the%20Banquet/Conference%20Hall%20at%20Parijat%20Resort." target="_blank" class="btn btn-success px-4 py-2 font-weight-bold shadow-sm rounded-pill mr-3 mb-2">
-                            <i class="fa fa-whatsapp mr-2"></i> Banquet Booking Enquiry
+                            <i class="fa fa-whatsapp mr-2"></i> WhatsApp Enquiry
                         </a>
-                        <a href="index.php#contact" class="button_hover theme_btn_two mb-2">Contact Desk</a>
+                        <a href="#banquet-booking" class="button_hover theme_btn_two mb-2" style="border-radius: 30px; padding: 10px 25px;"><i class="fa fa-calendar-check-o mr-1"></i> Book Banquet</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="position-relative mt-4 mt-lg-0">
-                    <img class="img-fluid rounded shadow-lg w-100" src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/gallery/02.jpg'; ?>" alt="Banquet Hall" style="max-height: 500px; object-fit: cover;">
+                    <?php if (!empty($banquet_images)): ?>
+                    <div id="banquetCarousel" class="carousel slide shadow-lg rounded" data-ride="carousel">
+                        <div class="carousel-inner rounded">
+                            <?php foreach ($banquet_images as $index => $img): ?>
+                            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                <img class="d-block w-100" src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="<?php echo htmlspecialchars($img['alt_text'] ?? 'Banquet Image'); ?>" style="height: 500px; object-fit: cover;">
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php if (count($banquet_images) > 1): ?>
+                        <a class="carousel-control-prev" href="#banquetCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#banquetCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <?php endif; ?>
+                    </div>
+                    <?php else: ?>
+                    <img class="img-fluid rounded shadow-lg w-100" src="image/gallery/02.jpg" alt="Banquet Hall" style="height: 500px; object-fit: cover;">
+                    <?php endif; ?>
                     <div class="position-absolute p-3 rounded shadow-sm bg-white" style="bottom: 20px; left: 20px; max-width: 280px; opacity: 0.95;">
                         <h6 class="font-weight-bold text-dark mb-1"><i class="fa fa-glass text-warning mr-1"></i> Tailored Event Catering</h6>
                         <small class="text-muted">Direct catering support from Labanya's Heshel Ghar available for all events.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Banquet Booking Enquiry Form Section -->
+<section id="banquet-booking" class="section_gap" style="background-color: #f9f9ff;">
+    <div class="container">
+        <div class="section_title text-center mb-5">
+            <h2 class="title_color">Book Our Banquet / Event Hall</h2>
+            <p>Please fill out the form below and our events team will get back to you with the best packages.</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 rounded-lg">
+                    <div class="card-body p-4 p-md-5">
+                        <form action="contact_process.php" method="POST" id="banquetForm">
+                            <input type="hidden" name="subject" value="Banquet Booking Enquiry">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Your Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" required placeholder="Enter full name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Mobile Number <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" name="phone" required placeholder="10-digit mobile number">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Event Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" name="event_date" required min="<?php echo date('Y-m-d'); ?>">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Event Type <span class="text-danger">*</span></label>
+                                    <select class="form-control w-100" style="display: block; width: 100% !important; padding: 8px 15px; height: auto;" name="event_type" required>
+                                        <option value="">Select Event Type</option>
+                                        <option value="Wedding / Reception">Wedding / Reception</option>
+                                        <option value="Corporate Event / Seminar">Corporate Event / Seminar</option>
+                                        <option value="Birthday / Anniversary">Birthday / Anniversary</option>
+                                        <option value="Get Together / Party">Get Together / Party</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Expected Guests <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="guests" required min="10" placeholder="Number of guests">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Catering Required? <span class="text-danger">*</span></label>
+                                    <select class="form-control w-100" style="display: block; width: 100% !important; padding: 8px 15px; height: auto;" name="catering" required>
+                                        <option value="Yes">Yes, require food & catering</option>
+                                        <option value="No">No, only hall required</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Additional Requirements</label>
+                                <textarea class="form-control" name="message" rows="4" placeholder="Any special requests, decoration needs, room bookings, etc..."></textarea>
+                            </div>
+                            <button type="submit" class="btn theme_btn button_hover w-100 py-3 font-weight-bold text-uppercase mt-2" style="border-radius: 5px;">
+                                <i class="fa fa-paper-plane mr-2"></i> Submit Booking Request
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

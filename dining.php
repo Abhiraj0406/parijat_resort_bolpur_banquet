@@ -143,30 +143,42 @@ $food_items = $foodStmt->fetchAll();
         <div class="row">
             <?php foreach ($food_items as $item): ?>
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm border-0 rounded-lg p-3 bg-white" style="transition: transform 0.2s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <span class="badge badge-light border text-muted text-uppercase" style="font-size: 11px;">
-                            <?php echo htmlspecialchars($item['category']); ?>
-                        </span>
-                        <?php if(!empty($item['is_veg'])): ?>
-                            <span class="badge badge-success" style="font-size: 11px;"><i class="fa fa-leaf mr-1"></i>Veg</span>
-                        <?php else: ?>
-                            <span class="badge badge-danger" style="font-size: 11px;">Non-Veg</span>
-                        <?php endif; ?>
+                <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden bg-white" style="transition: transform 0.2s ease;">
+                    <?php if(!empty($item['image_path'])): ?>
+                    <img src="<?php echo htmlspecialchars($item['image_path']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($item['name']); ?>" style="height: 200px; object-fit: cover;">
+                    <?php else: ?>
+                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                        <i class="fa fa-cutlery fa-3x text-muted" style="opacity: 0.3;"></i>
                     </div>
+                    <?php endif; ?>
                     
-                    <h5 class="card-title font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">
-                        <?php echo htmlspecialchars($item['name']); ?>
-                    </h5>
-                    <p class="card-text text-muted small mb-3 flex-grow-1" style="line-height: 1.5;">
-                        <?php echo htmlspecialchars($item['description']); ?>
-                    </p>
-                    
-                    <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-                        <strong class="text-warning font-weight-bold" style="font-size: 1.15rem;">
-                            ₹<?php echo number_format($item['price'], 0); ?>
-                        </strong>
-                        <small class="text-muted font-italic">Advance Order</small>
+                    <div class="p-3 d-flex flex-column h-100">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge badge-light border text-muted text-uppercase" style="font-size: 11px;">
+                                <?php echo htmlspecialchars($item['category']); ?>
+                            </span>
+                            <?php if(!empty($item['is_veg'])): ?>
+                                <span class="badge badge-success" style="font-size: 11px;"><i class="fa fa-leaf mr-1"></i>Veg</span>
+                            <?php else: ?>
+                                <span class="badge badge-danger" style="font-size: 11px;">Non-Veg</span>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <h5 class="card-title font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">
+                            <?php echo htmlspecialchars($item['name']); ?>
+                        </h5>
+                        <p class="card-text text-muted small mb-3 flex-grow-1" style="line-height: 1.5;">
+                            <?php echo htmlspecialchars($item['description']); ?>
+                        </p>
+                        
+                        <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto">
+                            <strong class="text-warning font-weight-bold" style="font-size: 1.15rem;">
+                                ₹<?php echo number_format($item['price'], 0); ?>
+                            </strong>
+                            <a href="accomodation.php" class="btn btn-outline-warning btn-sm font-weight-bold" style="border-radius: 20px; font-size: 12px; padding: 4px 12px;" title="Book room and pre-order food">
+                                <i class="fa fa-calendar-check-o mr-1"></i> Pre-Book
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

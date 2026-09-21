@@ -167,12 +167,12 @@ i.fa, i.bi {
     color: #fff !important;
 }
 .btn.theme_btn {
-    background: #f3c300 !important;
+    background: #2e7d32 !important;
     color: #000 !important;
     border: none !important;
 }
 .text-warning, .fa-star, .fa-tag {
-    color: #f3c300 !important;
+    color: #2e7d32 !important;
 }
 .text-success, .fa-leaf, .fa-whatsapp, .fa-check {
     color: #25D366 !important;
@@ -221,7 +221,7 @@ footer.footer-area, .footer-area.section_gap {
     color: #222222 !important;
 }
 .header_area .nav-item.active .nav-link, .header_area .nav-link:hover {
-    color: #f3c300 !important;
+    color: #2e7d32 !important;
 }
 </style>
 
@@ -590,7 +590,7 @@ footer.footer-area, .footer-area.section_gap {
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #f3c300 !important;">
+                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #2e7d32 !important;">
                     <div class="d-flex mb-3 text-warning">
                         <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
                     </div>
@@ -605,7 +605,7 @@ footer.footer-area, .footer-area.section_gap {
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #f3c300 !important;">
+                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #2e7d32 !important;">
                     <div class="d-flex mb-3 text-warning">
                         <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
                     </div>
@@ -620,7 +620,7 @@ footer.footer-area, .footer-area.section_gap {
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 mb-4">
-                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #f3c300 !important;">
+                <div class="card border-0 shadow-sm rounded-lg p-4 h-100 bg-white" style="border-top: 4px solid #2e7d32 !important;">
                     <div class="d-flex mb-3 text-warning">
                         <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
                     </div>
