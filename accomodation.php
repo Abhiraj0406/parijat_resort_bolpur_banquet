@@ -52,7 +52,6 @@ $allRates = $ratesStmt->fetchAll();
 
         <div class="row">
             <?php 
-            // TEMPORARY FIX: If there is only 1 room in the database, duplicate it for display so the user can see 2 cards side-by-side.
             if (count($rooms) == 1) {
                 $rooms[] = $rooms[0];
             }
@@ -69,19 +68,21 @@ $allRates = $ratesStmt->fetchAll();
                     <div class="position-relative" style="height: 280px; overflow: hidden;">
                         <img src="<?php echo $imgSrc; ?>" alt="<?php echo htmlspecialchars($room['name']); ?>" class="w-100 h-100" style="object-fit: cover;">
                         
-                        <div class="position-absolute" style="top: 15px; left: 15px;">
-                            <span class="badge badge-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
-                                <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms Available
-                            </span>
-                        </div>
+                        <div class="position-absolute" style="top: 15px; left: 15px; display: flex; flex-direction: column;">
+                            <div class="mb-2">
+                                <span class="badge badge-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
+                                    <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms Available
+                                </span>
+                            </div>
 
-                        <?php if (!empty($room['has_balcony'])): ?>
-                        <div class="position-absolute" style="top: 15px; right: 15px;">
-                            <span class="badge badge-success px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
-                                <i class="fa fa-sun-o mr-1"></i> Private Balcony
-                            </span>
+                            <?php if (!empty($room['has_balcony'])): ?>
+                            <div>
+                                <span class="badge badge-success px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
+                                    <i class="fa fa-sun-o mr-1"></i> Private Balcony
+                                </span>
+                            </div>
+                            <?php endif; ?>
                         </div>
-                        <?php endif; ?>
 
                         <div class="position-absolute" style="bottom: 12px; left: 15px;">
                             <span class="badge badge-warning text-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
@@ -167,13 +168,17 @@ $allRates = $ratesStmt->fetchAll();
                                     <small class="text-muted d-block">Contact us for best rates</small>
                                 </div>
 
-                                <div class="d-flex w-100" style="gap: 8px;">
-                                    <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center">
-                                        Book Online
-                                    </a>
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20enquiring%20about%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center" title="Enquire on WhatsApp">
-                                        <i class="fa fa-whatsapp mr-1"></i> WhatsApp
-                                    </a>
+                                <div class="row m-0 w-100">
+                                    <div class="col-6 pl-0 pr-1">
+                                        <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark w-100 text-white py-2 rounded-pill font-weight-bold shadow-sm text-center">
+                                            Book Online
+                                        </a>
+                                    </div>
+                                    <div class="col-6 pr-0 pl-1">
+                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20enquiring%20about%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success w-100 text-white py-2 rounded-pill font-weight-bold shadow-sm text-center" title="Enquire on WhatsApp">
+                                            <i class="fa fa-whatsapp"></i> WhatsApp
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
