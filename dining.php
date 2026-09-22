@@ -5,8 +5,8 @@ $meta_description = "Experience authentic Bengali, aromatic Mughlai, and wok-fre
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
-// Fetch food items for the menu
-$foodStmt = $pdo->query("SELECT * FROM restaurant_items ORDER BY category, price ASC");
+// Fetch food items for the menu (Limit to 6 to prevent repetition of placeholder images)
+$foodStmt = $pdo->query("SELECT * FROM restaurant_items ORDER BY category, price ASC LIMIT 6");
 $food_items = $foodStmt->fetchAll();
 ?>
 
@@ -141,15 +141,19 @@ $food_items = $foodStmt->fetchAll();
         </div>
 
         <div class="row">
-            <?php foreach ($food_items as $item): ?>
+            <?php 
+            $food_fallbacks = ['image/food1.jpg', 'image/food2.jpg', 'image/food3.jpg'];
+            $f_index = 0;
+            foreach ($food_items as $item): 
+                $fallback = $food_fallbacks[$f_index % count($food_fallbacks)];
+                $f_index++;
+            ?>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden bg-white" style="transition: transform 0.2s ease;">
                     <?php if(!empty($item['image_path'])): ?>
                     <img src="<?php echo htmlspecialchars($item['image_path']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($item['name']); ?>" style="height: 200px; object-fit: cover;">
                     <?php else: ?>
-                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
-                        <i class="fa fa-cutlery fa-3x text-muted" style="opacity: 0.3;"></i>
-                    </div>
+                    <img src="<?php echo $fallback; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($item['name']); ?>" style="height: 200px; object-fit: cover;">
                     <?php endif; ?>
                     
                     <div class="p-3 d-flex flex-column h-100">

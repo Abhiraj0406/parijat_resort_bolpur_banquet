@@ -10,12 +10,15 @@ $dynamicGallery = $stmt->fetchAll();
 // Fallback if empty
 if (empty($dynamicGallery)) {
     $dynamicGallery = [
-        ['image_path' => 'image/gallery/01.jpg', 'caption' => 'Resort Greenery & Lawn', 'category' => 'Resort'],
-        ['image_path' => 'image/gallery/02.jpg', 'caption' => 'Banquet & Events', 'category' => 'Events'],
-        ['image_path' => 'image/gallery/03.jpg', 'caption' => 'Dining Experience', 'category' => 'Dining'],
-        ['image_path' => 'image/gallery/04.jpg', 'caption' => 'Cottage Living', 'category' => 'Rooms'],
-        ['image_path' => 'image/gallery/05.jpg', 'caption' => 'Swimming Pool Deck', 'category' => 'Pool'],
-        ['image_path' => 'image/gallery/06.jpg', 'caption' => 'Serene Bolpur Mornings', 'category' => 'Nature'],
+        ['image_path' => 'image/gallery/07.jpg', 'caption' => 'Resort Cottages', 'category' => 'Rooms'],
+        ['image_path' => 'image/gallery/08.jpg', 'caption' => 'Beautiful Resort Courtyard', 'category' => 'Resort'],
+        ['image_path' => 'image/hall1.jpg', 'caption' => 'Banquet Hall Interior', 'category' => 'Events'],
+        ['image_path' => 'image/pool3.jpg', 'caption' => 'Night View of Pool', 'category' => 'Pool'],
+        ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Reception', 'category' => 'Resort'],
+        ['image_path' => 'image/food2.jpg', 'caption' => 'Authentic Bengali Thali', 'category' => 'Dining'],
+        ['image_path' => 'image/dining_out.jpg', 'caption' => 'Labanya\'s Heshel Ghar Exterior', 'category' => 'Dining'],
+        ['image_path' => 'image/pool5.jpg', 'caption' => 'Illuminated Pool', 'category' => 'Pool'],
+        ['image_path' => 'image/hall3.jpg', 'caption' => 'Banquet Hall Decor', 'category' => 'Events']
     ];
 }
 ?>

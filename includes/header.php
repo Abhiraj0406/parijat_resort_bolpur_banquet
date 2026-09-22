@@ -47,7 +47,7 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url); ?>" />
 
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         
         <link rel="stylesheet" href="css/bootstrap.css?v=<?php echo time(); ?>">
         <link rel="stylesheet" href="vendors/linericon/style.css">
@@ -57,8 +57,240 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         <link rel="stylesheet" href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
         
-        <!-- Dark Mode CSS Logic -->
+        <!-- Frontend Overrides & Dark Mode -->
         <style>
+        /* Modern Premium Font */
+        body, h1, h2, h3, h4, h5, h6, p, a, div, span, li, button, input {
+            font-family: 'Outfit', 'Poppins', sans-serif !important;
+        }
+        
+        /* Convert Blue Theme to Resort Green Theme */
+        .text-primary, .text-info {
+            color: #2e7d32 !important; /* Premium Emerald Green */
+        }
+        .bg-primary, .bg-info {
+            background-color: #2e7d32 !important;
+        }
+        .border-primary, .border-info {
+            border-color: #2e7d32 !important;
+        }
+        .btn-primary, .btn-info {
+            background-color: #2e7d32 !important;
+            border-color: #2e7d32 !important;
+            color: #fff !important;
+        }
+        .btn-outline-primary, .btn-outline-info {
+            color: #2e7d32 !important;
+            border-color: #2e7d32 !important;
+        }
+        .btn-outline-primary:hover, .btn-outline-info:hover {
+            background-color: #2e7d32 !important;
+            color: #fff !important;
+        }
+        
+        /* Increase text size for better readability */
+        body, p, ul li, ol li, .form-control, label {
+            font-size: 16px !important;
+            line-height: 1.8 !important;
+        }
+        .small, small, .text-muted {
+            font-size: 15px !important;
+            line-height: 1.7 !important;
+        }
+        
+        /* Global Mobile Responsiveness Fixes */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+            max-width: 100vw;
+        }
+        
+        /* Footer Glassmorphism & Text Visibility */
+        .footer-area {
+            position: relative;
+            background: url('image/pool3.jpg') no-repeat center center / cover !important;
+            color: #fff !important;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-area::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(6, 78, 59, 0.85); /* Dark Emerald Green Overlay */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 0;
+        }
+        .footer-area .container {
+            position: relative;
+            z-index: 1;
+        }
+        .footer-area h6, .footer-area p, .footer-area a, .footer-area i, .footer-area li {
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+        .footer-area .footer_title {
+            color: #fff !important;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.5);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .footer-area a:hover {
+            color: #2e7d32 !important; /* Premium Emerald Hover */
+        }
+        
+        /* Mobile Menu Hamburger Visibility Fix */
+        .navbar-light .navbar-toggler {
+            border-color: #2e7d32 !important;
+            background-color: #2e7d32 !important;
+        }
+        .navbar-light .navbar-toggler .icon-bar {
+            background-color: #fff !important;
+        }
+        
+        @media (max-width: 768px) {
+            h1, .h1 { font-size: 32px !important; line-height: 1.3 !important; }
+            h2, .h2, .banner_content h2 { font-size: 28px !important; line-height: 1.3 !important; }
+            h3, .h3 { font-size: 24px !important; }
+            h4, .h4 { font-size: 20px !important; }
+            
+            /* Fix banner overlapping and scrolling */
+            .banner_content {
+                padding: 0 15px;
+                word-wrap: break-word;
+            }
+            
+            /* Fix booking form overlapping on mobile */
+            .hotel_booking_area {
+                position: relative !important;
+                margin-top: 20px !important;
+                padding-bottom: 20px !important;
+            }
+            
+            /* Make text smaller on mobile if it was bumped up too much */
+            body, p, ul li, ol li, .form-control, label {
+                font-size: 15px !important;
+            }
+            
+            /* Ensure images don't break grid */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        
+        /* ==================================================
+           GLOBAL GLASSMORPHISM THEME
+           ================================================== */
+        body { 
+            background: url('image/gallery/01.jpg') no-repeat center center fixed !important; 
+            background-size: cover !important; 
+        } 
+        /* Add a dark overlay over the background image but behind the content */ 
+        body::before { 
+            content: ''; 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.75); 
+            z-index: -1; 
+        } 
+         
+        /* Make all section backgrounds transparent so the body background shows through */ 
+        .section_gap, .bg-light, .bg-white, .bg-dark, .accomodation_area, .about_history_area, .facilities_area, .gallery_area, .testimonial_area, .glass_section, .contact-area { 
+            background: transparent !important; 
+            background-color: transparent !important; 
+        } 
+         
+        /* Convert all white cards and containers to glass cards */
+        .card, .facilities_item, .about_content, .gallery_item .gallery_img, .contact_info {
+            background: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2) !important;
+            border-radius: 16px !important;
+            transition: transform 0.3s ease, background 0.3s ease;
+            height: auto !important;
+            overflow: visible !important;
+            padding: 30px !important;
+        }
+        
+        /* Ensure floats are cleared inside glass containers */
+        .card::after, .about_content::after, .contact_info::after {
+            content: "";
+            display: table;
+            clear: both;
+        } 
+         
+        .card:hover, .facilities_item:hover { 
+            background: rgba(255, 255, 255, 0.12) !important; 
+        } 
+         
+        /* Convert text colors to white for readability on dark background */ 
+        h1, h2, h3, h4, h5, h6, p, span, div, label, 
+        .text-dark, .text-muted, .title_color, .sec_h4 { 
+            color: #ffffff !important; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); 
+        } 
+         
+        /* Preserve specific colors and keep buttons looking normal */ 
+        .btn, .btn span, .btn i, 
+        .badge, .badge span, .badge i, 
+        i.fa, i.bi { 
+            text-shadow: none !important; 
+        } 
+         
+        .btn.btn-dark { 
+            background-color: rgba(0,0,0,0.7) !important; 
+            border-color: rgba(255,255,255,0.3) !important; 
+            color: #fff !important; 
+        }
+        .btn.btn-success { 
+            background-color: #2e7d32 !important; 
+            border-color: #2e7d32 !important; 
+            color: #fff !important; 
+        } 
+        .text-warning, .fa-star, .fa-tag { 
+            color: #2e7d32 !important; 
+        } 
+        .text-success, .fa-leaf, .fa-whatsapp, .fa-check { 
+            color: #2e7d32 !important; 
+        } 
+        
+        /* Fix tags, badges, alerts, and inputs to match glass theme */ 
+        .badge-warning { background-color: rgba(243, 195, 0, 0.9) !important; color: #000 !important; border: none !important; } 
+        .badge-light, .badge-white, .alert-warning { background-color: rgba(255,255,255,0.15) !important; color: #fff !important; border: 1px solid rgba(255,255,255,0.2) !important; text-shadow: none !important; } 
+        .badge-dark { background-color: rgba(0,0,0,0.6) !important; color: #fff !important; } 
+        .badge-success { background-color: rgba(16, 185, 129, 0.8) !important; color: #fff !important; } 
+        
+        .form-control, input, textarea, select {
+            background: rgba(255,255,255,0.1) !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            color: #fff !important;
+            border-radius: 8px !important;
+        }
+        .form-control::placeholder { color: rgba(255,255,255,0.6) !important; }
+        .form-control:focus { background: rgba(255,255,255,0.15) !important; border-color: #2e7d32 !important; }
+        
+        .bg-light, .bg-white { background-color: rgba(255,255,255,0.05) !important; }
+         
+        /* Ensure Header remains completely solid and readable */ 
+        .header_area { background: #ffffff !important; } 
+        .header_area h1, .header_area h2, .header_area h3, .header_area h4, .header_area h5, .header_area h6,  
+        .header_area p, .header_area span, .header_area div, .header_area a, .header_area .nav-link { 
+            text-shadow: none !important;
+        } 
+        .header_area .nav-link, .header_area .logo_h { color: #222222 !important; } 
+        .header_area .nav-item.active .nav-link, .header_area .nav-link:hover { color: #2e7d32 !important; }
+        
+        /* Stop glassmorphism on the footer since it has its own beautiful design now */
+        .footer-area h1, .footer-area h2, .footer-area h3, .footer-area h4, .footer-area h5, .footer-area h6,  
+        .footer-area p, .footer-area span, .footer-area div, .footer-area a {
+            text-shadow: none !important;
+        }
+        /* ================================================== */
+        
         html[data-theme="dark"] {
             filter: invert(1) hue-rotate(180deg);
             background-color: #111; /* Ensures smooth background color flip */
@@ -135,6 +367,46 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         <!-- Main CSS -->
         <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
         <link rel="stylesheet" href="css/responsive.css?v=<?php echo time(); ?>">
+        <style>
+        /* Force Absolute Green Theme (Overriding all Bootstrap Blues/Cyans/Yellows) */
+        .text-primary, .text-info, .text-warning { color: #2e7d32 !important; }
+        .bg-primary, .bg-info, .bg-warning { background-color: #2e7d32 !important; color: #fff !important; }
+        .badge-primary, .badge-info, .badge-warning { background-color: #2e7d32 !important; color: #fff !important; border-color: #2e7d32 !important; }
+        .btn-primary, .btn-info { background-color: #2e7d32 !important; border-color: #2e7d32 !important; color: #fff !important; }
+        .border-primary, .border-info, .border-warning { border-color: #2e7d32 !important; }
+        
+        /* Fix tag styling in accommodation and banquet */
+        .badge.border, .badge-secondary, span[style*="#e9ecef"] { 
+            background-color: rgba(255,255,255,0.1) !important; 
+            backdrop-filter: blur(5px) !important; 
+            border: 1px solid rgba(255,255,255,0.2) !important; 
+            color: #ffffff !important;
+        }
+        .accomodation_area i.fa, .dining_area i.fa, .rules_area i.fa { color: #2e7d32 !important; }
+        
+        /* Improve Contact Form Glass Input Design */
+        .form-control, input.form-control, textarea.form-control {
+            background: rgba(0, 0, 0, 0.2) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1) !important;
+            color: #ffffff !important;
+        }
+        
+        /* Fix Active and Hover Menu Links (Override style.css cyan) */
+        .navbar .menu_nav .nav-item:hover .nav-link, 
+        .navbar .menu_nav .nav-item.active .nav-link,
+        .header_area .navbar .nav .nav-item.active .nav-link {
+            color: #2e7d32 !important;
+        }
+        
+        /* Fix any stray anchor tags that are blue */
+        a:hover, a:focus { color: #2e7d32; }
+        
+        /* Exemptions */
+        .badge-danger { background-color: rgba(220,53,69,0.8) !important; color: #fff !important; }
+        .text-danger, i.fa-ban { color: #dc3545 !important; }
+        </style>
     </head>
     <body>
         <!--================Header Area =================-->

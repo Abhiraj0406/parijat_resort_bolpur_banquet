@@ -29,6 +29,28 @@ $banquet = $stmt->fetch();
 // Fetch Gallery Images
 $stmt = $pdo->query("SELECT * FROM gallery ORDER BY id DESC LIMIT 6");
 $gallery_images = $stmt->fetchAll();
+
+// Fallback if empty
+if (empty($gallery_images)) {
+    $gallery_images = [
+        ['image_path' => 'image/gallery/07.jpg', 'caption' => 'Resort Cottages'],
+        ['image_path' => 'image/gallery/08.jpg', 'caption' => 'Beautiful Resort Courtyard'],
+        ['image_path' => 'image/gallery/09.jpg', 'caption' => 'Resort Path at Sunset'],
+        ['image_path' => 'image/gallery/10.jpg', 'caption' => 'Main Building Exterior'],
+        ['image_path' => 'image/hall1.jpg', 'caption' => 'Banquet Hall Interior'],
+        ['image_path' => 'image/pool1.jpg', 'caption' => 'Swimming Pool Deck'],
+        ['image_path' => 'image/pool3.jpg', 'caption' => 'Night View of Pool'],
+        ['image_path' => 'image/pool4.jpg', 'caption' => 'Pool at Night'],
+        ['image_path' => 'image/pool5.jpg', 'caption' => 'Illuminated Pool'],
+        ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Reception'],
+        ['image_path' => 'image/reception2.jpg', 'caption' => 'Lobby Area'],
+        ['image_path' => 'image/food1.jpg', 'caption' => 'Evening Snacks'],
+        ['image_path' => 'image/food2.jpg', 'caption' => 'Authentic Bengali Thali'],
+        ['image_path' => 'image/food3.jpg', 'caption' => 'Special Dishes'],
+        ['image_path' => 'image/dining_in.jpg', 'caption' => 'Heshel Ghar Dining Area'],
+        ['image_path' => 'image/dining_out.jpg', 'caption' => 'Labanya\'s Heshel Ghar']
+    ];
+}
 ?>
 
 <section class="banner_area">
@@ -98,132 +120,7 @@ $gallery_images = $stmt->fetchAll();
     </div>
 </section>
 
-<style>
-/* Global Glass Theme for Homepage Content */
-body {
-    background: url('image/gallery/01.jpg') no-repeat center center fixed !important;
-    background-size: cover !important;
-}
-/* Add a dark overlay over the background image but behind the content */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: -1;
-}
-
-/* Make all section backgrounds transparent so the body background shows through */
-.section_gap, .bg-light, .bg-white, .bg-dark, .accomodation_area, .about_history_area, .facilities_area, .gallery_area, .testimonial_area, .glass_section {
-    background: transparent !important;
-    background-color: transparent !important;
-}
-
-/* Remove the old parallax overlay from the facilities section so it doesn't double up */
-.facilities_area .overlay.bg-parallax, .glass_section > div:first-child {
-    display: none !important;
-}
-
-/* Convert all white cards and containers to glass cards */
-.card, .facilities_item, .about_content, .gallery_item .gallery_img {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2) !important;
-    border-radius: 16px !important;
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.card:hover, .facilities_item:hover {
-    background: rgba(255, 255, 255, 0.12) !important;
-}
-
-/* Convert text colors to white for readability on dark background */
-h1, h2, h3, h4, h5, h6, p, span, div, 
-.text-dark, .text-muted, .title_color, .sec_h4 {
-    color: #ffffff !important;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-}
-
-/* Preserve specific colors and keep buttons looking normal */
-.btn, .btn span, .btn i,
-.badge, .badge span, .badge i,
-i.fa, i.bi {
-    text-shadow: none !important;
-}
-
-.btn.btn-dark {
-    background-color: rgba(0,0,0,0.7) !important;
-    border-color: rgba(255,255,255,0.3) !important;
-    color: #fff !important;
-}
-.btn.btn-dark:hover {
-    background-color: #000 !important;
-}
-.btn.btn-success {
-    background-color: #25D366 !important;
-    border-color: #25D366 !important;
-    color: #fff !important;
-}
-.btn.theme_btn {
-    background: #2e7d32 !important;
-    color: #000 !important;
-    border: none !important;
-}
-.text-warning, .fa-star, .fa-tag {
-    color: #2e7d32 !important;
-}
-.text-success, .fa-leaf, .fa-whatsapp, .fa-check {
-    color: #25D366 !important;
-}
-.badge-warning {
-    background-color: rgba(243, 195, 0, 0.9) !important;
-    color: #000 !important;
-    border: none !important;
-}
-.badge-light {
-    background-color: rgba(255,255,255,0.15) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-}
-.badge-dark {
-    background-color: rgba(0,0,0,0.6) !important;
-    color: #fff !important;
-}
-.badge-success {
-    background-color: rgba(37, 211, 102, 0.8) !important;
-    color: #fff !important;
-}
-
-/* Fix specific backgrounds inside cards */
-.bg-light {
-    background-color: rgba(255,255,255,0.05) !important;
-}
-
-/* Ensure Footer remains solid and not transparent */
-footer.footer-area, .footer-area.section_gap {
-    background-color: #04091e !important;
-    background: #04091e !important;
-    position: relative;
-    z-index: 10;
-}
-
-/* Ensure Header remains completely solid and readable */
-.header_area {
-    background: #ffffff !important;
-}
-.header_area h1, .header_area h2, .header_area h3, .header_area h4, .header_area h5, .header_area h6, 
-.header_area p, .header_area span, .header_area div, .header_area a {
-    text-shadow: none !important;
-}
-.header_area .nav-link {
-    color: #222222 !important;
-}
-.header_area .nav-item.active .nav-link, .header_area .nav-link:hover {
-    color: #2e7d32 !important;
-}
-</style>
+</section>
 
 <section class="about_history_area section_gap">
     <div class="container">
@@ -239,7 +136,7 @@ footer.footer-area, .footer-area.section_gap {
             </div>
             <div class="col-lg-6 col-md-12 d-flex" data-aos="fade-left" data-aos-delay="200">
                 <div class="glass-card p-3 w-100 h-100 d-flex align-items-center justify-content-center">
-                    <img class="img-fluid rounded-lg shadow w-100 h-100" src="image/about_bg.jpg" alt="About Resort" style="object-fit: cover;">
+                    <img class="img-fluid rounded-lg shadow w-100 h-100" src="image/reception1.jpg" alt="About Resort" style="object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -256,11 +153,11 @@ footer.footer-area, .footer-area.section_gap {
         
         <div class="row">
             <?php 
-            $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg'];
+            $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg', 'image/room5.jpg', 'image/room6.jpg'];
             $roomIndex = 0;
             $delay = 100;
             foreach (array_slice($rooms, 0, 2) as $room): 
-                $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 4];
+                $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 6];
                 $roomIndex++;
                 $facilitiesList = !empty($room['facilities']) ? explode(',', $room['facilities']) : [];
             ?>
@@ -438,7 +335,7 @@ footer.footer-area, .footer-area.section_gap {
             <!-- Dining -->
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
-                    <img src="image/gallery/03.jpg" class="card-img-top" alt="Labanya's Heshel Ghar" style="height: 220px; object-fit: cover;">
+                    <img src="image/dining_out.jpg" class="card-img-top" alt="Labanya's Heshel Ghar" style="height: 220px; object-fit: cover;">
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Labanya's Heshel Ghar</h4>
@@ -452,7 +349,7 @@ footer.footer-area, .footer-area.section_gap {
             <!-- Banquet -->
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="250">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
-                    <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/gallery/02.jpg'; ?>" class="card-img-top" alt="Banquet Hall" style="height: 220px; object-fit: cover;">
+                    <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/hall1.jpg'; ?>" class="card-img-top" alt="Banquet Hall" style="height: 220px; object-fit: cover;">
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Grand Banquet & Lawns</h4>
@@ -466,7 +363,7 @@ footer.footer-area, .footer-area.section_gap {
             <!-- Pool & Nature -->
             <div class="col-lg-4 col-md-6 mb-4 mx-auto" data-aos="fade-up" data-aos-delay="400">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
-                    <img src="image/gallery/05.jpg" class="card-img-top" alt="Swimming Pool" style="height: 220px; object-fit: cover;">
+                    <img src="image/pool1.jpg" class="card-img-top" alt="Swimming Pool" style="height: 220px; object-fit: cover;">
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Swimming Pool & Gardens</h4>
@@ -525,7 +422,7 @@ footer.footer-area, .footer-area.section_gap {
 }
 </style>
 <section class="glass_section section_gap" style="position: relative;">
-    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('image/gallery/01.jpg') no-repeat center center/cover; z-index: 1;"></div>
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('image/pool3.jpg') no-repeat center center/cover; z-index: 1;"></div>
     <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 2;"></div>
     
     <div class="container" style="position: relative; z-index: 3;">

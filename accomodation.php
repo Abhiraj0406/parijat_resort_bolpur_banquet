@@ -56,10 +56,10 @@ $allRates = $ratesStmt->fetchAll();
                 $rooms[] = $rooms[0];
             }
 
-            $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg'];
+            $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg', 'image/room5.jpg', 'image/room6.jpg'];
             $roomIndex = 0;
             foreach ($rooms as $room): 
-                $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 4];
+                $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 6];
                 $roomIndex++;
                 $facilitiesList = !empty($room['facilities']) ? explode(',', $room['facilities']) : [];
             ?>

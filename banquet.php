@@ -17,9 +17,17 @@ if ($banquet && isset($banquet['banquet_id'])) {
         $banquet_images = $imgStmt->fetchAll();
     } catch (PDOException $e) {}
 }
-// Add the main image if images list is empty but main image path exists
-if (empty($banquet_images) && !empty($banquet['image_path'])) {
-    $banquet_images[] = ['image_path' => $banquet['image_path'], 'alt_text' => 'Banquet Hall'];
+// Add the main image if images list is empty
+if (empty($banquet_images)) {
+    if (!empty($banquet['image_path'])) {
+        $banquet_images[] = ['image_path' => $banquet['image_path'], 'alt_text' => 'Banquet Hall'];
+    } else {
+        $banquet_images = [
+            ['image_path' => 'image/hall1.jpg', 'alt_text' => 'Banquet Hall Interior'],
+            ['image_path' => 'image/hall2.jpg', 'alt_text' => 'Banquet Hall Layout'],
+            ['image_path' => 'image/hall3.jpg', 'alt_text' => 'Banquet Hall Decor']
+        ];
+    }
 }
 ?>
 
