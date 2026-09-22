@@ -6,6 +6,9 @@
  * in `includes/` and protect it via `.htaccess` (will be added later).
  */
 
+// ----- Load Environment Variables from .env -----
+require_once __DIR__ . '/env.php';
+
 // ----- Database credentials (use environment variables in real deployment) -----
 $DB_HOST = getenv('DB_HOST') ?: 'localhost';
 $DB_NAME = getenv('DB_NAME') ?: 'parijat_resort';
@@ -18,6 +21,7 @@ try {
     $pdo = new PDO($dsn, $DB_USER, $DB_PASS, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
     ]);
 } catch (PDOException $e) {
     // In production we would log this error instead of displaying it.
@@ -48,14 +52,14 @@ function validate_csrf_token($token) {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 
-// ----- SMTP configuration (placeholders, update with real credentials) -----
-define('SMTP_HOST', 'smtp.example.com');
-define('SMTP_USER', 'user@example.com');
-define('SMTP_PASS', 'secret');
-define('SMTP_PORT', 587);
-define('SMTP_SECURE', 'tls');
-define('FROM_EMAIL', 'no-reply@example.com');
-define('FROM_NAME', 'Parijat Resort');
+// ----- SMTP configuration (dynamically loaded from .env) -----
+defined('SMTP_HOST')   || define('SMTP_HOST', getenv('SMTP_HOST') ?: 'smtp.example.com');
+defined('SMTP_USER')   || define('SMTP_USER', getenv('SMTP_USER') ?: 'user@example.com');
+defined('SMTP_PASS')   || define('SMTP_PASS', getenv('SMTP_PASS') ?: 'secret');
+defined('SMTP_PORT')   || define('SMTP_PORT', (int)(getenv('SMTP_PORT') ?: 587));
+defined('SMTP_SECURE') || define('SMTP_SECURE', getenv('SMTP_SECURE') ?: 'tls');
+defined('FROM_EMAIL')  || define('FROM_EMAIL', getenv('FROM_EMAIL') ?: 'no-reply@example.com');
+defined('FROM_NAME')   || define('FROM_NAME', getenv('FROM_NAME') ?: 'Parijat Resort');
 
 // Helper to fetch an admin by username
 function getUserByUsername(PDO $pdo, string $username): ?array {

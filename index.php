@@ -1,7 +1,17 @@
 <?php
-$current_page = "index";
-require_once 'includes/config.php';
-require_once 'includes/header.php';
+// Front Controller Bootstrap & Router Engine
+require_once __DIR__ . '/includes/bootstrap.php';
+require_once __DIR__ . '/includes/router.php';
+
+// Dispatch routed clean URLs (e.g. /about, /rooms, /dining, /contact, etc.)
+$requestPath = Router::getRequestPath();
+if ($requestPath !== '' && $requestPath !== 'home' && $requestPath !== 'index') {
+    Router::dispatch($pdo);
+    exit;
+}
+
+$current_page = "home";
+require_once __DIR__ . '/includes/header.php';
 
 // Fetch Active Room Categories with primary image and rates
 $stmt = $pdo->query("SELECT c.*, 
