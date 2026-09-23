@@ -166,7 +166,7 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             
             /* Fix banner background showing wrong image and zooming bug on mobile */
             .banner_area .bg-parallax {
-                background: url('image/banner_bg.jpg') no-repeat center center / cover !important;
+                background: url('image/banner_bg.jpg?v=2') no-repeat center center / cover !important;
                 background-attachment: scroll !important;
                 transform: none !important;
             }

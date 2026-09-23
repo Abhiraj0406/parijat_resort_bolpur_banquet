@@ -433,7 +433,7 @@ button:focus {
   z-index: 1;
 }
 .banner_area .bg-parallax {
-  background: url("../image/banner_bg.jpg") no-repeat scroll center 0/cover;
+  background: url("../image/banner_bg.jpg?v=2") no-repeat scroll center 0/cover;
   opacity: 0.5;
 }
 .banner_area .position {
