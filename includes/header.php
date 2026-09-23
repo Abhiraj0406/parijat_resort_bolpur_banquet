@@ -247,7 +247,7 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             background: transparent !important; 
             background-color: transparent !important; 
         } 
-        .breadcrumb_area .bg-parallax {
+        .breadcrumb_area {
             display: none !important;
         } 
          
