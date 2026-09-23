@@ -55,6 +55,9 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
         <link rel="stylesheet" href="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+        <!-- Flatpickr Modern Calendar -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
         <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
         
         <!-- Frontend Overrides & Dark Mode -->
@@ -183,8 +186,51 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         /* ==================================================
            GLOBAL GLASSMORPHISM THEME
            ================================================== */
+        <?php
+        // Dynamic background image selection according to the current page
+        $bg_image = 'image/gallery/01.jpg'; // Default: Resort/Room
+        $page_key = strtolower($current_page ?? 'home');
+        
+        switch ($page_key) {
+            case 'restaurant':
+            case 'dining':
+            case 'food':
+                $bg_image = 'image/food2.jpg'; // Authentic Food / Bengali Dining Feast
+                break;
+            case 'banquet':
+            case 'events':
+            case 'hall':
+                $bg_image = 'image/hall1.jpg'; // Grand Banquet Hall Interior
+                break;
+            case 'accomodation':
+            case 'accommodation':
+            case 'rooms':
+            case 'booking':
+            case 'book':
+                $bg_image = 'image/gallery/01.jpg'; // Luxury Room & Bed
+                break;
+            case 'about':
+            case 'about-us':
+                $bg_image = 'image/gallery/08.jpg'; // Resort Courtyard & Architecture
+                break;
+            case 'gallery':
+                $bg_image = 'image/gallery/09.jpg'; // Evening Resort Ambience
+                break;
+            case 'rules':
+            case 'policies':
+                $bg_image = 'image/gallery/07.jpg'; // Resort Cottages
+                break;
+            case 'contact':
+            case 'contact-us':
+                $bg_image = 'image/reception1.jpg'; // Resort Reception & Front Desk
+                break;
+            default:
+                $bg_image = 'image/gallery/01.jpg';
+                break;
+        }
+        ?>
         body { 
-            background: url('image/gallery/01.jpg') no-repeat center center fixed !important; 
+            background: url('<?php echo htmlspecialchars($bg_image); ?>') no-repeat center center fixed !important; 
             background-size: cover !important; 
         } 
         /* Add a dark overlay over the background image but behind the content */ 
@@ -197,13 +243,16 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         } 
          
         /* Make all section backgrounds transparent so the body background shows through */ 
-        .section_gap, .bg-light, .bg-white, .bg-dark, .accomodation_area, .about_history_area, .facilities_area, .gallery_area, .testimonial_area, .glass_section, .contact-area { 
+        .section_gap, .bg-light, .bg-white, .bg-dark, .accomodation_area, .about_history_area, .facilities_area, .gallery_area, .testimonial_area, .glass_section, .contact-area, .breadcrumb_area, #restaurant { 
             background: transparent !important; 
             background-color: transparent !important; 
         } 
+        .breadcrumb_area .bg-parallax {
+            display: none !important;
+        } 
          
         /* Convert all white cards and containers to glass cards */
-        .card, .facilities_item, .about_content, .gallery_item .gallery_img, .contact_info {
+        .card, .facilities_item, .about_content, .contact_info {
             background: rgba(255, 255, 255, 0.08) !important;
             backdrop-filter: blur(15px) !important;
             -webkit-backdrop-filter: blur(15px) !important;
@@ -406,6 +455,133 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
         /* Exemptions */
         .badge-danger { background-color: rgba(220,53,69,0.8) !important; color: #fff !important; }
         .text-danger, i.fa-ban { color: #dc3545 !important; }
+
+        /* Professional Luxury Flatpickr Calendar Styling */
+        .flatpickr-calendar {
+            background: #111d13 !important;
+            border: 1px solid rgba(46, 125, 50, 0.4) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+            font-family: 'Outfit', 'Poppins', sans-serif !important;
+            padding: 10px !important;
+            width: 320px !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+        }
+        .flatpickr-calendar::before, .flatpickr-calendar::after {
+            border-bottom-color: #111d13 !important;
+        }
+        .flatpickr-months {
+            padding: 6px 0 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            margin-bottom: 8px !important;
+        }
+        .flatpickr-months .flatpickr-month {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+            height: 38px !important;
+        }
+        .flatpickr-current-month {
+            font-size: 110% !important;
+            font-weight: 600 !important;
+            padding-top: 4px !important;
+        }
+        .flatpickr-current-month .cur-month {
+            font-weight: 600 !important;
+            color: #ffffff !important;
+        }
+        .flatpickr-current-month input.cur-year {
+            font-weight: 600 !important;
+            color: #2e7d32 !important;
+        }
+        .flatpickr-months .flatpickr-prev-month, 
+        .flatpickr-months .flatpickr-next-month {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+            padding: 8px !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease !important;
+        }
+        .flatpickr-months .flatpickr-prev-month:hover, 
+        .flatpickr-months .flatpickr-next-month:hover {
+            background: rgba(46, 125, 50, 0.25) !important;
+            color: #4caf50 !important;
+            fill: #4caf50 !important;
+        }
+        span.flatpickr-weekday {
+            color: #81c784 !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+        }
+        .flatpickr-day {
+            color: #e0e0e0 !important;
+            border-radius: 8px !important;
+            font-weight: 500 !important;
+            height: 38px !important;
+            line-height: 38px !important;
+            border: 1px solid transparent !important;
+            transition: all 0.18s ease-in-out !important;
+        }
+        .flatpickr-day:hover {
+            background: rgba(46, 125, 50, 0.25) !important;
+            border-color: rgba(76, 175, 80, 0.4) !important;
+            color: #ffffff !important;
+        }
+        .flatpickr-day.today {
+            border-color: #2e7d32 !important;
+            color: #81c784 !important;
+            font-weight: 700 !important;
+        }
+        .flatpickr-day.selected, 
+        .flatpickr-day.startRange, 
+        .flatpickr-day.endRange {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+            border-color: #4caf50 !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.5) !important;
+        }
+        .flatpickr-day.flatpickr-disabled, 
+        .flatpickr-day.flatpickr-disabled:hover {
+            color: rgba(255, 255, 255, 0.2) !important;
+            cursor: not-allowed !important;
+        }
+        .flatpickr-day.prevMonthDay, 
+        .flatpickr-day.nextMonthDay {
+            color: rgba(255, 255, 255, 0.22) !important;
+        }
+
+        /* Booking input styling for calendar */
+        .hotel_booking_table .input-group {
+            cursor: pointer;
+        }
+        .hotel_booking_table .input-group input.form-control {
+            cursor: pointer !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            border-right: none !important;
+            color: #ffffff !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.3px;
+        }
+        .hotel_booking_table .input-group .input-group-addon {
+            background: rgba(46, 125, 50, 0.35) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            border-left: none !important;
+            color: #81c784 !important;
+            padding: 0 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .hotel_booking_table .input-group:hover .input-group-addon {
+            background: #2e7d32 !important;
+            color: #ffffff !important;
+        }
         </style>
     </head>
     <body>

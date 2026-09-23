@@ -5,9 +5,34 @@ $meta_description = "Experience authentic Bengali, aromatic Mughlai, and wok-fre
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
-// Fetch food items for the menu (Limit to 6 to prevent repetition of placeholder images)
-$foodStmt = $pdo->query("SELECT * FROM restaurant_items ORDER BY category, price ASC LIMIT 6");
-$food_items = $foodStmt->fetchAll();
+// Fetch signature food items for the 3 cuisines: Bengali, Chinese, Mughlai
+$signature_items = [
+    [
+        'category' => 'Bengali',
+        'name' => 'Kolkata Style Chicken / Mutton Kosha',
+        'description' => 'Slow-cooked spicy meat delicacy infused with whole spices and mustard oil, served with Bengali thali accompaniments.',
+        'price' => 260,
+        'is_veg' => 0,
+        'image_path' => 'image/food2.jpg' // Authentic Bengali Thali feast image from resort
+    ],
+    [
+        'category' => 'Chinese',
+        'name' => 'Chilli Chicken (Dry / Gravy)',
+        'description' => 'Crispy wok-tossed chicken chunks in oriental soy-chilli sauce with fresh bell peppers, scallions, and aromatic spices.',
+        'price' => 220,
+        'is_veg' => 0,
+        'image_path' => 'image/chinese_food.jpg' // Authentic Chilli Chicken dish image
+    ],
+    [
+        'category' => 'Mughlai',
+        'name' => 'Royal Chicken Dum Biryani',
+        'description' => 'Aromatic long-grain Basmati rice slow-cooked in handi with tender chicken pieces, golden potato, and boiled egg in authentic Mughlai style.',
+        'price' => 260,
+        'is_veg' => 0,
+        'image_path' => 'image/mughlai_food.jpg' // Authentic Mughlai Dum Biryani image
+    ]
+];
+$food_items = $signature_items;
 ?>
 
 <!--================Breadcrumb Area =================-->
@@ -49,7 +74,7 @@ $food_items = $foodStmt->fetchAll();
                     <i class="fa fa-coffee fa-2x text-warning mb-2"></i>
                     <h5 class="font-weight-bold text-dark mb-1">Breakfast</h5>
                     <div class="badge border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace" style="background: rgba(255,255,255,0.6);">9:00 AM – 10:00 AM</div>
-                    <p class="small text-muted mb-0">Luchi-Alur Dom, Puri-Sabji, Toast, Eggs &amp; freshly brewed Darjeeling tea.</p>
+                    <p class="small text-muted mb-0">Luchi-Alur Dom, Puri-Sabji, Toast, Aalu paratha, Eggs &amp; tea & coffee, etc.</p>
                 </div>
             </div>
 
@@ -59,7 +84,7 @@ $food_items = $foodStmt->fetchAll();
                     <i class="fa fa-cutlery fa-2x text-primary mb-2"></i>
                     <h5 class="font-weight-bold text-dark mb-1">Lunch</h5>
                     <div class="badge border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace" style="background: rgba(255,255,255,0.6);">1:00 PM – 3:00 PM</div>
-                    <p class="small text-muted mb-0">Grand Bengali &amp; Multi-Cuisine <strong>Thali Service</strong> served fresh in the dining hall.</p>
+                    <p class="small text-muted mb-0"> Bengali  Thali Service , Prestige Service in the dining hall.</p>
                 </div>
             </div>
 
@@ -69,7 +94,7 @@ $food_items = $foodStmt->fetchAll();
                     <i class="fa fa-glass fa-2x text-success mb-2"></i>
                     <h5 class="font-weight-bold text-dark mb-1">Evening Snacks</h5>
                     <div class="badge border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace" style="background: rgba(255,255,255,0.6);">6:00 PM – 8:30 PM</div>
-                    <p class="small text-muted mb-0">Chilli Chicken, Pakoras, Crispy Baby Corn. <br><strong class="text-danger">Last Order: 8:00 PM</strong></p>
+                    <p class="small text-muted mb-0">Chilli Chicken, Pakoras, Crispy Baby Corn, Kabab, etc. <br><strong class="text-danger">Last Order: 8:00 PM</strong></p>
                 </div>
             </div>
 
@@ -79,7 +104,7 @@ $food_items = $foodStmt->fetchAll();
                     <i class="fa fa-moon-o fa-2x text-danger mb-2"></i>
                     <h5 class="font-weight-bold text-dark mb-1">Dinner</h5>
                     <div class="badge border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace" style="background: rgba(255,255,255,0.6);">9:00 PM – 10:30 PM</div>
-                    <p class="small text-muted mb-0">Biryani, Roti, Curries. <br><strong class="text-danger">Last Order: 9:00 PM</strong> | Kitchen Closes: 10:30 PM</p>
+                    <p class="small text-muted mb-0">Biryani, Roti, Curries, etc. <br><strong class="text-danger">Last Order: 9:00 PM</strong> | Kitchen Closes: 10:30 PM</p>
                 </div>
             </div>
         </div>
@@ -175,12 +200,9 @@ $food_items = $foodStmt->fetchAll();
                             <?php echo htmlspecialchars($item['description']); ?>
                         </p>
                         
-                        <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto">
-                            <strong class="text-warning font-weight-bold" style="font-size: 1.15rem;">
-                                ₹<?php echo number_format($item['price'], 0); ?>
-                            </strong>
-                            <a href="accomodation.php" class="btn btn-outline-warning btn-sm font-weight-bold" style="border-radius: 20px; font-size: 12px; padding: 4px 12px;" title="Book room and pre-order food">
-                                <i class="fa fa-calendar-check-o mr-1"></i> Pre-Book
+                        <div class="pt-3 border-top mt-auto text-center">
+                            <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20would%20like%20to%20enquire%20about%20<?php echo urlencode($item['name']); ?>%20at%20Labanya's%20Heshel%20Ghar." target="_blank" class="btn btn-outline-warning btn-sm btn-block font-weight-bold" style="border-radius: 20px; font-size: 13px; padding: 6px 16px;">
+                                <i class="fa fa-whatsapp mr-1 text-success font-weight-bold"></i> Enquire / Order
                             </a>
                         </div>
                     </div>

@@ -114,7 +114,31 @@ if ($type === 'quick_booking') {
         error_log('Failed to record contact inquiry: ' . $e->getMessage());
     }
     
-    // 2. Send SMTP Notification Email to Reservations Desk
+    // 2. Fetch Resort WhatsApp Number from site_settings
+    $settStmt = $pdo->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'whatsapp_number'");
+    $settStmt->execute();
+    $resortWhatsAppRaw = $settStmt->fetchColumn();
+    if (empty($resortWhatsAppRaw)) {
+        $resortWhatsAppRaw = '+91 98309 09875';
+    }
+    $targetWhatsAppDigits = preg_replace('/[^0-9]/', '', $resortWhatsAppRaw);
+    if (strlen($targetWhatsAppDigits) === 10) {
+        $targetWhatsAppDigits = '91' . $targetWhatsAppDigits;
+    }
+
+    // 3. Generate Formatted WhatsApp Message
+    $waMessage = "🏨 *New Message / Enquiry from Parijat Resort Website*\n\n"
+               . "👤 *Name:* $name\n"
+               . "📞 *Phone:* $phone\n"
+               . (!empty($email) ? "✉️ *Email:* $email\n" : "")
+               . (!empty($subject) ? "📌 *Subject:* $subject\n" : "")
+               . "💬 *Message:* $message\n\n"
+               . "🌐 _Sent from Parijat Resort Contact Page_";
+               
+    $encodedWaText = rawurlencode($waMessage);
+    $waUrl = "https://api.whatsapp.com/send?phone=" . $targetWhatsAppDigits . "&text=" . $encodedWaText;
+
+    // 4. Send SMTP Notification Email to Reservations Desk (if configured)
     $adminNotifyEmail = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'reservations@parijatresortbolpur.com';
     $body = "<h3>New Contact Enquiry Received</h3>
              <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
@@ -123,13 +147,87 @@ if ($type === 'quick_booking') {
              <p><strong>Subject:</strong> " . htmlspecialchars($subject) . "</p>
              <p><strong>Message:</strong><br/>" . nl2br(htmlspecialchars($message)) . "</p>";
              
-    $success = send_smtp_email($adminNotifyEmail, "New Contact Enquiry: " . $subject, $body);
-    
-    // 3. User feedback
-    echo "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 25px; border-radius: 8px; background: #e8f5e9; border: 1px solid #c8e6c9; color: #2e7d32;'>";
-    echo "<h3 style='margin-top:0;'>Thank You for Contacting Us!</h3>";
-    echo "<p>Your message has been received by our reservations desk. We will get back to you shortly.</p>";
-    echo "<p><a href='index.php' style='color: #1b5e20; font-weight: bold;'>&larr; Return to Homepage</a></p>";
-    echo "</div>";
+    @send_smtp_email($adminNotifyEmail, "New Contact Enquiry: " . $subject, $body);
+
+    // 5. Directly redirect to WhatsApp with friendly handover page
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Redirecting to WhatsApp - Parijat Resort</title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <style>
+            body {
+                background: #0f172a;
+                color: #ffffff;
+                font-family: 'Poppins', sans-serif;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+            .wa-card {
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(16px);
+                border-radius: 20px;
+                padding: 40px 30px;
+                max-width: 500px;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            }
+            .btn-wa {
+                background: #25d366;
+                color: #ffffff;
+                font-weight: 700;
+                font-size: 16px;
+                border-radius: 50px;
+                padding: 14px 28px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+            .btn-wa:hover {
+                background: #1ebc59;
+                color: #fff;
+                transform: translateY(-2px);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wa-card">
+            <div style="width: 80px; height: 80px; background: rgba(37, 211, 102, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;">
+                <i class="fa fa-whatsapp text-success" style="font-size: 45px;"></i>
+            </div>
+            <h3 style="font-weight: 700; margin-bottom: 10px; color: #fff;">Message Recorded!</h3>
+            <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 25px;">
+                Connecting you to Parijat Resort's WhatsApp reservation desk to send your message instantly.
+            </p>
+            <a href="<?php echo htmlspecialchars($waUrl); ?>" class="btn-wa" id="waRedirectBtn">
+                <i class="fa fa-whatsapp mr-2" style="font-size: 20px;"></i> Open WhatsApp Now
+            </a>
+            <div style="margin-top: 25px;">
+                <a href="contact.php" style="color: #94a3b8; font-size: 13px; text-decoration: underline;">&larr; Back to Contact Page</a>
+            </div>
+        </div>
+
+        <script>
+            // Automatically open WhatsApp in 1 second
+            setTimeout(function() {
+                window.location.href = <?php echo json_encode($waUrl); ?>;
+            }, 800);
+        </script>
+    </body>
+    </html>
+    <?php
+    exit;
 }
 ?>

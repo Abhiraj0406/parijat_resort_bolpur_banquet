@@ -50,7 +50,13 @@ class Router {
             if ($cleanRoute === 'index') {
                 $cleanRoute = '';
             }
-            $targetUrl = function_exists('base_url') ? base_url($cleanRoute) : '/' . $cleanRoute;
+            $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+            $baseDir    = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
+            if (function_exists('base_url') && getenv('APP_URL')) {
+                $targetUrl = base_url($cleanRoute);
+            } else {
+                $targetUrl = $baseDir . ($cleanRoute !== '' ? '/' . $cleanRoute : '/');
+            }
             if (!empty($_SERVER['QUERY_STRING'])) {
                 $targetUrl .= '?' . $_SERVER['QUERY_STRING'];
             }

@@ -72,6 +72,8 @@ $ig_link = $site_settings['instagram_link'] ?? '#';
         <script src="js/jquery.ajaxchimp.min.js"></script>
         <script src="js/mail-script.js"></script>
         <script src="vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+        <!-- Flatpickr Modern Calendar JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="vendors/nice-select/js/jquery.nice-select.js"></script>
         <script src="js/stellar.js"></script>
         <script src="vendors/lightbox/simpleLightbox.min.js"></script>

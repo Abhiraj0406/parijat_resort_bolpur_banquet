@@ -38,6 +38,63 @@ if (empty($dynamicGallery)) {
 </section>
 <!--================Breadcrumb Area =================-->
 
+<!-- Gallery Page Scoped Fix -->
+<style>
+    /* Fix gallery image cards - override global glassmorphism interference */
+    .gallery_item .gallery_img {
+        background: #000 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        height: 270px !important;
+        position: relative !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.4) !important;
+    }
+    .gallery_item .gallery_img img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+        border-radius: 0 !important;
+        transition: transform 0.4s ease !important;
+    }
+    .gallery_item .gallery_img:hover img {
+        transform: scale(1.07) !important;
+    }
+    .gallery_item .gallery_img .hover {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        padding: 16px !important;
+        opacity: 0;
+        transition: opacity 0.3s ease !important;
+        backdrop-filter: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .gallery_item .gallery_img:hover .hover {
+        opacity: 1 !important;
+    }
+    .gallery_item .gallery_img .hover span,
+    .gallery_item .gallery_img .hover a,
+    .gallery_item .gallery_img .hover i {
+        color: #ffffff !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
+    }
+    .gallery_item .gallery_img .hover a.text-warning,
+    .gallery_item .gallery_img .hover .text-warning {
+        color: #ffc107 !important;
+    }
+</style>
+
 <!--================Gallery Area =================-->
 <section class="gallery_area section_gap bg-light">
     <div class="container">
@@ -52,13 +109,13 @@ if (empty($dynamicGallery)) {
         <div class="row imageGallery1" id="gallery">
             <?php foreach ($dynamicGallery as $img): ?>
             <div class="col-lg-4 col-md-6 mb-4 gallery_item">
-                <div class="gallery_img rounded shadow-sm overflow-hidden position-relative bg-white" style="height: 270px;">
-                    <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="<?php echo htmlspecialchars($img['caption'] ?? 'Parijat Resort Gallery'); ?>" loading="lazy" decoding="async" class="w-100 h-100" style="object-fit: cover; transition: transform 0.4s ease;">
-                    <div class="hover d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);">
+                <div class="gallery_img" style="height: 270px;">
+                    <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="<?php echo htmlspecialchars($img['caption'] ?? 'Parijat Resort Gallery'); ?>" loading="lazy" decoding="async">
+                    <div class="hover">
                         <?php if (!empty($img['caption'])): ?>
-                            <span class="text-white font-weight-bold small mb-1"><?php echo htmlspecialchars($img['caption']); ?></span>
+                            <span class="font-weight-bold small mb-1"><?php echo htmlspecialchars($img['caption']); ?></span>
                         <?php endif; ?>
-                        <a class="light text-warning" href="<?php echo htmlspecialchars($img['image_path']); ?>">
+                        <a href="<?php echo htmlspecialchars($img['image_path']); ?>">
                             <i class="fa fa-expand fa-lg"></i>
                         </a>
                     </div>

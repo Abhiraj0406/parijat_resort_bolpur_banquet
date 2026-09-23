@@ -29,7 +29,63 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
     </div>
 </section>
 
-<div class="container my-5">
+<style>
+/* Fix input-group addon icon and input alignment */
+.booking-form-box .input-group {
+    display: flex !important;
+    align-items: stretch !important;
+    width: 100% !important;
+}
+.booking-form-box .input-group-addon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-right: none !important;
+    padding: 0 15px !important;
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    min-width: 48px;
+}
+.booking-form-box .input-group .form-control {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.booking-form-box .input-group-addon i {
+    font-size: 18px !important;
+}
+
+/* Fix dropdown / select box design and options */
+.booking-form-box select.form-control {
+    display: block !important;
+    width: 100% !important;
+    height: 48px !important;
+    background: rgba(20, 20, 20, 0.7) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 10px 15px !important;
+    font-size: 15px !important;
+    cursor: pointer !important;
+    -webkit-appearance: menulist !important;
+    -moz-appearance: menulist !important;
+    appearance: menulist !important;
+}
+.booking-form-box select.form-control option {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    padding: 10px !important;
+    font-size: 14px !important;
+}
+
+/* Disable problematic nice-select in booking form */
+.booking-form-box .nice-select {
+    display: none !important;
+}
+</style>
+
+<div class="container my-5 booking-form-box">
     <div class="row justify-content-center">
         <div class="col-lg-9">
             <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
@@ -180,6 +236,16 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Destroy niceSelect on booking form to allow native select dropdowns
+    if (typeof jQuery !== 'undefined') {
+        jQuery('.booking-form-box select').each(function() {
+            if (jQuery(this).next('.nice-select').length) {
+                jQuery(this).next('.nice-select').remove();
+            }
+            jQuery(this).show();
+        });
+    }
+
     // Same as mobile helper
     var sameBtn = document.getElementById('sameAsMobile');
     if (sameBtn) {

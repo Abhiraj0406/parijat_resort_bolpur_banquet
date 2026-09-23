@@ -202,8 +202,8 @@ $clean_mgr = preg_replace('/[^0-9]/', '', $manager_phone);
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
-                                <button type="submit" value="submit" class="btn theme_btn button_hover font-weight-bold px-4 py-2">
-                                    <i class="fa fa-paper-plane mr-1"></i> Submit Message
+                                <button type="submit" value="submit" class="btn btn-success font-weight-bold px-4 py-2 shadow-sm rounded-pill" style="background-color: #25d366 !important; border-color: #25d366 !important; color: #fff !important;">
+                                    <i class="fa fa-whatsapp mr-1 font-weight-bold" style="font-size: 1.1rem;"></i> Send Message on WhatsApp
                                 </button>
                             </div>
                         </div>

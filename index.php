@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/router.php';
 
 // Dispatch routed clean URLs (e.g. /about, /rooms, /dining, /contact, etc.)
 $requestPath = Router::getRequestPath();
-if ($requestPath !== '' && $requestPath !== 'home' && $requestPath !== 'index') {
+if ($requestPath !== '' && $requestPath !== 'home' && $requestPath !== 'index' && $requestPath !== 'index.php') {
     Router::dispatch($pdo);
     exit;
 }
@@ -92,14 +92,14 @@ if (empty($gallery_images)) {
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker11'>
-                                                    <input type='text' name="check_in" class="form-control" placeholder="Arrival Date" required/>
+                                                <div class='input-group date flatpickr-group' id='checkInGroup'>
+                                                    <input type='text' id="quick_check_in" name="check_in" class="form-control flatpickr-input-custom" placeholder="Arrival Date" readonly="readonly" required/>
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' name="check_out" class="form-control" placeholder="Departure Date" required/>
+                                                <div class='input-group date flatpickr-group' id='checkOutGroup'>
+                                                    <input type='text' id="quick_check_out" name="check_out" class="form-control flatpickr-input-custom" placeholder="Departure Date" readonly="readonly" required/>
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                 </div>
                                             </div>
@@ -146,7 +146,32 @@ if (empty($gallery_images)) {
             </div>
             <div class="col-lg-6 col-md-12 d-flex" data-aos="fade-left" data-aos-delay="200">
                 <div class="glass-card p-3 w-100 h-100 d-flex align-items-center justify-content-center">
-                    <img class="img-fluid rounded-lg shadow w-100 h-100" src="image/reception1.jpg" alt="About Resort" style="object-fit: cover;">
+                    <div id="aboutResortCarousel" class="carousel slide carousel-fade w-100 h-100" data-ride="carousel" data-interval="3500" data-pause="false" style="border-radius: 12px; overflow: hidden; min-height: 380px;">
+                        <ol class="carousel-indicators" style="margin-bottom: 15px;">
+                            <li data-target="#aboutResortCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="1"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner h-100" style="border-radius: 12px; min-height: 380px;">
+                            <div class="carousel-item active h-100">
+                                <img class="d-block w-100 h-100" src="image/about_slide1.jpg" alt="Parijat Resort Deluxe Room" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/about_slide2.jpg" alt="Modern Bathroom Amenities" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/about_slide3.jpg" alt="Resort Swimming Pool & Greenery" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#aboutResortCarousel" role="button" data-slide="prev" style="width: 12%; opacity: 0.85;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 18px;"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#aboutResortCarousel" role="button" data-slide="next" style="width: 12%; opacity: 0.85;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 18px;"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,111 +188,245 @@ if (empty($gallery_images)) {
         
         <div class="row">
             <?php 
-            $demoImages = ['image/room1.jpg', 'image/room2.jpg', 'image/room3.jpg', 'image/room4.jpg', 'image/room5.jpg', 'image/room6.jpg'];
             $roomIndex = 0;
             $delay = 100;
             foreach (array_slice($rooms, 0, 2) as $room): 
-                $imgSrc = !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : $demoImages[$roomIndex % 6];
-                $roomIndex++;
                 $facilitiesList = !empty($room['facilities']) ? explode(',', $room['facilities']) : [];
             ?>
-            <div class="col-lg-6 col-md-12 mb-4" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-                <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden room-premium-card" style="transition: transform 0.3s ease, box-shadow 0.3s ease; background: #fff;">
-                    <div class="row no-gutters h-100">
-                        <!-- Room Image Column -->
-                        <div class="col-md-5 position-relative" style="min-height: 250px;">
-                            <img src="<?php echo $imgSrc; ?>" alt="<?php echo htmlspecialchars($room['name']); ?>" loading="lazy" decoding="async" class="w-100 h-100" style="object-fit: cover; position: absolute; left: 0; top: 0;">
-                            
-                            <!-- Badges over image -->
-                            <div class="position-absolute" style="top: 12px; left: 12px; z-index: 2; display: flex; flex-direction: column;">
-                                <div class="mb-2">
-                                    <span class="badge badge-dark px-2 py-1 shadow-sm" style="font-size: 11px; letter-spacing: 0.5px;">
-                                        <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms
-                                    </span>
+            <div class="col-lg-6 col-md-12 mb-5" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+                <div class="card h-100 border-0 shadow rounded-lg overflow-hidden" style="transition: all 0.3s ease;">
+                    <div class="position-relative" style="height: 280px; overflow: hidden; border-radius: 12px 12px 0 0;">
+                        <?php if ($room['id'] == 1): ?>
+                            <!-- Image Slider for Deluxe Cottage Room -->
+                            <div id="homeRoomCarousel1" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#homeRoomCarousel1" data-slide-to="0" class="active"></li>
+                                    <li data-target="#homeRoomCarousel1" data-slide-to="1"></li>
+                                    <li data-target="#homeRoomCarousel1" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/cottage_slide1.jpg" alt="Deluxe Cottage Room" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/cottage_slide2.jpg" alt="Deluxe Cottage Room Side View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/cottage_slide3.jpg" alt="Deluxe Cottage Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
                                 </div>
-
-                                <?php if (!empty($room['has_balcony'])): ?>
-                                <div>
-                                    <span class="badge badge-success px-2 py-1 shadow-sm" style="font-size: 11px;">
-                                        <i class="fa fa-sun-o mr-1"></i> Balcony
-                                    </span>
-                                </div>
-                                <?php endif; ?>
+                                <a class="carousel-control-prev" href="#homeRoomCarousel1" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#homeRoomCarousel1" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
-
-                            <div class="position-absolute w-100 text-center" style="bottom: 10px; left: 0; z-index: 2;">
-                                <span class="badge badge-warning text-dark px-2 py-1 shadow-sm font-weight-bold" style="font-size: 11px;">
-                                    <i class="fa fa-snowflake-o mr-1"></i> AC / Non-AC Convertible
+                        <?php elseif ($room['id'] == 2): ?>
+                            <!-- Image Slider for Deluxe Premium Ground Floor -->
+                            <div id="homeRoomCarousel2" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#homeRoomCarousel2" data-slide-to="0" class="active"></li>
+                                    <li data-target="#homeRoomCarousel2" data-slide-to="1"></li>
+                                    <li data-target="#homeRoomCarousel2" data-slide-to="2"></li>
+                                    <li data-target="#homeRoomCarousel2" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/ground_slide1.jpg" alt="Deluxe Premium Ground Floor Bed View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/ground_slide2.jpg" alt="Deluxe Premium Ground Floor Room" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/ground_slide3.jpg" alt="Modern Bathroom with Shower & Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/ground_slide4.jpg" alt="Luxury Bathroom Wash Basin" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#homeRoomCarousel2" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#homeRoomCarousel2" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php elseif ($room['id'] == 3): ?>
+                            <!-- Image Slider for Deluxe Premium First Floor -->
+                            <div id="homeRoomCarousel3" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="0" class="active"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="1"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="2"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/first_slide1.jpg" alt="Deluxe Premium First Floor Master Bed" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide2.jpg" alt="Deluxe Premium First Floor Side View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide3.jpg" alt="Deluxe Premium First Floor with Balcony View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide4.jpg" alt="Modern Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#homeRoomCarousel3" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#homeRoomCarousel3" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php elseif ($room['id'] == 4): ?>
+                            <!-- Image Slider for Family Premium Four Sharing -->
+                            <div id="homeRoomCarousel4" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#homeRoomCarousel4" data-slide-to="0" class="active"></li>
+                                    <li data-target="#homeRoomCarousel4" data-slide-to="1"></li>
+                                    <li data-target="#homeRoomCarousel4" data-slide-to="2"></li>
+                                    <li data-target="#homeRoomCarousel4" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/family_slide1.jpg" alt="Family Premium Suite Double Bed View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/family_slide2.jpg" alt="Family Suite Two Beds Layout" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/family_slide3.jpg" alt="Family Suite Wardrobe and TV View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/family_slide4.jpg" alt="Modern Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#homeRoomCarousel4" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#homeRoomCarousel4" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <img src="<?php echo !empty($room['custom_image']) ? htmlspecialchars($room['custom_image']) : 'image/room1.jpg'; ?>" alt="<?php echo htmlspecialchars($room['name']); ?>" class="w-100 h-100" style="object-fit: cover;">
+                        <?php endif; ?>
+                        
+                        <div class="position-absolute" style="top: 15px; left: 15px; display: flex; flex-direction: column; z-index: 5;">
+                            <div class="mb-2">
+                                <span class="badge badge-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
+                                    <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms Available
                                 </span>
                             </div>
+
+                            <?php if (!empty($room['has_balcony'])): ?>
+                            <div>
+                                <span class="badge badge-success px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
+                                    <i class="fa fa-sun-o mr-1"></i> Private Balcony
+                                </span>
+                            </div>
+                            <?php endif; ?>
                         </div>
 
-                        <!-- Room Details Column -->
-                        <div class="col-md-7 d-flex flex-column justify-content-between p-4">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h4 class="card-title font-weight-bold text-dark mb-1" style="font-size: 1.15rem; line-height: 1.3;">
-                                        <?php echo htmlspecialchars($room['name']); ?>
-                                    </h4>
-                                </div>
+                        <div class="position-absolute" style="bottom: 12px; left: 15px; z-index: 5;">
+                            <span class="badge badge-warning text-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
+                                <i class="fa fa-snowflake-o mr-1"></i> Convertible: AC or Non-AC
+                            </span>
+                        </div>
+                    </div>
 
-                                <p class="card-text text-muted small mb-3" style="line-height: 1.5;">
-                                    <?php echo htmlspecialchars($room['description']); ?>
-                                </p>
+                    <div class="card-body p-4 d-flex flex-column justify-content-between">
+                        <div>
+                            <h3 class="font-weight-bold text-dark mb-2" style="font-size: 1.35rem;">
+                                <?php echo htmlspecialchars($room['name']); ?>
+                            </h3>
+                            
+                            <p class="text-muted mb-4" style="line-height: 1.6;">
+                                <?php echo htmlspecialchars($room['description']); ?>
+                            </p>
 
-                                <!-- Key Specs Icons -->
-                                <div class="bg-light p-2 rounded mb-3 small">
-                                    <div class="row no-gutters">
-                                        <div class="col-6 mb-1">
-                                            <i class="fa fa-users text-warning mr-1"></i> <strong>Occupancy:</strong> <?php echo $room['adult_capacity']; ?> Adults, <?php echo $room['kids_capacity']; ?> Kids (Max <?php echo $room['max_occupancy']; ?>)
+                            <!-- Specifications Grid -->
+                            <div class="bg-light p-3 rounded mb-4">
+                                <div class="row">
+                                    <div class="col-sm-6 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa fa-users text-warning mr-2" style="font-size: 18px;"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Occupancy</small>
+                                                <strong><?php echo $room['adult_capacity']; ?> Adults, <?php echo $room['kids_capacity']; ?> Kids</strong>
+                                                <span class="small text-muted">(Max <?php echo $room['max_occupancy']; ?>)</span>
+                                            </div>
                                         </div>
-                                        <div class="col-6 mb-1">
-                                            <i class="fa fa-building-o text-warning mr-1"></i> <strong>Balcony:</strong> <?php echo $room['has_balcony'] ? 'Private View' : 'No'; ?>
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa fa-bed text-warning mr-2" style="font-size: 18px;"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Extra Person Charge</small>
+                                                <strong>₹<?php echo number_format($room['extra_person_charge'], 0); ?></strong> <span class="small text-muted">/ night</span>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <i class="fa fa-bed text-warning mr-1"></i> <strong>Extra Person:</strong> ₹<?php echo number_format($room['extra_person_charge'], 0); ?>/night
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa fa-sun-o text-warning mr-2" style="font-size: 18px;"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Balcony</small>
+                                                <strong><?php echo $room['has_balcony'] ? 'Attached Private Balcony' : 'Standard View'; ?></strong>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <i class="fa fa-thermometer-half text-warning mr-1"></i> <strong>AC Mode:</strong> Convertible
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa fa-sliders text-warning mr-2" style="font-size: 18px;"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Flexibility</small>
+                                                <strong>AC &amp; Non-AC Convertible</strong>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Facilities Tags -->
-                                <?php if (!empty($facilitiesList)): ?>
-                                <div class="mb-3">
-                                    <span class="small font-weight-bold text-secondary d-block mb-1">Facilities:</span>
-                                    <div class="d-flex flex-wrap" style="gap: 4px;">
-                                        <?php foreach (array_slice($facilitiesList, 0, 4) as $facility): ?>
-                                            <span class="badge badge-light border text-muted py-1 px-2" style="font-size: 10.5px; font-weight: 500;">
-                                                <i class="fa fa-check text-success mr-1"></i><?php echo trim(htmlspecialchars($facility)); ?>
-                                            </span>
-                                        <?php endforeach; ?>
-                                        <?php if (count($facilitiesList) > 4): ?>
-                                            <span class="badge badge-light border text-muted py-1 px-2" style="font-size: 10.5px;">+<?php echo count($facilitiesList) - 4; ?> more</span>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                                <?php endif; ?>
                             </div>
 
-                            <!-- Pricing & Action -->
-                            <div class="pt-3 border-top">
-                                <div class="mb-3">
-                                    <div class="text-warning font-weight-bold" style="font-size: 0.95rem;">
-                                        <i class="fa fa-tag mr-1"></i> Tariff on Request
-                                    </div>
-                                    <small class="text-muted d-block" style="font-size: 11px;">Contact us for best rates</small>
+                            <!-- Room Facilities -->
+                            <?php if (!empty($facilitiesList)): ?>
+                            <div class="mb-4">
+                                <h6 class="font-weight-bold text-dark mb-2">Room Amenities &amp; Facilities:</h6>
+                                <div class="d-flex flex-wrap" style="gap: 6px;">
+                                    <?php foreach ($facilitiesList as $fac): ?>
+                                        <span class="badge badge-light border text-dark py-2 px-3" style="font-size: 12px; font-weight: 500;">
+                                            <i class="fa fa-check text-success mr-1"></i> <?php echo trim(htmlspecialchars($fac)); ?>
+                                        </span>
+                                    <?php endforeach; ?>
                                 </div>
+                            </div>
+                            <?php endif; ?>
+                        </div>
 
-                                <div class="d-flex w-100" style="gap: 8px;">
-                                    <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center">
-                                        Book Online
-                                    </a>
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20interested%20in%20booking%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success text-white py-2 rounded-pill font-weight-bold shadow-sm flex-fill text-center" title="Chat on WhatsApp">
-                                        <i class="fa fa-whatsapp mr-1"></i> WhatsApp
-                                    </a>
-                                </div>
+                        <!-- Pricing & Action -->
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="d-block text-muted small">Standard Plan:</span>
+                                <span class="text-warning font-weight-bold" style="font-size: 1.15rem;">
+                                    <i class="fa fa-tag mr-1"></i> Tariff on Request
+                                </span>
+                            </div>
+                            <div>
+                                <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow-sm">
+                                    Book This Room
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -571,5 +730,52 @@ if (empty($gallery_images)) {
     transition: all 0.3s;
 }
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    if (typeof flatpickr !== 'undefined') {
+        var checkOutPicker = flatpickr("#quick_check_out", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d M Y",
+            minDate: new Date().fp_incr(1),
+            disableMobile: "true"
+        });
+
+        var checkInPicker = flatpickr("#quick_check_in", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d M Y",
+            minDate: "today",
+            defaultDate: "today",
+            disableMobile: "true",
+            onChange: function(selectedDates, dateStr, instance) {
+                if (selectedDates.length > 0) {
+                    var nextDay = new Date(selectedDates[0]);
+                    nextDay.setDate(nextDay.getDate() + 1);
+                    checkOutPicker.set("minDate", nextDay);
+                    if (!checkOutPicker.selectedDates[0] || checkOutPicker.selectedDates[0] <= selectedDates[0]) {
+                        checkOutPicker.setDate(nextDay);
+                    }
+                }
+            }
+        });
+
+        // Make addon icons trigger calendar opening
+        var checkInAddon = document.querySelector("#checkInGroup .input-group-addon");
+        if (checkInAddon) {
+            checkInAddon.addEventListener("click", function() {
+                checkInPicker.open();
+            });
+        }
+        var checkOutAddon = document.querySelector("#checkOutGroup .input-group-addon");
+        if (checkOutAddon) {
+            checkOutAddon.addEventListener("click", function() {
+                checkOutPicker.open();
+            });
+        }
+    }
+});
+</script>
 
 <?php require_once 'includes/footer.php'; ?>

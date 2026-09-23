@@ -66,9 +66,135 @@ $allRates = $ratesStmt->fetchAll();
             <div class="col-lg-6 col-md-12 mb-5">
                 <div class="card h-100 border-0 shadow rounded-lg overflow-hidden" style="transition: all 0.3s ease;">
                     <div class="position-relative" style="height: 280px; overflow: hidden;">
-                        <img src="<?php echo $imgSrc; ?>" alt="<?php echo htmlspecialchars($room['name']); ?>" class="w-100 h-100" style="object-fit: cover;">
+                        <?php if ($room['id'] == 1): ?>
+                            <!-- Image Slider for Deluxe Cottage Room -->
+                            <div id="roomCarousel1" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#roomCarousel1" data-slide-to="0" class="active"></li>
+                                    <li data-target="#roomCarousel1" data-slide-to="1"></li>
+                                    <li data-target="#roomCarousel1" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/cottage_slide1.jpg" alt="Deluxe Cottage Room" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/cottage_slide2.jpg" alt="Deluxe Cottage Room Side View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/cottage_slide3.jpg" alt="Deluxe Cottage Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#roomCarousel1" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#roomCarousel1" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php elseif ($room['id'] == 2): ?>
+                            <!-- Image Slider for Deluxe Premium Ground Floor -->
+                            <div id="roomCarousel2" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#roomCarousel2" data-slide-to="0" class="active"></li>
+                                    <li data-target="#roomCarousel2" data-slide-to="1"></li>
+                                    <li data-target="#roomCarousel2" data-slide-to="2"></li>
+                                    <li data-target="#roomCarousel2" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/ground_slide1.jpg" alt="Deluxe Premium Ground Floor Bed View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/ground_slide2.jpg" alt="Deluxe Premium Ground Floor Room" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/ground_slide3.jpg" alt="Modern Bathroom with Shower & Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/ground_slide4.jpg" alt="Luxury Bathroom Wash Basin" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#roomCarousel2" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#roomCarousel2" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php elseif ($room['id'] == 3): ?>
+                            <!-- Image Slider for Deluxe Premium First Floor -->
+                            <div id="roomCarousel3" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#roomCarousel3" data-slide-to="0" class="active"></li>
+                                    <li data-target="#roomCarousel3" data-slide-to="1"></li>
+                                    <li data-target="#roomCarousel3" data-slide-to="2"></li>
+                                    <li data-target="#roomCarousel3" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/first_slide1.jpg" alt="Deluxe Premium First Floor Master Bed" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide2.jpg" alt="Deluxe Premium First Floor Side View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide3.jpg" alt="Deluxe Premium First Floor with Balcony View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide4.jpg" alt="Modern Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#roomCarousel3" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#roomCarousel3" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php elseif ($room['id'] == 4): ?>
+                            <!-- Image Slider for Family Premium Four Sharing -->
+                            <div id="roomCarousel4" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
+                                    <li data-target="#roomCarousel4" data-slide-to="0" class="active"></li>
+                                    <li data-target="#roomCarousel4" data-slide-to="1"></li>
+                                    <li data-target="#roomCarousel4" data-slide-to="2"></li>
+                                    <li data-target="#roomCarousel4" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner h-100">
+                                    <div class="carousel-item active h-100">
+                                        <img src="image/family_slide1.jpg" alt="Family Premium Suite Double Bed View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/family_slide2.jpg" alt="Family Suite Two Beds Layout" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/family_slide3.jpg" alt="Family Suite Wardrobe and TV View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/family_slide4.jpg" alt="Modern Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#roomCarousel4" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#roomCarousel4" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 14px;"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <img src="<?php echo $imgSrc; ?>" alt="<?php echo htmlspecialchars($room['name']); ?>" class="w-100 h-100" style="object-fit: cover;">
+                        <?php endif; ?>
                         
-                        <div class="position-absolute" style="top: 15px; left: 15px; display: flex; flex-direction: column;">
+                        <div class="position-absolute" style="top: 15px; left: 15px; display: flex; flex-direction: column; z-index: 5;">
                             <div class="mb-2">
                                 <span class="badge badge-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
                                     <i class="fa fa-key mr-1"></i> <?php echo $room['total_rooms']; ?> Rooms Available
@@ -84,7 +210,7 @@ $allRates = $ratesStmt->fetchAll();
                             <?php endif; ?>
                         </div>
 
-                        <div class="position-absolute" style="bottom: 12px; left: 15px;">
+                        <div class="position-absolute" style="bottom: 12px; left: 15px; z-index: 5;">
                             <span class="badge badge-warning text-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
                                 <i class="fa fa-snowflake-o mr-1"></i> Convertible: AC or Non-AC
                             </span>
