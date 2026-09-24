@@ -316,7 +316,7 @@ $allRates = $ratesStmt->fetchAll();
 
                         <div class="position-absolute" style="bottom: 12px; left: 15px; z-index: 5;">
                             <span class="badge badge-warning text-dark px-3 py-2 shadow font-weight-bold" style="font-size: 12px;">
-                                <i class="fa fa-snowflake-o mr-1"></i> Convertible: AC or Non-AC
+                                <i class="fa fa-snowflake-o mr-1"></i> Convertible
                             </span>
                         </div>
                     </div>
