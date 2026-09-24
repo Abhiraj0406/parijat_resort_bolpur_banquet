@@ -292,19 +292,39 @@ if (empty($gallery_images)) {
                                     <li data-target="#homeRoomCarousel3" data-slide-to="1"></li>
                                     <li data-target="#homeRoomCarousel3" data-slide-to="2"></li>
                                     <li data-target="#homeRoomCarousel3" data-slide-to="3"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="4"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="5"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="6"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="7"></li>
+                                    <li data-target="#homeRoomCarousel3" data-slide-to="8"></li>
                                 </ol>
                                 <div class="carousel-inner h-100">
                                     <div class="carousel-item active h-100">
-                                        <img src="image/first_slide1.jpg" alt="Deluxe Premium First Floor Master Bed" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/first_slide_1.jpeg" alt="Deluxe Premium First Floor Room" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/first_slide2.jpg" alt="Deluxe Premium First Floor Side View" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/first_slide_2.jpeg" alt="Deluxe Premium First Floor Bed View" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/first_slide3.jpg" alt="Deluxe Premium First Floor with Balcony View" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/first_slide_3.jpeg" alt="Deluxe Premium First Floor Interior" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/first_slide4.jpg" alt="Modern Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/first_slide_4.jpeg" alt="Deluxe Premium First Floor Balcony & View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide_5.jpeg" alt="Modern Bathroom Amenities" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide_6.jpeg" alt="Deluxe Premium First Floor Room Setup" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide_7.jpeg" alt="Deluxe Premium First Floor Bathroom" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide_8.jpeg" alt="Deluxe Premium First Floor Wash Area" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/first_slide_9.jpeg" alt="Deluxe Premium First Floor Comfort" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#homeRoomCarousel3" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
