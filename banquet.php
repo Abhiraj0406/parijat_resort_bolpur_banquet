@@ -248,7 +248,7 @@ if (empty($banquet_images)) {
                                 <label class="font-weight-bold">Additional Requirements</label>
                                 <textarea class="form-control" name="message" rows="4" placeholder="Any special requests, decoration needs, room bookings, etc..."></textarea>
                             </div>
-                            <button type="submit" class="btn theme_btn button_hover w-100 py-3 font-weight-bold text-uppercase mt-2" style="border-radius: 5px;">
+                            <button type="submit" class="btn theme_btn button_hover w-100 py-3 font-weight-bold text-uppercase mt-2 text-wrap" style="border-radius: 5px; white-space: normal; line-height: 1.5;">
                                 <i class="fa fa-paper-plane mr-2"></i> Submit Booking Request
                             </button>
                         </form>

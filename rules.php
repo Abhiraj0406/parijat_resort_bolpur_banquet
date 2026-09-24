@@ -28,8 +28,8 @@ $clean_wa = preg_replace('/[^0-9]/', '', $whatsapp);
     <div class="container">
 
         <!-- Introduction Banner -->
-        <div class="text-center mb-5">
-            <div class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase mb-2" style="font-size: 0.85rem; letter-spacing: 1px;">
+        <div class="text-center mb-5 pt-5 mt-4">
+            <div class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-2 text-uppercase mb-2 text-wrap" style="font-size: 0.85rem; letter-spacing: 1px; white-space: normal; max-width: 100%; display: inline-block;">
                 <i class="fa fa-shield mr-1"></i> Guest Information &amp; Code of Conduct
             </div>
             <h2 class="title_color font-weight-bold">Resort Guidelines &amp; Policies</h2>

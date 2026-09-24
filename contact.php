@@ -44,8 +44,8 @@ $clean_mgr = preg_replace('/[^0-9]/', '', $manager_phone);
 
         <!-- Management Team Section (Phase 11) -->
         <div class="mb-5">
-            <div class="text-center mb-4">
-                <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase" style="font-size: 0.82rem; letter-spacing: 1px;">
+            <div class="text-center mb-4 pt-5 mt-4">
+                <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-2 text-uppercase text-wrap" style="font-size: 0.82rem; letter-spacing: 1px; white-space: normal; max-width: 100%; display: inline-block;">
                     <i class="fa fa-users mr-1"></i> Resort Leadership
                 </span>
                 <h2 class="title_color font-weight-bold mt-2">Executive Management</h2>

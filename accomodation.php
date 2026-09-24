@@ -44,8 +44,8 @@ $allRates = $ratesStmt->fetchAll();
 <!--================ Detailed Accomodation Area =================-->
 <section class="accomodation_area section_gap">
     <div class="container">
-        <div class="section_title text-center">
-            <span class="text-uppercase text-warning font-weight-bold" style="letter-spacing: 1px;">19 Serene Units</span>
+        <div class="section_title text-center pt-5 mt-4">
+            <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing: 1px; white-space: normal; display: inline-block; max-width: 100%;">19 Serene Units</span>
             <h2 class="title_color mt-1">Our Room Categories</h2>
             <p>Every room at Parijat Resort Bolpur is convertible to <strong>AC or Non-AC</strong> and includes a <strong>private balcony</strong> with serene views.</p>
         </div>
@@ -314,17 +314,17 @@ $allRates = $ratesStmt->fetchAll();
         </div>
 
         <!-- Tariff & Booking Policy Note -->
-        <div class="card bg-light border-0 shadow-sm rounded-lg p-4 mt-4 mb-5">
+        <div class="card bg-transparent border-light shadow-sm rounded-lg p-4 mt-4 mb-5" style="background: rgba(0, 0, 0, 0.6) !important; backdrop-filter: blur(10px);">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h5 class="font-weight-bold text-dark mb-2"><i class="fa fa-info-circle text-warning mr-2"></i>Flexible Tariff Policy</h5>
-                    <p class="text-dark mb-0" style="font-size: 0.95rem; line-height: 1.6;">
+                    <h5 class="font-weight-bold text-white mb-2"><i class="fa fa-info-circle text-warning mr-2"></i>Flexible Tariff Policy</h5>
+                    <p class="text-white mb-0" style="font-size: 0.95rem; line-height: 1.6;">
                         Prices vary according to high season (Durga Puja, Winter holidays, Shantiniketan festivals) and long weekends. All 19 rooms are convertible and can be booked with AC or Non-AC based on your preference and budget. To check real-time availability and custom group discounts, please submit an enquiry or contact our reservations desk.
                     </p>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
                     <a href="index.php#contact" class="btn btn-dark font-weight-bold btn-block rounded-pill py-2 mb-2 shadow-sm">Online Reservation</a>
-                    <a href="contact.php" class="btn btn-outline-dark font-weight-bold btn-block rounded-pill py-2 shadow-sm">Contact Front Desk</a>
+                    <a href="contact.php" class="btn btn-outline-light font-weight-bold btn-block rounded-pill py-2 shadow-sm">Contact Front Desk</a>
                 </div>
             </div>
         </div>

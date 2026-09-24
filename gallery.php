@@ -98,8 +98,8 @@ if (empty($dynamicGallery)) {
 <!--================Gallery Area =================-->
 <section class="gallery_area section_gap bg-light">
     <div class="container">
-        <div class="section_title text-center mb-5">
-            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-1 text-uppercase" style="font-size: 0.8rem; letter-spacing: 1px;">
+        <div class="section_title text-center mb-5 pt-5 mt-4">
+            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-2 text-uppercase text-wrap" style="font-size: 0.8rem; letter-spacing: 1px; white-space: normal; max-width: 100%; display: inline-block;">
                 <i class="fa fa-camera mr-1"></i> Visual Tour
             </span>
             <h2 class="title_color font-weight-bold mt-2">Moments at Parijat Resort</h2>

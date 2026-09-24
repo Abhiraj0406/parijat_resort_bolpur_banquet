@@ -710,7 +710,7 @@ if (empty($gallery_images)) {
         <p class="mb-4 text-white-50" style="max-width: 650px; margin: 0 auto;">
             Please review our 18 resort guidelines regarding check-in (12:30 PM), check-out (11:00 AM), dining schedules, swimming pool etiquette, and cancellation terms.
         </p>
-        <a href="rules.php" class="btn theme_btn button_hover font-weight-bold shadow px-4 py-2">
+        <a href="rules.php" class="btn theme_btn button_hover font-weight-bold shadow px-4 py-2 text-wrap d-block d-md-inline-block" style="white-space: normal; line-height: 1.5;">
             <i class="fa fa-book mr-2"></i>View Dedicated Rules &amp; Regulations Page
         </a>
     </div>

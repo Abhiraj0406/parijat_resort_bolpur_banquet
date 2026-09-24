@@ -57,8 +57,8 @@ $food_items = $signature_items;
     <div style="position: absolute; bottom: 10%; right: 5%; width: 250px; height: 250px; background: rgba(0, 123, 255, 0.15); filter: blur(50px); border-radius: 50%; z-index: 0;"></div>
     
     <div class="container" style="position: relative; z-index: 1;">
-        <div class="section_title text-center mb-5">
-            <span class="text-uppercase text-warning font-weight-bold" style="letter-spacing:1px;">Multi-Cuisine Dining Experience</span>
+        <div class="section_title text-center mb-5 pt-5 mt-4">
+            <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing:1px; white-space: normal; display: inline-block; max-width: 100%;">Multi-Cuisine Dining Experience</span>
             <h2 class="title_color mt-1">Labanya's Heshel Ghar</h2>
             <p class="mx-auto" style="max-width: 750px;">
                 Specializing in authentic <strong>Bengali</strong>, aromatic <strong>Mughlai</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
