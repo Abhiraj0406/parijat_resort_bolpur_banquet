@@ -27,11 +27,11 @@ $allRates = $ratesStmt->fetchAll();
 ?>
 
 <!--================Breadcrumb Area =================-->
-<section class="breadcrumb_area">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+<section class="breadcrumb_area" style="position: relative; overflow: hidden;">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('image/premium_building_1.jpeg') no-repeat scroll center center / cover; opacity: 1;"></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Resort Accommodation</h2>
+            <h2 class="page-cover-tittle font-weight-bold text-white">Resort Accommodation</h2>
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
                 <li class="active">Rooms & Cottages</li>
@@ -44,7 +44,71 @@ $allRates = $ratesStmt->fetchAll();
 <!--================ Detailed Accomodation Area =================-->
 <section class="accomodation_area section_gap">
     <div class="container">
-        <div class="section_title text-center pt-5 mt-4">
+        <!-- Premium Building Architecture (Morning & Night Views) -->
+        <div class="row mb-5 justify-content-center">
+            <div class="col-lg-11">
+                <div class="card border-0 shadow-lg rounded-xl overflow-hidden" style="border-radius: 16px;">
+                    <div id="premiumBuildingCarousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+                        <ol class="carousel-indicators" style="margin-bottom: 20px; z-index: 3;">
+                            <li data-target="#premiumBuildingCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#premiumBuildingCarousel" data-slide-to="1"></li>
+                            <li data-target="#premiumBuildingCarousel" data-slide-to="2"></li>
+                            <li data-target="#premiumBuildingCarousel" data-slide-to="3"></li>
+                            <li data-target="#premiumBuildingCarousel" data-slide-to="4"></li>
+                            <li data-target="#premiumBuildingCarousel" data-slide-to="5"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height: 420px; max-height: 55vh;">
+                            <div class="carousel-item active h-100">
+                                <img src="image/premium_building_1.jpeg" class="d-block w-100 h-100" alt="Premium Building Morning Architecture" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.65); border-radius: 8px; padding: 8px 18px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0"><i class="fa fa-sun-o text-warning mr-2"></i>Premium Accommodation Building (Morning View)</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/premium_building_2.jpeg" class="d-block w-100 h-100" alt="Premium Building Daylight View" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.65); border-radius: 8px; padding: 8px 18px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0"><i class="fa fa-building text-info mr-2"></i>Spacious Balconies & Garden Facade</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/premium_building_3.jpeg" class="d-block w-100 h-100" alt="Premium Building Afternoon Ambience" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.65); border-radius: 8px; padding: 8px 18px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0"><i class="fa fa-tree text-success mr-2"></i>Serene Greenery & Scenic Grounds</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/premium_building_4.jpeg" class="d-block w-100 h-100" alt="Premium Building Dusk Lighting" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.65); border-radius: 8px; padding: 8px 18px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0"><i class="fa fa-moon-o text-warning mr-2"></i>Illuminated Evening Facade</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/premium_building_5.jpeg" class="d-block w-100 h-100" alt="Premium Building Night View" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.65); border-radius: 8px; padding: 8px 18px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0"><i class="fa fa-star text-warning mr-2"></i>Premium Building Night Ambience & Lighting</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/premium_building_6.jpeg" class="d-block w-100 h-100" alt="Peaceful Night Atmosphere" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.65); border-radius: 8px; padding: 8px 18px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0"><i class="fa fa-bed text-white mr-2"></i>Peaceful & Secure Night Atmosphere</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#premiumBuildingCarousel" role="button" data-slide="prev" style="width: 12%; z-index: 4;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 16px;"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#premiumBuildingCarousel" role="button" data-slide="next" style="width: 12%; z-index: 4;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 16px;"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section_title text-center pt-2 mt-2">
             <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing: 1px; white-space: normal; display: inline-block; max-width: 100%;">19 Serene Units</span>
             <h2 class="title_color mt-1">Our Room Categories</h2>
             <p>Every room at Parijat Resort Bolpur is convertible to <strong>AC or Non-AC</strong> and includes a <strong>private balcony</strong> with serene views.</p>

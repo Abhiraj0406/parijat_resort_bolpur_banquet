@@ -10,8 +10,9 @@ $dynamicGallery = $stmt->fetchAll();
 // Fallback if empty
 if (empty($dynamicGallery)) {
     $dynamicGallery = [
+        ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Building Morning View', 'category' => 'Resort'],
+        ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building Night Illumination', 'category' => 'Resort'],
         ['image_path' => 'image/gallery/07.jpg', 'caption' => 'Resort Cottages', 'category' => 'Rooms'],
-        ['image_path' => 'image/gallery/08.jpg', 'caption' => 'Beautiful Resort Courtyard', 'category' => 'Resort'],
         ['image_path' => 'image/hall1.jpg', 'caption' => 'Banquet Hall Interior', 'category' => 'Events'],
         ['image_path' => 'image/pool3.jpg', 'caption' => 'Night View of Pool', 'category' => 'Pool'],
         ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Reception', 'category' => 'Resort'],

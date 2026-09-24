@@ -55,8 +55,8 @@ if (empty($gallery_images)) {
         ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Reception'],
         ['image_path' => 'image/reception2.jpg', 'caption' => 'Lobby Area'],
         ['image_path' => 'image/food1.jpg', 'caption' => 'Evening Snacks'],
-        ['image_path' => 'image/food2.jpg', 'caption' => 'Authentic Bengali Thali'],
-        ['image_path' => 'image/food3.jpg', 'caption' => 'Special Dishes'],
+        ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation (Day View)'],
+        ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building (Night Illumination)'],
         ['image_path' => 'image/dining_in.jpg', 'caption' => 'Heshel Ghar Dining Area'],
         ['image_path' => 'image/dining_out.jpg', 'caption' => 'Labanya\'s Heshel Ghar']
     ];
