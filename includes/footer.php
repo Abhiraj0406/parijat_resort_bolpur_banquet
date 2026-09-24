@@ -24,15 +24,17 @@ $ig_link = $site_settings['instagram_link'] ?? '#';
                                 <div class="col-6">
                                     <ul class="list_style">
                                         <li><a href="index.php">Home</a></li>
-                                        <li><a href="index.php#rooms">Rooms</a></li>
-                                        <li><a href="index.php#restaurant">Dining</a></li>
+                                        <li><a href="accomodation.php">Rooms</a></li>
+                                        <li><a href="dining.php">Dining</a></li>
+                                        <li><a href="gallery.php">Gallery</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-6">
                                     <ul class="list_style">
-                                        <li><a href="index.php#banquet">Banquet</a></li>
-                                        <li><a href="rules.php">Rules & Policies</a></li>
-                                        <li><a href="index.php#contact">Contact Us</a></li>
+                                        <li><a href="banquet.php">Banquet</a></li>
+                                        <li><a href="rules.php">Rules &amp; Policies</a></li>
+                                        <li><a href="contact.php">Contact Us</a></li>
+                                        <li><a href="booking.php">Book Now</a></li>
                                     </ul>
                                 </div>                                      
                             </div>                          

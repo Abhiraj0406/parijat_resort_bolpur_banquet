@@ -610,11 +610,11 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
                     <!-- Navbar Links -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item <?php echo ($current_page == 'index') ? 'active' : ''; ?>"><a class="nav-link" href="index.php">Home</a></li> 
+                            <li class="nav-item <?php echo in_array($current_page, ['index', 'home']) ? 'active' : ''; ?>"><a class="nav-link" href="index.php">Home</a></li> 
                             <li class="nav-item <?php echo ($current_page == 'accomodation') ? 'active' : ''; ?>"><a class="nav-link" href="accomodation.php">Rooms</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'restaurant') ? 'active' : ''; ?>"><a class="nav-link" href="dining.php">Dining</a></li>
+                            <li class="nav-item <?php echo in_array($current_page, ['restaurant', 'dining']) ? 'active' : ''; ?>"><a class="nav-link" href="dining.php">Dining</a></li>
                             <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="banquet.php">Banquet</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'rules') ? 'active' : ''; ?>"><a class="nav-link" href="rules.php">Rules & Policies</a></li>
+                            <li class="nav-item <?php echo in_array($current_page, ['rules', 'about']) ? 'active' : ''; ?>"><a class="nav-link" href="rules.php">Rules & Policies</a></li>
                             <li class="nav-item <?php echo ($current_page == 'gallery') ? 'active' : ''; ?>"><a class="nav-link" href="gallery.php">Gallery</a></li>
                             <li class="nav-item <?php echo ($current_page == 'contact') ? 'active' : ''; ?>"><a class="nav-link" href="contact.php">Contact</a></li>
                         </ul>
