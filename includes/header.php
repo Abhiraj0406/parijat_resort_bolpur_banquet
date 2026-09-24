@@ -152,6 +152,23 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             background-color: #fff !important;
         }
         
+        /* High Clarity Hero Banner Styling */
+        .banner_area {
+            background: #111 !important;
+        }
+        .banner_area .bg-parallax {
+            background: url('image/banner_bg.jpg?v=<?php echo file_exists('image/banner_bg.jpg') ? filemtime('image/banner_bg.jpg') : 3; ?>') no-repeat center center / cover !important;
+            opacity: 0.90 !important;
+            background-attachment: scroll !important;
+            transform: none !important;
+        }
+        .banner_content h2 {
+            text-shadow: 0 3px 18px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.95) !important;
+        }
+        .banner_content h6, .banner_content p {
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9) !important;
+        }
+        
         @media (max-width: 768px) {
             h1, .h1 { font-size: 32px !important; line-height: 1.3 !important; }
             h2, .h2, .banner_content h2 { font-size: 28px !important; line-height: 1.3 !important; }
@@ -166,9 +183,10 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             
             /* Fix banner background showing wrong image and zooming bug on mobile */
             .banner_area .bg-parallax {
-                background: url('image/banner_bg.jpg?v=2') no-repeat center center / cover !important;
+                background: url('image/banner_bg.jpg?v=<?php echo file_exists('image/banner_bg.jpg') ? filemtime('image/banner_bg.jpg') : 3; ?>') no-repeat center center / cover !important;
                 background-attachment: scroll !important;
                 transform: none !important;
+                opacity: 0.90 !important;
             }
             
             /* Fix booking form overlapping on mobile */
