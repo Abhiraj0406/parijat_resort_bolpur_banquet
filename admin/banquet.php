@@ -204,7 +204,7 @@ $csrfToken = generate_csrf_token();
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Facilities (Comma Separated)</label>
-                        <textarea class="form-control" name="facilities" rows="2" placeholder="e.g. Central AC, Audio-Visual Setup, Stage, Dedicated Dining, Parking"><?php echo $editMode ? htmlspecialchars($editData['facilities'] ?? '') : ''; ?></textarea>
+                        <textarea class="form-control" name="facilities" rows="2" placeholder="e.g. Air Conditioned, Audio-Visual Setup, Stage, Dedicated Dining, Parking"><?php echo $editMode ? htmlspecialchars($editData['facilities'] ?? '') : ''; ?></textarea>
                     </div>
 
                     <div class="mb-3">
