@@ -36,11 +36,11 @@ $food_items = $signature_items;
 ?>
 
 <!--================Breadcrumb Area =================-->
-<section class="breadcrumb_area">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+<section class="breadcrumb_area" style="position: relative; overflow: hidden;">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('image/restaurant_slide_1.jpeg') no-repeat scroll center center / cover; opacity: 1;"></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Labanya's Heshel Ghar</h2>
+            <h2 class="page-cover-tittle font-weight-bold text-white">Labanya's Heshel Ghar</h2>
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
                 <li class="active">Dining</li>
@@ -52,18 +52,84 @@ $food_items = $signature_items;
 
 <!-- Restaurant Section -->
 <section id="restaurant" class="section_gap" style="background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); position: relative; overflow: hidden;">
+    <!-- Subtle Restaurant Background Texture Layer -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('image/restaurant_slide_1.jpeg') no-repeat center center / cover; opacity: 0.04; pointer-events: none; z-index: 0;"></div>
     <!-- Decorative background elements for glassmorphism -->
-    <div style="position: absolute; top: 5%; left: 5%; width: 300px; height: 300px; background: rgba(255, 193, 7, 0.2); filter: blur(60px); border-radius: 50%; z-index: 0;"></div>
-    <div style="position: absolute; bottom: 10%; right: 5%; width: 250px; height: 250px; background: rgba(0, 123, 255, 0.15); filter: blur(50px); border-radius: 50%; z-index: 0;"></div>
+    <div style="position: absolute; top: 5%; left: 5%; width: 300px; height: 300px; background: rgba(255, 193, 7, 0.15); filter: blur(60px); border-radius: 50%; z-index: 0;"></div>
+    <div style="position: absolute; bottom: 10%; right: 5%; width: 250px; height: 250px; background: rgba(0, 123, 255, 0.1); filter: blur(50px); border-radius: 50%; z-index: 0;"></div>
     
     <div class="container" style="position: relative; z-index: 1;">
-        <div class="section_title text-center mb-5 pt-5 mt-4">
+        <div class="section_title text-center mb-4 pt-4">
             <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing:1px; white-space: normal; display: inline-block; max-width: 100%;">Multi-Cuisine Dining Experience</span>
             <h2 class="title_color mt-1">Labanya's Heshel Ghar</h2>
             <p class="mx-auto" style="max-width: 750px;">
                 Specializing in authentic <strong>Bengali</strong>, delicious <strong>Roll, Kabab</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
                 All meals are prepared fresh upon order with pure local ingredients.
             </p>
+        </div>
+
+        <!-- Restaurant Ambience Slider -->
+        <div class="row mb-5 justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-lg rounded-xl overflow-hidden" style="border-radius: 16px;">
+                    <div id="restaurantCarousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+                        <ol class="carousel-indicators" style="margin-bottom: 20px; z-index: 3;">
+                            <li data-target="#restaurantCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#restaurantCarousel" data-slide-to="1"></li>
+                            <li data-target="#restaurantCarousel" data-slide-to="2"></li>
+                            <li data-target="#restaurantCarousel" data-slide-to="3"></li>
+                            <li data-target="#restaurantCarousel" data-slide-to="4"></li>
+                            <li data-target="#restaurantCarousel" data-slide-to="5"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height: 420px; max-height: 55vh;">
+                            <div class="carousel-item active h-100">
+                                <img src="image/restaurant_slide_1.jpeg" class="d-block w-100 h-100" alt="Restaurant Exterior & Dining Setup" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 16px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0">Labanya's Heshel Ghar Dining Ambiance</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_2.jpeg" class="d-block w-100 h-100" alt="Spacious Dining Hall" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 16px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0">Spacious Seating & Family Dining Area</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_3.jpeg" class="d-block w-100 h-100" alt="Restaurant Interior View" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 16px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0">Warm & Hygienic Dining Environment</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_4.jpeg" class="d-block w-100 h-100" alt="Garden & Restaurant View" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 16px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0">Scenic Resort Garden Ambiance</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_5.jpeg" class="d-block w-100 h-100" alt="Outdoor & Courtyard Dining" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 16px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0">Fresh Bolpur Air & Open Courtyard</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_6.jpeg" class="d-block w-100 h-100" alt="Heshel Ghar Hospitality" style="object-fit: cover;">
+                                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 16px; bottom: 25px;">
+                                    <h5 class="text-white font-weight-bold mb-0">Warm Hospitality & Dedicated Table Service</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#restaurantCarousel" role="button" data-slide="prev" style="width: 12%; z-index: 4;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 16px;"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#restaurantCarousel" role="button" data-slide="next" style="width: 12%; z-index: 4;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 16px;"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Meal Schedule Cards -->

@@ -16,7 +16,8 @@ if (empty($dynamicGallery)) {
         ['image_path' => 'image/pool3.jpg', 'caption' => 'Night View of Pool', 'category' => 'Pool'],
         ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Reception', 'category' => 'Resort'],
         ['image_path' => 'image/food2.jpg', 'caption' => 'Authentic Bengali Thali', 'category' => 'Dining'],
-        ['image_path' => 'image/dining_out.jpg', 'caption' => 'Labanya\'s Heshel Ghar Exterior', 'category' => 'Dining'],
+        ['image_path' => 'image/restaurant_slide_1.jpeg', 'caption' => 'Labanya\'s Heshel Ghar Dining Area', 'category' => 'Dining'],
+        ['image_path' => 'image/restaurant_slide_2.jpeg', 'caption' => 'Restaurant Indoor Seating', 'category' => 'Dining'],
         ['image_path' => 'image/pool5.jpg', 'caption' => 'Illuminated Pool', 'category' => 'Pool'],
         ['image_path' => 'image/hall3.jpg', 'caption' => 'Banquet Hall Decor', 'category' => 'Events']
     ];
