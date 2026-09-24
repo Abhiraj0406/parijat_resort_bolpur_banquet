@@ -1,11 +1,11 @@
 <?php
 $page_title = "Labanya's Heshel Ghar - Multi-Cuisine Dining at Parijat Resort";
 $current_page = "restaurant";
-$meta_description = "Experience authentic Bengali, aromatic Mughlai, and wok-fresh Chinese delicacies at Labanya's Heshel Ghar, Parijat Resort Bolpur.";
+$meta_description = "Experience authentic Bengali, delicious Roll, Kabab, and wok-fresh Chinese delicacies at Labanya's Heshel Ghar, Parijat Resort Bolpur.";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
-// Fetch signature food items for the 3 cuisines: Bengali, Chinese, Mughlai
+// Fetch signature food items for the 3 cuisines: Bengali, Chinese, Roll, Kabab
 $signature_items = [
     [
         'category' => 'Bengali',
@@ -24,12 +24,12 @@ $signature_items = [
         'image_path' => 'image/chinese_food.jpg' // Authentic Chilli Chicken dish image
     ],
     [
-        'category' => 'Mughlai',
-        'name' => 'Royal Chicken Dum Biryani',
-        'description' => 'Aromatic long-grain Basmati rice slow-cooked in handi with tender chicken pieces, golden potato, and boiled egg in authentic Mughlai style.',
-        'price' => 260,
+        'category' => 'Roll, Kabab',
+        'name' => 'Kolkata Kathi Rolls & Sizzling Kebabs',
+        'description' => 'Crispy flaky paratha rolls filled with tender spiced chicken, served alongside smoky, char-grilled chicken seekh & tikka kebabs.',
+        'price' => 220,
         'is_veg' => 0,
-        'image_path' => 'image/mughlai_food.jpg' // Authentic Mughlai Dum Biryani image
+        'image_path' => 'image/roll_kabab.jpg' // Authentic Roll & Kabab image
     ]
 ];
 $food_items = $signature_items;
@@ -61,7 +61,7 @@ $food_items = $signature_items;
             <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing:1px; white-space: normal; display: inline-block; max-width: 100%;">Multi-Cuisine Dining Experience</span>
             <h2 class="title_color mt-1">Labanya's Heshel Ghar</h2>
             <p class="mx-auto" style="max-width: 750px;">
-                Specializing in authentic <strong>Bengali</strong>, aromatic <strong>Mughlai</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
+                Specializing in authentic <strong>Bengali</strong>, delicious <strong>Roll, Kabab</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
                 All meals are prepared fresh upon order with pure local ingredients.
             </p>
         </div>
@@ -154,7 +154,7 @@ $food_items = $signature_items;
             </div>
         </div>
 
-        <!-- Featured Menu Items (Bengali, Chinese & Mughlai) -->
+        <!-- Featured Menu Items (Bengali, Chinese & Roll, Kabab) -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="font-weight-bold text-dark mb-0">
                 <i class="fa fa-star text-warning mr-2"></i>Signature Culinary Offerings

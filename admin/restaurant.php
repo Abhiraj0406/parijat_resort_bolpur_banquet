@@ -132,7 +132,7 @@ $csrfToken = generate_csrf_token();
                         <label class="form-label fw-semibold">Cuisine / Category <span class="text-danger">*</span></label>
                         <select class="form-select" name="category" required>
                             <?php 
-                            $cuisines = ['Bengali', 'Chinese', 'Mughlai', 'Beverages / Desserts'];
+                            $cuisines = ['Bengali', 'Chinese', 'Roll, Kabab', 'Beverages / Desserts'];
                             $currCat = $editMode ? $editData['category'] : 'Bengali';
                             foreach ($cuisines as $c): ?>
                                 <option value="<?php echo $c; ?>" <?php echo (strcasecmp($currCat, $c) === 0) ? 'selected' : ''; ?>>
@@ -199,7 +199,7 @@ $csrfToken = generate_csrf_token();
                                         $badgeBg = 'primary';
                                         if (stripos($item['category'], 'Bengali') !== false) $badgeBg = 'warning';
                                         elseif (stripos($item['category'], 'Chinese') !== false) $badgeBg = 'info';
-                                        elseif (stripos($item['category'], 'Mughlai') !== false) $badgeBg = 'danger';
+                                        elseif (stripos($item['category'], 'Roll') !== false || stripos($item['category'], 'Kabab') !== false) $badgeBg = 'danger';
                                         ?>
                                         <span class="badge bg-<?php echo $badgeBg; ?>-subtle text-<?php echo $badgeBg; ?> border border-<?php echo $badgeBg; ?>-subtle">
                                             <?php echo htmlspecialchars($item['category']); ?>
