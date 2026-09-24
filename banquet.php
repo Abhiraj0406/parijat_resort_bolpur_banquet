@@ -118,15 +118,12 @@ $banquet_images = [
                     <?php endif; ?>
 
                     <!-- Facilities -->
-                    <?php if (!empty($banquet['facilities'])): ?>
                     <div class="mb-4">
                         <h6 class="font-weight-bold text-dark mb-2"><i class="fa fa-check text-success mr-1"></i> Hall Facilities &amp; Amenities:</h6>
                         <div class="row">
                             <?php 
-                            $fac_arr = explode(',', $banquet['facilities']);
-                            foreach($fac_arr as $fac): 
-                                $fac_trim = trim($fac);
-                                if (!empty($fac_trim)):
+                            $fac_list = ['AC', 'Sound System', 'Projector Screen', 'Stage Lighting', 'Dedicated Catering by Labanya Heshel Ghar', 'Sprawling Lawn'];
+                            foreach($fac_list as $fac_trim): 
                             ?>
                                 <div class="col-sm-6 mb-2">
                                     <div class="small text-muted d-flex align-items-center">
@@ -134,13 +131,9 @@ $banquet_images = [
                                         <?php echo htmlspecialchars($fac_trim); ?>
                                     </div>
                                 </div>
-                            <?php 
-                                endif;
-                            endforeach; 
-                            ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                    <?php endif; ?>
 
                     <div class="d-flex flex-wrap align-items-center gap-3 mt-3">
                         <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20would%20like%20to%20enquire%20about%20booking%20the%20Banquet/Conference%20Hall%20at%20Parijat%20Resort." target="_blank" class="btn btn-success px-4 py-2 font-weight-bold shadow-sm rounded-pill mr-3 mb-2">
