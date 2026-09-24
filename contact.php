@@ -24,11 +24,11 @@ $clean_mgr = preg_replace('/[^0-9]/', '', $manager_phone);
 ?>
 
 <!--================Breadcrumb Area =================-->
-<section class="breadcrumb_area">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+<section class="breadcrumb_area" style="position: relative; overflow: hidden;">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('image/entrance_slide_1.jpeg') no-repeat scroll center center / cover; opacity: 1;"></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle font-weight-bold">Management &amp; Contact</h2>
+            <h2 class="page-cover-tittle font-weight-bold text-white">Management &amp; Contact</h2>
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
                 <li class="active">Contact Us</li>
