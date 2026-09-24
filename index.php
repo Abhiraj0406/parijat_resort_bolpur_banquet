@@ -494,8 +494,8 @@ if (empty($gallery_images)) {
     </div>
 </section>
 
-<section class="facilities_area section_gap">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+<section class="facilities_area section_gap" style="position: relative; overflow: hidden;">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="" style="background: linear-gradient(rgba(4, 9, 30, 0.65), rgba(4, 9, 30, 0.65)), url('image/pool_bg.jpg') no-repeat scroll center center / cover !important; opacity: 1;"></div>
     <div class="container">
         <div class="section_title text-center" data-aos="fade-up">
             <h2 class="title_w">Resort Facilities</h2>

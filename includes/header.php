@@ -169,6 +169,12 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9) !important;
         }
         
+        /* Resort Facilities Area Pool Background */
+        .facilities_area .bg-parallax {
+            background: linear-gradient(rgba(4, 9, 30, 0.65), rgba(4, 9, 30, 0.65)), url('image/pool_bg.jpg') no-repeat center center / cover !important;
+            opacity: 1 !important;
+        }
+        
         @media (max-width: 768px) {
             h1, .h1 { font-size: 32px !important; line-height: 1.3 !important; }
             h2, .h2, .banner_content h2 { font-size: 28px !important; line-height: 1.3 !important; }
