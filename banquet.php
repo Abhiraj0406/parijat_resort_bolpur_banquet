@@ -9,34 +9,28 @@ require_once 'includes/header.php';
 $banquetStmt = $pdo->query("SELECT * FROM banquet_details LIMIT 1");
 $banquet = $banquetStmt->fetch();
 
-$banquet_images = [];
-if ($banquet && isset($banquet['banquet_id'])) {
-    try {
-        $imgStmt = $pdo->prepare("SELECT * FROM banquet_images WHERE banquet_id = ? ORDER BY is_featured DESC");
-        $imgStmt->execute([$banquet['banquet_id']]);
-        $banquet_images = $imgStmt->fetchAll();
-    } catch (PDOException $e) {}
-}
-// Add the main image if images list is empty
-if (empty($banquet_images)) {
-    if (!empty($banquet['image_path'])) {
-        $banquet_images[] = ['image_path' => $banquet['image_path'], 'alt_text' => 'Banquet Hall'];
-    } else {
-        $banquet_images = [
-            ['image_path' => 'image/hall1.jpg', 'alt_text' => 'Banquet Hall Interior'],
-            ['image_path' => 'image/hall2.jpg', 'alt_text' => 'Banquet Hall Layout'],
-            ['image_path' => 'image/hall3.jpg', 'alt_text' => 'Banquet Hall Decor']
-        ];
-    }
-}
+// Hardcoded full set of 11 authentic Banquet Hall photos
+$banquet_images = [
+    ['image_path' => 'image/banquet_slide_1.jpeg', 'alt_text' => 'Grand Banquet Hall Front View'],
+    ['image_path' => 'image/banquet_slide_2.jpeg', 'alt_text' => 'AC Conference & Banquet Setup'],
+    ['image_path' => 'image/banquet_slide_3.jpeg', 'alt_text' => 'Banquet Seating Arrangement'],
+    ['image_path' => 'image/banquet_slide_4.jpeg', 'alt_text' => 'Spacious Event Stage & Hall'],
+    ['image_path' => 'image/banquet_slide_5.jpeg', 'alt_text' => 'Banquet Lighting & Decor'],
+    ['image_path' => 'image/banquet_slide_6.jpeg', 'alt_text' => 'Conference Hall Table Setup'],
+    ['image_path' => 'image/banquet_slide_7.jpeg', 'alt_text' => 'Event Reception & Hall Interior'],
+    ['image_path' => 'image/banquet_slide_8.jpeg', 'alt_text' => 'Grand Celebration Hall Space'],
+    ['image_path' => 'image/banquet_slide_9.jpeg', 'alt_text' => 'Banquet Hall Dining & Buffet Area'],
+    ['image_path' => 'image/banquet_slide_10.jpeg', 'alt_text' => 'Fully AC Conference Facilities'],
+    ['image_path' => 'image/banquet_slide_11.jpeg', 'alt_text' => 'Premium Banquet Hall Atmosphere']
+];
 ?>
 
 <!--================Breadcrumb Area =================-->
-<section class="breadcrumb_area">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+<section class="breadcrumb_area" style="position: relative; overflow: hidden;">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('image/banquet_slide_1.jpeg') no-repeat scroll center center / cover; opacity: 1;"></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Banquet &amp; Conference Hall</h2>
+            <h2 class="page-cover-tittle font-weight-bold text-white">Grand Banquet &amp; Conference Hall</h2>
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
                 <li class="active">Banquet</li>
@@ -159,7 +153,12 @@ if (empty($banquet_images)) {
             <div class="col-lg-6">
                 <div class="position-relative mt-4 mt-lg-0">
                     <?php if (!empty($banquet_images)): ?>
-                    <div id="banquetCarousel" class="carousel slide shadow-lg rounded" data-ride="carousel">
+                    <div id="banquetCarousel" class="carousel slide shadow-lg rounded" data-ride="carousel" data-interval="3500">
+                        <ol class="carousel-indicators" style="margin-bottom: 25px; z-index: 3;">
+                            <?php foreach ($banquet_images as $index => $img): ?>
+                            <li data-target="#banquetCarousel" data-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>"></li>
+                            <?php endforeach; ?>
+                        </ol>
                         <div class="carousel-inner rounded">
                             <?php foreach ($banquet_images as $index => $img): ?>
                             <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
@@ -168,12 +167,12 @@ if (empty($banquet_images)) {
                             <?php endforeach; ?>
                         </div>
                         <?php if (count($banquet_images) > 1): ?>
-                        <a class="carousel-control-prev" href="#banquetCarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <a class="carousel-control-prev" href="#banquetCarousel" role="button" data-slide="prev" style="width: 12%; z-index: 4;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 16px;"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#banquetCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <a class="carousel-control-next" href="#banquetCarousel" role="button" data-slide="next" style="width: 12%; z-index: 4;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 16px;"></span>
                             <span class="sr-only">Next</span>
                         </a>
                         <?php endif; ?>
