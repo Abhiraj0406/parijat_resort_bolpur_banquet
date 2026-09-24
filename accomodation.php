@@ -244,8 +244,8 @@ $allRates = $ratesStmt->fetchAll();
                                         <div class="d-flex align-items-center">
                                             <i class="fa fa-bed text-warning mr-2" style="font-size: 18px;"></i>
                                             <div>
-                                                <small class="text-muted d-block">Extra Person Charge</small>
-                                                <strong>₹<?php echo number_format($room['extra_person_charge'], 0); ?></strong> <span class="small text-muted">/ night</span>
+                                                <small class="text-muted d-block">Extra Person</small>
+                                                <strong>Available on Request</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -263,7 +263,7 @@ $allRates = $ratesStmt->fetchAll();
                                             <i class="fa fa-sliders text-warning mr-2" style="font-size: 18px;"></i>
                                             <div>
                                                 <small class="text-muted d-block">Flexibility</small>
-                                                <strong>AC &amp; Non-AC Convertible</strong>
+                                                <strong>Convertible</strong>
                                             </div>
                                         </div>
                                     </div>
