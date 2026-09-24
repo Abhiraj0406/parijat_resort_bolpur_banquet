@@ -151,16 +151,24 @@ if (empty($gallery_images)) {
                             <li data-target="#aboutResortCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#aboutResortCarousel" data-slide-to="1"></li>
                             <li data-target="#aboutResortCarousel" data-slide-to="2"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="3"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="4"></li>
                         </ol>
                         <div class="carousel-inner h-100" style="border-radius: 12px; min-height: 380px;">
                             <div class="carousel-item active h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide1.jpg" alt="Parijat Resort Deluxe Room" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/about_slide_1.jpeg" alt="Parijat Resort Living Spaces" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide2.jpg" alt="Modern Bathroom Amenities" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/about_slide1.jpeg" alt="Parijat Resort Deluxe Room" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide3.jpg" alt="Resort Swimming Pool & Greenery" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/about_slide2.jpeg" alt="Modern Bathroom Amenities" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/about_slide3.jpeg" alt="Resort Swimming Pool & Greenery" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/about_slide4.jpeg" alt="Resort Room & Cottage Comfort" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#aboutResortCarousel" role="button" data-slide="prev" style="width: 12%; opacity: 0.85;">
