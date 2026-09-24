@@ -14,12 +14,50 @@ $preselectedAc = isset($_GET['ac']) ? $_GET['ac'] : 'AC';
 $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
 ?>
 
-<!-- Breadcrumb Area -->
-<section class="breadcrumb_area">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
-    <div class="container">
-        <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Room Booking Enquiry</h2>
+<!-- Breadcrumb & Hero Pool Carousel Area -->
+<section class="breadcrumb_area" style="position: relative; overflow: hidden; min-height: 280px;">
+    <div id="bookingHeroCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3500" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 0;">
+        <ol class="carousel-indicators" style="margin-bottom: 15px; z-index: 3;">
+            <li data-target="#bookingHeroCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="1"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="2"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="3"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="4"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="5"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="6"></li>
+            <li data-target="#bookingHeroCarousel" data-slide-to="7"></li>
+        </ol>
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100">
+                <img src="image/pool_slide_1.jpeg" class="d-block w-100 h-100" alt="Swimming Pool" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_2.jpeg" class="d-block w-100 h-100" alt="Swimming Pool Lounge" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_3.jpeg" class="d-block w-100 h-100" alt="Crystal Clear Water" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_4.jpeg" class="d-block w-100 h-100" alt="Poolside Deck" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_5.jpeg" class="d-block w-100 h-100" alt="Lush Green Pool Surroundings" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_6.jpeg" class="d-block w-100 h-100" alt="Resort Pool Ambience" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_7.jpeg" class="d-block w-100 h-100" alt="Swimming Pool Relaxation" style="object-fit: cover;">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="image/pool_slide_8.jpeg" class="d-block w-100 h-100" alt="Scenic Pool Area" style="object-fit: cover;">
+            </div>
+        </div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)); z-index: 1;"></div>
+    </div>
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="page-cover text-center pt-3">
+            <h2 class="page-cover-tittle font-weight-bold text-white">Room Booking Enquiry</h2>
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="accomodation.php">Rooms</a></li>

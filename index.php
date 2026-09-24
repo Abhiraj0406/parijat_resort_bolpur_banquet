@@ -580,7 +580,40 @@ if (empty($gallery_images)) {
             <!-- Pool & Nature -->
             <div class="col-lg-4 col-md-6 mb-4 mx-auto" data-aos="fade-up" data-aos-delay="400">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
-                    <img src="image/pool1.jpg" class="card-img-top" alt="Swimming Pool" style="height: 220px; object-fit: cover;">
+                    <div id="homePoolCarousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+                        <ol class="carousel-indicators" style="margin-bottom: 15px; z-index: 3;">
+                            <li data-target="#homePoolCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#homePoolCarousel" data-slide-to="1"></li>
+                            <li data-target="#homePoolCarousel" data-slide-to="2"></li>
+                            <li data-target="#homePoolCarousel" data-slide-to="3"></li>
+                            <li data-target="#homePoolCarousel" data-slide-to="4"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height: 220px;">
+                            <div class="carousel-item active h-100">
+                                <img src="image/pool_slide_1.jpeg" class="d-block w-100 h-100" alt="Swimming Pool" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/pool_slide_2.jpeg" class="d-block w-100 h-100" alt="Poolside Relaxation" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/pool_slide_3.jpeg" class="d-block w-100 h-100" alt="Crystal Clear Pool Water" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/pool_slide_4.jpeg" class="d-block w-100 h-100" alt="Poolside Deck & Chairs" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/pool_slide_5.jpeg" class="d-block w-100 h-100" alt="Lush Green Pool Grounds" style="object-fit: cover;">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#homePoolCarousel" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 12px;"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#homePoolCarousel" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 12px;"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Swimming Pool & Gardens</h4>
@@ -639,7 +672,7 @@ if (empty($gallery_images)) {
 }
 </style>
 <section class="glass_section section_gap" style="position: relative;">
-    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('image/pool3.jpg') no-repeat center center/cover; z-index: 1;"></div>
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('image/pool_bg.jpg') no-repeat center center/cover; z-index: 1;"></div>
     <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 2;"></div>
     
     <div class="container" style="position: relative; z-index: 3;">
