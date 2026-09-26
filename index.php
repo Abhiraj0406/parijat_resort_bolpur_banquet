@@ -573,7 +573,7 @@ if (empty($gallery_images)) {
                     <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/hall1.jpg'; ?>" class="card-img-top" alt="Banquet Hall" style="height: 220px; object-fit: cover;">
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
-                            <h4 class="font-weight-bold mb-3">Grand Banquet & Lawns</h4>
+                            <h4 class="font-weight-bold mb-3">Parijat AC Banquet &amp; Conference Hall</h4>
                             <p class="text-muted small">Host your dream wedding, corporate event, or family gathering in our spacious fully AC banquet hall and open lawns.</p>
                         </div>
                         <a href="banquet" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Plan Event</a>

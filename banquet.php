@@ -30,10 +30,10 @@ $banquet_images = [
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('image/banquet_slide_1.jpeg') no-repeat scroll center center / cover; opacity: 1;"></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle font-weight-bold text-white">Grand Banquet &amp; Conference Hall</h2>
+            <h2 class="page-cover-tittle font-weight-bold text-white">Parijat AC Banquet &amp; Conference Hall</h2>
             <ol class="breadcrumb">
                 <li><a href="./">Home</a></li>
-                <li class="active">Banquet</li>
+                <li class="active">Banquet &amp; Conference</li>
             </ol>
         </div>
     </div>

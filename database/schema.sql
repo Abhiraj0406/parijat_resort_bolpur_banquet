@@ -371,7 +371,7 @@ ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- 6. Seed: Banquet Details
 INSERT INTO `banquet_details` (`id`, `name`, `capacity`, `description`, `price`, `facilities`, `status`) VALUES
-(1, 'Parijat Grand AC Banquet & Lawn', 250, 'Ideal for destination weddings, birthday gatherings, anniversary parties, institutional seminars, and corporate offsites in Shantiniketan.', 0.00, 'AC, Sound System, Projector Screen, Stage Lighting, Dedicated Catering by Labanya Heshel Ghar, Sprawling Lawn', 'active')
+(1, 'Parijat AC Banquet & Conference Hall', 250, 'Ideal for destination weddings, birthday gatherings, anniversary parties, institutional seminars, and corporate offsites in Shantiniketan.', 0.00, 'AC, Sound System, Projector Screen, Stage Lighting, Dedicated Catering by Labanya Heshel Ghar, Sprawling Lawn', 'active')
 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- 7. Seed: Core Site Settings
