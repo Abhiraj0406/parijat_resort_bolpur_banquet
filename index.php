@@ -137,7 +137,7 @@ if (empty($gallery_images)) {
         <div class="row align-items-stretch">
             <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 d-flex" data-aos="fade-right">
                 <div class="about_content p-5 glass-card d-flex flex-column justify-content-center h-100 w-100">
-                    <h2 class="title text-white font-weight-bold mb-4" style="line-height: 1.3;">About Us <br>A Haven of Peace</h2>
+                    <h2 class="title text-white font-weight-bold mb-4" style="line-height: 1.3;">About Us <br>A Heaven of Peace</h2>
                     <p class="text-white mb-4" style="font-size: 1.05rem; line-height: 1.7;">Escape the hustle and bustle of city life. Parijat Resort offers an eco-friendly environment filled with lush greenery, providing you the ultimate comfort and relaxation. Whether it's a family vacation or a corporate retreat, we have everything you need.</p>
                     <div>
                         <a href="#contact" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow">Contact Us</a>
@@ -153,22 +153,26 @@ if (empty($gallery_images)) {
                             <li data-target="#aboutResortCarousel" data-slide-to="2"></li>
                             <li data-target="#aboutResortCarousel" data-slide-to="3"></li>
                             <li data-target="#aboutResortCarousel" data-slide-to="4"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="5"></li>
                         </ol>
                         <div class="carousel-inner h-100" style="border-radius: 12px; min-height: 380px;">
                             <div class="carousel-item active h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide_1.jpeg" alt="Parijat Resort Living Spaces" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/about_slide_1.jpeg" alt="Parijat Resort Cottages & Living Spaces" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide1.jpeg" alt="Parijat Resort Deluxe Room" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/reception1.jpg" alt="Parijat Resort Reception & Welcome Desk" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide2.jpeg" alt="Modern Bathroom Amenities" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/reception2.jpg" alt="Parijat Resort Reception Lounge & Entrance" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/premium_building_1.jpeg" alt="Parijat Resort Premium Accommodation Building" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/premium_building_5.jpeg" alt="Premium Building Night Ambience" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
                                 <img class="d-block w-100 h-100" src="image/about_slide3.jpeg" alt="Resort Swimming Pool & Greenery" style="object-fit: cover; min-height: 380px; max-height: 440px;">
-                            </div>
-                            <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide4.jpeg" alt="Resort Room & Cottage Comfort" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#aboutResortCarousel" role="button" data-slide="prev" style="width: 12%; opacity: 0.85;">
