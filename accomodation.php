@@ -349,7 +349,7 @@ $allRates = $ratesStmt->fetchAll();
                                             <i class="fa fa-bed text-warning mr-2" style="font-size: 18px;"></i>
                                             <div>
                                                 <small class="text-muted d-block">Extra Person</small>
-                                                <strong>Available on Request</strong>
+                                                <strong>Available on Request, Chargeable.</strong>
                                             </div>
                                         </div>
                                     </div>
