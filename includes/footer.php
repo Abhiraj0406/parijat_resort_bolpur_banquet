@@ -31,7 +31,7 @@ $ig_link = $site_settings['instagram_link'] ?? '#';
                                 </div>
                                 <div class="col-6">
                                     <ul class="list_style">
-                                        <li><a href="banquet">Banquet</a></li>
+                                        <li><a href="banquet">Banquet &amp; Conference</a></li>
                                         <li><a href="rules">Rules &amp; Policies</a></li>
                                         <li><a href="contact">Contact Us</a></li>
                                         <li><a href="booking">Book Now</a></li>

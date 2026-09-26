@@ -37,6 +37,12 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
+    # Clean URL aliases & convenient route shortcuts
+    RewriteRule ^accommodation/?$ accomodation.php [NC,L,QSA]
+    RewriteRule ^rooms/?$ accomodation.php [NC,L,QSA]
+    RewriteRule ^about-us/?$ about.php [NC,L,QSA]
+    RewriteRule ^contact-us/?$ contact.php [NC,L,QSA]
+
     # Clean URL support: if .php file exists (e.g. /banquet -> banquet.php)
     RewriteCond %{REQUEST_FILENAME}.php -f
     RewriteRule ^([^/]+)/?$ $1.php [L,QSA]

@@ -635,9 +635,9 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item <?php echo in_array($current_page, ['index', 'home']) ? 'active' : ''; ?>"><a class="nav-link" href="./">Home</a></li> 
-                            <li class="nav-item <?php echo ($current_page == 'accomodation') ? 'active' : ''; ?>"><a class="nav-link" href="accomodation">Rooms</a></li>
+                            <li class="nav-item <?php echo in_array($current_page, ['accomodation', 'accommodation', 'rooms']) ? 'active' : ''; ?>"><a class="nav-link" href="accomodation">Rooms</a></li>
                             <li class="nav-item <?php echo in_array($current_page, ['restaurant', 'dining']) ? 'active' : ''; ?>"><a class="nav-link" href="dining">Dining</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="banquet">Banquet</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="banquet">Banquet &amp; Conference</a></li>
                             <li class="nav-item <?php echo in_array($current_page, ['rules', 'about']) ? 'active' : ''; ?>"><a class="nav-link" href="rules">Rules & Policies</a></li>
                             <li class="nav-item <?php echo ($current_page == 'gallery') ? 'active' : ''; ?>"><a class="nav-link" href="gallery">Gallery</a></li>
                             <li class="nav-item <?php echo ($current_page == 'contact') ? 'active' : ''; ?>"><a class="nav-link" href="contact">Contact</a></li>

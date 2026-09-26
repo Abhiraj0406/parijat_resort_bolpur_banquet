@@ -231,8 +231,8 @@ $banquet_images = [
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Catering Required? <span class="text-danger">*</span></label>
                                     <select class="form-control w-100" style="display: block; width: 100% !important; padding: 8px 15px; height: auto;" name="catering" required>
-                                        <option value="Yes">Yes, require food & catering</option>
-                                        <option value="No">No, only hall required</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
                                     </select>
                                 </div>
                             </div>
