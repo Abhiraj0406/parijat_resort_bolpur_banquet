@@ -215,6 +215,8 @@ if (empty($gallery_images)) {
                                     <li data-target="#homeRoomCarousel1" data-slide-to="0" class="active"></li>
                                     <li data-target="#homeRoomCarousel1" data-slide-to="1"></li>
                                     <li data-target="#homeRoomCarousel1" data-slide-to="2"></li>
+                                    <li data-target="#homeRoomCarousel1" data-slide-to="3"></li>
+                                    <li data-target="#homeRoomCarousel1" data-slide-to="4"></li>
                                 </ol>
                                 <div class="carousel-inner h-100">
                                     <div class="carousel-item active h-100">
@@ -222,6 +224,12 @@ if (empty($gallery_images)) {
                                     </div>
                                     <div class="carousel-item h-100">
                                         <img src="image/cottage_slide2.jpg" alt="Deluxe Cottage Room Side View" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/cottage_night_1.jpeg" alt="Deluxe Cottage Night Illumination" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="image/cottage_night_3.jpeg" alt="Deluxe Cottage Evening Ambiance" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
                                         <img src="image/cottage_slide3.jpg" alt="Deluxe Cottage Bathroom with Geyser" class="w-100 h-100" style="object-fit: cover;">
