@@ -556,7 +556,40 @@ if (empty($gallery_images)) {
             <!-- Dining -->
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
-                    <img src="image/dining_out.jpg" class="card-img-top" alt="Labanya's Heshel Ghar" style="height: 220px; object-fit: cover;">
+                    <div id="homeDiningCarousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+                        <ol class="carousel-indicators" style="margin-bottom: 15px; z-index: 3;">
+                            <li data-target="#homeDiningCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#homeDiningCarousel" data-slide-to="1"></li>
+                            <li data-target="#homeDiningCarousel" data-slide-to="2"></li>
+                            <li data-target="#homeDiningCarousel" data-slide-to="3"></li>
+                            <li data-target="#homeDiningCarousel" data-slide-to="4"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height: 220px;">
+                            <div class="carousel-item active h-100">
+                                <img src="image/dining_out.jpg" class="d-block w-100 h-100" alt="Labanya's Heshel Ghar" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_1.jpeg" class="d-block w-100 h-100" alt="Restaurant Exterior & Dining Setup" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_2.jpeg" class="d-block w-100 h-100" alt="Spacious Dining Hall" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_3.jpeg" class="d-block w-100 h-100" alt="Restaurant Interior View" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/restaurant_slide_5.jpeg" class="d-block w-100 h-100" alt="Outdoor & Courtyard Dining" style="object-fit: cover;">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#homeDiningCarousel" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 12px;"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#homeDiningCarousel" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 12px;"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Labanya's Heshel Ghar</h4>
@@ -570,7 +603,40 @@ if (empty($gallery_images)) {
             <!-- Banquet -->
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="250">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden">
-                    <img src="<?php echo !empty($banquet['image_path']) ? htmlspecialchars($banquet['image_path']) : 'image/hall1.jpg'; ?>" class="card-img-top" alt="Banquet Hall" style="height: 220px; object-fit: cover;">
+                    <div id="homeBanquetCarousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+                        <ol class="carousel-indicators" style="margin-bottom: 15px; z-index: 3;">
+                            <li data-target="#homeBanquetCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#homeBanquetCarousel" data-slide-to="1"></li>
+                            <li data-target="#homeBanquetCarousel" data-slide-to="2"></li>
+                            <li data-target="#homeBanquetCarousel" data-slide-to="3"></li>
+                            <li data-target="#homeBanquetCarousel" data-slide-to="4"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height: 220px;">
+                            <div class="carousel-item active h-100">
+                                <img src="image/banquet_slide_1.jpeg" class="d-block w-100 h-100" alt="Parijat AC Banquet & Conference Hall" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/banquet_slide_2.jpeg" class="d-block w-100 h-100" alt="Banquet & Conference Setup" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/banquet_slide_3.jpeg" class="d-block w-100 h-100" alt="Banquet Seating Arrangement" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/banquet_slide_4.jpeg" class="d-block w-100 h-100" alt="Spacious Event Stage & Hall" style="object-fit: cover;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="image/banquet_slide_5.jpeg" class="d-block w-100 h-100" alt="Banquet Lighting & Decor" style="object-fit: cover;">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#homeBanquetCarousel" role="button" data-slide="prev" style="width: 15%; z-index: 4;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 12px;"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#homeBanquetCarousel" role="button" data-slide="next" style="width: 15%; z-index: 4;">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 12px;"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Parijat AC Banquet &amp; Conference Hall</h4>
