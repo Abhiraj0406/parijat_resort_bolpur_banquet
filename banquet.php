@@ -209,11 +209,11 @@ $banquet_images = [
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Event Date <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="event_date" required min="<?php echo date('Y-m-d'); ?>">
+                                    <input type="date" class="form-control" name="event_date" required min="<?php echo date('Y-m-d'); ?>" style="height: 48px; border-radius: 6px;">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Event Type <span class="text-danger">*</span></label>
-                                    <select class="form-control w-100" style="display: block; width: 100% !important; padding: 8px 15px; height: auto;" name="event_type" required>
+                                    <select class="form-control" name="event_type" id="event_type" required style="height: 48px; border-radius: 6px;">
                                         <option value="">Select Event Type</option>
                                         <option value="Wedding / Reception">Wedding / Reception</option>
                                         <option value="Corporate Event / Seminar">Corporate Event / Seminar</option>
@@ -226,11 +226,12 @@ $banquet_images = [
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Expected Guests <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="guests" required min="10" placeholder="Number of guests">
+                                    <input type="number" class="form-control" name="guests" required min="10" placeholder="Number of guests" style="height: 48px; border-radius: 6px;">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Catering Required? <span class="text-danger">*</span></label>
-                                    <select class="form-control w-100" style="display: block; width: 100% !important; padding: 8px 15px; height: auto;" name="catering" required>
+                                    <select class="form-control" name="catering" id="catering" required style="height: 48px; border-radius: 6px;">
+                                        <option value="">Select (Yes / No)</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -238,9 +239,9 @@ $banquet_images = [
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Additional Requirements</label>
-                                <textarea class="form-control" name="message" rows="4" placeholder="Any special requests, decoration needs, room bookings, etc..."></textarea>
+                                <textarea class="form-control" name="message" rows="4" placeholder="Any special requests, decoration needs, room bookings, etc..." style="border-radius: 6px;"></textarea>
                             </div>
-                            <button type="submit" class="btn theme_btn button_hover w-100 py-3 font-weight-bold text-uppercase mt-2 text-wrap" style="border-radius: 5px; white-space: normal; line-height: 1.5;">
+                            <button type="submit" class="btn theme_btn button_hover w-100 py-3 font-weight-bold text-uppercase mt-2 text-wrap" style="border-radius: 6px; white-space: normal; line-height: 1.5; font-size: 1rem;">
                                 <i class="fa fa-paper-plane mr-2"></i> Submit Booking Request
                             </button>
                         </form>
@@ -250,6 +251,43 @@ $banquet_images = [
         </div>
     </div>
 </section>
+
+<style>
+/* Guarantee select dropdown options visibility across all OS and browsers */
+#banquetForm select option,
+#banquetForm select optgroup,
+select.form-control option,
+select option {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    padding: 10px 14px !important;
+}
+
+#banquetForm select option:checked,
+#banquetForm select option:hover {
+    background-color: #2e7d32 !important;
+    color: #ffffff !important;
+}
+
+#banquetForm select {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof jQuery !== 'undefined') {
+        jQuery('#banquetForm select').each(function() {
+            if (jQuery(this).next('.nice-select').length) {
+                jQuery(this).next('.nice-select').remove();
+            }
+            jQuery(this).show();
+        });
+    }
+});
+</script>
 <?php else: ?>
 <section class="section_gap text-center py-5">
     <div class="container py-5">

@@ -613,6 +613,22 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             background: #2e7d32 !important;
             color: #ffffff !important;
         }
+
+        /* Ensure all dropdown options are always legible on all operating systems */
+        select option,
+        select optgroup,
+        .form-control option,
+        .nice-select .option {
+            background-color: #1e293b !important;
+            color: #ffffff !important;
+            font-size: 15px !important;
+            padding: 8px 12px !important;
+        }
+        select option:checked,
+        select option:hover {
+            background-color: #2e7d32 !important;
+            color: #ffffff !important;
+        }
         </style>
     </head>
     <body>
