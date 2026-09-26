@@ -42,7 +42,7 @@ $food_items = $signature_items;
         <div class="page-cover text-center">
             <h2 class="page-cover-tittle font-weight-bold text-white">Labanya's Heshel Ghar</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">Dining</li>
             </ol>
         </div>

@@ -472,7 +472,7 @@ if (empty($gallery_images)) {
                                 </span>
                             </div>
                             <div>
-                                <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow-sm">
+                                <a href="booking?category=<?php echo $room['id']; ?>" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow-sm">
                                     Book This Room
                                 </a>
                             </div>
@@ -487,7 +487,7 @@ if (empty($gallery_images)) {
         </div>
 
         <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
-            <a href="accomodation.php" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow">
+            <a href="accomodation" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow">
                 View All Categories
             </a>
         </div>
@@ -558,7 +558,7 @@ if (empty($gallery_images)) {
                             <h4 class="font-weight-bold mb-3">Labanya's Heshel Ghar</h4>
                             <p class="text-muted small">Experience authentic Bengali thalis, sizzling Chinese woks, and mouth-watering Roll, Kabab selections crafted by expert chefs.</p>
                         </div>
-                        <a href="dining.php" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Explore Menu</a>
+                        <a href="dining" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Explore Menu</a>
                     </div>
                 </div>
             </div>
@@ -572,7 +572,7 @@ if (empty($gallery_images)) {
                             <h4 class="font-weight-bold mb-3">Grand Banquet & Lawns</h4>
                             <p class="text-muted small">Host your dream wedding, corporate event, or family gathering in our spacious fully AC banquet hall and open lawns.</p>
                         </div>
-                        <a href="banquet.php" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Plan Event</a>
+                        <a href="banquet" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Plan Event</a>
                     </div>
                 </div>
             </div>
@@ -619,7 +619,7 @@ if (empty($gallery_images)) {
                             <h4 class="font-weight-bold mb-3">Swimming Pool & Gardens</h4>
                             <p class="text-muted small">Take a refreshing dip in our crystal clear pool or stroll through our manicured gardens to reconnect with nature.</p>
                         </div>
-                        <a href="gallery.php" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">View Gallery</a>
+                        <a href="gallery" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">View Gallery</a>
                     </div>
                 </div>
             </div>
@@ -648,7 +648,7 @@ if (empty($gallery_images)) {
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-4">
-            <a href="gallery.php" class="btn theme_btn button_hover font-weight-bold px-4 py-2">
+            <a href="gallery" class="btn theme_btn button_hover font-weight-bold px-4 py-2">
                 <i class="fa fa-picture-o mr-2"></i> View Full Gallery
             </a>
         </div>
@@ -791,7 +791,7 @@ if (empty($gallery_images)) {
         <p class="mb-4 text-white-50" style="max-width: 650px; margin: 0 auto;">
             Please review our 18 resort guidelines regarding check-in (12:30 PM), check-out (11:00 AM), dining schedules, swimming pool etiquette, and cancellation terms.
         </p>
-        <a href="rules.php" class="btn theme_btn button_hover font-weight-bold shadow px-4 py-2 text-wrap d-block d-md-inline-block" style="white-space: normal; line-height: 1.5;">
+        <a href="rules" class="btn theme_btn button_hover font-weight-bold shadow px-4 py-2 text-wrap d-block d-md-inline-block" style="white-space: normal; line-height: 1.5;">
             <i class="fa fa-book mr-2"></i>View Dedicated Rules &amp; Regulations Page
         </a>
     </div>

@@ -32,7 +32,7 @@ if (empty($dynamicGallery)) {
         <div class="page-cover text-center">
             <h2 class="page-cover-tittle font-weight-bold">Photo Gallery</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">Gallery</li>
             </ol>
         </div>

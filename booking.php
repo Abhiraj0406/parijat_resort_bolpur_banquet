@@ -59,8 +59,8 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
         <div class="page-cover text-center pt-3">
             <h2 class="page-cover-tittle font-weight-bold text-white">Room Booking Enquiry</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="accomodation.php">Rooms</a></li>
+                <li><a href="./">Home</a></li>
+                <li><a href="accomodation">Rooms</a></li>
                 <li class="active">Booking Enquiry</li>
             </ol>
         </div>

@@ -33,7 +33,7 @@ $allRates = $ratesStmt->fetchAll();
         <div class="page-cover text-center">
             <h2 class="page-cover-tittle font-weight-bold text-white">Resort Accommodation</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">Rooms & Cottages</li>
             </ol>
         </div>
@@ -400,7 +400,7 @@ $allRates = $ratesStmt->fetchAll();
 
                                 <div class="row m-0 w-100">
                                     <div class="col-6 pl-0 pr-1">
-                                        <a href="booking.php?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark w-100 text-white py-2 rounded-pill font-weight-bold shadow-sm text-center">
+                                        <a href="booking?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark w-100 text-white py-2 rounded-pill font-weight-bold shadow-sm text-center">
                                             Book Online
                                         </a>
                                     </div>
@@ -427,8 +427,8 @@ $allRates = $ratesStmt->fetchAll();
                     </p>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
-                    <a href="index.php#contact" class="btn btn-dark font-weight-bold btn-block rounded-pill py-2 mb-2 shadow-sm">Online Reservation</a>
-                    <a href="contact.php" class="btn btn-outline-light font-weight-bold btn-block rounded-pill py-2 shadow-sm">Contact Front Desk</a>
+                    <a href="./#contact" class="btn btn-dark font-weight-bold btn-block rounded-pill py-2 mb-2 shadow-sm">Online Reservation</a>
+                    <a href="contact" class="btn btn-outline-light font-weight-bold btn-block rounded-pill py-2 shadow-sm">Contact Front Desk</a>
                 </div>
             </div>
         </div>

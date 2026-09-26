@@ -215,7 +215,7 @@ if ($type === 'quick_booking') {
                 <i class="fa fa-whatsapp mr-2" style="font-size: 20px;"></i> Open WhatsApp Now
             </a>
             <div style="margin-top: 25px;">
-                <a href="contact.php" style="color: #94a3b8; font-size: 13px; text-decoration: underline;">&larr; Back to Contact Page</a>
+                <a href="contact" style="color: #94a3b8; font-size: 13px; text-decoration: underline;">&larr; Back to Contact Page</a>
             </div>
         </div>
 

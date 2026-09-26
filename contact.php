@@ -30,7 +30,7 @@ $clean_mgr = preg_replace('/[^0-9]/', '', $manager_phone);
         <div class="page-cover text-center">
             <h2 class="page-cover-tittle font-weight-bold text-white">Management &amp; Contact</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">Contact Us</li>
             </ol>
         </div>

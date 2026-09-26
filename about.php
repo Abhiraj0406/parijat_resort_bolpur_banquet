@@ -21,7 +21,7 @@ $poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings
         <div class="page-cover text-center">
             <h2 class="page-cover-tittle">About Us &amp; Policies</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">About &amp; Guidelines</li>
             </ol>
         </div>
@@ -40,7 +40,7 @@ $poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings
                     <p class="text-muted">
                         Nestled amidst the peaceful, lush green landscape of Bolpur, Parijat Resort is designed for families, couples, and leisure travellers who appreciate tranquil nature alongside modern luxury. With 19 convertible rooms and cottages, a crystal-clear swimming pool, and authentic dining at Labanya's Heshel Ghar, we ensure every stay is unforgettable.
                     </p>
-                    <a href="booking.php" class="btn theme_btn button_hover font-weight-bold px-4 py-2">Make an Enquiry</a>
+                    <a href="booking" class="btn theme_btn button_hover font-weight-bold px-4 py-2">Make an Enquiry</a>
                 </div>
             </div>
             <div class="col-md-6">

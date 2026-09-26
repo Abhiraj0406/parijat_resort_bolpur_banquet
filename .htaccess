@@ -28,7 +28,6 @@ Options -Indexes
 # 4. Front Controller & Clean URL Rewriting Engine
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
 
     # Block direct HTTP access to includes folder
     RewriteRule ^includes/ - [F,L]
@@ -38,16 +37,13 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
-    # Clean URL support: if .php file exists (e.g. /about -> about.php)
+    # Clean URL support: if .php file exists (e.g. /banquet -> banquet.php)
     RewriteCond %{REQUEST_FILENAME}.php -f
-    RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
-
-    # Front Controller: Route all other requests to index.php
-    RewriteRule ^(.*)$ index.php [L,QSA]
+    RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
 </IfModule>
 
 # 5. Custom Error Document
-ErrorDocument 404 /404.php
+ErrorDocument 404 404.php
 
 # 6. Browser Caching & Performance
 <IfModule mod_expires.c>

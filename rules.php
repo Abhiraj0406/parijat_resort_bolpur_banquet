@@ -16,7 +16,7 @@ $clean_wa = preg_replace('/[^0-9]/', '', $whatsapp);
         <div class="page-cover text-center">
             <h2 class="page-cover-tittle font-weight-bold">Rules &amp; Regulations</h2>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">Resort Policies &amp; Guest Guidelines</li>
             </ol>
         </div>

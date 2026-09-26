@@ -621,7 +621,7 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             <div class="container-fluid" style="padding: 0;">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand -->
-                    <a class="navbar-brand logo_h" href="index.php">
+                    <a class="navbar-brand logo_h" href="./">
                         <img src="image/logo-parijat.png?v=3" alt="<?php echo htmlspecialchars($resort_name); ?>" style="max-height: 80px; width: auto; max-width: 100%; transform: scale(1.25); transform-origin: left center; margin-left: 10px;">
                     </a>
                     
@@ -634,13 +634,13 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
                     <!-- Navbar Links -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item <?php echo in_array($current_page, ['index', 'home']) ? 'active' : ''; ?>"><a class="nav-link" href="index.php">Home</a></li> 
-                            <li class="nav-item <?php echo ($current_page == 'accomodation') ? 'active' : ''; ?>"><a class="nav-link" href="accomodation.php">Rooms</a></li>
-                            <li class="nav-item <?php echo in_array($current_page, ['restaurant', 'dining']) ? 'active' : ''; ?>"><a class="nav-link" href="dining.php">Dining</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="banquet.php">Banquet</a></li>
-                            <li class="nav-item <?php echo in_array($current_page, ['rules', 'about']) ? 'active' : ''; ?>"><a class="nav-link" href="rules.php">Rules & Policies</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'gallery') ? 'active' : ''; ?>"><a class="nav-link" href="gallery.php">Gallery</a></li>
-                            <li class="nav-item <?php echo ($current_page == 'contact') ? 'active' : ''; ?>"><a class="nav-link" href="contact.php">Contact</a></li>
+                            <li class="nav-item <?php echo in_array($current_page, ['index', 'home']) ? 'active' : ''; ?>"><a class="nav-link" href="./">Home</a></li> 
+                            <li class="nav-item <?php echo ($current_page == 'accomodation') ? 'active' : ''; ?>"><a class="nav-link" href="accomodation">Rooms</a></li>
+                            <li class="nav-item <?php echo in_array($current_page, ['restaurant', 'dining']) ? 'active' : ''; ?>"><a class="nav-link" href="dining">Dining</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'banquet') ? 'active' : ''; ?>"><a class="nav-link" href="banquet">Banquet</a></li>
+                            <li class="nav-item <?php echo in_array($current_page, ['rules', 'about']) ? 'active' : ''; ?>"><a class="nav-link" href="rules">Rules & Policies</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'gallery') ? 'active' : ''; ?>"><a class="nav-link" href="gallery">Gallery</a></li>
+                            <li class="nav-item <?php echo ($current_page == 'contact') ? 'active' : ''; ?>"><a class="nav-link" href="contact">Contact</a></li>
                         </ul>
                     </div> 
                 </nav>

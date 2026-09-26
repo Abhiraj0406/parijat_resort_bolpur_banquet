@@ -88,7 +88,7 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
                     <?php endif; ?>
 
                     <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
-                        <a href="index.php" class="btn btn-outline-secondary">
+                        <a href="./" class="btn btn-outline-secondary">
                             <i class="fa fa-home mr-1"></i> Back to Home
                         </a>
                         <button class="btn btn-outline-dark" onclick="window.print();">
