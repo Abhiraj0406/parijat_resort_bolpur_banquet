@@ -71,7 +71,7 @@ $poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings
                     </div>
                     <div class="card-body p-4">
                         <p class="text-muted small mb-3">
-                            Specializing in authentic <strong>Bengali, Chinese &amp; Roll, Kabab</strong>. All meals are prepared fresh upon order; therefore, <strong>advance meal orders are required</strong>.
+                            Specializing in authentic <strong>Bengali, Chinese &amp; Roll, Kebab</strong>. All meals are prepared fresh upon order; therefore, <strong>advance meal orders are required</strong>.
                         </p>
 
                         <h6 class="font-weight-bold text-dark mb-2"><i class="fa fa-clock-o text-warning mr-1"></i> Meal Timings:</h6>

@@ -560,7 +560,7 @@ if (empty($gallery_images)) {
                     <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="font-weight-bold mb-3">Labanya's Heshel Ghar</h4>
-                            <p class="text-muted small">Experience authentic Bengali thalis, sizzling Chinese woks, and mouth-watering Roll, Kabab selections crafted by expert chefs.</p>
+                            <p class="text-muted small">Experience authentic Bengali thalis, sizzling Chinese woks, and mouth-watering Roll, Kebab selections crafted by expert chefs.</p>
                         </div>
                         <a href="dining" class="btn btn-outline-warning rounded-pill mt-3 font-weight-bold">Explore Menu</a>
                     </div>
@@ -718,7 +718,7 @@ if (empty($gallery_images)) {
                 <div class="glass-card text-center p-4 h-100">
                     <i class="fa fa-cutlery fa-3x text-danger mb-3"></i>
                     <h4 class="text-white font-weight-bold mb-3">Fine Dining</h4>
-                    <p class="text-white small mb-0">Authentic Bengali, Chinese & Roll, Kabab.</p>
+                    <p class="text-white small mb-0">Authentic Bengali, Chinese & Roll, Kebab.</p>
                 </div>
             </div>
         </div>

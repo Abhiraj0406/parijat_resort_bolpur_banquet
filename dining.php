@@ -1,11 +1,11 @@
 <?php
 $page_title = "Labanya's Heshel Ghar - Multi-Cuisine Dining at Parijat Resort";
 $current_page = "restaurant";
-$meta_description = "Experience authentic Bengali, delicious Roll, Kabab, and wok-fresh Chinese delicacies at Labanya's Heshel Ghar, Parijat Resort Bolpur.";
+$meta_description = "Experience authentic Bengali, delicious Roll, Kebab, and wok-fresh Chinese delicacies at Labanya's Heshel Ghar, Parijat Resort Bolpur.";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
-// Fetch signature food items for the 3 cuisines: Bengali, Chinese, Roll, Kabab
+// Fetch signature food items for the 3 cuisines: Bengali, Chinese, Roll, Kebab
 $signature_items = [
     [
         'category' => 'Bengali',
@@ -24,12 +24,12 @@ $signature_items = [
         'image_path' => 'image/chinese_food.jpg' // Authentic Chilli Chicken dish image
     ],
     [
-        'category' => 'Roll, Kabab',
+        'category' => 'Roll, Kebab',
         'name' => 'Kolkata Kathi Rolls & Sizzling Kebabs',
         'description' => 'Crispy flaky paratha rolls filled with tender spiced chicken, served alongside smoky, char-grilled chicken seekh & tikka kebabs.',
         'price' => 220,
         'is_veg' => 0,
-        'image_path' => 'image/roll_kabab.jpg' // Authentic Roll & Kabab image
+        'image_path' => 'image/roll_kabab.jpg' // Authentic Roll & Kebab image
     ]
 ];
 $food_items = $signature_items;
@@ -63,7 +63,7 @@ $food_items = $signature_items;
             <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing:1px; white-space: normal; display: inline-block; max-width: 100%;">Multi-Cuisine Dining Experience</span>
             <h2 class="title_color mt-1">Labanya's Heshel Ghar</h2>
             <p class="mx-auto" style="max-width: 750px;">
-                Specializing in authentic <strong>Bengali</strong>, delicious <strong>Roll, Kabab</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
+                Specializing in authentic <strong>Bengali</strong>, delicious <strong>Roll, Kebab</strong>, and wok-fresh <strong>Chinese</strong> delicacies. 
                 All meals are prepared fresh upon order with pure local ingredients.
             </p>
         </div>
@@ -160,7 +160,7 @@ $food_items = $signature_items;
                     <i class="fa fa-glass fa-2x text-success mb-2"></i>
                     <h5 class="font-weight-bold text-dark mb-1">Evening Snacks</h5>
                     <div class="badge border text-dark font-weight-bold px-2 py-1 mb-2 font-monospace" style="background: rgba(255,255,255,0.6);">6:00 PM – 8:30 PM</div>
-                    <p class="small text-muted mb-0">Chilli Chicken, Pakoras, Crispy Baby Corn, Kabab, etc. <br><strong class="text-danger">Last Order: 8:00 PM</strong></p>
+                    <p class="small text-muted mb-0">Chilli Chicken, Pakoras, Crispy Baby Corn, Kebab, etc. <br><strong class="text-danger">Last Order: 8:00 PM</strong></p>
                 </div>
             </div>
 
@@ -220,7 +220,7 @@ $food_items = $signature_items;
             </div>
         </div>
 
-        <!-- Featured Menu Items (Bengali, Chinese & Roll, Kabab) -->
+        <!-- Featured Menu Items (Bengali, Chinese & Roll, Kebab) -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="font-weight-bold text-dark mb-0">
                 <i class="fa fa-star text-warning mr-2"></i>Signature Culinary Offerings
