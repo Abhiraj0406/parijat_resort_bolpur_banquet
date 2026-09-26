@@ -43,6 +43,9 @@ if (empty($dynamicGallery)) {
         // Swimming Pool & Gardens
         ['image_path' => 'image/pool_slide_1.jpeg', 'caption' => 'Crystal Clear Swimming Pool', 'category' => 'Pool'],
         ['image_path' => 'image/pool_slide_2.jpeg', 'caption' => 'Poolside Sun Loungers & Relaxation Deck', 'category' => 'Pool'],
+        ['image_path' => 'image/pool_temp_1.jpeg', 'caption' => 'Refreshing Swimming Pool Oasis & Gardens', 'category' => 'Pool'],
+        ['image_path' => 'image/pool_temp_2.jpeg', 'caption' => 'Sunny Pool Deck & Landscaped Grounds', 'category' => 'Pool'],
+        ['image_path' => 'image/pool_temp_3.jpeg', 'caption' => 'Crystal Clear Swimming Pool Area', 'category' => 'Pool'],
         ['image_path' => 'image/pool_slide_3.jpeg', 'caption' => 'Scenic Pool Deck & Surrounding Gardens', 'category' => 'Pool'],
         ['image_path' => 'image/pool_slide_4.jpeg', 'caption' => 'Poolside Shaded Seating Area', 'category' => 'Pool'],
         ['image_path' => 'image/pool_slide_5.jpeg', 'caption' => 'Lush Green Poolside Grounds', 'category' => 'Pool'],
