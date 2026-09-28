@@ -3,6 +3,19 @@ $current_page = "gallery";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
+// Self-healing database sync: ensure Reception & Lobby images are populated with authentic resort pictures
+try {
+    $pdo->exec("DELETE FROM gallery WHERE category = 'Reception' AND image_path NOT IN ('image/reception_desk_1.jpeg', 'image/reception_lobby_1.jpeg', 'image/reception_lobby_2.jpeg', 'image/reception_desk_2.jpeg')");
+    $recCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE category = 'Reception'")->fetchColumn();
+    if ($recCheck === 0) {
+        $rStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, 'Reception', ?, 'active')");
+        $rStmt->execute(['image/reception_desk_1.jpeg', 'Resort Front Office & Reception Desk', 60]);
+        $rStmt->execute(['image/reception_lobby_1.jpeg', 'Reception Lounge with Ganesha Artwork', 61]);
+        $rStmt->execute(['image/reception_lobby_2.jpeg', 'Guest Waiting Lobby & Luxury Seating', 62]);
+        $rStmt->execute(['image/reception_desk_2.jpeg', 'Reception Counter & Chandelier Lighting', 63]);
+    }
+} catch (Exception $e) {}
+
 // Fetch gallery images managed dynamically by admin
 $stmt = $pdo->query("SELECT * FROM gallery WHERE status = 'active' ORDER BY sort_order ASC, id ASC");
 $dynamicGallery = $stmt->fetchAll();
@@ -87,8 +100,10 @@ if (empty($dynamicGallery)) {
         ['image_path' => 'image/roll_kabab.jpg', 'caption' => 'Kolkata Kathi Rolls & Sizzling Kebabs', 'category' => 'Dining'],
 
         // Reception & Lobby
-        ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Front Office & Reception Desk', 'category' => 'Reception'],
-        ['image_path' => 'image/reception2.jpg', 'caption' => 'Welcome Lobby & Guest Lounge', 'category' => 'Reception']
+        ['image_path' => 'image/reception_desk_1.jpeg', 'caption' => 'Resort Front Office & Reception Desk', 'category' => 'Reception'],
+        ['image_path' => 'image/reception_lobby_1.jpeg', 'caption' => 'Reception Lounge with Ganesha Artwork', 'category' => 'Reception'],
+        ['image_path' => 'image/reception_lobby_2.jpeg', 'caption' => 'Guest Waiting Lobby & Luxury Seating', 'category' => 'Reception'],
+        ['image_path' => 'image/reception_desk_2.jpeg', 'caption' => 'Reception Counter & Chandelier Lighting', 'category' => 'Reception']
     ];
 }
 ?>
@@ -209,9 +224,6 @@ if (empty($dynamicGallery)) {
 <section class="gallery_area section_gap bg-light">
     <div class="container">
         <div class="section_title text-center mb-4">
-            <span class="badge badge-pill badge-warning text-dark font-weight-bold px-3 py-2 text-uppercase text-wrap" style="font-size: 0.8rem; letter-spacing: 1px;">
-                <i class="fa fa-camera mr-1"></i> Visual Tour
-            </span>
             <h2 class="title_color font-weight-bold mt-2">Moments at Parijat Resort</h2>
             <p class="text-muted">Explore authentic photographs of our cottages, swimming pool, dining hall, lawns, and banquet facilities.</p>
         </div>
