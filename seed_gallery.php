@@ -16,7 +16,7 @@ $gallery_items = [
     ['image/about_bg.jpg', 'Tranquil Resort Surroundings in Bolpur', 'Resort', 11],
 
     // Rooms & Suites
-    ['image/cottage_slide1.jpg', 'Deluxe Cottage Room (King Bed Setup)', 'Rooms', 12],
+    ['image/cottage_slide1.jpg', 'Deluxe Cottage Room (Queen Bed Setup)', 'Rooms', 12],
     ['image/cottage_slide2.jpg', 'Deluxe Cottage Sit-out & Side View', 'Rooms', 13],
     ['image/cottage_slide3.jpg', 'Deluxe Cottage Modern Bathroom', 'Rooms', 14],
     ['image/ground_slide_1.jpeg', 'Deluxe Premium Ground Floor Suite', 'Rooms', 15],

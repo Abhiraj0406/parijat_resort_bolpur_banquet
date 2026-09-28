@@ -162,7 +162,7 @@ $totalRoomsSum = array_sum(array_column($categories, 'total_rooms'));
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Facilities (comma-separated tags)</label>
-                        <textarea class="form-control" name="facilities" rows="2" placeholder="e.g. Balcony, Free Wi-Fi, King Bed, LED TV, Geyser, Pool Access"><?php echo $editMode ? htmlspecialchars($editData['facilities'] ?? '') : ''; ?></textarea>
+                        <textarea class="form-control" name="facilities" rows="2" placeholder="e.g. Balcony, Free Wi-Fi, Queen Bed, LED TV, Geyser, Pool Access"><?php echo $editMode ? htmlspecialchars($editData['facilities'] ?? '') : ''; ?></textarea>
                         <small class="text-muted">These tags will appear as facility badges on the website.</small>
                     </div>
                     

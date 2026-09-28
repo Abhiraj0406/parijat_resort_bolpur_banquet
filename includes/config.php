@@ -30,6 +30,18 @@ try {
     die('Database connection error.');
 }
 
+// Auto-sync: ensure room categories and gallery use Queen Bed everywhere
+try {
+    $pdo->exec("UPDATE room_categories SET description = 'Spacious cottage rooms nestled amidst serene garden landscapes, featuring private sit-out balconies, comfortable queen bed, high-speed WiFi, LED television, tea/coffee station, and premium bathroom amenities.' WHERE id = 1");
+    $pdo->exec("UPDATE room_categories SET description = 'Convenient ground-floor executive rooms with direct lawn and garden access, private balcony, comfortable queen bed, and modern ensuite bathroom.' WHERE id = 2");
+    $pdo->exec("UPDATE room_categories SET description = 'Elevated premium rooms offering panoramic views of the landscaped grounds and swimming pool, tranquil private balcony, and peaceful natural ambiance.' WHERE id = 3");
+    $pdo->exec("UPDATE room_categories SET description = 'Expansive suite designed for family vacations or small groups of up to four guests, featuring dual queen beds, spacious balcony, and modern conveniences.' WHERE id = 4");
+    $pdo->exec("UPDATE room_categories SET facilities = REPLACE(facilities, 'King Bed', 'Queen Bed') WHERE facilities LIKE '%King Bed%'");
+    $pdo->exec("UPDATE room_categories SET facilities = REPLACE(facilities, 'king bed', 'Queen Bed') WHERE facilities LIKE '%king bed%'");
+    $pdo->exec("UPDATE gallery SET caption = REPLACE(caption, 'King Bed', 'Queen Bed') WHERE caption LIKE '%King Bed%'");
+    $pdo->exec("UPDATE gallery SET caption = REPLACE(caption, 'king bed', 'Queen Bed') WHERE caption LIKE '%king bed%'");
+} catch (Exception $e) {}
+
 // ----- Session settings (secure) -----
 session_name('parijat_admin');
 // Use httponly and secure flags if served over HTTPS

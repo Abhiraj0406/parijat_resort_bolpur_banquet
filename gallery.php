@@ -37,7 +37,7 @@ if (empty($dynamicGallery)) {
         ['image_path' => 'image/about_bg.jpg', 'caption' => 'Tranquil Resort Surroundings in Bolpur', 'category' => 'Resort'],
 
         // Rooms & Suites
-        ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (King Bed Setup)', 'category' => 'Rooms'],
+        ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (Queen Bed Setup)', 'category' => 'Rooms'],
         ['image_path' => 'image/cottage_slide2.jpg', 'caption' => 'Deluxe Cottage Sit-out & Side View', 'category' => 'Rooms'],
         ['image_path' => 'image/cottage_slide3.jpg', 'caption' => 'Deluxe Cottage Modern Bathroom', 'category' => 'Rooms'],
         ['image_path' => 'image/cottage_night_1.jpeg', 'caption' => 'Deluxe Cottage (Illuminated Night View)', 'category' => 'Rooms'],
