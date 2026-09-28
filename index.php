@@ -35,6 +35,9 @@ $food_items = $stmt->fetchAll();
 // Fetch Banquet Details
 $stmt = $pdo->query("SELECT * FROM banquet_details LIMIT 1");
 $banquet = $stmt->fetch();
+if ($banquet && ($banquet['name'] === 'Parijat Grand AC Banquet & Lawn' || empty($banquet['name']))) {
+    $banquet['name'] = 'Parijat AC Banquet & Conference Hall';
+}
 
 // Fetch Gallery Images
 $stmt = $pdo->query("SELECT * FROM gallery ORDER BY id DESC LIMIT 6");

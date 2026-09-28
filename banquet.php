@@ -9,6 +9,16 @@ require_once 'includes/header.php';
 $banquetStmt = $pdo->query("SELECT * FROM banquet_details LIMIT 1");
 $banquet = $banquetStmt->fetch();
 
+// Self-healing database sync: update legacy name in database on live server
+if ($banquet) {
+    if ($banquet['name'] === 'Parijat Grand AC Banquet & Lawn' || empty($banquet['name'])) {
+        try {
+            $pdo->exec("UPDATE banquet_details SET name = 'Parijat AC Banquet & Conference Hall' WHERE id = " . (int)$banquet['id']);
+        } catch (Exception $e) {}
+        $banquet['name'] = 'Parijat AC Banquet & Conference Hall';
+    }
+}
+
 // Hardcoded full set of 11 authentic Banquet Hall photos
 $banquet_images = [
     ['image_path' => 'image/banquet_slide_1.jpeg', 'alt_text' => 'Grand Banquet Hall Front View'],
