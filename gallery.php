@@ -3,41 +3,109 @@ $current_page = "gallery";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
-// Self-healing database sync: ensure Reception & Lobby images are populated with authentic resort pictures
+// Master list of authentic resort photos across all categories
+$allDefaultGallery = [
+    // Resort & Architecture
+    ['image_path' => 'image/entrance_slide_1.jpeg', 'caption' => 'Grand Resort Entrance & Welcoming Gate', 'category' => 'Resort', 'sort_order' => 1],
+    ['image_path' => 'image/entrance_slide_2.jpeg', 'caption' => 'Resort Entrance Pathway & Greenery', 'category' => 'Resort', 'sort_order' => 2],
+    ['image_path' => 'image/entrance_slide_3.jpeg', 'caption' => 'Lush Green Front Lawn & Walkway', 'category' => 'Resort', 'sort_order' => 3],
+    ['image_path' => 'image/entrance_slide_4.jpeg', 'caption' => 'Serene Resort Compound & Gardens', 'category' => 'Resort', 'sort_order' => 4],
+    ['image_path' => 'image/about_bg.jpg', 'caption' => 'Tranquil Resort Surroundings in Bolpur', 'category' => 'Resort', 'sort_order' => 5],
+
+    // Premium Building
+    ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation Building — Morning View', 'category' => 'Premium Building', 'sort_order' => 10],
+    ['image_path' => 'image/premium_building_2.jpeg', 'caption' => 'Balconies & Landscaped Garden Facade', 'category' => 'Premium Building', 'sort_order' => 11],
+    ['image_path' => 'image/premium_building_3.jpeg', 'caption' => 'Serene Greenery & Scenic Grounds', 'category' => 'Premium Building', 'sort_order' => 12],
+    ['image_path' => 'image/premium_building_4.jpeg', 'caption' => 'Illuminated Evening Facade', 'category' => 'Premium Building', 'sort_order' => 13],
+    ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building Night Ambience & Lighting', 'category' => 'Premium Building', 'sort_order' => 14],
+    ['image_path' => 'image/premium_building_6.jpeg', 'caption' => 'Peaceful & Secure Night Atmosphere', 'category' => 'Premium Building', 'sort_order' => 15],
+
+    // Rooms & Suites
+    ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (Queen Bed Setup)', 'category' => 'Rooms', 'sort_order' => 20],
+    ['image_path' => 'image/cottage_slide2.jpg', 'caption' => 'Deluxe Cottage Sit-out & Side View', 'category' => 'Rooms', 'sort_order' => 21],
+    ['image_path' => 'image/cottage_slide3.jpg', 'caption' => 'Deluxe Cottage Modern Bathroom', 'category' => 'Rooms', 'sort_order' => 22],
+    ['image_path' => 'image/cottage_night_1.jpeg', 'caption' => 'Deluxe Cottage (Illuminated Night View)', 'category' => 'Rooms', 'sort_order' => 23],
+    ['image_path' => 'image/cottage_night_2.jpeg', 'caption' => 'Deluxe Cottage Pathway & Night Lighting', 'category' => 'Rooms', 'sort_order' => 24],
+    ['image_path' => 'image/cottage_night_3.jpeg', 'caption' => 'Deluxe Cottage Serene Evening Ambience', 'category' => 'Rooms', 'sort_order' => 25],
+    ['image_path' => 'image/cottage_night_4.jpeg', 'caption' => 'Deluxe Cottage Landscaped Garden Night View', 'category' => 'Rooms', 'sort_order' => 26],
+    ['image_path' => 'image/ground_slide_1.jpeg', 'caption' => 'Deluxe Premium Ground Floor Suite', 'category' => 'Rooms', 'sort_order' => 27],
+    ['image_path' => 'image/ground_slide_2.jpeg', 'caption' => 'Ground Floor Premium Bed & Interior', 'category' => 'Rooms', 'sort_order' => 28],
+    ['image_path' => 'image/ground_slide_3.jpeg', 'caption' => 'Ground Floor Balcony with Garden View', 'category' => 'Rooms', 'sort_order' => 29],
+    ['image_path' => 'image/ground_slide_4.jpeg', 'caption' => 'Modern Bathroom with Geyser & Toiletries', 'category' => 'Rooms', 'sort_order' => 30],
+    ['image_path' => 'image/ground_slide_5.jpeg', 'caption' => 'Deluxe Room Seating & Lighting', 'category' => 'Rooms', 'sort_order' => 31],
+    ['image_path' => 'image/first_slide_1.jpeg', 'caption' => 'Deluxe Premium First Floor Suite', 'category' => 'Rooms', 'sort_order' => 32],
+    ['image_path' => 'image/first_slide_2.jpeg', 'caption' => 'First Floor Private Balcony & Pool View', 'category' => 'Rooms', 'sort_order' => 33],
+    ['image_path' => 'image/first_slide_3.jpeg', 'caption' => 'First Floor Suite Interior & LED TV', 'category' => 'Rooms', 'sort_order' => 34],
+    ['image_path' => 'image/family_slide1.jpg', 'caption' => 'Family Premium Four Sharing Suite', 'category' => 'Rooms', 'sort_order' => 35],
+    ['image_path' => 'image/family_slide2.jpg', 'caption' => 'Family Suite Dual Double Bed Layout', 'category' => 'Rooms', 'sort_order' => 36],
+    ['image_path' => 'image/family_slide3.jpg', 'caption' => 'Family Suite Wardrobe & Amenities', 'category' => 'Rooms', 'sort_order' => 37],
+    ['image_path' => 'image/family_slide4.jpg', 'caption' => 'Family Suite Modern Washroom', 'category' => 'Rooms', 'sort_order' => 38],
+
+    // Swimming Pool & Gardens
+    ['image_path' => 'image/pool_slide_1.jpeg', 'caption' => 'Crystal Clear Swimming Pool', 'category' => 'Pool', 'sort_order' => 40],
+    ['image_path' => 'image/pool_slide_2.jpeg', 'caption' => 'Poolside Sun Loungers & Relaxation Deck', 'category' => 'Pool', 'sort_order' => 41],
+    ['image_path' => 'image/pool_temp_1.jpeg', 'caption' => 'Refreshing Swimming Pool Oasis & Gardens', 'category' => 'Pool', 'sort_order' => 42],
+    ['image_path' => 'image/pool_temp_2.jpeg', 'caption' => 'Sunny Pool Deck & Landscaped Grounds', 'category' => 'Pool', 'sort_order' => 43],
+    ['image_path' => 'image/pool_temp_3.jpeg', 'caption' => 'Crystal Clear Swimming Pool Area', 'category' => 'Pool', 'sort_order' => 44],
+    ['image_path' => 'image/pool_slide_3.jpeg', 'caption' => 'Scenic Pool Deck & Surrounding Gardens', 'category' => 'Pool', 'sort_order' => 45],
+    ['image_path' => 'image/pool_slide_4.jpeg', 'caption' => 'Poolside Shaded Seating Area', 'category' => 'Pool', 'sort_order' => 46],
+    ['image_path' => 'image/pool_slide_5.jpeg', 'caption' => 'Lush Green Poolside Grounds', 'category' => 'Pool', 'sort_order' => 47],
+    ['image_path' => 'image/pool_slide_6.jpeg', 'caption' => 'Poolside Palm Trees & Pathway', 'category' => 'Pool', 'sort_order' => 48],
+    ['image_path' => 'image/pool_slide_7.jpeg', 'caption' => 'Evening Pool Reflections', 'category' => 'Pool', 'sort_order' => 49],
+    ['image_path' => 'image/pool_slide_8.jpeg', 'caption' => 'Daytime Pool Oasis', 'category' => 'Pool', 'sort_order' => 50],
+    ['image_path' => 'image/pool_slide_9.jpeg', 'caption' => 'Pool & Garden Landscape', 'category' => 'Pool', 'sort_order' => 51],
+    ['image_path' => 'image/pool_slide_10.jpeg', 'caption' => 'Pool Deck Perspective', 'category' => 'Pool', 'sort_order' => 52],
+    ['image_path' => 'image/pool_slide_12.jpeg', 'caption' => 'Swimming Pool Panoramic View', 'category' => 'Pool', 'sort_order' => 53],
+    ['image_path' => 'image/pool_bg.jpg', 'caption' => 'Night Pool Illumination & Lights', 'category' => 'Pool', 'sort_order' => 54],
+
+    // Banquet & Events
+    ['image_path' => 'image/banquet_slide_1.jpeg', 'caption' => 'Parijat AC Banquet & Conference Hall Front View', 'category' => 'Banquet', 'sort_order' => 60],
+    ['image_path' => 'image/banquet_slide_2.jpeg', 'caption' => 'AC Conference & Banquet Setup', 'category' => 'Banquet', 'sort_order' => 61],
+    ['image_path' => 'image/banquet_slide_3.jpeg', 'caption' => 'Banquet Seating Arrangement & Chairs', 'category' => 'Banquet', 'sort_order' => 62],
+    ['image_path' => 'image/banquet_slide_4.jpeg', 'caption' => 'Spacious Event Stage & Hall', 'category' => 'Banquet', 'sort_order' => 63],
+    ['image_path' => 'image/banquet_slide_5.jpeg', 'caption' => 'Banquet Lighting & Festive Decor', 'category' => 'Banquet', 'sort_order' => 64],
+    ['image_path' => 'image/banquet_slide_6.jpeg', 'caption' => 'Conference Hall Table & Seminar Setup', 'category' => 'Banquet', 'sort_order' => 65],
+    ['image_path' => 'image/banquet_slide_7.jpeg', 'caption' => 'Event Reception & Hall Interior', 'category' => 'Banquet', 'sort_order' => 66],
+    ['image_path' => 'image/banquet_slide_8.jpeg', 'caption' => 'Grand Celebration Hall Space', 'category' => 'Banquet', 'sort_order' => 67],
+    ['image_path' => 'image/banquet_slide_9.jpeg', 'caption' => 'Banquet Hall Dining & Buffet Area', 'category' => 'Banquet', 'sort_order' => 68],
+    ['image_path' => 'image/banquet_slide_10.jpeg', 'caption' => 'Fully AC Conference Facilities', 'category' => 'Banquet', 'sort_order' => 69],
+    ['image_path' => 'image/banquet_slide_11.jpeg', 'caption' => 'Premium Banquet Hall Atmosphere', 'category' => 'Banquet', 'sort_order' => 70],
+
+    // Dining & Heshel Ghar
+    ['image_path' => 'image/dining_out.jpg', 'caption' => 'Labanya\'s Heshel Ghar Restaurant Exterior', 'category' => 'Dining', 'sort_order' => 75],
+    ['image_path' => 'image/dining_in.jpg', 'caption' => 'Heshel Ghar Indoor Dining Hall', 'category' => 'Dining', 'sort_order' => 76],
+    ['image_path' => 'image/restaurant_slide_1.jpeg', 'caption' => 'Restaurant Exterior & Courtyard Setup', 'category' => 'Dining', 'sort_order' => 77],
+    ['image_path' => 'image/restaurant_slide_2.jpeg', 'caption' => 'Spacious Multi-Cuisine Dining Hall', 'category' => 'Dining', 'sort_order' => 78],
+    ['image_path' => 'image/restaurant_slide_3.jpeg', 'caption' => 'Heshel Ghar Restaurant Interior View', 'category' => 'Dining', 'sort_order' => 79],
+    ['image_path' => 'image/restaurant_slide_4.jpeg', 'caption' => 'Garden & Restaurant View', 'category' => 'Dining', 'sort_order' => 80],
+    ['image_path' => 'image/restaurant_slide_5.jpeg', 'caption' => 'Outdoor & Courtyard Dining', 'category' => 'Dining', 'sort_order' => 81],
+    ['image_path' => 'image/food2.jpg', 'caption' => 'Authentic Bengali Fish Thali Feast', 'category' => 'Dining', 'sort_order' => 82],
+    ['image_path' => 'image/chinese_food.jpg', 'caption' => 'Crispy Wok-Tossed Chilli Chicken', 'category' => 'Dining', 'sort_order' => 83],
+    ['image_path' => 'image/roll_kabab.jpg', 'caption' => 'Kolkata Kathi Rolls & Sizzling Kebabs', 'category' => 'Dining', 'sort_order' => 84],
+
+    // Reception & Lobby
+    ['image_path' => 'image/reception_desk_1.jpeg', 'caption' => 'Resort Front Office & Reception Desk', 'category' => 'Reception', 'sort_order' => 90],
+    ['image_path' => 'image/reception_lobby_1.jpeg', 'caption' => 'Reception Lounge with Ganesha Artwork', 'category' => 'Reception', 'sort_order' => 91],
+    ['image_path' => 'image/reception_lobby_2.jpeg', 'caption' => 'Guest Waiting Lobby & Luxury Seating', 'category' => 'Reception', 'sort_order' => 92],
+    ['image_path' => 'image/reception_desk_2.jpeg', 'caption' => 'Reception Counter & Chandelier Lighting', 'category' => 'Reception', 'sort_order' => 93],
+    ['image_path' => 'image/reception_new_1.jpeg', 'caption' => 'Grand Resort Reception & Welcome Area', 'category' => 'Reception', 'sort_order' => 94],
+    ['image_path' => 'image/reception_new_2.jpeg', 'caption' => 'Elegant Reception Hall & Lobby', 'category' => 'Reception', 'sort_order' => 95],
+    ['image_path' => 'image/reception_new_3.jpeg', 'caption' => 'Premium Lobby Interiors & Ambience', 'category' => 'Reception', 'sort_order' => 96]
+];
+
+// Self-healing database sync: automatically populate database with authentic photos if table has fewer items or missing categories
 try {
-    $allowedRec = "'image/reception_desk_1.jpeg','image/reception_lobby_1.jpeg','image/reception_lobby_2.jpeg','image/reception_desk_2.jpeg','image/reception_new_1.jpeg','image/reception_new_2.jpeg','image/reception_new_3.jpeg'";
-    $pdo->exec("DELETE FROM gallery WHERE category = 'Reception' AND image_path NOT IN ($allowedRec)");
-    $recCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE category = 'Reception'")->fetchColumn();
-    if ($recCheck === 0) {
-        $rStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, 'Reception', ?, 'active')");
-        $rStmt->execute(['image/reception_desk_1.jpeg', 'Resort Front Office & Reception Desk', 60]);
-        $rStmt->execute(['image/reception_lobby_1.jpeg', 'Reception Lounge with Ganesha Artwork', 61]);
-        $rStmt->execute(['image/reception_lobby_2.jpeg', 'Guest Waiting Lobby & Luxury Seating', 62]);
-        $rStmt->execute(['image/reception_desk_2.jpeg', 'Reception Counter & Chandelier Lighting', 63]);
-        $rStmt->execute(['image/reception_new_1.jpeg', 'Grand Resort Reception & Welcome Area', 64]);
-        $rStmt->execute(['image/reception_new_2.jpeg', 'Elegant Reception Hall & Lobby', 65]);
-        $rStmt->execute(['image/reception_new_3.jpeg', 'Premium Lobby Interiors & Ambience', 66]);
-    }
-    // Premium Building self-heal
-    $pbCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE category = 'Premium Building'")->fetchColumn();
-    if ($pbCheck === 0) {
-        $pbStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, 'Premium Building', ?, 'active')");
-        $pbStmt->execute(['image/premium_building_1.jpeg', 'Premium Accommodation Building — Morning View', 70]);
-        $pbStmt->execute(['image/premium_building_2.jpeg', 'Balconies & Landscaped Garden Facade', 71]);
-        $pbStmt->execute(['image/premium_building_3.jpeg', 'Serene Greenery & Scenic Grounds', 72]);
-        $pbStmt->execute(['image/premium_building_4.jpeg', 'Illuminated Evening Facade', 73]);
-        $pbStmt->execute(['image/premium_building_5.jpeg', 'Premium Building Night Ambience & Lighting', 74]);
-        $pbStmt->execute(['image/premium_building_6.jpeg', 'Peaceful & Secure Night Atmosphere', 75]);
-    }
-    // Ensure pool_slide_1.jpeg is in Pool category
-    $poolSlideCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE image_path = 'image/pool_slide_1.jpeg'")->fetchColumn();
-    if ($poolSlideCheck === 0) {
-        $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES ('image/pool_slide_1.jpeg', 'Crystal Clear Swimming Pool', 'Pool', 27, 'active')")->execute();
-    }
-    // Ensure reception_lobby_1.jpeg is in Reception category
-    $recLobbyCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE image_path = 'image/reception_lobby_1.jpeg'")->fetchColumn();
-    if ($recLobbyCheck === 0) {
-        $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES ('image/reception_lobby_1.jpeg', 'Reception Lounge with Ganesha Artwork', 'Reception', 61, 'active')")->execute();
+    $totalCount = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE status = 'active'")->fetchColumn();
+    if ($totalCount < 50) {
+        $insertStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, ?, ?, 'active')");
+        $existingRows = $pdo->query("SELECT image_path FROM gallery")->fetchAll(PDO::FETCH_COLUMN);
+        $existingSet = array_flip($existingRows);
+        foreach ($allDefaultGallery as $item) {
+            if (!isset($existingSet[$item['image_path']])) {
+                $insertStmt->execute([$item['image_path'], $item['caption'], $item['category'], $item['sort_order']]);
+                $existingSet[$item['image_path']] = true;
+            }
+        }
     }
 } catch (Exception $e) {}
 
@@ -45,97 +113,17 @@ try {
 $stmt = $pdo->query("SELECT * FROM gallery WHERE status = 'active' ORDER BY sort_order ASC, id ASC");
 $dynamicGallery = $stmt->fetchAll();
 
-// Comprehensive fallback if table is empty
-if (empty($dynamicGallery)) {
-    $dynamicGallery = [
-        // Resort & Architecture
-        ['image_path' => 'image/entrance_slide_1.jpeg', 'caption' => 'Grand Resort Entrance & Welcoming Gate', 'category' => 'Resort'],
-        ['image_path' => 'image/entrance_slide_2.jpeg', 'caption' => 'Resort Entrance Pathway & Greenery', 'category' => 'Resort'],
-        ['image_path' => 'image/entrance_slide_3.jpeg', 'caption' => 'Lush Green Front Lawn & Walkway', 'category' => 'Resort'],
-        ['image_path' => 'image/entrance_slide_4.jpeg', 'caption' => 'Serene Resort Compound & Gardens', 'category' => 'Resort'],
-        ['image_path' => 'image/about_bg.jpg', 'caption' => 'Tranquil Resort Surroundings in Bolpur', 'category' => 'Resort'],
-
-        // Premium Building
-        ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation Building — Morning View', 'category' => 'Premium Building'],
-        ['image_path' => 'image/premium_building_2.jpeg', 'caption' => 'Balconies & Landscaped Garden Facade', 'category' => 'Premium Building'],
-        ['image_path' => 'image/premium_building_3.jpeg', 'caption' => 'Serene Greenery & Scenic Grounds', 'category' => 'Premium Building'],
-        ['image_path' => 'image/premium_building_4.jpeg', 'caption' => 'Illuminated Evening Facade', 'category' => 'Premium Building'],
-        ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building Night Ambience & Lighting', 'category' => 'Premium Building'],
-        ['image_path' => 'image/premium_building_6.jpeg', 'caption' => 'Peaceful & Secure Night Atmosphere', 'category' => 'Premium Building'],
-
-
-        // Rooms & Suites
-        ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (Queen Bed Setup)', 'category' => 'Rooms'],
-        ['image_path' => 'image/cottage_slide2.jpg', 'caption' => 'Deluxe Cottage Sit-out & Side View', 'category' => 'Rooms'],
-        ['image_path' => 'image/cottage_slide3.jpg', 'caption' => 'Deluxe Cottage Modern Bathroom', 'category' => 'Rooms'],
-        ['image_path' => 'image/cottage_night_1.jpeg', 'caption' => 'Deluxe Cottage (Illuminated Night View)', 'category' => 'Rooms'],
-        ['image_path' => 'image/cottage_night_2.jpeg', 'caption' => 'Deluxe Cottage Pathway & Night Lighting', 'category' => 'Rooms'],
-        ['image_path' => 'image/cottage_night_3.jpeg', 'caption' => 'Deluxe Cottage Serene Evening Ambience', 'category' => 'Rooms'],
-        ['image_path' => 'image/cottage_night_4.jpeg', 'caption' => 'Deluxe Cottage Landscaped Garden Night View', 'category' => 'Rooms'],
-        ['image_path' => 'image/ground_slide_1.jpeg', 'caption' => 'Deluxe Premium Ground Floor Suite', 'category' => 'Rooms'],
-        ['image_path' => 'image/ground_slide_2.jpeg', 'caption' => 'Ground Floor Premium Bed & Interior', 'category' => 'Rooms'],
-        ['image_path' => 'image/ground_slide_3.jpeg', 'caption' => 'Ground Floor Balcony with Garden View', 'category' => 'Rooms'],
-        ['image_path' => 'image/ground_slide_4.jpeg', 'caption' => 'Modern Bathroom with Geyser & Toiletries', 'category' => 'Rooms'],
-        ['image_path' => 'image/ground_slide_5.jpeg', 'caption' => 'Deluxe Room Seating & Lighting', 'category' => 'Rooms'],
-        ['image_path' => 'image/first_slide_1.jpeg', 'caption' => 'Deluxe Premium First Floor Suite', 'category' => 'Rooms'],
-        ['image_path' => 'image/first_slide_2.jpeg', 'caption' => 'First Floor Private Balcony & Pool View', 'category' => 'Rooms'],
-        ['image_path' => 'image/first_slide_3.jpeg', 'caption' => 'First Floor Suite Interior & LED TV', 'category' => 'Rooms'],
-        ['image_path' => 'image/family_slide1.jpg', 'caption' => 'Family Premium Four Sharing Suite', 'category' => 'Rooms'],
-        ['image_path' => 'image/family_slide2.jpg', 'caption' => 'Family Suite Dual Double Bed Layout', 'category' => 'Rooms'],
-        ['image_path' => 'image/family_slide3.jpg', 'caption' => 'Family Suite Wardrobe & Amenities', 'category' => 'Rooms'],
-        ['image_path' => 'image/family_slide4.jpg', 'caption' => 'Family Suite Modern Washroom', 'category' => 'Rooms'],
-
-        // Swimming Pool & Gardens
-        ['image_path' => 'image/pool_slide_1.jpeg', 'caption' => 'Crystal Clear Swimming Pool', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_2.jpeg', 'caption' => 'Poolside Sun Loungers & Relaxation Deck', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_temp_1.jpeg', 'caption' => 'Refreshing Swimming Pool Oasis & Gardens', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_temp_2.jpeg', 'caption' => 'Sunny Pool Deck & Landscaped Grounds', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_temp_3.jpeg', 'caption' => 'Crystal Clear Swimming Pool Area', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_3.jpeg', 'caption' => 'Scenic Pool Deck & Surrounding Gardens', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_4.jpeg', 'caption' => 'Poolside Shaded Seating Area', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_5.jpeg', 'caption' => 'Lush Green Poolside Grounds', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_6.jpeg', 'caption' => 'Poolside Palm Trees & Pathway', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_7.jpeg', 'caption' => 'Evening Pool Reflections', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_8.jpeg', 'caption' => 'Daytime Pool Oasis', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_9.jpeg', 'caption' => 'Pool & Garden Landscape', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_10.jpeg', 'caption' => 'Pool Deck Perspective', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_slide_12.jpeg', 'caption' => 'Swimming Pool Panoramic View', 'category' => 'Pool'],
-        ['image_path' => 'image/pool_bg.jpg', 'caption' => 'Night Pool Illumination & Lights', 'category' => 'Pool'],
-
-        // Banquet & Events
-        ['image_path' => 'image/banquet_slide_1.jpeg', 'caption' => 'Parijat AC Banquet & Conference Hall Front View', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_2.jpeg', 'caption' => 'AC Conference & Banquet Setup', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_3.jpeg', 'caption' => 'Banquet Seating Arrangement & Chairs', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_4.jpeg', 'caption' => 'Spacious Event Stage & Hall', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_5.jpeg', 'caption' => 'Banquet Lighting & Festive Decor', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_6.jpeg', 'caption' => 'Conference Hall Table & Seminar Setup', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_7.jpeg', 'caption' => 'Event Reception & Hall Interior', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_8.jpeg', 'caption' => 'Grand Celebration Hall Space', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_9.jpeg', 'caption' => 'Banquet Hall Dining & Buffet Area', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_10.jpeg', 'caption' => 'Fully AC Conference Facilities', 'category' => 'Banquet'],
-        ['image_path' => 'image/banquet_slide_11.jpeg', 'caption' => 'Premium Banquet Hall Atmosphere', 'category' => 'Banquet'],
-
-        // Dining & Heshel Ghar
-        ['image_path' => 'image/dining_out.jpg', 'caption' => 'Labanya\'s Heshel Ghar Restaurant Exterior', 'category' => 'Dining'],
-        ['image_path' => 'image/dining_in.jpg', 'caption' => 'Heshel Ghar Indoor Dining Hall', 'category' => 'Dining'],
-        ['image_path' => 'image/restaurant_slide_1.jpeg', 'caption' => 'Restaurant Exterior & Courtyard Setup', 'category' => 'Dining'],
-        ['image_path' => 'image/restaurant_slide_2.jpeg', 'caption' => 'Spacious Multi-Cuisine Dining Hall', 'category' => 'Dining'],
-        ['image_path' => 'image/restaurant_slide_3.jpeg', 'caption' => 'Heshel Ghar Restaurant Interior View', 'category' => 'Dining'],
-        ['image_path' => 'image/restaurant_slide_4.jpeg', 'caption' => 'Garden & Restaurant View', 'category' => 'Dining'],
-        ['image_path' => 'image/restaurant_slide_5.jpeg', 'caption' => 'Outdoor & Courtyard Dining', 'category' => 'Dining'],
-        ['image_path' => 'image/food2.jpg', 'caption' => 'Authentic Bengali Fish Thali Feast', 'category' => 'Dining'],
-        ['image_path' => 'image/chinese_food.jpg', 'caption' => 'Crispy Wok-Tossed Chilli Chicken', 'category' => 'Dining'],
-        ['image_path' => 'image/roll_kabab.jpg', 'caption' => 'Kolkata Kathi Rolls & Sizzling Kebabs', 'category' => 'Dining'],
-
-        // Reception & Lobby
-        ['image_path' => 'image/reception_desk_1.jpeg', 'caption' => 'Resort Front Office & Reception Desk', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_lobby_1.jpeg', 'caption' => 'Reception Lounge with Ganesha Artwork', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_lobby_2.jpeg', 'caption' => 'Guest Waiting Lobby & Luxury Seating', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_desk_2.jpeg', 'caption' => 'Reception Counter & Chandelier Lighting', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_new_1.jpeg', 'caption' => 'Grand Resort Reception & Welcome Area', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_new_2.jpeg', 'caption' => 'Elegant Reception Hall & Lobby', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_new_3.jpeg', 'caption' => 'Premium Lobby Interiors & Ambience', 'category' => 'Reception']
-    ];
+// Guarantee all categories and all authentic photos are present even if database has partial records
+if (count($dynamicGallery) < 50) {
+    $loadedPaths = [];
+    foreach ($dynamicGallery as $dg) {
+        $loadedPaths[$dg['image_path']] = true;
+    }
+    foreach ($allDefaultGallery as $item) {
+        if (!isset($loadedPaths[$item['image_path']])) {
+            $dynamicGallery[] = $item;
+        }
+    }
 }
 ?>
 
