@@ -253,7 +253,7 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
                 break;
             case 'contact':
             case 'contact-us':
-                $bg_image = 'image/reception1.jpg'; // Resort Reception & Front Desk
+                $bg_image = 'image/reception_lobby_1.jpeg'; // Resort Reception & Front Desk
                 break;
             default:
                 $bg_image = 'image/gallery/01.jpg';

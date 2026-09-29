@@ -51,12 +51,12 @@ if (empty($gallery_images)) {
         ['image_path' => 'image/gallery/09.jpg', 'caption' => 'Resort Path at Sunset'],
         ['image_path' => 'image/gallery/10.jpg', 'caption' => 'Main Building Exterior'],
         ['image_path' => 'image/hall1.jpg', 'caption' => 'Banquet Hall Interior'],
-        ['image_path' => 'image/pool1.jpg', 'caption' => 'Swimming Pool Deck'],
+        ['image_path' => 'image/pool_slide_1.jpeg', 'caption' => 'Swimming Pool Deck'],
         ['image_path' => 'image/pool3.jpg', 'caption' => 'Night View of Pool'],
         ['image_path' => 'image/pool4.jpg', 'caption' => 'Pool at Night'],
         ['image_path' => 'image/pool5.jpg', 'caption' => 'Illuminated Pool'],
-        ['image_path' => 'image/reception1.jpg', 'caption' => 'Resort Reception'],
-        ['image_path' => 'image/reception2.jpg', 'caption' => 'Lobby Area'],
+        ['image_path' => 'image/reception_lobby_1.jpeg', 'caption' => 'Resort Reception Lounge'],
+        ['image_path' => 'image/reception_desk_1.jpeg', 'caption' => 'Resort Front Office & Reception Desk'],
         ['image_path' => 'image/food1.jpg', 'caption' => 'Evening Snacks'],
         ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation (Day View)'],
         ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building (Night Illumination)'],
@@ -163,10 +163,10 @@ if (empty($gallery_images)) {
                                 <img class="d-block w-100 h-100" src="image/about_slide_1.jpeg" alt="Parijat Resort Cottages & Living Spaces" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/reception1.jpg" alt="Parijat Resort Reception & Welcome Desk" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/reception_lobby_1.jpeg" alt="Parijat Resort Reception Lounge & Entrance" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/reception2.jpg" alt="Parijat Resort Reception Lounge & Entrance" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/reception_desk_1.jpeg" alt="Parijat Resort Reception & Welcome Desk" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
                                 <img class="d-block w-100 h-100" src="image/premium_building_1.jpeg" alt="Parijat Resort Premium Accommodation Building" style="object-fit: cover; min-height: 380px; max-height: 440px;">
@@ -175,7 +175,7 @@ if (empty($gallery_images)) {
                                 <img class="d-block w-100 h-100" src="image/premium_building_5.jpeg" alt="Premium Building Night Ambience" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
-                                <img class="d-block w-100 h-100" src="image/about_slide3.jpeg" alt="Resort Swimming Pool & Greenery" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                                <img class="d-block w-100 h-100" src="image/pool_slide_1.jpeg" alt="Resort Swimming Pool & Greenery" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#aboutResortCarousel" role="button" data-slide="prev" style="width: 12%; opacity: 0.85;">

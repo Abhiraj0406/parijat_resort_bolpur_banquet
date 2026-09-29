@@ -5,7 +5,8 @@ require_once 'includes/header.php';
 
 // Self-healing database sync: ensure Reception & Lobby images are populated with authentic resort pictures
 try {
-    $pdo->exec("DELETE FROM gallery WHERE category = 'Reception' AND image_path NOT IN ('image/reception_desk_1.jpeg', 'image/reception_lobby_1.jpeg', 'image/reception_lobby_2.jpeg', 'image/reception_desk_2.jpeg')");
+    $allowedRec = "'image/reception_desk_1.jpeg','image/reception_lobby_1.jpeg','image/reception_lobby_2.jpeg','image/reception_desk_2.jpeg','image/reception_new_1.jpeg','image/reception_new_2.jpeg','image/reception_new_3.jpeg'";
+    $pdo->exec("DELETE FROM gallery WHERE category = 'Reception' AND image_path NOT IN ($allowedRec)");
     $recCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE category = 'Reception'")->fetchColumn();
     if ($recCheck === 0) {
         $rStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, 'Reception', ?, 'active')");
@@ -13,6 +14,30 @@ try {
         $rStmt->execute(['image/reception_lobby_1.jpeg', 'Reception Lounge with Ganesha Artwork', 61]);
         $rStmt->execute(['image/reception_lobby_2.jpeg', 'Guest Waiting Lobby & Luxury Seating', 62]);
         $rStmt->execute(['image/reception_desk_2.jpeg', 'Reception Counter & Chandelier Lighting', 63]);
+        $rStmt->execute(['image/reception_new_1.jpeg', 'Grand Resort Reception & Welcome Area', 64]);
+        $rStmt->execute(['image/reception_new_2.jpeg', 'Elegant Reception Hall & Lobby', 65]);
+        $rStmt->execute(['image/reception_new_3.jpeg', 'Premium Lobby Interiors & Ambience', 66]);
+    }
+    // Premium Building self-heal
+    $pbCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE category = 'Premium Building'")->fetchColumn();
+    if ($pbCheck === 0) {
+        $pbStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, 'Premium Building', ?, 'active')");
+        $pbStmt->execute(['image/premium_building_1.jpeg', 'Premium Accommodation Building — Morning View', 70]);
+        $pbStmt->execute(['image/premium_building_2.jpeg', 'Balconies & Landscaped Garden Facade', 71]);
+        $pbStmt->execute(['image/premium_building_3.jpeg', 'Serene Greenery & Scenic Grounds', 72]);
+        $pbStmt->execute(['image/premium_building_4.jpeg', 'Illuminated Evening Facade', 73]);
+        $pbStmt->execute(['image/premium_building_5.jpeg', 'Premium Building Night Ambience & Lighting', 74]);
+        $pbStmt->execute(['image/premium_building_6.jpeg', 'Peaceful & Secure Night Atmosphere', 75]);
+    }
+    // Ensure pool_slide_1.jpeg is in Pool category
+    $poolSlideCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE image_path = 'image/pool_slide_1.jpeg'")->fetchColumn();
+    if ($poolSlideCheck === 0) {
+        $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES ('image/pool_slide_1.jpeg', 'Crystal Clear Swimming Pool', 'Pool', 27, 'active')")->execute();
+    }
+    // Ensure reception_lobby_1.jpeg is in Reception category
+    $recLobbyCheck = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE image_path = 'image/reception_lobby_1.jpeg'")->fetchColumn();
+    if ($recLobbyCheck === 0) {
+        $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES ('image/reception_lobby_1.jpeg', 'Reception Lounge with Ganesha Artwork', 'Reception', 61, 'active')")->execute();
     }
 } catch (Exception $e) {}
 
@@ -28,13 +53,16 @@ if (empty($dynamicGallery)) {
         ['image_path' => 'image/entrance_slide_2.jpeg', 'caption' => 'Resort Entrance Pathway & Greenery', 'category' => 'Resort'],
         ['image_path' => 'image/entrance_slide_3.jpeg', 'caption' => 'Lush Green Front Lawn & Walkway', 'category' => 'Resort'],
         ['image_path' => 'image/entrance_slide_4.jpeg', 'caption' => 'Serene Resort Compound & Gardens', 'category' => 'Resort'],
-        ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation Building (Morning View)', 'category' => 'Resort'],
-        ['image_path' => 'image/premium_building_2.jpeg', 'caption' => 'Balconies & Landscaped Garden Facade', 'category' => 'Resort'],
-        ['image_path' => 'image/premium_building_3.jpeg', 'caption' => 'Serene Greenery & Scenic Grounds', 'category' => 'Resort'],
-        ['image_path' => 'image/premium_building_4.jpeg', 'caption' => 'Illuminated Evening Facade', 'category' => 'Resort'],
-        ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building (Night Ambience & Lighting)', 'category' => 'Resort'],
-        ['image_path' => 'image/premium_building_6.jpeg', 'caption' => 'Peaceful & Secure Night Atmosphere', 'category' => 'Resort'],
         ['image_path' => 'image/about_bg.jpg', 'caption' => 'Tranquil Resort Surroundings in Bolpur', 'category' => 'Resort'],
+
+        // Premium Building
+        ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation Building — Morning View', 'category' => 'Premium Building'],
+        ['image_path' => 'image/premium_building_2.jpeg', 'caption' => 'Balconies & Landscaped Garden Facade', 'category' => 'Premium Building'],
+        ['image_path' => 'image/premium_building_3.jpeg', 'caption' => 'Serene Greenery & Scenic Grounds', 'category' => 'Premium Building'],
+        ['image_path' => 'image/premium_building_4.jpeg', 'caption' => 'Illuminated Evening Facade', 'category' => 'Premium Building'],
+        ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building Night Ambience & Lighting', 'category' => 'Premium Building'],
+        ['image_path' => 'image/premium_building_6.jpeg', 'caption' => 'Peaceful & Secure Night Atmosphere', 'category' => 'Premium Building'],
+
 
         // Rooms & Suites
         ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (Queen Bed Setup)', 'category' => 'Rooms'],
@@ -103,7 +131,10 @@ if (empty($dynamicGallery)) {
         ['image_path' => 'image/reception_desk_1.jpeg', 'caption' => 'Resort Front Office & Reception Desk', 'category' => 'Reception'],
         ['image_path' => 'image/reception_lobby_1.jpeg', 'caption' => 'Reception Lounge with Ganesha Artwork', 'category' => 'Reception'],
         ['image_path' => 'image/reception_lobby_2.jpeg', 'caption' => 'Guest Waiting Lobby & Luxury Seating', 'category' => 'Reception'],
-        ['image_path' => 'image/reception_desk_2.jpeg', 'caption' => 'Reception Counter & Chandelier Lighting', 'category' => 'Reception']
+        ['image_path' => 'image/reception_desk_2.jpeg', 'caption' => 'Reception Counter & Chandelier Lighting', 'category' => 'Reception'],
+        ['image_path' => 'image/reception_new_1.jpeg', 'caption' => 'Grand Resort Reception & Welcome Area', 'category' => 'Reception'],
+        ['image_path' => 'image/reception_new_2.jpeg', 'caption' => 'Elegant Reception Hall & Lobby', 'category' => 'Reception'],
+        ['image_path' => 'image/reception_new_3.jpeg', 'caption' => 'Premium Lobby Interiors & Ambience', 'category' => 'Reception']
     ];
 }
 ?>
@@ -250,6 +281,9 @@ if (empty($dynamicGallery)) {
             </button>
             <button type="button" class="gallery-filter-btn" data-filter="Reception">
                 <i class="fa fa-info-circle mr-1"></i> Reception &amp; Lobby
+            </button>
+            <button type="button" class="gallery-filter-btn" data-filter="Premium Building">
+                <i class="fa fa-building mr-1"></i> Premium Building
             </button>
         </div>
 
