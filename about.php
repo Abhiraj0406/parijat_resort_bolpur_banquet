@@ -2,7 +2,7 @@
 $page_title = "About Us & Resort Policies - Parijat Resort Bolpur";
 $current_page = "about";
 $meta_description = "Learn about Parijat Resort Bolpur, our restaurant Labanya's Heshel Ghar, swimming pool rules, and resort policies.";
-$og_image = "image/about_bg.jpg";
+$og_image = "image/cottage_exterior_lawn_1.jpeg";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 
@@ -44,7 +44,7 @@ $poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings
                 </div>
             </div>
             <div class="col-md-6">
-                <img class="img-fluid rounded shadow-lg" src="image/about_bg.jpg" alt="Parijat Resort Bolpur Grounds">
+                <img class="img-fluid rounded shadow-lg" src="image/cottage_exterior_lawn_1.jpeg" alt="Parijat Resort Bolpur Grounds & Cottages">
             </div>
         </div>
     </div>

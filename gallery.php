@@ -10,7 +10,9 @@ $allDefaultGallery = [
     ['image_path' => 'image/entrance_slide_2.jpeg', 'caption' => 'Resort Entrance Pathway & Greenery', 'category' => 'Resort', 'sort_order' => 2],
     ['image_path' => 'image/entrance_slide_3.jpeg', 'caption' => 'Lush Green Front Lawn & Walkway', 'category' => 'Resort', 'sort_order' => 3],
     ['image_path' => 'image/entrance_slide_4.jpeg', 'caption' => 'Serene Resort Compound & Gardens', 'category' => 'Resort', 'sort_order' => 4],
-    ['image_path' => 'image/about_bg.jpg', 'caption' => 'Tranquil Resort Surroundings in Bolpur', 'category' => 'Resort', 'sort_order' => 5],
+    ['image_path' => 'image/cottage_outside_courtyard.jpeg', 'caption' => 'Outside Cottage View — Courtyard Lawn & Gardens', 'category' => 'Resort', 'sort_order' => 5],
+    ['image_path' => 'image/cottage_outside_lawn_garden.jpeg', 'caption' => 'Outside Cottage View — Front Lawn & Cottage Exterior', 'category' => 'Resort', 'sort_order' => 6],
+    ['image_path' => 'image/cottage_exterior_lawn_1.jpeg', 'caption' => 'Outside Cottage View — Panoramic Garden & Cottage Facade', 'category' => 'Resort', 'sort_order' => 7],
 
     // Premium Building
     ['image_path' => 'image/premium_building_1.jpeg', 'caption' => 'Premium Accommodation Building — Morning View', 'category' => 'Premium Building', 'sort_order' => 10],
@@ -20,43 +22,49 @@ $allDefaultGallery = [
     ['image_path' => 'image/premium_building_5.jpeg', 'caption' => 'Premium Building Night Ambience & Lighting', 'category' => 'Premium Building', 'sort_order' => 14],
     ['image_path' => 'image/premium_building_6.jpeg', 'caption' => 'Peaceful & Secure Night Atmosphere', 'category' => 'Premium Building', 'sort_order' => 15],
 
-    // Rooms & Suites
-    ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (Queen Bed Setup)', 'category' => 'Rooms', 'sort_order' => 20],
-    ['image_path' => 'image/cottage_slide2.jpg', 'caption' => 'Deluxe Cottage Sit-out & Side View', 'category' => 'Rooms', 'sort_order' => 21],
-    ['image_path' => 'image/cottage_slide3.jpg', 'caption' => 'Deluxe Cottage Modern Bathroom', 'category' => 'Rooms', 'sort_order' => 22],
-    ['image_path' => 'image/cottage_night_1.jpeg', 'caption' => 'Deluxe Cottage (Illuminated Night View)', 'category' => 'Rooms', 'sort_order' => 23],
-    ['image_path' => 'image/cottage_night_2.jpeg', 'caption' => 'Deluxe Cottage Pathway & Night Lighting', 'category' => 'Rooms', 'sort_order' => 24],
-    ['image_path' => 'image/cottage_night_3.jpeg', 'caption' => 'Deluxe Cottage Serene Evening Ambience', 'category' => 'Rooms', 'sort_order' => 25],
-    ['image_path' => 'image/cottage_night_4.jpeg', 'caption' => 'Deluxe Cottage Landscaped Garden Night View', 'category' => 'Rooms', 'sort_order' => 26],
-    ['image_path' => 'image/ground_slide_1.jpeg', 'caption' => 'Deluxe Premium Ground Floor Suite', 'category' => 'Rooms', 'sort_order' => 27],
-    ['image_path' => 'image/ground_slide_2.jpeg', 'caption' => 'Ground Floor Premium Bed & Interior', 'category' => 'Rooms', 'sort_order' => 28],
-    ['image_path' => 'image/ground_slide_3.jpeg', 'caption' => 'Ground Floor Balcony with Garden View', 'category' => 'Rooms', 'sort_order' => 29],
-    ['image_path' => 'image/ground_slide_4.jpeg', 'caption' => 'Modern Bathroom with Geyser & Toiletries', 'category' => 'Rooms', 'sort_order' => 30],
-    ['image_path' => 'image/ground_slide_5.jpeg', 'caption' => 'Deluxe Room Seating & Lighting', 'category' => 'Rooms', 'sort_order' => 31],
-    ['image_path' => 'image/first_slide_1.jpeg', 'caption' => 'Deluxe Premium First Floor Suite', 'category' => 'Rooms', 'sort_order' => 32],
-    ['image_path' => 'image/first_slide_2.jpeg', 'caption' => 'First Floor Private Balcony & Pool View', 'category' => 'Rooms', 'sort_order' => 33],
-    ['image_path' => 'image/first_slide_3.jpeg', 'caption' => 'First Floor Suite Interior & LED TV', 'category' => 'Rooms', 'sort_order' => 34],
-    ['image_path' => 'image/family_slide1.jpg', 'caption' => 'Family Premium Four Sharing Suite', 'category' => 'Rooms', 'sort_order' => 35],
-    ['image_path' => 'image/family_slide2.jpg', 'caption' => 'Family Suite Dual Double Bed Layout', 'category' => 'Rooms', 'sort_order' => 36],
-    ['image_path' => 'image/family_slide3.jpg', 'caption' => 'Family Suite Wardrobe & Amenities', 'category' => 'Rooms', 'sort_order' => 37],
-    ['image_path' => 'image/family_slide4.jpg', 'caption' => 'Family Suite Modern Washroom', 'category' => 'Rooms', 'sort_order' => 38],
+    // Rooms & Suites (Cottages & Premium Suites)
+    ['image_path' => 'image/cottage_outside_lawn_garden.jpeg', 'caption' => 'Outside Cottage View — Front Lawn & Cottage Exterior', 'category' => 'Rooms', 'sort_order' => 20],
+    ['image_path' => 'image/cottage_outside_courtyard.jpeg', 'caption' => 'Outside Cottage View — Courtyard Lawn & Gardens', 'category' => 'Rooms', 'sort_order' => 21],
+    ['image_path' => 'image/cottage_outside_raktakarabi.jpeg', 'caption' => 'Outside Cottage View — Raktakarabi Cottage Porch', 'category' => 'Rooms', 'sort_order' => 22],
+    ['image_path' => 'image/cottage_outside_doors.jpeg', 'caption' => 'Outside Cottage View — Veranda & Suite Entrances', 'category' => 'Rooms', 'sort_order' => 23],
+    ['image_path' => 'image/cottage_outside_night.jpeg', 'caption' => 'Outside Cottage View — Night Illumination & Garden Ambiance', 'category' => 'Rooms', 'sort_order' => 24],
+    ['image_path' => 'image/cottage_veranda_2.jpeg', 'caption' => 'Outside Cottage View — Veranda Corridor & Folk Art Murals', 'category' => 'Rooms', 'sort_order' => 25],
+    ['image_path' => 'image/cottage_slide1.jpg', 'caption' => 'Deluxe Cottage Room (Queen Bed Setup)', 'category' => 'Rooms', 'sort_order' => 26],
+    ['image_path' => 'image/cottage_slide2.jpg', 'caption' => 'Deluxe Cottage Sit-out & Side View', 'category' => 'Rooms', 'sort_order' => 27],
+    ['image_path' => 'image/cottage_slide3.jpg', 'caption' => 'Deluxe Cottage Modern Bathroom', 'category' => 'Rooms', 'sort_order' => 28],
+    ['image_path' => 'image/cottage_night_1.jpeg', 'caption' => 'Deluxe Cottage (Illuminated Night View)', 'category' => 'Rooms', 'sort_order' => 29],
+    ['image_path' => 'image/cottage_night_2.jpeg', 'caption' => 'Deluxe Cottage Pathway & Night Lighting', 'category' => 'Rooms', 'sort_order' => 30],
+    ['image_path' => 'image/cottage_night_3.jpeg', 'caption' => 'Deluxe Cottage Serene Evening Ambience', 'category' => 'Rooms', 'sort_order' => 31],
+    ['image_path' => 'image/cottage_night_4.jpeg', 'caption' => 'Deluxe Cottage Landscaped Garden Night View', 'category' => 'Rooms', 'sort_order' => 32],
+    ['image_path' => 'image/ground_slide_1.jpeg', 'caption' => 'Deluxe Premium Ground Floor Suite', 'category' => 'Rooms', 'sort_order' => 33],
+    ['image_path' => 'image/ground_slide_2.jpeg', 'caption' => 'Ground Floor Premium Bed & Interior', 'category' => 'Rooms', 'sort_order' => 34],
+    ['image_path' => 'image/ground_slide_3.jpeg', 'caption' => 'Ground Floor Balcony with Garden View', 'category' => 'Rooms', 'sort_order' => 35],
+    ['image_path' => 'image/ground_slide_4.jpeg', 'caption' => 'Modern Bathroom with Geyser & Toiletries', 'category' => 'Rooms', 'sort_order' => 36],
+    ['image_path' => 'image/ground_slide_5.jpeg', 'caption' => 'Deluxe Room Seating & Lighting', 'category' => 'Rooms', 'sort_order' => 37],
+    ['image_path' => 'image/first_slide_1.jpeg', 'caption' => 'Deluxe Premium First Floor Suite', 'category' => 'Rooms', 'sort_order' => 38],
+    ['image_path' => 'image/first_slide_2.jpeg', 'caption' => 'First Floor Private Balcony & Pool View', 'category' => 'Rooms', 'sort_order' => 39],
+    ['image_path' => 'image/first_slide_3.jpeg', 'caption' => 'First Floor Suite Interior & LED TV', 'category' => 'Rooms', 'sort_order' => 40],
+    ['image_path' => 'image/family_slide1.jpg', 'caption' => 'Family Premium Four Sharing Suite', 'category' => 'Rooms', 'sort_order' => 41],
+    ['image_path' => 'image/family_slide2.jpg', 'caption' => 'Family Suite Dual Double Bed Layout', 'category' => 'Rooms', 'sort_order' => 42],
+    ['image_path' => 'image/family_slide3.jpg', 'caption' => 'Family Suite Wardrobe & Amenities', 'category' => 'Rooms', 'sort_order' => 43],
+    ['image_path' => 'image/family_slide4.jpg', 'caption' => 'Family Suite Modern Washroom', 'category' => 'Rooms', 'sort_order' => 44],
 
     // Swimming Pool & Gardens
-    ['image_path' => 'image/pool_slide_1.jpeg', 'caption' => 'Crystal Clear Swimming Pool', 'category' => 'Pool', 'sort_order' => 40],
-    ['image_path' => 'image/pool_slide_2.jpeg', 'caption' => 'Poolside Sun Loungers & Relaxation Deck', 'category' => 'Pool', 'sort_order' => 41],
-    ['image_path' => 'image/pool_temp_1.jpeg', 'caption' => 'Refreshing Swimming Pool Oasis & Gardens', 'category' => 'Pool', 'sort_order' => 42],
-    ['image_path' => 'image/pool_temp_2.jpeg', 'caption' => 'Sunny Pool Deck & Landscaped Grounds', 'category' => 'Pool', 'sort_order' => 43],
-    ['image_path' => 'image/pool_temp_3.jpeg', 'caption' => 'Crystal Clear Swimming Pool Area', 'category' => 'Pool', 'sort_order' => 44],
-    ['image_path' => 'image/pool_slide_3.jpeg', 'caption' => 'Scenic Pool Deck & Surrounding Gardens', 'category' => 'Pool', 'sort_order' => 45],
-    ['image_path' => 'image/pool_slide_4.jpeg', 'caption' => 'Poolside Shaded Seating Area', 'category' => 'Pool', 'sort_order' => 46],
-    ['image_path' => 'image/pool_slide_5.jpeg', 'caption' => 'Lush Green Poolside Grounds', 'category' => 'Pool', 'sort_order' => 47],
-    ['image_path' => 'image/pool_slide_6.jpeg', 'caption' => 'Poolside Palm Trees & Pathway', 'category' => 'Pool', 'sort_order' => 48],
-    ['image_path' => 'image/pool_slide_7.jpeg', 'caption' => 'Evening Pool Reflections', 'category' => 'Pool', 'sort_order' => 49],
-    ['image_path' => 'image/pool_slide_8.jpeg', 'caption' => 'Daytime Pool Oasis', 'category' => 'Pool', 'sort_order' => 50],
-    ['image_path' => 'image/pool_slide_9.jpeg', 'caption' => 'Pool & Garden Landscape', 'category' => 'Pool', 'sort_order' => 51],
-    ['image_path' => 'image/pool_slide_10.jpeg', 'caption' => 'Pool Deck Perspective', 'category' => 'Pool', 'sort_order' => 52],
-    ['image_path' => 'image/pool_slide_12.jpeg', 'caption' => 'Swimming Pool Panoramic View', 'category' => 'Pool', 'sort_order' => 53],
-    ['image_path' => 'image/pool_bg.jpg', 'caption' => 'Night Pool Illumination & Lights', 'category' => 'Pool', 'sort_order' => 54],
+    ['image_path' => 'image/pool_slide_1.jpeg', 'caption' => 'Crystal Clear Swimming Pool', 'category' => 'Pool', 'sort_order' => 45],
+    ['image_path' => 'image/pool_slide_2.jpeg', 'caption' => 'Poolside Sun Loungers & Relaxation Deck', 'category' => 'Pool', 'sort_order' => 46],
+    ['image_path' => 'image/pool_temp_1.jpeg', 'caption' => 'Refreshing Swimming Pool Oasis & Gardens', 'category' => 'Pool', 'sort_order' => 47],
+    ['image_path' => 'image/pool_temp_2.jpeg', 'caption' => 'Sunny Pool Deck & Landscaped Grounds', 'category' => 'Pool', 'sort_order' => 48],
+    ['image_path' => 'image/pool_temp_3.jpeg', 'caption' => 'Crystal Clear Swimming Pool Area', 'category' => 'Pool', 'sort_order' => 49],
+    ['image_path' => 'image/pool_slide_3.jpeg', 'caption' => 'Scenic Pool Deck & Surrounding Gardens', 'category' => 'Pool', 'sort_order' => 50],
+    ['image_path' => 'image/pool_slide_4.jpeg', 'caption' => 'Poolside Shaded Seating Area', 'category' => 'Pool', 'sort_order' => 51],
+    ['image_path' => 'image/pool_slide_5.jpeg', 'caption' => 'Lush Green Poolside Grounds', 'category' => 'Pool', 'sort_order' => 52],
+    ['image_path' => 'image/pool_slide_6.jpeg', 'caption' => 'Poolside Palm Trees & Pathway', 'category' => 'Pool', 'sort_order' => 53],
+    ['image_path' => 'image/pool_slide_7.jpeg', 'caption' => 'Evening Pool Reflections', 'category' => 'Pool', 'sort_order' => 54],
+    ['image_path' => 'image/pool_slide_8.jpeg', 'caption' => 'Daytime Pool Oasis', 'category' => 'Pool', 'sort_order' => 55],
+    ['image_path' => 'image/pool_slide_9.jpeg', 'caption' => 'Pool & Garden Landscape', 'category' => 'Pool', 'sort_order' => 56],
+    ['image_path' => 'image/pool_slide_10.jpeg', 'caption' => 'Pool Deck Perspective', 'category' => 'Pool', 'sort_order' => 57],
+    ['image_path' => 'image/pool_slide_12.jpeg', 'caption' => 'Swimming Pool Panoramic View', 'category' => 'Pool', 'sort_order' => 58],
+    ['image_path' => 'image/pool_bg.jpg', 'caption' => 'Night Pool Illumination & Lights', 'category' => 'Pool', 'sort_order' => 59],
 
     // Banquet & Events
     ['image_path' => 'image/banquet_slide_1.jpeg', 'caption' => 'Parijat AC Banquet & Conference Hall Front View', 'category' => 'Banquet', 'sort_order' => 60],
@@ -93,36 +101,45 @@ $allDefaultGallery = [
     ['image_path' => 'image/reception_new_3.jpeg', 'caption' => 'Premium Lobby Interiors & Ambience', 'category' => 'Reception', 'sort_order' => 96]
 ];
 
-// Self-healing database sync: automatically populate database with authentic photos if table has fewer items or missing categories
+// Self-healing database sync: automatically populate database with authentic photos
 try {
-    $totalCount = (int)$pdo->query("SELECT COUNT(*) FROM gallery WHERE status = 'active'")->fetchColumn();
-    if ($totalCount < 50) {
-        $insertStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, ?, ?, 'active')");
-        $existingRows = $pdo->query("SELECT image_path FROM gallery")->fetchAll(PDO::FETCH_COLUMN);
-        $existingSet = array_flip($existingRows);
-        foreach ($allDefaultGallery as $item) {
-            if (!isset($existingSet[$item['image_path']])) {
-                $insertStmt->execute([$item['image_path'], $item['caption'], $item['category'], $item['sort_order']]);
-                $existingSet[$item['image_path']] = true;
-            }
+    // Permanently remove unwanted stock about_bg.jpg if present in database
+    $pdo->exec("DELETE FROM gallery WHERE image_path = 'image/about_bg.jpg'");
+
+    $existingRows = $pdo->query("SELECT image_path, category FROM gallery WHERE image_path != 'image/about_bg.jpg'")->fetchAll(PDO::FETCH_ASSOC);
+    $existingSet = [];
+    foreach ($existingRows as $row) {
+        $existingSet[$row['image_path'] . '|' . $row['category']] = true;
+    }
+
+    $insertStmt = $pdo->prepare("INSERT INTO gallery (image_path, caption, category, sort_order, status) VALUES (?, ?, ?, ?, 'active')");
+    $updateStmt = $pdo->prepare("UPDATE gallery SET caption = ?, sort_order = ? WHERE image_path = ? AND category = ?");
+
+    foreach ($allDefaultGallery as $item) {
+        $key = $item['image_path'] . '|' . $item['category'];
+        if (!isset($existingSet[$key])) {
+            $insertStmt->execute([$item['image_path'], $item['caption'], $item['category'], $item['sort_order']]);
+            $existingSet[$key] = true;
+        } else {
+            $updateStmt->execute([$item['caption'], $item['sort_order'], $item['image_path'], $item['category']]);
         }
     }
 } catch (Exception $e) {}
 
 // Fetch gallery images managed dynamically by admin
-$stmt = $pdo->query("SELECT * FROM gallery WHERE status = 'active' ORDER BY sort_order ASC, id ASC");
+$stmt = $pdo->query("SELECT * FROM gallery WHERE status = 'active' AND image_path != 'image/about_bg.jpg' ORDER BY sort_order ASC, id ASC");
 $dynamicGallery = $stmt->fetchAll();
 
-// Guarantee all categories and all authentic photos are present even if database has partial records
-if (count($dynamicGallery) < 50) {
-    $loadedPaths = [];
-    foreach ($dynamicGallery as $dg) {
-        $loadedPaths[$dg['image_path']] = true;
-    }
-    foreach ($allDefaultGallery as $item) {
-        if (!isset($loadedPaths[$item['image_path']])) {
-            $dynamicGallery[] = $item;
-        }
+// Guarantee all authentic photos are present even if database has partial records
+$loadedKeys = [];
+foreach ($dynamicGallery as $dg) {
+    $loadedKeys[$dg['image_path'] . '|' . ($dg['category'] ?? '')] = true;
+}
+foreach ($allDefaultGallery as $item) {
+    $key = $item['image_path'] . '|' . $item['category'];
+    if (!isset($loadedKeys[$key])) {
+        $dynamicGallery[] = $item;
+        $loadedKeys[$key] = true;
     }
 }
 ?>
