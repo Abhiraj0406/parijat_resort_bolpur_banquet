@@ -157,10 +157,22 @@ if (empty($gallery_images)) {
                             <li data-target="#aboutResortCarousel" data-slide-to="3"></li>
                             <li data-target="#aboutResortCarousel" data-slide-to="4"></li>
                             <li data-target="#aboutResortCarousel" data-slide-to="5"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="6"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="7"></li>
+                            <li data-target="#aboutResortCarousel" data-slide-to="8"></li>
                         </ol>
                         <div class="carousel-inner h-100" style="border-radius: 12px; min-height: 380px;">
                             <div class="carousel-item active h-100">
                                 <img class="d-block w-100 h-100" src="image/about_slide_1.jpeg" alt="Parijat Resort Cottages & Living Spaces" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/cottage_exterior_lawn_1.jpeg" alt="Parijat Resort Cottages & Lush Green Lawn" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/cottage_veranda_1.jpeg" alt="Parijat Resort Cottage Verandah & Sit-out" style="object-fit: cover; min-height: 380px; max-height: 440px;">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img class="d-block w-100 h-100" src="image/cottage_veranda_2.jpeg" alt="Parijat Resort Cottage Pathway & Santiniketan Art" style="object-fit: cover; min-height: 380px; max-height: 440px;">
                             </div>
                             <div class="carousel-item h-100">
                                 <img class="d-block w-100 h-100" src="image/reception_lobby_1.jpeg" alt="Parijat Resort Reception Lounge & Entrance" style="object-fit: cover; min-height: 380px; max-height: 440px;">
