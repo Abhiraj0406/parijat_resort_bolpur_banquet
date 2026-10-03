@@ -5,6 +5,9 @@ require_once __DIR__.'/includes/email.php';
 
 // Check form type
 $type = $_POST['type'] ?? 'contact';
+$isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+       || (isset($_POST['ajax']) && $_POST['ajax'] == '1')
+       || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
 
 if ($type === 'quick_booking') {
     // Process Quick Booking from Homepage
@@ -14,12 +17,22 @@ if ($type === 'quick_booking') {
     $check_out = trim($_POST['check_out'] ?? '');
     
     if (empty($name) || empty($phone) || empty($check_in) || empty($check_out)) {
+        if ($isAjax) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['status' => 'error', 'message' => 'Please fill in all required fields (Arrival Date, Departure Date, Name, and Phone).']);
+            exit;
+        }
         die('Please fill all required fields.');
     }
     
     // Validate phone digits
     $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
     if (strlen(preg_replace('/[^0-9]/', '', $cleanPhone)) < 10) {
+        if ($isAjax) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['status' => 'error', 'message' => 'Please provide a valid 10-digit mobile number.']);
+            exit;
+        }
         die('Please provide a valid 10-digit mobile number.');
     }
     
@@ -27,66 +40,58 @@ if ($type === 'quick_booking') {
     $inTime = strtotime(str_replace('/', '-', $check_in));
     $outTime = strtotime(str_replace('/', '-', $check_out));
     if (!$inTime || !$outTime) {
+        if ($isAjax) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['status' => 'error', 'message' => 'Invalid date format selected.']);
+            exit;
+        }
         die('Invalid date format.');
     }
-    $check_in_db = date('Y-m-d', $inTime);
-    $check_out_db = date('Y-m-d', $outTime);
+    $check_in_db   = date('Y-m-d', $inTime);
+    $check_out_db  = date('Y-m-d', $outTime);
+    $formatted_in  = date('d M Y', $inTime);
+    $formatted_out = date('d M Y', $outTime);
     
-    try {
-        // Fetch a default category_id for Quick Booking
-        $catStmt = $pdo->query("SELECT id FROM room_categories LIMIT 1");
-        $defaultCategory = $catStmt->fetchColumn() ?: 1;
-
-        // Insert into booking_inquiries table (Admin panel reads this)
-        $sqlInq = "INSERT INTO booking_inquiries 
-            (guest_name, email, phone, whatsapp_number, check_in, check_out, category_id, ac_preference, number_of_rooms, adults, kids, message, status) 
-            VALUES (:guest_name, :email, :phone, :wa, :check_in, :check_out, :category_id, 'AC', 1, 2, 0, :message, 'new')";
-        
-        $stmtInq = $pdo->prepare($sqlInq);
-        $stmtInq->execute([
-            ':guest_name'  => $name,
-            ':email'       => 'quick-booking@parijatresortbolpur.com',
-            ':phone'       => $phone,
-            ':wa'          => $phone,
-            ':check_in'    => $check_in_db,
-            ':check_out'   => $check_out_db,
-            ':category_id' => $defaultCategory,
-            ':message'     => 'Submitted via Quick Booking Form on Homepage.'
-        ]);
-        
-        $reservationId = $pdo->lastInsertId();
-        
-        // Fetch Primary Resort WhatsApp Number
-        $settStmt = $pdo->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'whatsapp_number'");
-        $settStmt->execute();
-        $resortWhatsAppRaw = $settStmt->fetchColumn();
-        if (empty($resortWhatsAppRaw)) {
-            $resortWhatsAppRaw = '+91 98309 09875';
-        }
-        $targetWhatsAppDigits = preg_replace('/[^0-9]/', '', $resortWhatsAppRaw);
-        if (strlen($targetWhatsAppDigits) === 10) {
-            $targetWhatsAppDigits = '91' . $targetWhatsAppDigits;
-        }
-        
-        // Generate WhatsApp Message
-        $waMessage = "*New Quick Booking Enquiry*\n\n"
-                   . "*Name:* $name\n"
-                   . "*Mobile:* $phone\n"
-                   . "*Check-in:* $check_in\n"
-                   . "*Check-out:* $check_out\n"
-                   . "*Source:* Homepage Quick Booking";
-                   
-        $encodedWaText = rawurlencode($waMessage);
-        $waUrl = "https://api.whatsapp.com/send?phone=" . $targetWhatsAppDigits . "&text=" . $encodedWaText;
-        
-        // Redirect to confirmation
-        header('Location: confirmation.php?id=' . $reservationId . '&wa=1&url=' . urlencode($waUrl));
-        exit;
-        
-    } catch (Exception $e) {
-        error_log('Quick booking error: ' . $e->getMessage());
-        die('A database error occurred. Please try again.');
+    // Fetch Primary Resort WhatsApp Number (from settings or fallback)
+    $settStmt = $pdo->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'whatsapp_number'");
+    $settStmt->execute();
+    $resortWhatsAppRaw = $settStmt->fetchColumn();
+    if (empty($resortWhatsAppRaw)) {
+        $resortWhatsAppRaw = defined('WHATSAPP_NUMBER') ? WHATSAPP_NUMBER : '+91 98309 09875';
     }
+    $targetWhatsAppDigits = preg_replace('/[^0-9]/', '', $resortWhatsAppRaw);
+    if (strlen($targetWhatsAppDigits) === 10) {
+        $targetWhatsAppDigits = '91' . $targetWhatsAppDigits;
+    }
+    
+    // Generate WhatsApp Message
+    $waMessage = "*New Quick Booking Enquiry*\n\n"
+               . "*Name:* $name\n"
+               . "*Mobile:* $phone\n"
+               . "*Check-in:* $formatted_in\n"
+               . "*Check-out:* $formatted_out\n"
+               . "*Source:* Homepage Quick Booking";
+               
+    $encodedWaText = rawurlencode($waMessage);
+    $waUrl = "https://api.whatsapp.com/send?phone=" . $targetWhatsAppDigits . "&text=" . $encodedWaText;
+    
+    if ($isAjax) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'status'     => 'success',
+            'message'    => "Thank you, $name! We have received your booking enquiry. Our team will call you shortly at $phone.",
+            'guest_name' => $name,
+            'phone'      => $phone,
+            'check_in'   => $formatted_in,
+            'check_out'  => $formatted_out,
+            'wa_url'     => $waUrl
+        ]);
+        exit;
+    }
+
+    // Direct redirect to WhatsApp
+    header('Location: ' . $waUrl);
+    exit;
     
 } else {
     // Process General Contact Form

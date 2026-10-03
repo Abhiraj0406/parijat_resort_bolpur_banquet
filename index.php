@@ -88,7 +88,14 @@ if (empty($gallery_images)) {
                     </div>
                     <div class="col-md-9">
                         <div class="boking_table">
-                            <form action="contact_process.php" method="POST">
+                            <?php
+                            $qb_raw_wa = $site_settings['whatsapp_number'] ?? (defined('WHATSAPP_NUMBER') ? WHATSAPP_NUMBER : '+91 98309 09875');
+                            $qb_wa_digits = preg_replace('/[^0-9]/', '', $qb_raw_wa);
+                            if (strlen($qb_wa_digits) === 10) {
+                                $qb_wa_digits = '91' . $qb_wa_digits;
+                            }
+                            ?>
+                            <form id="quickBookingForm" action="contact_process.php" method="POST" data-wa="<?php echo $qb_wa_digits; ?>">
                                 <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                 <input type="hidden" name="type" value="quick_booking">
                                 <div class="row">
@@ -111,16 +118,16 @@ if (empty($gallery_images)) {
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="form-group" style="margin-bottom: 20px;">
-                                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                                <input type="text" id="quick_name" name="name" class="form-control" placeholder="Your Name" required>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                                                <input type="tel" id="quick_phone" name="phone" class="form-control" placeholder="Phone Number" required maxlength="15">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
-                                            <button type="submit" class="book_now_btn button_hover w-100" style="border:none; border-radius: 5px; margin-top: 10px; padding: 10px 20px;">Request Call</button>
+                                            <button type="submit" id="quickBookingBtn" class="book_now_btn button_hover w-100" style="border:none; border-radius: 5px; margin-top: 10px; padding: 10px 20px;">Request Call</button>
                                         </div>
                                     </div>
                                 </div>
@@ -132,6 +139,61 @@ if (empty($gallery_images)) {
         </div>
     </div>
 </section>
+
+<!-- Quick Booking Confirmation Modal for Client -->
+<div class="modal fade" id="quickBookingModal" tabindex="-1" role="dialog" aria-labelledby="quickBookingModalLabel" aria-hidden="true" style="z-index: 99999;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 520px;">
+        <div class="modal-content" style="border-radius: 16px; border: none; box-shadow: 0 20px 60px rgba(0,0,0,0.35); overflow: hidden;">
+            <div class="modal-header text-white" style="background: linear-gradient(135deg, #1f6e43 0%, #155724 100%); padding: 22px 25px; border-bottom: none; position: relative;">
+                <div class="d-flex align-items-center w-100">
+                    <div style="width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                        <i class="fa fa-check text-white" style="font-size: 24px;"></i>
+                    </div>
+                    <div>
+                        <h4 class="modal-title font-weight-bold mb-0 text-white" id="quickBookingModalLabel">Booking Request Received!</h4>
+                        <p class="mb-0 text-white-50 small" id="qbRefCode">Reference: #RES-00000</p>
+                    </div>
+                </div>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 18px; right: 20px; font-size: 26px; opacity: 0.9;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4" style="background: #ffffff;">
+                <div class="alert alert-success d-flex align-items-start mb-3" style="background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 10px; color: #1e4620;">
+                    <i class="fa fa-phone mr-3 mt-1 text-success" style="font-size: 22px;"></i>
+                    <div>
+                        <strong class="d-block" style="font-size: 15px;">Thank you, <span id="qbGuestName">Guest</span>!</strong>
+                        <span style="font-size: 13.5px;" id="qbSuccessMsg">Your room booking enquiry has been recorded. Our reservations team will call you shortly on your number to verify availability and offer special deals.</span>
+                    </div>
+                </div>
+
+                <div class="p-3 rounded mb-3" style="background: #f8fafc; border: 1px solid #e2e8f0; font-size: 14px;">
+                    <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                        <span class="text-muted"><i class="fa fa-calendar-check-o mr-2 text-success"></i>Stay Dates:</span>
+                        <strong class="text-dark"><span id="qbDates">--</span></strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted"><i class="fa fa-phone mr-2 text-success"></i>Contact Mobile:</span>
+                        <strong class="text-dark"><span id="qbPhone">--</span></strong>
+                    </div>
+                </div>
+
+                <div class="text-center p-3 rounded" style="background: #f0fdf4; border: 1px dashed #22c55e;">
+                    <p class="mb-2 text-dark font-weight-bold" style="font-size: 14px;">
+                        <i class="fa fa-whatsapp text-success mr-1"></i> Send this enquiry directly on WhatsApp:
+                    </p>
+                    <a href="#" target="_blank" id="qbWaBtn" class="btn btn-success btn-block py-2 font-weight-bold shadow-sm d-inline-flex align-items-center justify-content-center" style="border-radius: 50px; font-size: 15px; background: #25d366; border-color: #25d366;">
+                        <i class="fa fa-whatsapp mr-2 fa-lg"></i> Open WhatsApp Now
+                    </a>
+                    <small class="text-muted d-block mt-2" style="font-size: 12px;" id="qbWaNote">Connecting you to WhatsApp front desk...</small>
+                </div>
+            </div>
+            <div class="modal-footer bg-light py-2 px-3" style="border-top: 1px solid #e9ecef;">
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-4" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </section>
 
@@ -913,6 +975,7 @@ document.addEventListener("DOMContentLoaded", function() {
             altInput: true,
             altFormat: "d M Y",
             minDate: new Date().fp_incr(1),
+            defaultDate: new Date().fp_incr(1),
             disableMobile: "true"
         });
 
@@ -949,6 +1012,106 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     }
+
+    // Quick Booking Form - Send WhatsApp directly without database storage
+    var qbForm = document.getElementById("quickBookingForm");
+    if (qbForm) {
+        qbForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            var nameInput = document.getElementById("quick_name");
+            var phoneInput = document.getElementById("quick_phone");
+            var checkInInput = document.getElementById("quick_check_in");
+            var checkOutInput = document.getElementById("quick_check_out");
+
+            var name = nameInput ? nameInput.value.trim() : "";
+            var phone = phoneInput ? phoneInput.value.trim() : "";
+            var checkIn = checkInInput ? checkInInput.value.trim() : "";
+            var checkOut = checkOutInput ? checkOutInput.value.trim() : "";
+
+            if (!name || !phone) {
+                alert("Please fill in your name and phone number.");
+                if (!name && nameInput) nameInput.focus();
+                else if (phoneInput) phoneInput.focus();
+                return;
+            }
+
+            var cleanPhone = phone.replace(/[^0-9]/g, "");
+            if (cleanPhone.length < 10) {
+                alert("Please provide a valid 10-digit mobile number.");
+                if (phoneInput) phoneInput.focus();
+                return;
+            }
+
+            // Get formatted date strings from Flatpickr altInput or default
+            var inDateStr = (typeof checkInPicker !== 'undefined' && checkInPicker && checkInPicker.altInput) 
+                            ? checkInPicker.altInput.value 
+                            : (checkIn || "Upcoming Stay");
+            var outDateStr = (typeof checkOutPicker !== 'undefined' && checkOutPicker && checkOutPicker.altInput) 
+                            ? checkOutPicker.altInput.value 
+                            : (checkOut || "");
+
+            var displayDates = outDateStr ? (inDateStr + " → " + outDateStr) : inDateStr;
+
+            // Target Resort WhatsApp Number (Default: 919830909875)
+            var resortWa = qbForm.getAttribute("data-wa") || "919830909875";
+
+            // Build Formatted WhatsApp Message
+            var waMessage = "*New Quick Booking Enquiry*\n\n"
+                          + "*Name:* " + name + "\n"
+                          + "*Mobile:* " + phone + "\n"
+                          + "*Check-in:* " + inDateStr + "\n"
+                          + "*Check-out:* " + (outDateStr || inDateStr) + "\n"
+                          + "*Source:* Homepage Quick Booking";
+
+            var waUrl = "https://api.whatsapp.com/send?phone=" + resortWa + "&text=" + encodeURIComponent(waMessage);
+
+            // 1. Immediately open WhatsApp in new tab (synchronous in click event prevents popup blockers)
+            window.open(waUrl, "_blank");
+
+            // 2. Show confirmation message to client on screen
+            var guestNameEl = document.getElementById("qbGuestName");
+            if (guestNameEl) guestNameEl.textContent = name;
+
+            var datesEl = document.getElementById("qbDates");
+            if (datesEl) datesEl.textContent = displayDates;
+
+            var phoneEl = document.getElementById("qbPhone");
+            if (phoneEl) phoneEl.textContent = phone;
+
+            var waBtn = document.getElementById("qbWaBtn");
+            if (waBtn) waBtn.href = waUrl;
+
+            if (typeof $ !== 'undefined' && typeof $('#quickBookingModal').modal === 'function') {
+                $('#quickBookingModal').modal('show');
+            } else {
+                var modalEl = document.getElementById('quickBookingModal');
+                if (modalEl) {
+                    modalEl.style.display = 'block';
+                    modalEl.classList.add('show');
+                }
+            }
+
+            // Reset inputs
+            if (nameInput) nameInput.value = "";
+            if (phoneInput) phoneInput.value = "";
+        });
+    }
+
+    // Modal dismiss fallback handler
+    document.querySelectorAll('#quickBookingModal [data-dismiss="modal"]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            if (typeof $ !== 'undefined' && typeof $('#quickBookingModal').modal === 'function') {
+                $('#quickBookingModal').modal('hide');
+            } else {
+                var modalEl = document.getElementById('quickBookingModal');
+                if (modalEl) {
+                    modalEl.style.display = 'none';
+                    modalEl.classList.remove('show');
+                }
+            }
+        });
+    });
 });
 </script>
 

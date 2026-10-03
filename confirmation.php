@@ -18,6 +18,13 @@ $stmt->execute([':id' => $reservationId]);
 $reservation = $stmt->fetch();
 
 if (!$reservation) {
+    // Fallback: check booking_inquiries table in case the ID was from booking_inquiries
+    $stmtInq = $pdo->prepare("SELECT guest_name AS name, email, phone, check_in, check_out, COALESCE(NULLIF(ac_preference, ''), 'Quick Booking') AS room_type, message, created_at FROM booking_inquiries WHERE id = :id");
+    $stmtInq->execute([':id' => $reservationId]);
+    $reservation = $stmtInq->fetch();
+}
+
+if (!$reservation) {
     echo '<div class="container my-5"><div class="alert alert-warning" role="alert">Reservation enquiry not found.</div></div>';
     include_once 'includes/footer.php';
     exit;
@@ -78,12 +85,13 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
                     </ul>
 
                     <?php if (!empty($waUrl)): ?>
-                    <div class="p-3 bg-light border rounded text-center mb-4">
-                        <p class="font-weight-bold text-dark mb-2">Continue to WhatsApp to chat directly with our front desk:</p>
-                        <a href="<?php echo htmlspecialchars($waUrl); ?>" target="_blank" id="waOpenBtn" class="btn btn-success btn-lg px-4 py-3 font-weight-bold shadow rounded-pill">
-                            <i class="fa fa-whatsapp mr-2 fa-lg"></i> Open WhatsApp with Enquiry Details
+                    <div class="p-4 bg-light border rounded text-center mb-4 shadow-sm" style="border-radius: 12px;">
+                        <h5 class="font-weight-bold text-dark mb-1">Send Booking Request to WhatsApp</h5>
+                        <p class="text-muted small mb-3">Connecting with our front desk directly sends all your booking details to WhatsApp:</p>
+                        <a href="<?php echo htmlspecialchars($waUrl); ?>" target="_blank" id="waOpenBtn" class="btn btn-success btn-lg px-4 py-3 font-weight-bold shadow rounded-pill d-inline-flex align-items-center">
+                            <i class="fa fa-whatsapp mr-2 fa-2x"></i> <span>Open WhatsApp &amp; Send Details</span>
                         </a>
-                        <small class="d-block text-muted mt-2">If WhatsApp didn't open automatically, click the button above.</small>
+                        <small class="d-block text-muted mt-2" id="waStatusText">If WhatsApp didn't open automatically, click the green button above.</small>
                     </div>
                     <?php endif; ?>
 
@@ -102,15 +110,32 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
 </div>
 
 <?php if ($openWa): ?>
+<style>
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.pulse-btn {
+    animation: pulseGlow 1.5s infinite;
+}
+</style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Open WhatsApp in a new tab/window automatically after brief delay
-    setTimeout(function() {
-        var waLink = "<?php echo addslashes($waUrl); ?>";
-        if (waLink) {
-            window.open(waLink, '_blank');
+    var waLink = "<?php echo addslashes($waUrl); ?>";
+    if (waLink) {
+        var win = window.open(waLink, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+            var statusEl = document.getElementById('waStatusText');
+            if (statusEl) {
+                statusEl.innerHTML = '<span class="text-success font-weight-bold"><i class="fa fa-info-circle"></i> Click the button above to launch WhatsApp.</span>';
+            }
+            var btn = document.getElementById('waOpenBtn');
+            if (btn) {
+                btn.classList.add('pulse-btn');
+            }
         }
-    }, 800);
+    }
 });
 </script>
 <?php endif; ?>

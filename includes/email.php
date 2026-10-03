@@ -18,9 +18,15 @@ function send_smtp_email(string $to, string $subject, string $htmlBody): bool {
     $fromEmail = defined('FROM_EMAIL') ? FROM_EMAIL : 'no-reply@example.com';
     $fromName  = defined('FROM_NAME')  ? FROM_NAME  : 'Parijat Resort';
 
+    // Avoid blocking network delays when SMTP is configured with placeholder values
+    if (empty($smtpPass) || $smtpPass === 'your_email_app_password_here' || $smtpHost === 'smtp.example.com') {
+        return false;
+    }
+
     $mail = new PHPMailer(true);
     try {
         // Server settings
+        $mail->Timeout    = 3;
         $mail->isSMTP();
         $mail->Host       = $smtpHost;
         $mail->SMTPAuth   = true;
