@@ -140,56 +140,200 @@ if (empty($gallery_images)) {
     </div>
 </section>
 
+<style>
+/* High-Contrast Luxury Styling for Quick Booking Modal */
+#quickBookingModal .modal-content {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    border-radius: 20px !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45) !important;
+    border: none !important;
+    overflow: hidden !important;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+#quickBookingModal .modal-header {
+    background: linear-gradient(135deg, #14532d 0%, #166534 100%) !important;
+    padding: 22px 24px !important;
+    border: none !important;
+    position: relative !important;
+}
+#quickBookingModal .modal-title {
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.3px;
+    margin: 0 !important;
+}
+#quickBookingModal .modal-subtitle {
+    color: #dcfce7 !important;
+    font-size: 13px !important;
+    margin-top: 3px;
+}
+#quickBookingModal .modal-body {
+    background: #ffffff !important;
+    padding: 24px !important;
+}
+#quickBookingModal .qb-alert-box {
+    background: #f0fdf4 !important;
+    border: 1.5px solid #86efac !important;
+    border-radius: 14px !important;
+    padding: 16px 18px !important;
+    margin-bottom: 20px !important;
+}
+#quickBookingModal .qb-alert-title {
+    color: #14532d !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+    text-transform: capitalize;
+}
+#quickBookingModal .qb-alert-text {
+    color: #166534 !important;
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+#quickBookingModal .qb-summary-box {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    padding: 16px 20px !important;
+    margin-bottom: 20px !important;
+}
+#quickBookingModal .qb-summary-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+#quickBookingModal .qb-summary-row:not(:last-child) {
+    padding-bottom: 12px !important;
+    margin-bottom: 12px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+#quickBookingModal .qb-label {
+    color: #475569 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+#quickBookingModal .qb-value {
+    color: #0f172a !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+#quickBookingModal .qb-wa-box {
+    background: #f0fdf4 !important;
+    border: 1.5px dashed #22c55e !important;
+    border-radius: 14px !important;
+    padding: 18px !important;
+    text-align: center !important;
+}
+#quickBookingModal .qb-wa-heading {
+    color: #15803d !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+}
+#quickBookingModal .qb-wa-btn {
+    background: #25d366 !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    padding: 13px 28px !important;
+    border-radius: 50px !important;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    width: 100% !important;
+    transition: all 0.25s ease !important;
+}
+#quickBookingModal .qb-wa-btn:hover {
+    background: #1ebc59 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 22px rgba(37, 211, 102, 0.5) !important;
+}
+#quickBookingModal .qb-wa-hint {
+    color: #64748b !important;
+    font-size: 12px !important;
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+}
+#quickBookingModal .modal-footer {
+    background: #f8fafc !important;
+    border-top: 1px solid #e2e8f0 !important;
+    padding: 12px 24px !important;
+}
+#quickBookingModal .qb-close-btn {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    border-radius: 30px !important;
+    padding: 7px 24px !important;
+    transition: all 0.2s ease !important;
+}
+#quickBookingModal .qb-close-btn:hover {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+}
+</style>
+
 <!-- Quick Booking Confirmation Modal for Client -->
 <div class="modal fade" id="quickBookingModal" tabindex="-1" role="dialog" aria-labelledby="quickBookingModalLabel" aria-hidden="true" style="z-index: 99999;">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 520px;">
-        <div class="modal-content" style="border-radius: 16px; border: none; box-shadow: 0 20px 60px rgba(0,0,0,0.35); overflow: hidden;">
-            <div class="modal-header text-white" style="background: linear-gradient(135deg, #1f6e43 0%, #155724 100%); padding: 22px 25px; border-bottom: none; position: relative;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header">
                 <div class="d-flex align-items-center w-100">
-                    <div style="width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
-                        <i class="fa fa-check text-white" style="font-size: 24px;"></i>
+                    <div style="width: 46px; height: 46px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 14px; flex-shrink: 0;">
+                        <i class="fa fa-whatsapp text-white" style="font-size: 26px;"></i>
                     </div>
                     <div>
-                        <h4 class="modal-title font-weight-bold mb-0 text-white" id="quickBookingModalLabel">Booking Request Received!</h4>
-                        <p class="mb-0 text-white-50 small" id="qbRefCode">Reference: #RES-00000</p>
+                        <h4 class="modal-title" id="quickBookingModalLabel">Booking Request Prepared!</h4>
+                        <div class="modal-subtitle">Parijat Resort Bolpur &bull; Front Desk</div>
                     </div>
                 </div>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 18px; right: 20px; font-size: 26px; opacity: 0.9;">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 18px; right: 20px; font-size: 26px; opacity: 0.9; text-shadow: none;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body p-4" style="background: #ffffff;">
-                <div class="alert alert-success d-flex align-items-start mb-3" style="background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 10px; color: #1e4620;">
-                    <i class="fa fa-phone mr-3 mt-1 text-success" style="font-size: 22px;"></i>
+            <div class="modal-body">
+                <div class="qb-alert-box d-flex align-items-start">
+                    <i class="fa fa-check-circle mr-3 mt-1" style="font-size: 24px; color: #16a34a; flex-shrink: 0;"></i>
                     <div>
-                        <strong class="d-block" style="font-size: 15px;">Thank you, <span id="qbGuestName">Guest</span>!</strong>
-                        <span style="font-size: 13.5px;" id="qbSuccessMsg">Your room booking enquiry has been recorded. Our reservations team will call you shortly on your number to verify availability and offer special deals.</span>
+                        <span class="qb-alert-title">Thank you, <span id="qbGuestName">Guest</span>!</span>
+                        <p class="qb-alert-text">Your room booking request is ready. Click below to send your details directly to our WhatsApp reservations desk.</p>
                     </div>
                 </div>
 
-                <div class="p-3 rounded mb-3" style="background: #f8fafc; border: 1px solid #e2e8f0; font-size: 14px;">
-                    <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                        <span class="text-muted"><i class="fa fa-calendar-check-o mr-2 text-success"></i>Stay Dates:</span>
-                        <strong class="text-dark"><span id="qbDates">--</span></strong>
+                <div class="qb-summary-box">
+                    <div class="qb-summary-row">
+                        <span class="qb-label"><i class="fa fa-calendar-check-o mr-2 text-success"></i>Stay Dates:</span>
+                        <span class="qb-value" id="qbDates">--</span>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <span class="text-muted"><i class="fa fa-phone mr-2 text-success"></i>Contact Mobile:</span>
-                        <strong class="text-dark"><span id="qbPhone">--</span></strong>
+                    <div class="qb-summary-row">
+                        <span class="qb-label"><i class="fa fa-phone mr-2 text-success"></i>Contact Mobile:</span>
+                        <span class="qb-value" id="qbPhone">--</span>
                     </div>
                 </div>
 
-                <div class="text-center p-3 rounded" style="background: #f0fdf4; border: 1px dashed #22c55e;">
-                    <p class="mb-2 text-dark font-weight-bold" style="font-size: 14px;">
-                        <i class="fa fa-whatsapp text-success mr-1"></i> Send this enquiry directly on WhatsApp:
-                    </p>
-                    <a href="#" target="_blank" id="qbWaBtn" class="btn btn-success btn-block py-2 font-weight-bold shadow-sm d-inline-flex align-items-center justify-content-center" style="border-radius: 50px; font-size: 15px; background: #25d366; border-color: #25d366;">
+                <div class="qb-wa-box">
+                    <div class="qb-wa-heading"><i class="fa fa-whatsapp text-success mr-1"></i> Send this enquiry directly on WhatsApp:</div>
+                    <a href="#" target="_blank" id="qbWaBtn" class="qb-wa-btn">
                         <i class="fa fa-whatsapp mr-2 fa-lg"></i> Open WhatsApp Now
                     </a>
-                    <small class="text-muted d-block mt-2" style="font-size: 12px;" id="qbWaNote">Connecting you to WhatsApp front desk...</small>
+                    <p class="qb-wa-hint">WhatsApp connects directly to +91 98309 09875</p>
                 </div>
             </div>
-            <div class="modal-footer bg-light py-2 px-3" style="border-top: 1px solid #e9ecef;">
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-4" data-dismiss="modal">Close</button>
+            <div class="modal-footer">
+                <button type="button" class="btn qb-close-btn" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
