@@ -13,9 +13,9 @@ $site_settings = [];
 while ($row = $stmt->fetch()) {
     $site_settings[$row['setting_key']] = $row['setting_value'];
 }
-$resort_name = $site_settings['resort_name'] ?? (getenv('RESORT_NAME') ?: 'Parijat Resort Bolpur & Banquet');
-if ($resort_name === 'Parijat Resort Bolpur') {
-    $resort_name = 'Parijat Resort Bolpur & Banquet';
+$resort_name = $site_settings['resort_name'] ?? (getenv('RESORT_NAME') ?: 'Parijat Resort & Banquet');
+if ($resort_name === 'Parijat Resort Bolpur' || $resort_name === 'Parijat Resort Bolpur & Banquet') {
+    $resort_name = 'Parijat Resort & Banquet';
 }
 
 // Fetch SEO settings for the current page

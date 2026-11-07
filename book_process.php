@@ -148,21 +148,31 @@ try {
     $resortEmail = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : (getenv('ADMIN_EMAIL') ?: 'parijatresort21@gmail.com');
     $subject = "New Room Booking Enquiry #$refId - $name ($category_name)";
 
+    // Fetch resort contact details for customer emails
+    $settStmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings WHERE setting_key IN ('phone_number', 'whatsapp_number')");
+    $siteSettings = $settStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+    $resortPhone = !empty($siteSettings['phone_number']) ? $siteSettings['phone_number'] : '+91 98309 09875';
+    $resortWhatsApp = !empty($siteSettings['whatsapp_number']) ? $siteSettings['whatsapp_number'] : '+91 98309 09875';
+    $cleanResortPhone = preg_replace('/[^0-9+]/', '', $resortPhone);
+    $cleanResortWa = preg_replace('/[^0-9]/', '', $resortWhatsApp);
+    if (strlen($cleanResortWa) === 10) $cleanResortWa = '91' . $cleanResortWa;
+
     $cleanWaDigits = preg_replace('/[^0-9]/', '', $whatsapp_number);
     if (strlen($cleanWaDigits) === 10) $cleanWaDigits = '91' . $cleanWaDigits;
 
-    $htmlEmail = '<!DOCTYPE html>
+    // --- Admin Notification Email ---
+    $adminHtmlEmail = '<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>New Room Booking Enquiry</title>
 </head>
-<body style="font-family: Arial, Helvetica, sans-serif; background-color: #f4f6f8; margin: 0; padding: 20px; color: #333;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 20px; color: #333;">
     <div style="max-width: 600px; background: #ffffff; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
-        <div style="background: #1b5e20; color: #ffffff; padding: 24px 20px; text-align: center;">
-            <h2 style="margin: 0; font-size: 22px; font-weight: bold; letter-spacing: 0.5px;">Parijat Resort Bolpur &amp; Banquet</h2>
-            <p style="margin: 6px 0 0; opacity: 0.9; font-size: 14px;">Online Room Booking Enquiry</p>
-            <div style="display: inline-block; background: #fab915; color: #111; padding: 4px 14px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-top: 10px;">
+        <div style="background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%); color: #ffffff; padding: 24px 20px; text-align: center;">
+            <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: 0.5px;">Parijat Resort &amp; Banquet</h2>
+            <p style="margin: 6px 0 0; opacity: 0.9; font-size: 14px; color: #e8f5e9;">New Room Booking Enquiry</p>
+            <div style="display: inline-block; background: #fab915; color: #111; padding: 5px 16px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-top: 10px;">
                 Reference: #' . $refId . '
             </div>
         </div>
@@ -220,25 +230,108 @@ try {
             <a href="tel:' . htmlspecialchars($phone) . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">📞 Call Guest</a>
         </div>
         <div style="padding: 14px; text-align: center; font-size: 12px; color: #888; background: #f0f2f5;">
-            Official Automated Booking Desk &bull; Parijat Resort Bolpur &bull; Near Shantiniketan
+            Official Automated Booking Desk &bull; Parijat Resort &amp; Banquet &bull; Near Shantiniketan
         </div>
     </div>
 </body>
 </html>';
 
-    send_smtp_email($resortEmail, $subject, $htmlEmail);
+    // --- Guest Confirmation Receipt Email ---
+    $guestHtmlEmail = '<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Booking Enquiry Received</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 20px; color: #333;">
+    <div style="max-width: 600px; background: #ffffff; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+        <div style="background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%); color: #ffffff; padding: 24px 20px; text-align: center;">
+            <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: 0.5px;">Parijat Resort &amp; Banquet</h2>
+            <p style="margin: 6px 0 0; opacity: 0.9; font-size: 14px; color: #e8f5e9;">Booking Enquiry Confirmation Receipt</p>
+            <div style="display: inline-block; background: #fab915; color: #111; padding: 5px 16px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-top: 10px;">
+                Reference ID: #' . $refId . '
+            </div>
+        </div>
+        <div style="padding: 24px 20px;">
+            <h3 style="margin-top: 0; font-size: 17px; color: #1b5e20;">Dear ' . htmlspecialchars($name) . ',</h3>
+            <p style="font-size: 14.5px; line-height: 1.55; color: #444; margin-bottom: 18px;">
+                Thank you for choosing <strong>Parijat Resort &amp; Banquet</strong>. We have successfully received your room booking enquiry. Our reservations manager is reviewing your dates and will contact you shortly to confirm room availability and tariff.
+            </p>
 
-    // Also send confirmation copy to guest if email was provided
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
+                <tr style="background: #f7faf7;">
+                    <td colspan="2" style="padding: 10px 14px; font-weight: bold; color: #1b5e20; font-size: 14px; border-bottom: 1px solid #eee;">
+                        Enquiry Details Summary
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; width: 40%; background: #fafafa;">Room Category</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #1b5e20;">' . htmlspecialchars($category_name) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Climate Preference</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . htmlspecialchars($ac_preference) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Number of Rooms</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . $number_of_rooms . ' Room(s)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Check-In Date</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . date('d M Y (l)', $inTime) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Check-Out Date</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . date('d M Y (l)', $outTime) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Total Guests</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . $adults . ' Adult(s)' . ($kids > 0 ? ', ' . $kids . ' Kid(s)' : '') . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Contact Phone</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee;">' . htmlspecialchars($phone) . '</td>
+                </tr>
+                ' . (!empty($message) ? '<tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Special Requests</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-style: italic; color: #555;">' . nl2br(htmlspecialchars($message)) . '</td>
+                </tr>' : '') . '
+            </table>
+
+            <div style="background: #fff8e1; border-left: 4px solid #fab915; padding: 12px 14px; margin-top: 18px; border-radius: 4px; font-size: 13.5px; color: #6d4c41; line-height: 1.45;">
+                <strong>Next Steps:</strong> Our reservation manager will review room availability for your dates and reach out to you directly to confirm your booking and tariff.
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 22px 20px; background: #f9fbf9; border-top: 1px solid #e8f5e9;">
+            <p style="margin: 0 0 12px; font-size: 14px; font-weight: bold; color: #333;">Need immediate assistance? Connect with our front desk:</p>
+            <a href="tel:' . $cleanResortPhone . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 13.5px; margin: 4px;">📞 Call Desk (' . htmlspecialchars($resortPhone) . ')</a>
+            <a href="https://wa.me/' . $cleanResortWa . '?text=' . rawurlencode('Hello Parijat Resort, I have submitted an online room enquiry #' . $refId . ' under name ' . $name . '.') . '" style="display: inline-block; background: #25d366; color: #ffffff !important; text-decoration: none; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 13.5px; margin: 4px;">💬 Chat on WhatsApp</a>
+        </div>
+
+        <div style="padding: 16px; text-align: center; font-size: 12px; color: #777; background: #f0f2f5; line-height: 1.5;">
+            <strong>Parijat Resort &amp; Banquet</strong><br>
+            Sriniketan Rd, Bolpur, West Bengal 731236 (Near Shantiniketan)<br>
+            Contact: ' . htmlspecialchars($resortPhone) . ' &bull; Email: ' . htmlspecialchars($resortEmail) . '
+        </div>
+    </div>
+</body>
+</html>';
+
+    // Send Admin notification
+    send_smtp_email($resortEmail, $subject, $adminHtmlEmail);
+
+    // Send personalized customer receipt
     if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $guestSubject = "Booking Enquiry Received (#$refId) - Parijat Resort Bolpur";
-        send_smtp_email($email, $guestSubject, $htmlEmail);
+        $guestSubject = "Booking Enquiry Received (#$refId) - Parijat Resort & Banquet";
+        send_smtp_email($email, $guestSubject, $guestHtmlEmail);
     }
 
     // 5. Generate Pre-written Email for User's Email Client (Auto-compose)
     $emailPlainBody = "Dear Parijat Resort Reservations Team,\n\n"
-                    . "I would like to enquire about a room booking at Parijat Resort Bolpur with the following details:\n\n"
+                    . "I would like to enquire about a room booking at Parijat Resort & Banquet with the following details:\n\n"
                     . "====================================\n"
-                    . "PARIJAT RESORT BOLPUR - ROOM ENQUIRY\n"
+                    . "PARIJAT RESORT & BANQUET - ROOM ENQUIRY\n"
                     . "====================================\n"
                     . "Reference ID: #" . $refId . "\n"
                     . "Guest Name: " . $name . "\n"
