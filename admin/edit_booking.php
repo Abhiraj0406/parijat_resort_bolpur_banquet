@@ -1,5 +1,5 @@
 <?php
-$page_title = "Edit Reservation - Parijat Resort Bolpur";
+$page_title = "Edit Reservation - Parijat Resort & Banquet";
 include_once '../includes/header.php';
 require_once __DIR__.'/../includes/config.php';
 

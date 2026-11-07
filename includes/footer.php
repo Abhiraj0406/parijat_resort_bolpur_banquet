@@ -54,7 +54,7 @@ $ig_link = $site_settings['instagram_link'] ?? '#';
                 <div class="border_line"></div>
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">
                     <p class="col-lg-8 col-sm-12 footer-text m-0">
-                        Copyright &copy;<?php echo date('Y'); ?> All rights reserved | Parijat Resort Bolpur
+                        Copyright &copy;<?php echo date('Y'); ?> All rights reserved | <?php echo htmlspecialchars($resort_name); ?>
                     </p>
                     <div class="col-lg-4 col-sm-12 footer-social">
                         <a href="<?php echo htmlspecialchars($fb_link); ?>" target="_blank"><i class="fa fa-facebook"></i></a>

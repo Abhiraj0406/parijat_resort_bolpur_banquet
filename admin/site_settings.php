@@ -119,7 +119,7 @@ $csrfToken = generate_csrf_token();
                     
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Resort Name</label>
-                        <input type="text" class="form-control" name="settings[resort_name]" value="<?php echo htmlspecialchars($s['resort_name'] ?? 'Parijat Resort Bolpur'); ?>">
+                        <input type="text" class="form-control" name="settings[resort_name]" value="<?php echo htmlspecialchars($s['resort_name'] ?? 'Parijat Resort & Banquet'); ?>">
                     </div>
 
                     <div class="mb-3">

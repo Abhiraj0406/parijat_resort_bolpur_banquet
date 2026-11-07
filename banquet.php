@@ -1,5 +1,5 @@
 <?php
-$page_title = "Banquet & Conference Hall - Parijat Resort Bolpur";
+$page_title = "Banquet & Conference Hall - Parijat Resort & Banquet";
 $current_page = "banquet";
 $meta_description = "Host your weddings, corporate seminars, and family get-togethers at the Grand Parijat Banquet & Conference Hall.";
 require_once 'includes/config.php';

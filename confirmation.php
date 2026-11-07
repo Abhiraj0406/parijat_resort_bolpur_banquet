@@ -1,6 +1,6 @@
 <?php
-$page_title = "Enquiry Submitted - Parijat Resort Bolpur";
-$meta_description = "Your room booking enquiry has been recorded for Parijat Resort Bolpur.";
+$page_title = "Enquiry Submitted - Parijat Resort & Banquet";
+$meta_description = "Your room booking enquiry has been recorded for Parijat Resort & Banquet.";
 $og_image = "image/confirmation_og.jpg";
 include_once 'includes/header.php';
 require_once __DIR__.'/includes/config.php';

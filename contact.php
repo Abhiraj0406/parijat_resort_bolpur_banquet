@@ -4,7 +4,7 @@ require_once 'includes/config.php';
 require_once 'includes/header.php';
 
 // Site & Management Details
-$resort_name = $site_settings['resort_name'] ?? 'Parijat Resort Bolpur';
+$resort_name = $site_settings['resort_name'] ?? 'Parijat Resort & Banquet';
 $address = $site_settings['address'] ?? 'Near Shantiniketan, Bolpur, Birbhum, West Bengal - 731204, India';
 $phone_primary = $site_settings['phone_primary'] ?? '+91 98302 76364';
 $phone_secondary = $site_settings['phone_secondary'] ?? '+91 98309 09875';
@@ -50,7 +50,7 @@ $clean_mgr = preg_replace('/[^0-9]/', '', $manager_phone);
                 </span>
                 <h2 class="title_color font-weight-bold mt-2">Executive Management</h2>
                 <p class="text-muted mx-auto" style="max-width: 600px;">
-                    Dedicated leadership committed to warm hospitality and exceptional guest experiences at Parijat Resort Bolpur.
+                    Dedicated leadership committed to warm hospitality and exceptional guest experiences at Parijat Resort &amp; Banquet.
                 </p>
             </div>
 

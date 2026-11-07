@@ -1,6 +1,6 @@
 <?php
-$page_title = "Room Booking Enquiry - Parijat Resort Bolpur";
-$meta_description = "Submit your room reservation enquiry for Parijat Resort Bolpur. All 19 rooms across 4 categories feature private balconies with AC / Non-AC options.";
+$page_title = "Room Booking Enquiry - Parijat Resort & Banquet";
+$meta_description = "Submit your room reservation enquiry for Parijat Resort & Banquet. All 19 rooms across 4 categories feature private balconies with AC / Non-AC options.";
 $og_image = "image/booking_og.jpg";
 $current_page = "booking";
 include_once 'includes/header.php';

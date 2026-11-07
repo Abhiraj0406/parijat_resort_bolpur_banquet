@@ -297,7 +297,7 @@ foreach ($allDefaultGallery as $item) {
             <?php foreach ($dynamicGallery as $img): 
                 $cat = htmlspecialchars($img['category'] ?? 'Resort');
                 $img_src = htmlspecialchars($img['image_path']);
-                $caption = htmlspecialchars($img['caption'] ?? 'Parijat Resort Bolpur');
+                $caption = htmlspecialchars($img['caption'] ?? 'Parijat Resort & Banquet');
             ?>
             <div class="col-lg-4 col-md-6 mb-4 gallery_item" data-category="<?php echo $cat; ?>">
                 <div class="gallery_img" style="height: 270px;">

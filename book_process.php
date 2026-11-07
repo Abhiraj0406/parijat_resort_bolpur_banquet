@@ -226,8 +226,8 @@ try {
             </table>
         </div>
         <div style="text-align: center; padding: 20px; background: #f9fbf9; border-top: 1px solid #e8f5e9;">
-            <a href="https://wa.me/' . $cleanWaDigits . '" style="display: inline-block; background: #25d366; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">💬 Chat on WhatsApp</a>
-            <a href="tel:' . htmlspecialchars($phone) . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">📞 Call Guest</a>
+            <a href="https://wa.me/' . $cleanWaDigits . '" style="display: inline-block; background: #25d366; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">&#128172; Chat on WhatsApp</a>
+            <a href="tel:' . htmlspecialchars($phone) . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">&#128222; Call Guest</a>
         </div>
         <div style="padding: 14px; text-align: center; font-size: 12px; color: #888; background: #f0f2f5;">
             Official Automated Booking Desk &bull; Parijat Resort &amp; Banquet &bull; Near Shantiniketan
@@ -305,8 +305,8 @@ try {
 
         <div style="text-align: center; padding: 22px 20px; background: #f9fbf9; border-top: 1px solid #e8f5e9;">
             <p style="margin: 0 0 12px; font-size: 14px; font-weight: bold; color: #333;">Need immediate assistance? Connect with our front desk:</p>
-            <a href="tel:' . $cleanResortPhone . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 13.5px; margin: 4px;">📞 Call Desk (' . htmlspecialchars($resortPhone) . ')</a>
-            <a href="https://wa.me/' . $cleanResortWa . '?text=' . rawurlencode('Hello Parijat Resort, I have submitted an online room enquiry #' . $refId . ' under name ' . $name . '.') . '" style="display: inline-block; background: #25d366; color: #ffffff !important; text-decoration: none; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 13.5px; margin: 4px;">💬 Chat on WhatsApp</a>
+            <a href="tel:' . $cleanResortPhone . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 13.5px; margin: 4px;">&#128222; Call Desk (' . htmlspecialchars($resortPhone) . ')</a>
+            <a href="https://wa.me/' . $cleanResortWa . '?text=' . rawurlencode('Hello Parijat Resort, I have submitted an online room enquiry #' . $refId . ' under name ' . $name . '.') . '" style="display: inline-block; background: #25d366; color: #ffffff !important; text-decoration: none; padding: 11px 22px; border-radius: 25px; font-weight: bold; font-size: 13.5px; margin: 4px;">&#128172; Chat on WhatsApp</a>
         </div>
 
         <div style="padding: 16px; text-align: center; font-size: 12px; color: #777; background: #f0f2f5; line-height: 1.5;">

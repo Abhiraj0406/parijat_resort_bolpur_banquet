@@ -1,7 +1,7 @@
 <?php
-$page_title = "About Us & Resort Policies - Parijat Resort Bolpur";
+$page_title = "About Us & Resort Policies - Parijat Resort & Banquet";
 $current_page = "about";
-$meta_description = "Learn about Parijat Resort Bolpur, our restaurant Labanya's Heshel Ghar, swimming pool rules, and resort policies.";
+$meta_description = "Learn about Parijat Resort & Banquet, our restaurant Labanya's Heshel Ghar, swimming pool rules, and resort policies.";
 $og_image = "image/cottage_exterior_lawn_1.jpeg";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
@@ -36,15 +36,15 @@ $poolNote = !empty($site_settings['swimming_pool_timing_note']) ? $site_settings
             <div class="col-md-6 d_flex align-items-center">
                 <div class="about_content">
                     <span class="text-uppercase text-warning font-weight-bold" style="letter-spacing:1px;">Tranquil Haven in Shantiniketan</span>
-                    <h2 class="title title_color mt-2">Welcome to <br>Parijat Resort Bolpur</h2>
+                    <h2 class="title title_color mt-2">Welcome to <br>Parijat Resort &amp; Banquet</h2>
                     <p class="text-muted">
-                        Nestled amidst the peaceful, lush green landscape of Bolpur, Parijat Resort is designed for families, couples, and leisure travellers who appreciate tranquil nature alongside modern luxury. With 19 convertible rooms and cottages, a crystal-clear swimming pool, and authentic dining at Labanya's Heshel Ghar, we ensure every stay is unforgettable.
+                        Nestled amidst the peaceful, lush green landscape of Bolpur, Parijat Resort &amp; Banquet is designed for families, couples, and leisure travellers who appreciate tranquil nature alongside modern luxury. With 19 convertible rooms and cottages, a crystal-clear swimming pool, and authentic dining at Labanya's Heshel Ghar, we ensure every stay is unforgettable.
                     </p>
                     <a href="booking" class="btn theme_btn button_hover font-weight-bold px-4 py-2">Make an Enquiry</a>
                 </div>
             </div>
             <div class="col-md-6">
-                <img class="img-fluid rounded shadow-lg" src="image/cottage_exterior_lawn_1.jpeg" alt="Parijat Resort Bolpur Grounds & Cottages">
+                <img class="img-fluid rounded shadow-lg" src="image/cottage_exterior_lawn_1.jpeg" alt="Parijat Resort &amp; Banquet Grounds & Cottages">
             </div>
         </div>
     </div>

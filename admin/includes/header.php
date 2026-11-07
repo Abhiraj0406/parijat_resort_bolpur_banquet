@@ -122,7 +122,7 @@ requireLogin();
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2" aria-labelledby="profileDropdown">
                         <li class="dropdown-header">
                             <div class="fw-bold text-dark">Admin (Resort Manager)</div>
-                            <small class="text-muted">Parijat Resort Bolpur</small>
+                            <small class="text-muted">Parijat Resort &amp; Banquet</small>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="profile.php"><i class="bi bi-person me-2"></i>My Profile</a></li>

@@ -1,7 +1,7 @@
 <?php
 $page_title = "Labanya's Heshel Ghar - Multi-Cuisine Dining at Parijat Resort";
 $current_page = "restaurant";
-$meta_description = "Experience authentic Bengali, delicious Roll, Kebab, and wok-fresh Chinese delicacies at Labanya's Heshel Ghar, Parijat Resort Bolpur.";
+$meta_description = "Experience authentic Bengali, delicious Roll, Kebab, and wok-fresh Chinese delicacies at Labanya's Heshel Ghar, Parijat Resort & Banquet.";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
 

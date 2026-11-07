@@ -1,7 +1,7 @@
 <?php
-$page_title = "Rooms & Cottages Tariff - Parijat Resort Bolpur";
+$page_title = "Rooms & Cottages Tariff - Parijat Resort & Banquet";
 $current_page = "accomodation";
-$meta_description = "Explore all 19 rooms and cottages across 4 premium categories at Parijat Resort Bolpur. All rooms offer private balconies and AC/Non-AC options.";
+$meta_description = "Explore all 19 rooms and cottages across 4 premium categories at Parijat Resort & Banquet. All rooms offer private balconies and AC/Non-AC options.";
 $og_image = "image/room1.jpg";
 require_once 'includes/config.php';
 require_once 'includes/header.php';
@@ -272,7 +272,7 @@ $allRates = $ratesStmt->fetchAll();
         <div class="section_title text-center pt-2 mt-2">
             <span class="text-uppercase text-warning font-weight-bold text-wrap" style="letter-spacing: 1px; white-space: normal; display: inline-block; max-width: 100%;">19 Serene Units</span>
             <h2 class="title_color mt-1">Our Room Categories</h2>
-            <p>Every room at Parijat Resort Bolpur is convertible to <strong>AC or Non-AC</strong> and includes a <strong>private balcony</strong> with serene views.</p>
+            <p>Every room at Parijat Resort &amp; Banquet is convertible to <strong>AC or Non-AC</strong> and includes a <strong>private balcony</strong> with serene views.</p>
         </div>
 
         <div class="row">

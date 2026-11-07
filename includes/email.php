@@ -16,7 +16,7 @@ function send_smtp_email(string $to, string $subject, string $htmlBody): bool {
     $smtpPort = defined('SMTP_PORT') ? SMTP_PORT : 587; // TLS
     $smtpSecure = defined('SMTP_SECURE') ? SMTP_SECURE : 'tls'; // or 'ssl'
     $fromEmail = defined('FROM_EMAIL') ? FROM_EMAIL : 'no-reply@parijatresortbolpur.com';
-    $fromName  = defined('FROM_NAME')  ? FROM_NAME  : 'Parijat Resort Bolpur';
+    $fromName  = defined('FROM_NAME')  ? FROM_NAME  : (getenv('FROM_NAME') ?: 'Parijat Resort & Banquet');
 
     // If SMTP credentials configured, attempt PHPMailer first
     if (!empty($smtpPass) && $smtpPass !== 'your_email_app_password_here' && $smtpHost !== 'smtp.example.com') {

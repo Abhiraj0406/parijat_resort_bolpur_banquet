@@ -297,7 +297,7 @@ if (empty($gallery_images)) {
                     </div>
                     <div>
                         <h4 class="modal-title" id="quickBookingModalLabel">Booking Request Prepared!</h4>
-                        <div class="modal-subtitle">Parijat Resort Bolpur &bull; Front Desk</div>
+                        <div class="modal-subtitle">Parijat Resort &amp; Banquet &bull; Front Desk</div>
                     </div>
                 </div>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 18px; right: 20px; font-size: 26px; opacity: 0.9; text-shadow: none;">
@@ -347,7 +347,7 @@ if (empty($gallery_images)) {
             <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 d-flex" data-aos="fade-right">
                 <div class="about_content p-5 glass-card d-flex flex-column justify-content-center h-100 w-100">
                     <h2 class="title text-white font-weight-bold mb-4" style="line-height: 1.3;">About Us <br>A Heaven of Peace</h2>
-                    <p class="text-white mb-4" style="font-size: 1.05rem; line-height: 1.7;">Escape the hustle and bustle of city life. Parijat Resort offers an eco-friendly environment filled with lush greenery, providing you the ultimate comfort and relaxation. Whether it's a family vacation or a corporate retreat, we have everything you need.</p>
+                    <p class="text-white mb-4" style="font-size: 1.05rem; line-height: 1.7;">Escape the hustle and bustle of city life. Parijat Resort &amp; Banquet offers an eco-friendly environment filled with lush greenery, providing you the ultimate comfort and relaxation. Whether it's a family vacation or a corporate retreat, we have everything you need.</p>
                     <div>
                         <a href="#contact" class="btn theme_btn button_hover font-weight-bold px-4 py-2 rounded-pill shadow">Contact Us</a>
                     </div>
@@ -938,7 +938,7 @@ if (empty($gallery_images)) {
             <?php foreach(array_slice($gallery_images, 0, 4) as $img): ?>
             <div class="col-lg-3 col-md-6 mb-4 gallery_item">
                 <div class="gallery_img rounded shadow-sm overflow-hidden" style="height: 200px;">
-                    <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="Gallery Image - Parijat Resort Bolpur" loading="lazy" decoding="async" class="w-100 h-100" style="object-fit:cover; transition: transform 0.4s;">
+                    <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="Gallery Image - Parijat Resort &amp; Banquet" loading="lazy" decoding="async" class="w-100 h-100" style="object-fit:cover; transition: transform 0.4s;">
                     <div class="hover">
                         <a class="light" href="<?php echo htmlspecialchars($img['image_path']); ?>"><i class="fa fa-expand"></i></a>
                     </div>
@@ -976,7 +976,7 @@ if (empty($gallery_images)) {
     
     <div class="container" style="position: relative; z-index: 3;">
         <div class="text-center mb-5" data-aos="zoom-in">
-            <h2 class="text-white font-weight-bold mb-3" style="font-size: 2.5rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">Why Choose Parijat Resort?</h2>
+            <h2 class="text-white font-weight-bold mb-3" style="font-size: 2.5rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">Why Choose Parijat Resort &amp; Banquet?</h2>
             <p class="text-white" style="font-size: 1.1rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Discover the perfect blend of modern luxury and serene nature.</p>
         </div>
         
