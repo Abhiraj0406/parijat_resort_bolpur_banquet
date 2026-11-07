@@ -33,6 +33,7 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="google-site-verification" content="j0RniskA1nUFWcsL7bLQddixF84uvNrJCppyD6Lq9Eo" />
         <link rel="icon" href="image/favicon.png" type="image/png">
         
         <title><?php echo htmlspecialchars($page_title); ?></title>

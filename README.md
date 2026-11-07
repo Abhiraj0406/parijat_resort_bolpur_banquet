@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Parijat Resort Bolpur & Banquet
 
 Always first commit to main and then create another branch.
@@ -104,3 +105,8 @@ parijat_resort_bolpur_banquet/
 
 For complete live subdomain deployment and migrating to a production two-tier `public_html` architecture, refer to:
 - [`docs/DEPLOYMENT_AND_PUBLIC_HTML_GUIDE.md`](docs/DEPLOYMENT_AND_PUBLIC_HTML_GUIDE.md)
+=======
+# parijat_resort_bolpur_banquet
+
+Always first commit to main and then crate another branch
+>>>>>>> bbc28c12ea824da9de5dc6c6490a1198dccd5778
