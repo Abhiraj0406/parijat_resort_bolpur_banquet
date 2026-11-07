@@ -13,7 +13,10 @@ $site_settings = [];
 while ($row = $stmt->fetch()) {
     $site_settings[$row['setting_key']] = $row['setting_value'];
 }
-$resort_name = $site_settings['resort_name'] ?? 'Parijat Resort Bolpur';
+$resort_name = $site_settings['resort_name'] ?? (getenv('RESORT_NAME') ?: 'Parijat Resort Bolpur & Banquet');
+if ($resort_name === 'Parijat Resort Bolpur') {
+    $resort_name = 'Parijat Resort Bolpur & Banquet';
+}
 
 // Fetch SEO settings for the current page
 $seoStmt = $pdo->prepare("SELECT * FROM seo_settings WHERE page_name = :page");
