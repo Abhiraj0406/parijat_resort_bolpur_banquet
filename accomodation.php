@@ -42,13 +42,174 @@ $allRates = $ratesStmt->fetchAll();
 <!--================Breadcrumb Area =================-->
 
 <!--================ Detailed Accomodation Area =================-->
+<style>
+/* Accomodation Mobile View Optimization */
+.accomodation_area {
+    padding-top: 20px !important;
+    padding-bottom: 50px !important;
+}
+
+/* Premium building architecture card */
+.building-carousel-card {
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: rgba(20, 20, 20, 0.6) !important;
+}
+
+@media (max-width: 767.98px) {
+    #premiumBuildingCarousel .carousel-inner {
+        height: 230px !important;
+        max-height: 230px !important;
+        border-radius: 16px !important;
+    }
+    /* Move caption badge to top-left so it never collides with bottom indicators */
+    #premiumBuildingCarousel .carousel-caption {
+        display: inline-block !important;
+        top: 12px !important;
+        bottom: auto !important;
+        left: 12px !important;
+        right: auto !important;
+        padding: 5px 12px !important;
+        background: rgba(0, 0, 0, 0.75) !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        max-width: calc(100% - 60px) !important;
+        text-align: left !important;
+    }
+    #premiumBuildingCarousel .carousel-caption h5 {
+        font-size: 11px !important;
+        margin: 0 !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    /* Indicators sit cleanly at bottom */
+    #premiumBuildingCarousel .carousel-indicators {
+        bottom: 8px !important;
+        margin-bottom: 0 !important;
+        z-index: 3;
+    }
+    #premiumBuildingCarousel .carousel-indicators li {
+        width: 16px !important;
+        height: 3px !important;
+        background-color: rgba(255, 255, 255, 0.6) !important;
+        border-radius: 2px !important;
+        margin: 0 3px !important;
+    }
+    #premiumBuildingCarousel .carousel-indicators li.active {
+        background-color: #2e7d32 !important;
+        width: 22px !important;
+    }
+}
+
+/* Room Cards: Override global .card padding: 30px so images go full bleed */
+.room-card {
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    background: rgba(20, 20, 20, 0.65) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    margin-bottom: 25px !important;
+    box-sizing: border-box !important;
+}
+
+.room-card .card-body {
+    padding: 22px 20px !important;
+    box-sizing: border-box !important;
+}
+
+.room-spec-box {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+    margin-bottom: 18px !important;
+}
+
+.room-card-actions .btn {
+    height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13.5px !important;
+    padding: 8px 10px !important;
+    border-radius: 25px !important;
+    white-space: nowrap !important;
+}
+
+@media (max-width: 576px) {
+    .accomodation_area {
+        padding-top: 10px !important;
+        padding-bottom: 30px !important;
+    }
+    .accomodation_area .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    .section_title h2 {
+        font-size: 1.45rem !important;
+    }
+    .section_title p {
+        font-size: 13px !important;
+        padding: 0 5px;
+    }
+    .room-card .card-body {
+        padding: 16px 14px !important;
+    }
+    .room-card .position-relative[style*="height: 280px"] {
+        height: 220px !important;
+    }
+    .room-card h3 {
+        font-size: 1.18rem !important;
+        margin-bottom: 6px !important;
+    }
+    .room-card p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 12px !important;
+    }
+    .room-card .badge {
+        font-size: 10.5px !important;
+        padding: 4px 8px !important;
+    }
+    .room-spec-box {
+        padding: 10px 12px !important;
+    }
+    .room-spec-box small {
+        font-size: 10.5px !important;
+    }
+    .room-spec-box strong {
+        font-size: 12px !important;
+    }
+    .room-card-actions .btn {
+        font-size: 12.5px !important;
+        padding: 6px 8px !important;
+        height: 38px !important;
+    }
+    .tariff-policy-card {
+        padding: 16px 14px !important;
+    }
+    .tariff-policy-card h5 {
+        font-size: 1.05rem !important;
+    }
+    .tariff-policy-card p {
+        font-size: 12.5px !important;
+        line-height: 1.5 !important;
+    }
+}
+</style>
 <section class="accomodation_area section_gap">
     <div class="container">
         <!-- Premium Building Architecture (Morning & Night Views) -->
         <div class="row mb-5 justify-content-center">
             <div class="col-lg-11">
-                <div class="card border-0 shadow-lg rounded-xl overflow-hidden" style="border-radius: 16px;">
-                    <div id="premiumBuildingCarousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+                <div class="card building-carousel-card border-0 shadow-lg rounded-xl overflow-hidden" style="border-radius: 16px;">
+                    <div id="premiumBuildingCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3500">
                         <ol class="carousel-indicators" style="margin-bottom: 20px; z-index: 3;">
                             <li data-target="#premiumBuildingCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#premiumBuildingCarousel" data-slide-to="1"></li>
@@ -128,11 +289,11 @@ $allRates = $ratesStmt->fetchAll();
                 $facilitiesList = !empty($room['facilities']) ? explode(',', $room['facilities']) : [];
             ?>
             <div class="col-lg-6 col-md-12 mb-5">
-                <div class="card h-100 border-0 shadow rounded-lg overflow-hidden" style="transition: all 0.3s ease;">
+                <div class="card room-card h-100 border-0 shadow rounded-lg overflow-hidden" style="transition: all 0.3s ease;">
                     <div class="position-relative" style="height: 280px; overflow: hidden;">
                         <?php if ($room['id'] == 1): ?>
                             <!-- Image Slider for Deluxe Cottage Room -->
-                            <div id="roomCarousel1" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                            <div id="roomCarousel1" class="carousel slide carousel-fade h-100 w-100" data-ride="carousel" data-interval="4000">
                                 <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
                                     <li data-target="#roomCarousel1" data-slide-to="0" class="active"></li>
                                     <li data-target="#roomCarousel1" data-slide-to="1"></li>
@@ -168,7 +329,7 @@ $allRates = $ratesStmt->fetchAll();
                             </div>
                         <?php elseif ($room['id'] == 2): ?>
                             <!-- Image Slider for Deluxe Premium Ground Floor -->
-                            <div id="roomCarousel2" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                            <div id="roomCarousel2" class="carousel slide carousel-fade h-100 w-100" data-ride="carousel" data-interval="4000">
                                 <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
                                     <li data-target="#roomCarousel2" data-slide-to="0" class="active"></li>
                                     <li data-target="#roomCarousel2" data-slide-to="1"></li>
@@ -220,7 +381,7 @@ $allRates = $ratesStmt->fetchAll();
                             </div>
                         <?php elseif ($room['id'] == 3): ?>
                             <!-- Image Slider for Deluxe Premium First Floor -->
-                            <div id="roomCarousel3" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                            <div id="roomCarousel3" class="carousel slide carousel-fade h-100 w-100" data-ride="carousel" data-interval="4000">
                                 <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
                                     <li data-target="#roomCarousel3" data-slide-to="0" class="active"></li>
                                     <li data-target="#roomCarousel3" data-slide-to="1"></li>
@@ -272,7 +433,7 @@ $allRates = $ratesStmt->fetchAll();
                             </div>
                         <?php elseif ($room['id'] == 4): ?>
                             <!-- Image Slider for Family Premium Four Sharing -->
-                            <div id="roomCarousel4" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
+                            <div id="roomCarousel4" class="carousel slide carousel-fade h-100 w-100" data-ride="carousel" data-interval="4000">
                                 <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
                                     <li data-target="#roomCarousel4" data-slide-to="0" class="active"></li>
                                     <li data-target="#roomCarousel4" data-slide-to="1"></li>
@@ -339,43 +500,42 @@ $allRates = $ratesStmt->fetchAll();
                                 <?php echo htmlspecialchars($room['description']); ?>
                             </p>
 
-                            <!-- Specifications Grid -->
-                            <div class="bg-light p-3 rounded mb-4">
+                            <!-- Specifications Grid (Compact 2x2 on mobile) -->
+                            <div class="room-spec-box mb-3">
                                 <div class="row">
-                                    <div class="col-sm-6 mb-2">
+                                    <div class="col-6 col-sm-6 mb-2">
                                         <div class="d-flex align-items-center">
-                                            <i class="fa fa-users text-warning mr-2" style="font-size: 18px;"></i>
+                                            <i class="fa fa-users text-warning mr-2 flex-shrink-0" style="font-size: 16px;"></i>
                                             <div>
-                                                <small class="text-muted d-block">Occupancy</small>
-                                                <strong><?php echo $room['adult_capacity']; ?> Adults, <?php echo $room['kids_capacity']; ?> Kids</strong>
-                                                <span class="small text-muted">(Max <?php echo $room['max_occupancy']; ?>)</span>
+                                                <small class="text-white-50 d-block" style="font-size: 11px;">Occupancy</small>
+                                                <strong class="text-white" style="font-size: 12.5px;"><?php echo $room['adult_capacity']; ?> Adults<?php echo $room['kids_capacity'] ? ', ' . $room['kids_capacity'] . ' Kids' : ''; ?></strong>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 mb-2">
+                                    <div class="col-6 col-sm-6 mb-2">
                                         <div class="d-flex align-items-center">
-                                            <i class="fa fa-bed text-warning mr-2" style="font-size: 18px;"></i>
+                                            <i class="fa fa-snowflake-o text-warning mr-2 flex-shrink-0" style="font-size: 16px;"></i>
                                             <div>
-                                                <small class="text-muted d-block">Extra Person</small>
-                                                <strong>Available on Request, Chargeable.</strong>
+                                                <small class="text-white-50 d-block" style="font-size: 11px;">Climate</small>
+                                                <strong class="text-white" style="font-size: 12.5px;">AC / Non-AC</strong>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 mb-2">
+                                    <div class="col-6 col-sm-6 mb-2">
                                         <div class="d-flex align-items-center">
-                                            <i class="fa fa-sun-o text-warning mr-2" style="font-size: 18px;"></i>
+                                            <i class="fa fa-sun-o text-warning mr-2 flex-shrink-0" style="font-size: 16px;"></i>
                                             <div>
-                                                <small class="text-muted d-block">Balcony</small>
-                                                <strong><?php echo $room['has_balcony'] ? 'Attached Private Balcony' : 'Standard View'; ?></strong>
+                                                <small class="text-white-50 d-block" style="font-size: 11px;">Balcony</small>
+                                                <strong class="text-white" style="font-size: 12.5px;"><?php echo $room['has_balcony'] ? 'Private Balcony' : 'Standard View'; ?></strong>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 mb-2">
+                                    <div class="col-6 col-sm-6 mb-2">
                                         <div class="d-flex align-items-center">
-                                            <i class="fa fa-sliders text-warning mr-2" style="font-size: 18px;"></i>
+                                            <i class="fa fa-bed text-warning mr-2 flex-shrink-0" style="font-size: 16px;"></i>
                                             <div>
-                                                <small class="text-muted d-block">Flexibility</small>
-                                                <strong>Convertible</strong>
+                                                <small class="text-white-50 d-block" style="font-size: 11px;">Extra Bed</small>
+                                                <strong class="text-white" style="font-size: 12.5px;">On Request</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -384,11 +544,11 @@ $allRates = $ratesStmt->fetchAll();
 
                             <!-- Room Facilities -->
                             <?php if (!empty($facilitiesList)): ?>
-                            <div class="mb-4">
-                                <h6 class="font-weight-bold text-dark mb-2">Room Amenities &amp; Facilities:</h6>
-                                <div class="d-flex flex-wrap" style="gap: 6px;">
+                            <div class="mb-3">
+                                <h6 class="font-weight-bold text-white mb-2" style="font-size: 13.5px;">Room Amenities:</h6>
+                                <div class="d-flex flex-wrap" style="gap: 5px;">
                                     <?php foreach ($facilitiesList as $fac): ?>
-                                        <span class="badge badge-light border text-dark py-2 px-3" style="font-size: 12px; font-weight: 500;">
+                                        <span class="badge badge-light border text-white py-1 px-2" style="font-size: 11px; font-weight: 500;">
                                             <i class="fa fa-check text-success mr-1"></i> <?php echo trim(htmlspecialchars($fac)); ?>
                                         </span>
                                     <?php endforeach; ?>
@@ -399,22 +559,22 @@ $allRates = $ratesStmt->fetchAll();
 
                         <!-- Price Box & Action Buttons -->
                             <div class="pt-3 border-top mt-auto">
-                                <div class="mb-3">
-                                    <div class="text-warning font-weight-bold" style="font-size: 1.1rem;">
+                                <div class="mb-2">
+                                    <div class="text-warning font-weight-bold" style="font-size: 1.05rem;">
                                         <i class="fa fa-tag mr-1"></i> Tariff on Request
                                     </div>
-                                    <small class="text-muted d-block">Contact us for best rates</small>
+                                    <small class="text-white-50 d-block">Contact us for seasonal best rates</small>
                                 </div>
 
-                                <div class="row m-0 w-100">
+                                <div class="row m-0 w-100 room-card-actions">
                                     <div class="col-6 pl-0 pr-1">
-                                        <a href="booking?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark w-100 text-white py-2 rounded-pill font-weight-bold shadow-sm text-center">
-                                            Book Online
+                                        <a href="booking?category=<?php echo $room['id']; ?>" class="btn btn-sm btn-dark w-100 text-white font-weight-bold shadow-sm text-center">
+                                            <i class="fa fa-calendar-check-o mr-1"></i> Book Online
                                         </a>
                                     </div>
                                     <div class="col-6 pr-0 pl-1">
-                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20enquiring%20about%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success w-100 text-white py-2 rounded-pill font-weight-bold shadow-sm text-center" title="Enquire on WhatsApp">
-                                            <i class="fa fa-whatsapp"></i> WhatsApp
+                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? ''); ?>?text=Hello,%20I%20am%20enquiring%20about%20<?php echo urlencode($room['name']); ?>%20at%20Parijat%20Resort." target="_blank" class="btn btn-sm btn-success w-100 text-white font-weight-bold shadow-sm text-center" title="Enquire on WhatsApp">
+                                            <i class="fa fa-whatsapp mr-1"></i> WhatsApp
                                         </a>
                                     </div>
                                 </div>
@@ -426,7 +586,7 @@ $allRates = $ratesStmt->fetchAll();
         </div>
 
         <!-- Tariff & Booking Policy Note -->
-        <div class="card bg-transparent border-light shadow-sm rounded-lg p-4 mt-4 mb-5" style="background: rgba(0, 0, 0, 0.6) !important; backdrop-filter: blur(10px);">
+        <div class="card tariff-policy-card bg-transparent border-light shadow-sm rounded-lg p-4 mt-4 mb-5" style="background: rgba(0, 0, 0, 0.6) !important; backdrop-filter: blur(10px);">
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <h5 class="font-weight-bold text-white mb-2"><i class="fa fa-info-circle text-warning mr-2"></i>Flexible Tariff Policy</h5>

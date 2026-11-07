@@ -630,9 +630,33 @@ $og_image = $seo['og_image'] ?? 'image/logo-parijat.png';
             background-color: #2e7d32 !important;
             color: #ffffff !important;
         }
+
+        /* Ensure all non-home page content starts cleanly below the absolute/fixed navbar */
+        body.inner-page {
+            padding-top: 110px !important;
+        }
+        @media (max-width: 991.98px) {
+            body.inner-page {
+                padding-top: 95px !important;
+            }
+        }
+        @media (max-width: 576px) {
+            .header_area .logo_h img {
+                max-height: 56px !important;
+                transform: none !important;
+                margin-left: 5px !important;
+            }
+            .header_area .navbar {
+                padding: 6px 12px !important;
+                min-height: 68px !important;
+            }
+            body.inner-page {
+                padding-top: 80px !important;
+            }
+        }
         </style>
     </head>
-    <body>
+    <body class="<?php echo in_array($current_page ?? '', ['home', 'index']) ? 'home-page' : 'inner-page'; ?>">
         <!--================Header Area =================-->
         <header class="header_area">
             <div class="container-fluid" style="padding: 0;">
