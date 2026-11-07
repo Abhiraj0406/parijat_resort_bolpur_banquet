@@ -13,18 +13,30 @@ $preselectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 $preselectedAc = isset($_GET['ac']) ? $_GET['ac'] : 'AC';
 $preselectedCheckIn = isset($_GET['check_in']) ? htmlspecialchars($_GET['check_in']) : date('Y-m-d');
 $preselectedCheckOut = isset($_GET['check_out']) ? htmlspecialchars($_GET['check_out']) : date('Y-m-d', strtotime('+1 day'));
-$primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
+$adminEmail = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : (getenv('ADMIN_EMAIL') ?: 'parijatresort21@gmail.com');
 
-// Pre-selected category details for quick display banner
-$selectedCategoryName = '';
-if ($preselectedCategory > 0) {
-    foreach ($categories as $cat) {
-        if ($cat['id'] == $preselectedCategory) {
-            $selectedCategoryName = $cat['name'];
-            break;
-        }
-    }
+// Build Category Map for interactive room previews
+$categoryMap = [];
+foreach ($categories as $cat) {
+    $thumb = 'image/gallery/01.jpg';
+    if ($cat['id'] == 1) $thumb = 'image/cottage_slide1.jpg';
+    elseif ($cat['id'] == 2) $thumb = 'image/ground_slide_1.jpeg';
+    elseif ($cat['id'] == 3) $thumb = 'image/first_slide_1.jpeg';
+    elseif ($cat['id'] == 4) $thumb = 'image/room4.jpg';
+    
+    $categoryMap[$cat['id']] = [
+        'id'            => $cat['id'],
+        'name'          => $cat['name'],
+        'description'   => $cat['description'] ?? 'Convertible AC / Non-AC with private balcony and modern amenities.',
+        'thumbnail'     => $thumb,
+        'has_balcony'   => !empty($cat['has_balcony']),
+        'total_rooms'   => $cat['total_rooms'] ?? 1,
+        'max_occupancy' => $cat['max_occupancy'] ?? 2
+    ];
 }
+
+$initialCategory = ($preselectedCategory > 0 && isset($categoryMap[$preselectedCategory])) ? $categoryMap[$preselectedCategory] : ($categoryMap[1] ?? reset($categoryMap));
+$selectedCategoryName = $initialCategory['name'] ?? '';
 ?>
 
 <!-- Breadcrumb & Hero Pool Carousel Area -->
@@ -137,10 +149,64 @@ if ($preselectedCategory > 0) {
     display: none !important;
 }
 
+/* Room Preview Card */
+.selected-room-preview {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(46, 125, 50, 0.6) !important;
+    border-radius: 14px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    margin-bottom: 24px !important;
+    transition: all 0.3s ease;
+}
+
+.selected-room-preview .room-thumb-wrap {
+    position: relative;
+    width: 150px;
+    height: 105px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+.selected-room-preview .room-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.selected-room-preview:hover .room-thumb-img {
+    transform: scale(1.05);
+}
+
+.selected-room-preview .room-thumb-badge {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    font-size: 10.5px;
+    padding: 3px 8px;
+    background: rgba(46, 125, 50, 0.95) !important;
+    border-radius: 12px;
+}
+
+@media (max-width: 576px) {
+    .selected-room-preview .room-thumb-wrap {
+        width: 100%;
+        height: 140px;
+        margin-bottom: 12px;
+    }
+}
+
 /* Mobile View Enhancements */
 .booking-form-box {
     max-width: 100% !important;
     overflow-x: hidden !important;
+    margin-top: 20px !important;
+    margin-bottom: 40px !important;
 }
 
 /* Override global .card 30px padding for booking form so content is not squished */
@@ -151,45 +217,30 @@ if ($preselectedCategory > 0) {
     box-sizing: border-box !important;
     max-width: 100% !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    background: rgba(20, 20, 20, 0.65) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
+    background: rgba(18, 26, 20, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
 }
 
 .booking-form-box .card-header {
-    padding: 22px 18px !important;
-    background: rgba(0, 0, 0, 0.75) !important;
+    padding: 24px 20px !important;
+    background: linear-gradient(135deg, #102613 0%, #1b431e 100%) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
 .booking-form-box .card-body {
-    padding: 24px 18px !important;
+    padding: 28px 24px !important;
     box-sizing: border-box !important;
     width: 100% !important;
 }
 
 @media (min-width: 768px) {
     .booking-form-box .card-body {
-        padding: 38px !important;
+        padding: 40px !important;
     }
 }
 
-.booking-notice-box {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 12px !important;
-    padding: 14px !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-}
-
-.booking-notice-box p {
-    font-size: 13.5px !important;
-    line-height: 1.5 !important;
-    margin: 0 !important;
-}
-
-/* Mobile-safe WhatsApp submit button that never overflows */
+/* Mobile-safe submit button that never overflows */
 #submitBookingBtn {
     width: 100% !important;
     max-width: 100% !important;
@@ -200,48 +251,58 @@ if ($preselectedCategory > 0) {
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    font-size: clamp(0.92rem, 3.8vw, 1.15rem) !important;
-    padding: 14px 12px !important;
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem) !important;
+    padding: 16px 14px !important;
     line-height: 1.35 !important;
     letter-spacing: 0.3px !important;
     border-radius: 12px !important;
-    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4) !important;
+    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%) !important;
+    border: 1px solid rgba(250, 185, 21, 0.4) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(27, 94, 32, 0.5) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#submitBookingBtn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%) !important;
+    box-shadow: 0 6px 22px rgba(46, 125, 50, 0.7) !important;
 }
 
 @media (max-width: 576px) {
     .booking-form-box {
         padding-left: 10px !important;
         padding-right: 10px !important;
-        margin-top: 15px !important;
+        margin-top: 12px !important;
         margin-bottom: 25px !important;
     }
     .booking-form-box .card-header {
-        padding: 16px 12px !important;
+        padding: 18px 14px !important;
     }
     .booking-form-box .card-header h3 {
-        font-size: 1.15rem !important;
+        font-size: 1.18rem !important;
     }
     .booking-form-box .card-header p {
-        font-size: 12px !important;
+        font-size: 12.5px !important;
     }
     .booking-form-box .card-body {
-        padding: 16px 12px !important;
+        padding: 18px 14px !important;
     }
     .booking-form-box h5 {
-        font-size: 1rem !important;
-        margin-top: 18px !important;
+        font-size: 1.05rem !important;
+        margin-top: 20px !important;
     }
     .booking-form-box .form-group {
         margin-bottom: 14px !important;
     }
     .booking-form-box label {
-        font-size: 13px !important;
-        margin-bottom: 4px !important;
+        font-size: 13.5px !important;
+        margin-bottom: 5px !important;
     }
     .booking-form-box .form-control {
         font-size: 15px !important;
-        height: 44px !important;
-        padding: 6px 10px !important;
+        height: 46px !important;
+        padding: 8px 12px !important;
     }
     .booking-form-box textarea.form-control {
         height: auto !important;
@@ -254,11 +315,8 @@ if ($preselectedCategory > 0) {
         <div class="col-lg-9">
             <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
                 <div class="card-header bg-dark text-white p-4 text-center">
-                    <span class="badge badge-warning text-dark px-3 py-1 font-weight-bold text-uppercase mb-2" style="letter-spacing:1px;">Official Reservation Desk</span>
-                    <h3 class="text-white font-weight-bold mb-1">Room Booking &amp; WhatsApp Enquiry</h3>
-                    <p class="mb-0 text-white-50 small">
-                        Please fill out the details below. Your enquiry will be securely recorded and sent to our reservations team on WhatsApp (<strong class="text-warning"><?php echo htmlspecialchars($primaryWhatsApp); ?></strong>).
-                    </p>
+                    <h3 class="text-white font-weight-bold mb-1">Room Reservation</h3>
+                    <p class="mb-0 text-white-50 small">Fill out your details to check room availability &amp; reserve your stay</p>
                 </div>
                 
                 <div class="card-body p-4 p-md-5">
@@ -271,15 +329,34 @@ if ($preselectedCategory > 0) {
                         </div>
                     <?php endif; ?>
 
-                    <?php if (!empty($selectedCategoryName)): ?>
-                        <div class="alert alert-success border-0 rounded-lg p-3 mb-4 d-flex align-items-center shadow-sm" style="background: rgba(46, 125, 50, 0.3) !important; border: 1px solid rgba(46, 125, 50, 0.6) !important;">
-                            <i class="fa fa-bed fa-2x text-warning mr-3 flex-shrink-0"></i>
-                            <div>
-                                <small class="text-white-50 d-block font-weight-bold text-uppercase" style="letter-spacing: 0.5px;">Selected Room Category</small>
-                                <strong class="text-white font-weight-bold" style="font-size: 15px;"><?php echo htmlspecialchars($selectedCategoryName); ?></strong>
+                    <!-- Interactive Selected Room Preview Card -->
+                    <div class="selected-room-preview mb-4" id="roomPreviewCard">
+                        <div class="d-flex flex-column flex-sm-row align-items-center">
+                            <div class="room-thumb-wrap">
+                                <img src="<?php echo htmlspecialchars($initialCategory['thumbnail'] ?? 'image/gallery/01.jpg'); ?>" alt="<?php echo htmlspecialchars($initialCategory['name'] ?? 'Room'); ?>" id="previewRoomImg" class="room-thumb-img">
+                                <span class="badge badge-success room-thumb-badge"><i class="fa fa-check-circle mr-1"></i> Selected</span>
+                            </div>
+                            <div class="room-thumb-info pl-sm-3 pt-2 pt-sm-0 w-100 text-left">
+                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
+                                    <span class="badge badge-warning text-dark font-weight-bold px-2 py-1" id="previewRoomBadge" style="font-size: 11px;">
+                                        <?php echo htmlspecialchars($initialCategory['total_rooms'] ?? 1); ?> Rooms in Resort
+                                    </span>
+                                    <span class="text-white-50 small"><i class="fa fa-sun-o text-warning mr-1"></i> Attached Private Balcony</span>
+                                </div>
+                                <h4 class="text-white font-weight-bold mb-1" id="previewRoomTitle" style="font-size: 1.2rem;">
+                                    <?php echo htmlspecialchars($initialCategory['name'] ?? 'Resort Room'); ?>
+                                </h4>
+                                <p class="small text-white-50 mb-2" id="previewRoomDesc" style="line-height: 1.45;">
+                                    <?php echo htmlspecialchars($initialCategory['description'] ?? 'Convertible AC / Non-AC with private balcony and modern amenities.'); ?>
+                                </p>
+                                <div class="d-flex flex-wrap align-items-center text-white-50 small" style="gap: 12px;">
+                                    <span><i class="fa fa-users text-success mr-1"></i> Max <strong id="previewRoomGuests" class="text-white"><?php echo $initialCategory['max_occupancy'] ?? 2; ?></strong> Guests</span>
+                                    <span><i class="fa fa-snowflake-o text-info mr-1"></i> AC / Non-AC Convertible</span>
+                                    <span><i class="fa fa-tag text-warning mr-1"></i> Tariff on Request</span>
+                                </div>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    </div>
 
                     <form action="book_process.php" method="POST" class="needs-validation" novalidate id="bookingForm">
                         <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
@@ -320,8 +397,9 @@ if ($preselectedCategory > 0) {
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="font-weight-bold">Email Address <span class="text-white-50 small">(Optional - for email receipt)</span></label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" maxlength="150">
+                            <label for="email" class="font-weight-bold">Email Address <span class="text-danger">*</span> <span class="text-white-50 small">(To receive booking confirmation copy)</span></label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required maxlength="150">
+                            <div class="invalid-feedback">Please enter a valid email address to receive your booking confirmation.</div>
                         </div>
 
                         <h5 class="font-weight-bold text-white border-bottom pb-2 mb-3 mt-4">
@@ -330,7 +408,10 @@ if ($preselectedCategory > 0) {
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-12">
-                                <label for="check_in" class="font-weight-bold">Check‑In Date <span class="text-danger">*</span></label>
+                                <label for="check_in" class="font-weight-bold d-flex justify-content-between align-items-center">
+                                    <span>Check‑In Date <span class="text-danger">*</span></span>
+                                    <span id="stayDurationBadge" class="badge badge-success px-2 py-1 font-weight-bold" style="font-size: 11px;"><i class="fa fa-moon-o mr-1"></i> 1 Night Stay</span>
+                                </label>
                                 <input type="date" class="form-control" id="check_in" name="check_in" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $preselectedCheckIn; ?>" required>
                                 <div class="invalid-feedback">Please select check-in date.</div>
                             </div>
@@ -381,26 +462,14 @@ if ($preselectedCategory > 0) {
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-4">
                             <label for="message" class="font-weight-bold">Message / Special Requests</label>
                             <textarea class="form-control" id="message" name="message" rows="3" placeholder="Mention extra bed request, food preferences, early check-in, or occasion..."></textarea>
                         </div>
 
-                        <div class="booking-notice-box mb-4">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-whatsapp text-success mr-3 mt-1 flex-shrink-0" style="font-size: 26px;"></i>
-                                <div>
-                                    <strong class="d-block text-white mb-1" style="font-size: 14px;">Direct WhatsApp Booking Desk</strong>
-                                    <p class="small text-white-50 mb-0">
-                                        On clicking below, your reservation is securely saved and you will be <strong>directly redirected to WhatsApp</strong> with all your details pre-filled to send directly to Parijat Resort.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" id="submitBookingBtn" class="btn btn-success btn-block py-3 font-weight-bold text-uppercase shadow">
-                            <i class="fa fa-whatsapp mr-2 fa-lg flex-shrink-0"></i>
-                            <span>Send Enquiry Directly to WhatsApp</span>
+                        <button type="submit" id="submitBookingBtn" class="btn btn-success btn-block py-3 font-weight-bold text-uppercase shadow mt-3">
+                            <i class="fa fa-paper-plane mr-2 fa-lg flex-shrink-0"></i>
+                            <span>Submit Booking Enquiry</span>
                         </button>
                     </form>
                 </div>
@@ -410,6 +479,8 @@ if ($preselectedCategory > 0) {
 </div>
 
 <script>
+window.resortCategories = <?php echo json_encode($categoryMap, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Destroy niceSelect on booking form to allow native select dropdowns
     if (typeof jQuery !== 'undefined') {
@@ -418,6 +489,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 jQuery(this).next('.nice-select').remove();
             }
             jQuery(this).show();
+        });
+    }
+
+    // Dynamic Room Category Switcher
+    var categorySelect = document.getElementById('category_id');
+    var previewImg = document.getElementById('previewRoomImg');
+    var previewTitle = document.getElementById('previewRoomTitle');
+    var previewDesc = document.getElementById('previewRoomDesc');
+    var previewBadge = document.getElementById('previewRoomBadge');
+    var previewGuests = document.getElementById('previewRoomGuests');
+
+    if (categorySelect && window.resortCategories) {
+        categorySelect.addEventListener('change', function() {
+            var catId = this.value;
+            var catData = window.resortCategories[catId];
+            if (catData) {
+                if (previewImg) {
+                    previewImg.src = catData.thumbnail;
+                    previewImg.alt = catData.name;
+                }
+                if (previewTitle) previewTitle.textContent = catData.name;
+                if (previewDesc) previewDesc.textContent = catData.description;
+                if (previewBadge) previewBadge.textContent = catData.total_rooms + ' Rooms in Resort';
+                if (previewGuests) previewGuests.textContent = catData.max_occupancy;
+            }
         });
     }
 
@@ -434,9 +530,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dynamic date validation: check_out must be after check_in (timezone-safe)
+    // Dynamic date validation and duration badge
     var checkInInput = document.getElementById('check_in');
     var checkOutInput = document.getElementById('check_out');
+    var stayDurationBadge = document.getElementById('stayDurationBadge');
+
+    function updateStayDuration() {
+        if (!checkInInput || !checkOutInput || !stayDurationBadge) return;
+        var inVal = checkInInput.value;
+        var outVal = checkOutInput.value;
+        if (inVal && outVal) {
+            var inDate = new Date(inVal);
+            var outDate = new Date(outVal);
+            var diffMs = outDate - inDate;
+            var nights = Math.round(diffMs / (1000 * 60 * 60 * 24));
+            if (nights > 0) {
+                stayDurationBadge.innerHTML = '<i class="fa fa-moon-o mr-1"></i> ' + nights + (nights === 1 ? ' Night Stay' : ' Nights Stay');
+                stayDurationBadge.className = 'badge badge-success px-2 py-1 font-weight-bold';
+            } else {
+                stayDurationBadge.innerHTML = '<i class="fa fa-exclamation-triangle mr-1"></i> Invalid Dates';
+                stayDurationBadge.className = 'badge badge-danger px-2 py-1 font-weight-bold';
+            }
+        }
+    }
 
     if (checkInInput && checkOutInput) {
         checkInInput.addEventListener('change', function() {
@@ -455,10 +571,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
+            updateStayDuration();
         });
+
+        checkOutInput.addEventListener('change', updateStayDuration);
+        updateStayDuration();
     }
 
-    // Form Bootstrap validation & Submit State
+    // Form Bootstrap validation & Submit State (Auto-redirect to write email)
     var form = document.getElementById('bookingForm');
     var submitBtn = document.getElementById('submitBookingBtn');
 
@@ -471,15 +591,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             form.classList.add('was-validated');
+            event.preventDefault();
 
-            // Show immediate feedback to user while direct redirecting to WhatsApp
+            // Show immediate feedback to user
             if (submitBtn) {
-                setTimeout(function() {
-                    submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin mr-2"></i> Opening WhatsApp...';
-                    submitBtn.style.pointerEvents = 'none';
-                    submitBtn.style.opacity = '0.9';
-                }, 10);
+                submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin mr-2"></i> Opening Email App...';
+                submitBtn.style.pointerEvents = 'none';
+                submitBtn.style.opacity = '0.9';
             }
+
+            var formData = new FormData(form);
+            formData.append('ajax', '1');
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function(data) {
+                if (data && data.status === 'success' && data.mailto_url) {
+                    // Trigger email client with pre-written booking enquiry
+                    window.location.href = data.mailto_url;
+
+                    // Navigate to confirmation page after short moment
+                    setTimeout(function() {
+                        window.location.href = data.redirect || ('confirmation.php?id=' + data.reservation_id + '&email_sent=1');
+                    }, 800);
+                } else if (data && data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    form.submit();
+                }
+            })
+            .catch(function(err) {
+                console.warn('Form submission fallback:', err);
+                form.submit();
+            });
         }, false);
     }
 });

@@ -72,6 +72,7 @@ defined('SMTP_PORT')   || define('SMTP_PORT', (int)(getenv('SMTP_PORT') ?: 587))
 defined('SMTP_SECURE') || define('SMTP_SECURE', getenv('SMTP_SECURE') ?: 'tls');
 defined('FROM_EMAIL')  || define('FROM_EMAIL', getenv('FROM_EMAIL') ?: 'no-reply@example.com');
 defined('FROM_NAME')   || define('FROM_NAME', getenv('FROM_NAME') ?: 'Parijat Resort');
+defined('ADMIN_EMAIL') || define('ADMIN_EMAIL', getenv('ADMIN_EMAIL') ?: 'parijatresort21@gmail.com');
 
 // Helper to fetch an admin by username
 function getUserByUsername(PDO $pdo, string $username): ?array {

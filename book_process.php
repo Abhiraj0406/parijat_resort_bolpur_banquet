@@ -100,24 +100,6 @@ if (!$category_name) {
     redirect_error('The selected room category does not exist.');
 }
 
-// Fetch Primary Resort WhatsApp Number (Default +91 98309 09875)
-$settStmt = $pdo->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'whatsapp_number'");
-$settStmt->execute();
-$resortWhatsAppRaw = $settStmt->fetchColumn();
-if (empty($resortWhatsAppRaw)) {
-    $resortWhatsAppRaw = '+91 98309 09875';
-}
-// Clean target whatsapp number to digits only (e.g. 919830909875)
-$targetWhatsAppDigits = preg_replace('/[^0-9]/', '', $resortWhatsAppRaw);
-if (strlen($targetWhatsAppDigits) === 11 && str_starts_with($targetWhatsAppDigits, '0')) {
-    $targetWhatsAppDigits = '91' . substr($targetWhatsAppDigits, 1);
-} elseif (strlen($targetWhatsAppDigits) === 10) {
-    $targetWhatsAppDigits = '91' . $targetWhatsAppDigits;
-}
-if (empty($targetWhatsAppDigits)) {
-    $targetWhatsAppDigits = '919830909875';
-}
-
 try {
     // 3. Save Enquiry in MySQL (booking_inquiries)
     $sqlInq = "INSERT INTO booking_inquiries 
@@ -157,62 +139,145 @@ try {
     ]);
     $reservationId = $pdo->lastInsertId();
 
-    // 4. Send Email notifications in background (non-blocking)
-    $subject = 'New Room Booking Enquiry from ' . $name;
-    $body = "New Room Booking Enquiry (ID #$inquiryId)\n\n"
-          . "Name: $name\n"
-          . "Mobile: $phone\n"
-          . "WhatsApp: $whatsapp_number\n"
-          . "Email: " . ($email ?: 'N/A') . "\n"
-          . "Check-in: " . date('d M Y', $inTime) . "\n"
-          . "Check-out: " . date('d M Y', $outTime) . "\n"
-          . "Room Category: $category_name\n"
-          . "AC/Non-AC: $ac_preference\n"
-          . "Rooms: $number_of_rooms\n"
-          . "Adults: $adults\n"
-          . "Kids: $kids\n"
-          . "Message: " . ($message ?: 'None');
-    send_smtp_email('reservations@parijatresortbolpur.com', $subject, nl2br($body));
-
-    // 5. Generate Properly Formatted WhatsApp Message
+    $refId = 'RES-' . str_pad($reservationId ?: $inquiryId, 5, '0', STR_PAD_LEFT);
     $formattedCheckIn  = date('d M Y', $inTime);
     $formattedCheckOut = date('d M Y', $outTime);
     $displayMessage    = !empty($message) ? $message : 'None';
-    $refId = 'RES-' . str_pad($reservationId ?: $inquiryId, 5, '0', STR_PAD_LEFT);
 
-    $waMessage = "🏨 *PARIJAT RESORT BOLPUR - ROOM BOOKING ENQUIRY*\n"
-               . "━━━━━━━━━━━━━━━━━━━━\n"
-               . "📋 *Ref ID:* #" . $refId . "\n"
-               . "👤 *Guest Name:* " . $name . "\n"
-               . "📞 *Mobile:* " . $phone . "\n"
-               . "💬 *WhatsApp:* " . $whatsapp_number . "\n"
-               . "📅 *Check-In:* " . $formattedCheckIn . "\n"
-               . "📅 *Check-Out:* " . $formattedCheckOut . "\n"
-               . "🛏️ *Room Category:* " . $category_name . "\n"
-               . "❄️ *AC / Non-AC:* " . $ac_preference . "\n"
-               . "🚪 *No. of Rooms:* " . $number_of_rooms . "\n"
-               . "👥 *Total Guests:* " . $adults . " Adult(s)" . ($kids > 0 ? " + " . $kids . " Kid(s)" : "") . "\n"
-               . ($email ? "✉️ *Email:* " . $email . "\n" : "")
-               . "📝 *Special Request:* " . $displayMessage . "\n"
-               . "━━━━━━━━━━━━━━━━━━━━\n"
-               . "Please confirm room availability & booking tariff. Thank you!";
+    // 4. Send Email notifications directly to resort admin email
+    $resortEmail = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : (getenv('ADMIN_EMAIL') ?: 'parijatresort21@gmail.com');
+    $subject = "New Room Booking Enquiry #$refId - $name ($category_name)";
 
-    $encodedWaText = rawurlencode($waMessage);
-    $waUrl = "https://api.whatsapp.com/send?phone=" . $targetWhatsAppDigits . "&text=" . $encodedWaText;
+    $cleanWaDigits = preg_replace('/[^0-9]/', '', $whatsapp_number);
+    if (strlen($cleanWaDigits) === 10) $cleanWaDigits = '91' . $cleanWaDigits;
 
-    // 6. Direct Send to WhatsApp (Immediate Redirect)
+    $htmlEmail = '<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Room Booking Enquiry</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background-color: #f4f6f8; margin: 0; padding: 20px; color: #333;">
+    <div style="max-width: 600px; background: #ffffff; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+        <div style="background: #1b5e20; color: #ffffff; padding: 24px 20px; text-align: center;">
+            <h2 style="margin: 0; font-size: 22px; font-weight: bold; letter-spacing: 0.5px;">Parijat Resort Bolpur &amp; Banquet</h2>
+            <p style="margin: 6px 0 0; opacity: 0.9; font-size: 14px;">Online Room Booking Enquiry</p>
+            <div style="display: inline-block; background: #fab915; color: #111; padding: 4px 14px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-top: 10px;">
+                Reference: #' . $refId . '
+            </div>
+        </div>
+        <div style="padding: 24px 20px;">
+            <p style="font-size: 15px; margin-top: 0; color: #444;">A customer has submitted a new online room enquiry through the resort website:</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; width: 38%; background: #fafafa;">Guest Name</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #111;">' . htmlspecialchars($name) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Mobile Number</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;"><a href="tel:' . htmlspecialchars($phone) . '" style="color: #1b5e20; text-decoration: none;">' . htmlspecialchars($phone) . '</a></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">WhatsApp Number</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;"><a href="https://wa.me/' . $cleanWaDigits . '" style="color: #25d366; text-decoration: none;">' . htmlspecialchars($whatsapp_number) . '</a></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Email Address</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; color: #333;">' . ($email ? htmlspecialchars($email) : 'Not provided') . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Room Category</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #1b5e20;">' . htmlspecialchars($category_name) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Climate Preference</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . htmlspecialchars($ac_preference) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Number of Rooms</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . $number_of_rooms . ' Room(s)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Check-In Date</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . date('d M Y (l)', $inTime) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Check-Out Date</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . date('d M Y (l)', $outTime) . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Total Guests</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold;">' . $adults . ' Adult(s)' . ($kids > 0 ? ', ' . $kids . ' Kid(s)' : '') . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-weight: bold; color: #666; background: #fafafa;">Special Requests</td>
+                    <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-style: italic; color: #555;">' . ($message ? nl2br(htmlspecialchars($message)) : 'None') . '</td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center; padding: 20px; background: #f9fbf9; border-top: 1px solid #e8f5e9;">
+            <a href="https://wa.me/' . $cleanWaDigits . '" style="display: inline-block; background: #25d366; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">💬 Chat on WhatsApp</a>
+            <a href="tel:' . htmlspecialchars($phone) . '" style="display: inline-block; background: #1b5e20; color: #ffffff !important; text-decoration: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; margin: 4px;">📞 Call Guest</a>
+        </div>
+        <div style="padding: 14px; text-align: center; font-size: 12px; color: #888; background: #f0f2f5;">
+            Official Automated Booking Desk &bull; Parijat Resort Bolpur &bull; Near Shantiniketan
+        </div>
+    </div>
+</body>
+</html>';
+
+    send_smtp_email($resortEmail, $subject, $htmlEmail);
+
+    // Also send confirmation copy to guest if email was provided
+    if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $guestSubject = "Booking Enquiry Received (#$refId) - Parijat Resort Bolpur";
+        send_smtp_email($email, $guestSubject, $htmlEmail);
+    }
+
+    // 5. Generate Pre-written Email for User's Email Client (Auto-compose)
+    $emailPlainBody = "Dear Parijat Resort Reservations Team,\n\n"
+                    . "I would like to enquire about a room booking at Parijat Resort Bolpur with the following details:\n\n"
+                    . "====================================\n"
+                    . "PARIJAT RESORT BOLPUR - ROOM ENQUIRY\n"
+                    . "====================================\n"
+                    . "Reference ID: #" . $refId . "\n"
+                    . "Guest Name: " . $name . "\n"
+                    . "Contact Number: " . $phone . "\n"
+                    . "WhatsApp Number: " . $whatsapp_number . "\n"
+                    . ($email ? "Email: " . $email . "\n" : "")
+                    . "Room Category: " . $category_name . "\n"
+                    . "Climate Preference: " . $ac_preference . "\n"
+                    . "Number of Rooms: " . $number_of_rooms . " Room(s)\n"
+                    . "Check-In Date: " . $formattedCheckIn . "\n"
+                    . "Check-Out Date: " . $formattedCheckOut . "\n"
+                    . "Total Guests: " . $adults . " Adult(s)" . ($kids > 0 ? ", " . $kids . " Kid(s)" : "") . "\n"
+                    . "Special Requests: " . $displayMessage . "\n"
+                    . "====================================\n\n"
+                    . "Please confirm room availability and tariff rates.\n\n"
+                    . "Thank you,\n"
+                    . $name;
+
+    $emailSubject = "Room Booking Enquiry #" . $refId . " - " . $name . " (" . $category_name . ")";
+    $mailtoUrl = "mailto:" . $resortEmail . "?subject=" . rawurlencode($emailSubject) . "&body=" . rawurlencode($emailPlainBody);
+    $gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=" . rawurlencode($resortEmail) . "&su=" . rawurlencode($emailSubject) . "&body=" . rawurlencode($emailPlainBody);
+
+    $confirmationUrl = 'confirmation.php?id=' . $reservationId . '&email_sent=1';
+
     if (isset($_POST['ajax']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')) {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode([
             'status'         => 'success',
             'reservation_id' => $reservationId,
             'ref_id'         => $refId,
-            'wa_url'         => $waUrl
+            'email_sent'     => true,
+            'mailto_url'     => $mailtoUrl,
+            'gmail_url'      => $gmailUrl,
+            'redirect'       => $confirmationUrl
         ]);
         exit;
     }
 
-    header('Location: ' . $waUrl);
+    header('Location: ' . $confirmationUrl);
     exit;
 
 } catch (PDOException $e) {
