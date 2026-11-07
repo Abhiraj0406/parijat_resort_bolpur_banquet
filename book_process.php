@@ -11,7 +11,14 @@ if (!isset($_POST['csrf_token']) || !validate_csrf_token($_POST['csrf_token'])) 
 
 // Helper to redirect with error
 function redirect_error($msg) {
-    header('Location: booking.php?error=' . urlencode($msg));
+    $cat = isset($_POST['category_id']) ? (int)$_POST['category_id'] : 0;
+    $catParam = $cat > 0 ? '&category=' . $cat : '';
+    if (isset($_POST['ajax']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['status' => 'error', 'message' => $msg]);
+        exit;
+    }
+    header('Location: booking.php?error=' . urlencode($msg) . $catParam);
     exit;
 }
 
@@ -102,8 +109,13 @@ if (empty($resortWhatsAppRaw)) {
 }
 // Clean target whatsapp number to digits only (e.g. 919830909875)
 $targetWhatsAppDigits = preg_replace('/[^0-9]/', '', $resortWhatsAppRaw);
-if (strlen($targetWhatsAppDigits) === 10) {
+if (strlen($targetWhatsAppDigits) === 11 && str_starts_with($targetWhatsAppDigits, '0')) {
+    $targetWhatsAppDigits = '91' . substr($targetWhatsAppDigits, 1);
+} elseif (strlen($targetWhatsAppDigits) === 10) {
     $targetWhatsAppDigits = '91' . $targetWhatsAppDigits;
+}
+if (empty($targetWhatsAppDigits)) {
+    $targetWhatsAppDigits = '919830909875';
 }
 
 try {
@@ -166,25 +178,41 @@ try {
     $formattedCheckIn  = date('d M Y', $inTime);
     $formattedCheckOut = date('d M Y', $outTime);
     $displayMessage    = !empty($message) ? $message : 'None';
+    $refId = 'RES-' . str_pad($reservationId ?: $inquiryId, 5, '0', STR_PAD_LEFT);
 
-    $waMessage = "*New Room Booking Enquiry*\n\n"
-               . "*Name:* $name\n"
-               . "*Mobile:* $phone\n"
-               . "*WhatsApp:* $whatsapp_number\n"
-               . "*Check-in:* $formattedCheckIn\n"
-               . "*Check-out:* $formattedCheckOut\n"
-               . "*Room Category:* $category_name\n"
-               . "*AC/Non-AC:* $ac_preference\n"
-               . "*Rooms:* $number_of_rooms\n"
-               . "*Adults:* $adults\n"
-               . "*Kids:* $kids\n"
-               . "*Message:* $displayMessage";
+    $waMessage = "🏨 *PARIJAT RESORT BOLPUR - ROOM BOOKING ENQUIRY*\n"
+               . "━━━━━━━━━━━━━━━━━━━━\n"
+               . "📋 *Ref ID:* #" . $refId . "\n"
+               . "👤 *Guest Name:* " . $name . "\n"
+               . "📞 *Mobile:* " . $phone . "\n"
+               . "💬 *WhatsApp:* " . $whatsapp_number . "\n"
+               . "📅 *Check-In:* " . $formattedCheckIn . "\n"
+               . "📅 *Check-Out:* " . $formattedCheckOut . "\n"
+               . "🛏️ *Room Category:* " . $category_name . "\n"
+               . "❄️ *AC / Non-AC:* " . $ac_preference . "\n"
+               . "🚪 *No. of Rooms:* " . $number_of_rooms . "\n"
+               . "👥 *Total Guests:* " . $adults . " Adult(s)" . ($kids > 0 ? " + " . $kids . " Kid(s)" : "") . "\n"
+               . ($email ? "✉️ *Email:* " . $email . "\n" : "")
+               . "📝 *Special Request:* " . $displayMessage . "\n"
+               . "━━━━━━━━━━━━━━━━━━━━\n"
+               . "Please confirm room availability & booking tariff. Thank you!";
 
     $encodedWaText = rawurlencode($waMessage);
     $waUrl = "https://api.whatsapp.com/send?phone=" . $targetWhatsAppDigits . "&text=" . $encodedWaText;
 
-    // 6. Redirect customer to confirmation page with automatic WhatsApp redirect modal & link
-    header('Location: confirmation.php?id=' . $reservationId . '&wa=1&url=' . urlencode($waUrl));
+    // 6. Direct Send to WhatsApp (Immediate Redirect)
+    if (isset($_POST['ajax']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'status'         => 'success',
+            'reservation_id' => $reservationId,
+            'ref_id'         => $refId,
+            'wa_url'         => $waUrl
+        ]);
+        exit;
+    }
+
+    header('Location: ' . $waUrl);
     exit;
 
 } catch (PDOException $e) {

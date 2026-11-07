@@ -11,6 +11,8 @@ $categories = $catStmt->fetchAll();
 
 $preselectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 $preselectedAc = isset($_GET['ac']) ? $_GET['ac'] : 'AC';
+$preselectedCheckIn = isset($_GET['check_in']) ? htmlspecialchars($_GET['check_in']) : date('Y-m-d');
+$preselectedCheckOut = isset($_GET['check_out']) ? htmlspecialchars($_GET['check_out']) : date('Y-m-d', strtotime('+1 day'));
 $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
 ?>
 
@@ -195,12 +197,12 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="check_in" class="font-weight-bold">Check‑In Date <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="check_in" name="check_in" min="<?php echo date('Y-m-d'); ?>" required>
+                                <input type="date" class="form-control" id="check_in" name="check_in" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $preselectedCheckIn; ?>" required>
                                 <div class="invalid-feedback">Please select check-in date.</div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="check_out" class="font-weight-bold">Check‑Out Date <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="check_out" name="check_out" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
+                                <input type="date" class="form-control" id="check_out" name="check_out" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" value="<?php echo $preselectedCheckOut; ?>" required>
                                 <div class="invalid-feedback">Please select check-out date.</div>
                             </div>
                         </div>
@@ -254,16 +256,16 @@ $primaryWhatsApp = $site_settings['whatsapp_number'] ?? '+91 98309 09875';
                             <div class="d-flex align-items-start">
                                 <i class="fa fa-whatsapp text-success fa-2x mr-3 mt-1"></i>
                                 <div>
-                                    <strong class="text-dark d-block">Instant WhatsApp Booking Desk</strong>
+                                    <strong class="text-dark d-block">Direct WhatsApp Booking Desk</strong>
                                     <p class="small text-muted mb-0">
-                                        On clicking submit, your enquiry will be saved into our reservation system, and WhatsApp will open with your pre-formatted enquiry message to send directly to Parijat Resort's reservation executive.
+                                        On clicking the button below, your reservation enquiry will be securely recorded in our system and you will be <strong>directly redirected to WhatsApp</strong> with all your room details pre-filled to send directly to Parijat Resort's reservation executive.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-block py-3 font-weight-bold text-uppercase shadow" style="font-size: 1.1rem; letter-spacing: 0.5px;">
-                            <i class="fa fa-whatsapp mr-2 fa-lg"></i> Send Enquiry via WhatsApp &amp; Book
+                        <button type="submit" id="submitBookingBtn" class="btn btn-success btn-block py-3 font-weight-bold text-uppercase shadow" style="font-size: 1.15rem; letter-spacing: 0.5px;">
+                            <i class="fa fa-whatsapp mr-2 fa-lg"></i> Send Enquiry Directly to WhatsApp
                         </button>
                     </form>
                 </div>
@@ -297,31 +299,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dynamic date validation: check_out must be after check_in
+    // Dynamic date validation: check_out must be after check_in (timezone-safe)
     var checkInInput = document.getElementById('check_in');
     var checkOutInput = document.getElementById('check_out');
 
-    checkInInput.addEventListener('change', function() {
-        if (this.value) {
-            var inDate = new Date(this.value);
-            inDate.setDate(inDate.getDate() + 1);
-            var minOut = inDate.toISOString().split('T')[0];
-            checkOutInput.min = minOut;
-            if (checkOutInput.value && checkOutInput.value <= this.value) {
-                checkOutInput.value = minOut;
+    if (checkInInput && checkOutInput) {
+        checkInInput.addEventListener('change', function() {
+            if (this.value) {
+                var parts = this.value.split('-');
+                if (parts.length === 3) {
+                    var inDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+                    inDate.setDate(inDate.getDate() + 1);
+                    var y = inDate.getFullYear();
+                    var m = String(inDate.getMonth() + 1).padStart(2, '0');
+                    var d = String(inDate.getDate()).padStart(2, '0');
+                    var minOut = y + '-' + m + '-' + d;
+                    checkOutInput.min = minOut;
+                    if (checkOutInput.value && checkOutInput.value <= this.value) {
+                        checkOutInput.value = minOut;
+                    }
+                }
             }
-        }
-    });
+        });
+    }
 
-    // Form Bootstrap validation
+    // Form Bootstrap validation & Submit State
     var form = document.getElementById('bookingForm');
-    form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-    }, false);
+    var submitBtn = document.getElementById('submitBookingBtn');
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+            form.classList.add('was-validated');
+
+            // Show immediate feedback to user while direct redirecting to WhatsApp
+            if (submitBtn) {
+                setTimeout(function() {
+                    submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin mr-2"></i> Opening WhatsApp...';
+                    submitBtn.style.pointerEvents = 'none';
+                    submitBtn.style.opacity = '0.9';
+                }, 10);
+            }
+        }, false);
+    }
 });
 </script>
 
