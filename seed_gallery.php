@@ -33,7 +33,7 @@ $gallery_items = [
     ['image/cottage_night_2.jpeg', 'Deluxe Cottage Pathway & Night Lighting', 'Rooms', 30],
     ['image/cottage_night_3.jpeg', 'Deluxe Cottage Serene Evening Ambience', 'Rooms', 31],
     ['image/cottage_night_4.jpeg', 'Deluxe Cottage Landscaped Garden Night View', 'Rooms', 32],
-    ['image/ground_slide_1.jpeg', 'Deluxe Premium Ground Floor Suite', 'Rooms', 33],
+    ['image/ground_slide_1.jpeg', 'Deluxe Premium with Private Balcony - Lawn & Garden View', 'Rooms', 33],
     ['image/ground_slide_2.jpeg', 'Ground Floor Premium Bed & Interior', 'Rooms', 34],
     ['image/ground_slide_3.jpeg', 'Ground Floor Balcony with Garden View', 'Rooms', 35],
     ['image/ground_slide_4.jpeg', 'Modern Bathroom with Geyser & Toiletries', 'Rooms', 36],

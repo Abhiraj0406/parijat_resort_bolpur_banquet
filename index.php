@@ -466,7 +466,7 @@ if (empty($gallery_images)) {
                                 </a>
                             </div>
                         <?php elseif ($room['id'] == 2): ?>
-                            <!-- Image Slider for Deluxe Premium Ground Floor -->
+                            <!-- Image Slider for Deluxe Premium with Private Balcony - Lawn & Garden View -->
                             <div id="homeRoomCarousel2" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
                                 <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
                                     <li data-target="#homeRoomCarousel2" data-slide-to="0" class="active"></li>
@@ -481,31 +481,31 @@ if (empty($gallery_images)) {
                                 </ol>
                                 <div class="carousel-inner h-100">
                                     <div class="carousel-item active h-100">
-                                        <img src="image/ground_slide_1.jpeg" alt="Deluxe Premium Ground Floor Room" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_1.jpeg" alt="Deluxe Premium with Private Balcony - Lawn & Garden View" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_2.jpeg" alt="Deluxe Premium Ground Floor Bed View" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_2.jpeg" alt="Deluxe Premium Bed View" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_3.jpeg" alt="Deluxe Premium Ground Floor Balcony & View" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_3.jpeg" alt="Deluxe Premium Private Balcony & Garden View" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
                                         <img src="image/ground_slide_4.jpeg" alt="Modern Bathroom Amenities" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_5.jpeg" alt="Deluxe Premium Ground Floor Interior" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_5.jpeg" alt="Deluxe Premium Interior" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_6.jpeg" alt="Deluxe Premium Ground Floor Bathroom" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_6.jpeg" alt="Deluxe Premium Bathroom" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_7.jpeg" alt="Deluxe Premium Ground Floor Room Setup" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_7.jpeg" alt="Deluxe Premium Room Setup" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_8.jpeg" alt="Deluxe Premium Ground Floor Wash Area" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_8.jpeg" alt="Deluxe Premium Wash Area" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/ground_slide_9.jpeg" alt="Deluxe Premium Ground Floor Comfort" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/ground_slide_9.jpeg" alt="Deluxe Premium Comfort" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#homeRoomCarousel2" role="button" data-slide="prev" style="width: 15%; z-index: 4;">

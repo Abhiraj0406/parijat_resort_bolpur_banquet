@@ -36,7 +36,7 @@ $allDefaultGallery = [
     ['image_path' => 'image/cottage_night_2.jpeg', 'caption' => 'Deluxe Cottage Pathway & Night Lighting', 'category' => 'Rooms', 'sort_order' => 30],
     ['image_path' => 'image/cottage_night_3.jpeg', 'caption' => 'Deluxe Cottage Serene Evening Ambience', 'category' => 'Rooms', 'sort_order' => 31],
     ['image_path' => 'image/cottage_night_4.jpeg', 'caption' => 'Deluxe Cottage Landscaped Garden Night View', 'category' => 'Rooms', 'sort_order' => 32],
-    ['image_path' => 'image/ground_slide_1.jpeg', 'caption' => 'Deluxe Premium Ground Floor Suite', 'category' => 'Rooms', 'sort_order' => 33],
+    ['image_path' => 'image/ground_slide_1.jpeg', 'caption' => 'Deluxe Premium with Private Balcony - Lawn & Garden View', 'category' => 'Rooms', 'sort_order' => 33],
     ['image_path' => 'image/ground_slide_2.jpeg', 'caption' => 'Ground Floor Premium Bed & Interior', 'category' => 'Rooms', 'sort_order' => 34],
     ['image_path' => 'image/ground_slide_3.jpeg', 'caption' => 'Ground Floor Balcony with Garden View', 'category' => 'Rooms', 'sort_order' => 35],
     ['image_path' => 'image/ground_slide_4.jpeg', 'caption' => 'Modern Bathroom with Geyser & Toiletries', 'category' => 'Rooms', 'sort_order' => 36],
