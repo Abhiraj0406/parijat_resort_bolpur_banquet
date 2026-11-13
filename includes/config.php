@@ -30,8 +30,10 @@ try {
     die('Database connection error.');
 }
 
-// Auto-sync: ensure room categories and gallery use Queen Bed everywhere
+// Auto-sync: ensure room categories names, descriptions and gallery use updated details everywhere
 try {
+    $pdo->exec("UPDATE room_categories SET name = 'Deluxe Premium with Private Balcony - Lawn & Garden View' WHERE id = 2");
+    $pdo->exec("UPDATE room_categories SET name = 'Deluxe Premium with Private Balcony - Pool View with Garden & Lawn' WHERE id = 3");
     $pdo->exec("UPDATE room_categories SET description = 'Spacious cottage rooms nestled amidst serene garden landscapes, featuring private sit-out balconies, comfortable queen bed, high-speed WiFi, LED television, tea/coffee station, and premium bathroom amenities.' WHERE id = 1");
     $pdo->exec("UPDATE room_categories SET description = 'Convenient ground-floor executive rooms with direct lawn and garden access, private balcony, comfortable queen bed, and modern ensuite bathroom.' WHERE id = 2");
     $pdo->exec("UPDATE room_categories SET description = 'Elevated premium rooms offering panoramic views of the landscaped grounds and swimming pool, tranquil private balcony, and peaceful natural ambiance.' WHERE id = 3");
@@ -49,7 +51,7 @@ if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
     ini_set('session.cookie_secure', '1');
 }
 ini_set('session.cookie_httponly', '1');
-if (session_status() === PHP_SESSION_NONE) {
+if (php_sapi_name() !== 'cli' && session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 

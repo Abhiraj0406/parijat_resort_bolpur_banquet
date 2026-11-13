@@ -30,14 +30,14 @@ if (!function_exists('load_env')) {
             ];
 
             foreach ($candidates as $candidate) {
-                if (file_exists($candidate) && is_readable($candidate)) {
-                    $filePath = realpath($candidate);
+                if (file_exists($candidate) && (is_readable($candidate) || is_file($candidate))) {
+                    $filePath = realpath($candidate) ?: $candidate;
                     break;
                 }
             }
         }
 
-        if (!$filePath || !file_exists($filePath) || !is_readable($filePath)) {
+        if (!$filePath || !file_exists($filePath) || (!is_readable($filePath) && !is_file($filePath))) {
             return false;
         }
 
