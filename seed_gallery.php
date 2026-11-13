@@ -38,7 +38,7 @@ $gallery_items = [
     ['image/ground_slide_3.jpeg', 'Ground Floor Balcony with Garden View', 'Rooms', 35],
     ['image/ground_slide_4.jpeg', 'Modern Bathroom with Geyser & Toiletries', 'Rooms', 36],
     ['image/ground_slide_5.jpeg', 'Deluxe Room Seating & Lighting', 'Rooms', 37],
-    ['image/first_slide_1.jpeg', 'Deluxe Premium First Floor Suite', 'Rooms', 38],
+    ['image/first_slide_1.jpeg', 'Deluxe Premium with Private Balcony - Pool View with Garden & Lawn', 'Rooms', 38],
     ['image/first_slide_2.jpeg', 'First Floor Private Balcony & Pool View', 'Rooms', 39],
     ['image/first_slide_3.jpeg', 'First Floor Suite Interior & LED TV', 'Rooms', 40],
     ['image/family_slide1.jpg', 'Family Premium Four Sharing Suite', 'Rooms', 41],

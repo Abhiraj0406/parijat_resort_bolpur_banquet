@@ -41,7 +41,7 @@ $allDefaultGallery = [
     ['image_path' => 'image/ground_slide_3.jpeg', 'caption' => 'Ground Floor Balcony with Garden View', 'category' => 'Rooms', 'sort_order' => 35],
     ['image_path' => 'image/ground_slide_4.jpeg', 'caption' => 'Modern Bathroom with Geyser & Toiletries', 'category' => 'Rooms', 'sort_order' => 36],
     ['image_path' => 'image/ground_slide_5.jpeg', 'caption' => 'Deluxe Room Seating & Lighting', 'category' => 'Rooms', 'sort_order' => 37],
-    ['image_path' => 'image/first_slide_1.jpeg', 'caption' => 'Deluxe Premium First Floor Suite', 'category' => 'Rooms', 'sort_order' => 38],
+    ['image_path' => 'image/first_slide_1.jpeg', 'caption' => 'Deluxe Premium with Private Balcony - Pool View with Garden & Lawn', 'category' => 'Rooms', 'sort_order' => 38],
     ['image_path' => 'image/first_slide_2.jpeg', 'caption' => 'First Floor Private Balcony & Pool View', 'category' => 'Rooms', 'sort_order' => 39],
     ['image_path' => 'image/first_slide_3.jpeg', 'caption' => 'First Floor Suite Interior & LED TV', 'category' => 'Rooms', 'sort_order' => 40],
     ['image_path' => 'image/family_slide1.jpg', 'caption' => 'Family Premium Four Sharing Suite', 'category' => 'Rooms', 'sort_order' => 41],

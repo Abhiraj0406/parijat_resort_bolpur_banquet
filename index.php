@@ -518,7 +518,7 @@ if (empty($gallery_images)) {
                                 </a>
                             </div>
                         <?php elseif ($room['id'] == 3): ?>
-                            <!-- Image Slider for Deluxe Premium First Floor -->
+                            <!-- Image Slider for Deluxe Premium with Private Balcony - Pool View with Garden & Lawn -->
                             <div id="homeRoomCarousel3" class="carousel slide h-100 w-100" data-ride="carousel" data-interval="4000">
                                 <ol class="carousel-indicators" style="margin-bottom: 35px; z-index: 3;">
                                     <li data-target="#homeRoomCarousel3" data-slide-to="0" class="active"></li>
@@ -533,7 +533,7 @@ if (empty($gallery_images)) {
                                 </ol>
                                 <div class="carousel-inner h-100">
                                     <div class="carousel-item active h-100">
-                                        <img src="image/first_slide_1.jpeg" alt="Deluxe Premium First Floor Room" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/first_slide_1.jpeg" alt="Deluxe Premium with Private Balcony - Pool View with Garden & Lawn" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
                                         <img src="image/first_slide_2.jpeg" alt="Deluxe Premium First Floor Bed View" class="w-100 h-100" style="object-fit: cover;">
@@ -542,7 +542,7 @@ if (empty($gallery_images)) {
                                         <img src="image/first_slide_3.jpeg" alt="Deluxe Premium First Floor Interior" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
-                                        <img src="image/first_slide_4.jpeg" alt="Deluxe Premium First Floor Balcony & View" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="image/first_slide_4.jpeg" alt="Deluxe Premium Private Balcony & Pool View" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="carousel-item h-100">
                                         <img src="image/first_slide_5.jpeg" alt="Modern Bathroom Amenities" class="w-100 h-100" style="object-fit: cover;">
